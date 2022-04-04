@@ -112,7 +112,18 @@ export const Event = (props) => {
             case 'reward':
                 return <Reward event={props.event}/>;
             case 'redirect':
-                return; //need to fill this in for 
+                switch (props.event.direction) {
+                    case 'injury':
+                        return <blah></blah>;
+                    case 'life':
+                        return <blah></blah>;
+                    case 'mishap': 
+                        return <blah></blah>;
+                    case 'rare': 
+                        return <blah></blah>;
+                    default: 
+                        return;
+                }
             default: break;
         }
     }

@@ -2,13 +2,13 @@ const agent = {
     description: 'Law enforcement agencies, corporate operatives, spies, and others who work in the shadows.',
     eventList: [
         
-        {type: 'redirect', destination: 'injury table', roll: 2},
+        {type: 'redirect', destination: 'injury', roll: 2},
         
-        {type: 'skillCheckChoice', roll: 3, checkSkillA: 'Investigate', checkSkillB: 'StreetWise', checkDC: 8,
+        {type: 'choiceCheck', roll: 3, skillList: ['Investigate', 'Streetwise'], checkDC: 8,
             pass: {description: 'During a dangerous investigation, you demonstrate and noticeably improve your tradecraft.', result: {type: 'skill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], value: 1}},
             fail: {description: 'During a dangerous investigation, you bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
         
-        {type: 'reward', roll: 4, result: {type: 'benefit bonus', value: 1}},
+        {type: 'reward', roll: 4, result: {type: 'benefitPlus', value: 1}},
         
         {type: 'reward', roll: 5, result:{type: 'contacts', value: 'roll d3'}},
         
@@ -20,9 +20,9 @@ const agent = {
         
         {type: 'skillCheck', roll: 8, checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
-                result: {type: 'Skill Event', choices: {rogue: 'Rogue Skills', citizen: 'Citizen Skills'}, events: {rogue: 'rogue events', citizen: 'citizen events'}}},
+                result: {type: 'eventskill', choiceList:['rogue', 'citizen'], choices: {rogue: 'Rogue Skills', citizen: 'Citizen Skills'}, eventList:['rogue', 'citizen'], events: {rogue: 'rogue events', citizen: 'citizen events'}}},
             fail: {description: 'You fail to deceive your targets...', 
-                result: {type: 'mishap', events: {rogue: 'rogue mishaps', citizen: 'citizen mishaps'}}}},
+                result: {type: 'mishap', eventList: ['rogue', 'citizen'], events: {rogue: 'rogue mishaps', citizen: 'citizen mishaps'}}}},
         
         {type: 'reward', roll: 9, result:{type: 'advancement bonus', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
         
@@ -33,23 +33,23 @@ const agent = {
         {type: 'promotion', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
     ],
     mishapList: [
-        {type: 'redirect', destination: 'Injury table, disadvantage'},
+        {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
         
         {type: 'choice', 
             description: 'Someone you are investigating offers you a deal...',
             choiceList: ['a', 'b'],
             a: {description: 'You leave the career, sacrificing some honor, but losing little else...', results: 'lose benefit, leave career', button: 'Accept the deal...'},
-            b: {description: 'You leave the career after being injured by the one whose deal you refused...', results: 'injury table, enemy, one free skill level', button: 'Decline the deal...'}},
+            b: {description: 'You leave the career after being injured by the one whose deal you refused...', results: ['injury table', 'enemy', 'skill level'], button: 'Decline the deal...'}},
         
         {type: 'check', checkType: 'Advocate', checkDC: 8,  
             success: {description: 'An investigation goes horribly wrong-- or right-- ending your career. You manage to defend yourself well enough that you are able to leave amicably...'},
-            failure: {description: "An investigation goes horribly wrong-- or right-- ending your career, and you are unable to successfully defend yourself, landing in jail..."}},
+            failure: {description: "An investigation goes horribly wrong-- or right-- ending your career, and you are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
         
         {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', results: 'enemy, deception up'},
         
-        {type: 'choice', description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', results:{target: 'contact, ally, or family member', cost:'injury of some description.'}},
+        {type: 'choice', description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', results:{target: 'contact, ally, or family member', bonus:'injury'}},
         
-        {type: 'redirect', destination: 'Injury table'}
+        {type: 'redirect', destination: 'injury table'}
     ],
     skills: {
         personal: [
