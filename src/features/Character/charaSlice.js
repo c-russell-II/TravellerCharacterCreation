@@ -1,5 +1,4 @@
 import { createSlice } from '@reduxjs/toolkit';
-import {roll} from './careerHandler';
 
 const initialChara = {
     name: 'name',
@@ -40,4 +39,6 @@ const options = {
 
 const charaSlice = createSlice(options);
 
+
+export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk} = charaSlice.actions;
 export default charaSlice;
