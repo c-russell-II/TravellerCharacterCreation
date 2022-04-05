@@ -2,7 +2,7 @@ import jobObject from "./CareerDetails";
 
 
 // Helper func for die rolls, with modifiers and advantage
-const roll = (num = 6) => {
+export const roll = (num = 6) => {
     if (typeof num !== 'number') {
         throw new Error('expected a number!');
     }
