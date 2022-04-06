@@ -40,7 +40,7 @@ export const CharacterCreation = (props) => {
             <button onClick={() => decrease('int')}>-</button><span>Int: {stats.int}</span><button onClick={() => increase('int')}>+</button><br/>
             <button onClick={() => decrease('edu')}>-</button><span>Edu: {stats.edu}</span><button onClick={() => increase('edu')}>+</button><br/>
             <button onClick={() => decrease('soc')}>-</button><span>Soc: {stats.soc}</span><button onClick={() => increase('soc')}>+</button><br/>
-            <Link to="/choose_career">Select career...</Link>
+            <Link to="/background_skills">Background Skills!</Link>
         </div>
     )
 }

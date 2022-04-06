@@ -1,17 +1,37 @@
-import React, {useState} from "react";
+import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Link } from "react-router-dom";
 import {increaseToZero} from './SkillsSlice';
 
 export const BackgroundSkillsChoice = (props) => {
-    const [count, setCount] = useState(0);
     const [skills, setSkills] = useState([]);
+    const [checked, setChecked] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]);
     const dispatch = useDispatch();
+    
     const stats = useSelector(state => state.stats);
-    const options = ['Admin', 'Animals', 'Athletics', 'Art', 'Carouse', 'Drive', 'Electronics', 'Flyer', 'Language', 'Mechanic', 'Medic', 'Profession', 'Science', 'Seafarer', 'Streetwise', 'Survival', 'Vacc Suit']
-    const handleChange = (event) => {
+    const options = ['Admin', 'Animals', 'Athletics', 'Art', 'Carouse', 'Drive', 'Electronics', 'Flyer', 'Language', 'Mechanic', 'Medic', 'Profession', 'Science', 'Seafarer', 'Streetwise', 'Survival', 'Vacc Suit'];
+    const limit = stats.edu + 3
+
+    const handleChange = (event, e, i) => {
         event.preventDefault();
-        setSkills([...skills, event.target.value]);
-        setCount(count + 1);
+
+        if (checked[i]) {
+            const temp = skills.filter((f) => f !== e)
+            setSkills(temp);
+
+            const tempCheck = checked;
+            tempCheck[i] = false;
+            setChecked(tempCheck);
+            return;
+        }
+        if (skills.length < limit) {
+            const temp = checked;
+            temp[i] = true;
+            setChecked(temp);
+
+            setSkills([...skills, e]);
+            return
+        }
     };
     const handleSubmit = (event) => {
         event.preventDefault();
@@ -19,16 +39,25 @@ export const BackgroundSkillsChoice = (props) => {
             dispatch(increaseToZero(e));
         })
     }
+
     return (
         <div className="background_skills_choice">
             <h3>Select Background Skills...</h3>
-            <h4>Up to {3 + stats.edu}</h4>
+            <h4>Up to {limit}</h4>
             <form onSubmit={handleSubmit}>
-            {options.forEach((e, i) => {
-                return (<div key={i}><input type="checkbox" name="skill" value={e} onChange={handleChange}/> <label for={e}>{e}</label></div>)
+            <h5>Points Remaining: {limit - skills.length}</h5>
+            {options.map((e, i) => {
+                return (
+                    <div key={i}>
+                        <label>
+                            <input type="checkbox" name="skill" value={e} checked={checked[i]} onClick={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
+                        </label>
+                    </div>
+                )
             })}
             <input type="submit" value="Confirm"/>
             </form>
+            <Link to="/choose_career">Choose your career...</Link>
         </div>
     )
 }
