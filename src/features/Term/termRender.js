@@ -60,7 +60,7 @@ export const Term = (props) => {
             <h2>{currentJob.title}</h2>
             {responseBuilder(termResults)}
             <br/>
-            <Event event={termResults.newEvent} isMishap={termResults.survive}/>
+            <Event event={termResults.newEvent} isMishap={!termResults.survive}/>
             <p>You are currently {age} years old</p>
             <Link to="/choose_career">Choose a new career.</Link>
             <br/>

@@ -41,9 +41,9 @@ const agent = {
             a: {description: 'You leave the career, sacrificing some honor, but losing little else...', results: 'lose benefit, leave career', button: 'Accept the deal...'},
             b: {description: 'You leave the career after being injured by the one whose deal you refused...', results: ['injury table', 'enemy', 'skill level'], button: 'Decline the deal...'}},
         
-        {type: 'check', checkType: 'Advocate', checkDC: 8,  
-            success: {description: 'An investigation goes horribly wrong-- or right-- ending your career. You manage to defend yourself well enough that you are able to leave amicably...'},
-            failure: {description: "An investigation goes horribly wrong-- or right-- ending your career, and you are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
+        {type: 'skillCheck', checkType: 'Advocate', checkDC: 8,  
+            pass: {description: 'An investigation goes horribly wrong-- or right-- ending your career. You manage to defend yourself well enough that you are able to leave amicably...'},
+            fail: {description: "An investigation goes horribly wrong-- or right-- ending your career, and you are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
         
         {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', results: 'enemy, deception up'},
         

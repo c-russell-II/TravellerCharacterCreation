@@ -1,7 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 
 const initialChara = {
-    name: 'name',
+    charaName: 'name',
     background: 'none',
     events: [],
     benefits: [],
@@ -41,4 +41,4 @@ const charaSlice = createSlice(options);
 
 
 export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk} = charaSlice.actions;
-export default charaSlice;
+export default charaSlice.reducer;

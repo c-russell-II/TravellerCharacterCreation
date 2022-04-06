@@ -20,16 +20,16 @@ const Choice = (props) => {
             modal
         >
             <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{props.description}</p>
+            <p>{props.event.description}</p>
             {isActive &&
                 <div>
-                    <p>{props[choice].description}</p>
+                    <p>{props.event[choice].description}</p>
                     <button onClick={() => setIsOpen(false)}>{'Onwards!'}</button>
                 </div>
             }
             {list.forEach((e, i) => {
                 return (
-                            <button onClick={() => {setIsActive(true); setChoice(e); event.choice = choice; dispatch(addEvent(choice))}}>{e.button}</button>
+                            <button onClick={() => {setIsActive(true); setChoice(e); event.choice = choice; dispatch(addEvent(choice))}}>{props.event[e].button}</button>
                 )
             })}
         </Popup>
@@ -51,7 +51,7 @@ const CheckEvent = (props) => {
             modal
         >
             <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{result ? props.pass.description : props.fail.description}</p>
+            <p>{result ? props.event.pass.description : props.event.fail.description}</p>
             <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>{result ? 'Well done.' : 'What a shame...'}</button>
         </Popup>
     )
@@ -62,7 +62,7 @@ const StatCheckEvent = (props) => {
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
     const event = props.event
-    const result = props.checkDC <= stats[props.checkStat];
+    const result = props.event.checkDC <= stats[props.event.checkStat];
     result ? delete event.fail : delete event.pass;
     return (
         <Popup
@@ -70,7 +70,7 @@ const StatCheckEvent = (props) => {
             modal
         >
             <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{result ? props.pass.description : props.fail.description}</p>
+            <p>{result ? props.event.pass.description : props.event.fail.description}</p>
             <button onClick={() =>  {setIsOpen(false); dispatch(addEvent(event))}}>{result ? 'Well done.' : 'What a shame...'}</button>
         </Popup>
     )
@@ -84,9 +84,9 @@ const ChoiceCheckEvent = (props) => {
     const event = props.event;
     const stats = useSelector(state => state.stats);
     const skills = useSelector(state=> state.skills);
-    const stat = stats[props.stat];
-    const dc = props.checkDC;
-    const list = props.choiceList;
+    const stat = stats[props.event.stat];
+    const dc = props.event.checkDC;
+    const list = props.event.skillList;
     const handleClick = (choice) => {
         const skill = skills[choice];
         const result = dc <= skillCheck(skill, stat);
