@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector, useDispatch, shallowEqual } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import {increaseStat, decreaseStat} from './StatsSlice';
 export const CharacterCreation = (props) => {
     const dispatch = useDispatch();
-    const stats = useSelector((state) => state.stats, shallowEqual);
+    const stats = useSelector((state) => state.stats);
     const decrease = (val) => {
         if (stats[val] > -3) {
             dispatch(decreaseStat(val));
@@ -21,9 +21,7 @@ export const CharacterCreation = (props) => {
         <div className="CharacterCreation">
             <h2>This is where character creation will actually occur</h2>
             <ul>
-                <li>Need to build reducers and such for the actual character data in the redux store</li>
-                <li>Gonna need a list of careers to build in</li>
-                <li>So: Careers, data tracking from careers, and maybe backgrounds and races</li>
+                <li>So: Careers, data tracking from careers, and maybe backgrounds and races?</li>
             </ul>
             <h3>Points remaining: {stats.freePoints}</h3>
             <button onClick={() => decrease('str')}>-</button><span>Str: {stats.str}</span><button onClick={() => increase('str')}>+</button><br/>

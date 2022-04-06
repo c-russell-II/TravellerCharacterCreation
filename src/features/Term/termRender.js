@@ -6,13 +6,12 @@ import { survivedTerm, advancedTerm, failedTerm } from '../Career/careerSlice';
 import {Passed, Advanced, Failed} from './termOutcomes';
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
-// import { Event } from "../Event/event";
+import { Event } from "../Event/event";
 
 export const Term = (props) => {
     const dispatch = useDispatch();
     const params = useParams();
     const career = params.career;
-
     const stats = useSelector(state => state.stats);
     const age = useSelector(state => state.stats.age);
     const currentJob = careerFuncs.job[career]
@@ -61,7 +60,7 @@ export const Term = (props) => {
             <h2>{currentJob.title}</h2>
             {responseBuilder(termResults)}
             <br/>
-            {/* <Event event={termResults.newEvent}/> */}
+            <Event event={termResults.newEvent} isMishap={termResults.survive}/>
             <p>You are currently {age} years old</p>
             <Link to="/choose_career">Choose a new career.</Link>
             <br/>
