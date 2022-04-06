@@ -3,6 +3,7 @@ import { Link, Redirect } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
 import Popup from "reactjs-popup";
+import 'reactjs-popup/dist/index.css';
 
 export const UniversityChoice = (props) => {
     const [uniPass, setUniPass] = useState(false);
@@ -78,7 +79,7 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've successfully passed the entrance exams!</h5>
-                <Link to="/university_term/1">Off to school!</Link>
+                <Link to="/university_term">Off to school!</Link>
             </Popup>
             <Popup
                 open={milAcademyLink}
@@ -94,21 +95,21 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've joined your planetary Army's military academy!</h5>
-                <Link to="/army_mil_academy/1">Hooah!</Link>
+                <Link to="/mil_academy/army">Hooah!</Link>
             </Popup>
             <Popup
                 open={navyPass}
                 modal
             >
                 <h5>You've joined your planetary Navy's military academy!</h5>
-                <Link to="/navy_mil_academy/1">Hooyah!</Link>
+                <Link to="/mil_academy/navy">Hooyah!</Link>
             </Popup>
             <Popup
                 open={marinesPass}
                 modal
             >
                 <h5>You've joined your planetary Marines military academy!</h5>
-                <Link to="/marines_mil_academy/1">Oorah!</Link>
+                <Link to="/mil_academy/marines">Oorah!</Link>
             </Popup>
             {toCareers &&
                 <div>
