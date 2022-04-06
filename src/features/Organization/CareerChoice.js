@@ -8,9 +8,10 @@ import jobObject, {parentJobs} from "../Career/CareerDetails";
 
 export const CareerChooser = (props) => {
     const parentList = parentJobs.list;
+    const name = useSelector(state => state.chara.charaName);
     return (
         <div className="jobBoard">
-            <h2>Select Career!</h2>
+            <h2>Select Your Career, {name}!</h2>
             {parentList.map((e, i) => {
                 return ( 
                     <div className="jobListing" key={i}> 

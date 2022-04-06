@@ -14,7 +14,7 @@ const options = {
     reducers: {
         reset: state => initialChara,
         setName: (state, action) => {
-            state.name = action.payload;
+            state.charaName = action.payload;
             return state;
         },
         addEvent: (state, action) => {

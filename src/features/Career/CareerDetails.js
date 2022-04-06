@@ -30,7 +30,7 @@ const agent = {
         
         {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', {type: 'advancement bonus', value: 4}]}},
         
-        {type: 'promotion', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
+        {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
     ],
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
