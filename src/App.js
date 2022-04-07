@@ -11,13 +11,12 @@ import { UniversityTerm } from './features/education/UniversityTerm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'reactjs-popup/dist/index.css';
 import { ClassicContainer } from './features/Character/Classic/ClassicContainer';
-import { JobSkills } from './features/Skills/JobSkills';
 
 function App() {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<JobSkills/>}/>
+        <Route path="/" element={<LandingPage/>}/>
         <Route path="/background_skills" element={<BackgroundSkillsChoice/>}/>
         <Route path="/character_creation" element={<CharacterCreation/>}/>
         <Route path="/classic_character_creation" element={<ClassicContainer/>}/>
