@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increaseToZero, setValue } from "../Character/SkillsSlice";
+import { increaseToZero, setValue } from "../Skills/SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import {useParams} from 'react-router-dom'
 import { Graduation } from "./GraduationContainer";

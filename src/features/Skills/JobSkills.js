@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import jobObject, {parentJobs} from "../Career/CareerDetails";
 import SplitButton from 'react-bootstrap/SplitButton';
 import Dropdown from 'react-bootstrap/Dropdown'
-import { genericIncrease } from "../Character/SkillsSlice";
+import { genericIncrease } from "./SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "./selectSpecialty";
 
@@ -24,7 +24,7 @@ export const JobSkills = () => {
             if (skills[selection.skill].specialties) {
                 if (skills[selection.skill].trained) {
                     if (!selection.specialty) {
-                        setSelectedSkill({...selection, specialtyList: skills[selection.skill].specialtiesList});
+                        setSelectedSkill({...selection, specialty: skills[selection.skill].specialtiesList});
                         setNeedSpecialty(true);
                         return;
                     }

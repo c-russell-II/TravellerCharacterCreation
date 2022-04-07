@@ -4,7 +4,7 @@ import {CharacterCreation} from './features/Character/CharacterCreation';
 import {TermContainer} from './features/Term/termContainer.js';
 import {LandingPage} from './features/Organization/LandingPage';
 import { CareerChooser } from './features/Organization/CareerChoice';
-import { BackgroundSkillsChoice } from './features/Character/backgroundSkills';
+import { BackgroundSkillsChoice } from './features/Skills/BackgroundSkills';
 import { UniversityChoice } from './features/education/UniversityChoice';
 import { MilitaryAcademyTerm } from './features/education/MilitaryAcademyTerm';
 import { UniversityTerm } from './features/education/UniversityTerm';

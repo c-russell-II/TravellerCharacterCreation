@@ -10,7 +10,7 @@ export const GraduationDialogue = (props) => {
         defaultOpen
         modal
     >
-        <h5>You made it through this term!</h5>
+        <h5></h5>
         <p>Would you like to continue for another term, or go for graduation now?</p>
         <button>Another term!</button>   <button>To Careers!</button>
     </Popup>)

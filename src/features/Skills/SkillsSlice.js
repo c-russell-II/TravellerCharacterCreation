@@ -134,30 +134,35 @@ const options = {
         },
         genericIncrease: (state, action) => {
             const skill = action.payload.skill
+            let val = 1
+            if (action.payload.value) {
+                val = action.payload.value;
+            }
             if (state[skill].specialties) {
                 if (!state[skill].trained) {
                     state[skill].trained = true;
                     state[skill].specialtiesList.forEach((e) => { state[skill][e] = 0; })
+                    state[skill][action.payload.specialty] = val;
                     return state;
                 }
                 const specialty = action.payload.specialty
                 const list = state[skill].specialtiesList;
                 if (!list.includes(specialty)) {
                     state[skill].specialtiesList.push(specialty)
-                    state[skill][specialty] = 1;
+                    state[skill][specialty] = val;
                 }
                 if (state[skill][specialty] > 0) {
                     state[skill][specialty]++
                     return state;
                 }
-                state[skill][specialty] = 1;
+                state[skill][specialty] = val;
                 return state;
             }
             if (state[skill].value >= 0) {
-                state[skill].value++;
+                state[skill].value += val
                 return state;
             }
-            state[skill].value = 1;
+            state[skill].value = val;
             return state;
         },
         setValue: (state, action) => {

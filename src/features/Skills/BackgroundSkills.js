@@ -6,6 +6,7 @@ import {increaseToZero} from './SkillsSlice';
 export const BackgroundSkillsChoice = (props) => {
     const [skills, setSkills] = useState([]);
     const [checked, setChecked] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]);
+    const [ready, setReady] = useState(false);
     const dispatch = useDispatch();
     
     const stats = useSelector(state => state.stats);
@@ -38,6 +39,7 @@ export const BackgroundSkillsChoice = (props) => {
         skills.forEach((e) => {
             dispatch(increaseToZero(e));
         })
+        setReady(true);
     }
 
     return (
@@ -57,8 +59,11 @@ export const BackgroundSkillsChoice = (props) => {
                 })}
                 <input type="submit" value="Confirm"/>
             </form>
-            <Link to="/choose_education">Go back to school, or...</Link><br/>
-            <Link to="/choose_career">Choose your career...</Link>
+            {ready &&
+                <>
+                    <Link to="/choose_education">Another step down your own trail...</Link><br/>
+                </>
+            }
         </div>
     )
 }
