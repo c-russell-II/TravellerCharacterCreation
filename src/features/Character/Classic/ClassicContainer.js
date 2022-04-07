@@ -14,7 +14,7 @@ export const ClassicContainer = (props) => {
         const index = statArray.indexOf(num)
         temp.splice(index, 1);
         setStatArray(temp)
-        setCurrentStats({...currentStats, [eventKey]: num});
+        setCurrentStats(prevStats =>{return {...prevStats, [eventKey]: num}});
         return;
     }
     const currentStatArray = Object.keys(currentStats);

@@ -16,7 +16,7 @@ export const skillCheck = (stat = 0, skill = 0) => {
 
 // carrer handler function
 
-const careerTermHandler = (job, stats) => {
+export const careerTermHandler = (job, stats) => {
     // assigns the stats from the job in the job object to local variables
 
     const {survivalSkill, advancementSkill} = job;

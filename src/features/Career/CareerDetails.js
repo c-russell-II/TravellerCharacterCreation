@@ -53,11 +53,11 @@ const agent = {
     ],
     skills: {
         personal: [
-            {type: 'skill', skill: 'Gun Combat'},
-            {type: 'stat', stat: 'dex', value: 1},
-            {type: 'stat', stat: 'end', value: 1},
-            {type: 'skill', skill: 'melee'},
-            {type: 'stat', stat: 'int', value: 1},
+            {type: 'skill', skill: 'GunCombat'},
+            {type: 'stat', stat: 'dex'},
+            {type: 'stat', stat: 'end'},
+            {type: 'skill', skill: 'Melee'},
+            {type: 'stat', stat: 'int'},
             {type: 'skill', skill: 'Athletics'}
         ],
         service: [
@@ -66,20 +66,20 @@ const agent = {
             {type: 'skill', skill: 'Investigate'},
             {type: 'skill', skill: 'Flyer'},
             {type: 'skill', skill: 'Recon'},
-            {type: 'skill', skill: 'Gun Combat'}
+            {type: 'skill', skill: 'GunCombat'}
         ],
         advanced: [
             {type: 'skill', skill: 'Advocate'},
             {type: 'skill', skill: 'Language'},
             {type: 'skill', skill: 'Explosives'},
             {type: 'skill', skill: 'Medic'},
-            {type: 'skill', skill: 'Vacc Suit'},
+            {type: 'skill', skill: 'VaccSuit'},
             {type: 'skill', skill: 'Electronics'},
         ],
         specialties:{intelligence: [
             {type: 'skill', skill: 'Investigate'},
             {type: 'skill', skill: 'Recon'},
-            {type: 'skill', skill: 'Electronics - comms'},
+            {type: 'skill', skill: 'Electronics', specialty: 'comms'},
             {type: 'skill', skill: 'Stealth'},
             {type: 'skill', skill: 'Persuade'},
             {type: 'skill', skill: 'Deception'},
@@ -92,7 +92,7 @@ const agent = {
             {type: 'skill', skill: 'Advocate'},
         ], corporate: [
             {type: 'skill', skill: 'Investigate'},
-            {type: 'skill', skill: 'Electronics - computers'},
+            {type: 'skill', skill: 'Electronics', specialty:'computers'},
             {type: 'skill', skill: 'Stealth'},
             {type: 'skill', skill: 'Carouse'},
             {type: 'skill', skill: 'Deception'},
