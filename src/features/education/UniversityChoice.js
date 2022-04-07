@@ -1,11 +1,12 @@
 import React, { useState } from "react";
-import { Link, Redirect } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
 import Popup from "reactjs-popup";
 import 'reactjs-popup/dist/index.css';
 
 export const UniversityChoice = (props) => {
+    const navigate = useNavigate();
     const [uniPass, setUniPass] = useState(false);
     const [milAcademyLink, setMilAcademyLink] = useState(false);
     const [choiceButtons, setChoiceButtons] = useState(true);
@@ -71,7 +72,7 @@ export const UniversityChoice = (props) => {
                 <div>
                     <button onClick={uniEnroll}>University</button>
                     <button onClick={milAcademyEnroll}>Military Academy</button>
-                    <button onClick={() => {<Redirect to="/choose_career"/>}}> Straight to Careers</button>
+                    <button onClick={() => {navigate("/choose_career")}}> Straight to Careers</button>
                 </div>
             }
             <Popup
@@ -113,6 +114,8 @@ export const UniversityChoice = (props) => {
             </Popup>
             {toCareers &&
                 <div>
+                    <h4>Learning on the job!</h4>
+                    <Link to="/choose_career">Choose a job</Link>
                 </div>
             }
         </div>

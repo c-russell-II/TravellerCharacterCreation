@@ -7,6 +7,7 @@ import { CareerChooser } from './features/Organization/CareerChoice';
 import { BackgroundSkillsChoice } from './features/Character/backgroundSkills';
 import { UniversityChoice } from './features/education/UniversityChoice';
 import { MilitaryAcademyTerm } from './features/education/MilitaryAcademyTerm';
+import { UniversityTerm } from './features/education/UniversityTerm';
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
         <Route path="/background_skills" element={<BackgroundSkillsChoice/>}/>
         <Route path="/character_creation" element={<CharacterCreation/>}/>
         <Route path="/choose_education" element={<UniversityChoice/>}/>
+        <Route path="/university" element={<UniversityTerm/>}/>
         <Route path="/mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
         <Route path="/choose_career" element={<CareerChooser />}/>
         <Route path="/term/:career" element={<Term/>}/>

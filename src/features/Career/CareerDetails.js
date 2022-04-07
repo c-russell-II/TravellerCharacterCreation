@@ -1,37 +1,37 @@
 const agent = {
     description: 'Law enforcement agencies, corporate operatives, spies, and others who work in the shadows.',
-    eventList: [
+    eventList: {
         
-        {type: 'redirect', destination: 'injury', roll: 2},
+        2: {type: 'redirect', destination: 'injury', roll: 2},
         
-        {type: 'choiceCheck', roll: 3, skillList: ['Investigate', 'Streetwise'], checkDC: 8,
+        3: {type: 'choiceCheck', roll: 3, skillList: ['Investigate', 'Streetwise'], checkDC: 8,
             pass: {description: 'During a dangerous investigation, you demonstrate and noticeably improve your tradecraft.', result: {type: 'skill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], value: 1}},
             fail: {description: 'During a dangerous investigation, you bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
         
-        {type: 'reward', roll: 4, result: {type: 'benefitPlus', value: 1}},
+        4: {type: 'reward', roll: 4, result: {type: 'benefitPlus', value: 1}},
         
-        {type: 'reward', roll: 5, result:{type: 'contacts', value: 'roll d3'}},
+        5: {type: 'reward', roll: 5, result:{type: 'contacts', value: 'roll d3'}},
         
-        {type: 'statCheck', roll: 6, checkStat: 'edu', checkDC: 8, 
+        6: {type: 'statCheck', roll: 6, checkStat: 'edu', checkDC: 8, 
             pass: {description: 'You take full advantage of an opportunity for specialist training.', result: {type: 'skill', choices: 'any'}},
             fail: {description: "You are offered an opportunity for specialist training, but you do not measure up to your instructors' standards."}},
         
-        {type: 'redirect', destination: 'life', roll: 7},
+        7: {type: 'redirect', destination: 'life', roll: 7},
         
-        {type: 'skillCheck', roll: 8, checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
+        8: {type: 'skillCheck', roll: 8, checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
                 result: {type: 'eventskill', choiceList:['rogue', 'citizen'], choices: {rogue: 'Rogue Skills', citizen: 'Citizen Skills'}, eventList:['rogue', 'citizen'], events: {rogue: 'rogue events', citizen: 'citizen events'}}},
             fail: {description: 'You fail to deceive your targets...', 
                 result: {type: 'mishap', eventList: ['rogue', 'citizen'], events: {rogue: 'rogue mishaps', citizen: 'citizen mishaps'}}}},
         
-        {type: 'reward', roll: 9, result:{type: 'advancement bonus', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
+        9: {type: 'reward', roll: 9, result:{type: 'advancement bonus', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
         
-        {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'skillChoice', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
+        10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'skillChoice', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
         
-        {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', {type: 'advancement bonus', value: 4}]}},
+        11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', {type: 'advancement bonus', value: 4}]}},
         
-        {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
-    ],
+        12: {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
+    },
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
         

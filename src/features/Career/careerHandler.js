@@ -21,14 +21,14 @@ const careerTermHandler = (job, stats) => {
 
     const {survivalSkill, advancementSkill} = job;
 
-    const event = job.eventList[roll(job.eventList.length)]
+    const event = job.eventList[roll() + roll()]
 
     // builds the object we'll eventually return
 
     const results = {
         job: job,
         jobDetails: jobObject.job,
-        newEvent: event,
+        newEvent: job.mishapList[roll()],
         isError: false,
         survive: false,
         advance: false,
@@ -43,12 +43,12 @@ const careerTermHandler = (job, stats) => {
     if (surviveRoll >= job.survivalDC) {
 
         results.survive = true;
-        
+        results.newEvent = event;
         // checks if you pass the advancement check for this term and sets the relevant property in the results obj
         
         if (advanceRoll >= job.advancementDC) {
 
-        results.advance = true;
+            results.advance = true;
 
         }
     }
