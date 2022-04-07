@@ -20,6 +20,8 @@ export const Graduation = (props) => {
             dispatch(genericIncrease({skill: major}))
             if (skills[minor].specialties) {
                 setNeedSpecialty(true);
+            } else {
+                dispatch(genericIncrease({skill: minor}))
             }
         }
     // eslint-disable-next-line react-hooks/exhaustive-deps
