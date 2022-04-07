@@ -4,13 +4,7 @@ import 'reactjs-popup/dist/index.css';
 import { useSelector } from "react-redux";
 
 export const GraduationDialogue = (props) => {
-
-    const continueClick = (event) => {
-        return;
-    }
-    const graduateClick = (event) => {
-        return;
-    }
+    
     return (
     <Popup
         defaultOpen

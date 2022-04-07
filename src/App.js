@@ -17,7 +17,7 @@ function App() {
         <Route path="/background_skills" element={<BackgroundSkillsChoice/>}/>
         <Route path="/character_creation" element={<CharacterCreation/>}/>
         <Route path="/choose_education" element={<UniversityChoice/>}/>
-        <Route path="/university" element={<UniversityTerm/>}/>
+        <Route path="/university_term/:term" element={<UniversityTerm/>}/>
         <Route path="/mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
         <Route path="/choose_career" element={<CareerChooser />}/>
         <Route path="/term/:career" element={<Term/>}/>

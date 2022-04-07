@@ -120,6 +120,7 @@ const options = {
             if (state[skill].specialties) {
                 if (!state[skill].trained) {
                     state[skill].trained = true;
+                    state[skill].specialtiesList.forEach((e) => {state[skill][e] = 0;})
                     return state;
                 }
                 const specialty = action.payload.specialty

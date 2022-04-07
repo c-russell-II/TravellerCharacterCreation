@@ -45,18 +45,19 @@ export const BackgroundSkillsChoice = (props) => {
             <h3>Select Background Skills...</h3>
             <h4>Up to {limit}</h4>
             <form onSubmit={handleSubmit}>
-            <h5>Points Remaining: {limit - skills.length}</h5>
-            {options.map((e, i) => {
-                return (
-                    <div key={i}>
-                        <label>
-                            <input type="checkbox" name="skill" value={e} checked={checked[i]} onClick={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
-                        </label>
-                    </div>
-                )
-            })}
-            <input type="submit" value="Confirm"/>
+                <h5>Points Remaining: {limit - skills.length}</h5>
+                {options.map((e, i) => {
+                    return (
+                        <div key={i}>
+                            <label>
+                                <input type="checkbox" name="skill" value={e} checked={checked[i]} onClick={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
+                            </label>
+                        </div>
+                    )
+                })}
+                <input type="submit" value="Confirm"/>
             </form>
+            <Link to="/choose_education">Go back to school, or...</Link><br/>
             <Link to="/choose_career">Choose your career...</Link>
         </div>
     )

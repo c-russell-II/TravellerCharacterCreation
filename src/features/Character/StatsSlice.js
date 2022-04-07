@@ -20,7 +20,7 @@ const options = {
         reset: state => startStats,
         changeStat: (state, action) => {
             const stat = action.payload
-            return {...state, stat};
+            return {...state, ...stat};
         },
         increaseStat: (state, action) => {
             state[action.payload]++;

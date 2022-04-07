@@ -16,8 +16,21 @@ export const UniversityChoice = (props) => {
     const [marinesPass, setMarinesPass] = useState(false);
 
     const stats = useSelector(state => state.stats);
+    const jobArray = useSelector(state=> state.careers.jobArray);
+    const getCareerModifier = (isMilitary=false) => {
+        let mod = 1;
+        if (isMilitary) {
+            mod = 2;
+        }
+        if (jobArray.length === 1) {
+            return 1 * mod;
+        } else if (jobArray.length === 2) {
+            return 2 * mod;
+        }
+        return 0;
+    }
     const uniEnroll = () => {
-        const result = 8 <= skillCheck(stats.edu);
+        const result = 8 <= skillCheck(stats.edu) - getCareerModifier();
         if (result) {
             setUniPass(true);
             setChoiceButtons(false);
@@ -33,7 +46,7 @@ export const UniversityChoice = (props) => {
     }
 
     const armyEnroll = () => {
-        const result = 8 <= skillCheck(stats.end);
+        const result = 8 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
             setArmyPass(true);
             setMilAcademyLink(false);
@@ -44,7 +57,7 @@ export const UniversityChoice = (props) => {
     }
     
     const navyEnroll = () => {
-        const result = 9 <= skillCheck(stats.int);
+        const result = 9 <= skillCheck(stats.int) - getCareerModifier(true);
         if (result) {
             setNavyPass(true);
             setMilAcademyLink(false);
@@ -54,7 +67,7 @@ export const UniversityChoice = (props) => {
         return;
     }
     const marinesEnroll = () => {
-        const result = 9 <= skillCheck(stats.end);
+        const result = 9 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
             setMarinesPass(true);
             setMilAcademyLink(false);
@@ -80,7 +93,7 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've successfully passed the entrance exams!</h5>
-                <Link to="/university_term">Off to school!</Link>
+                <Link to="/university_term/0">Off to school!</Link>
             </Popup>
             <Popup
                 open={milAcademyLink}
