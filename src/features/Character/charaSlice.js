@@ -5,6 +5,7 @@ const initialChara = {
     background: 'none',
     events: [],
     benefits: [],
+    trained: false,
 }
 
 
@@ -33,6 +34,10 @@ const options = {
         addBenefitBulk: (state, action) => {
             state = [...state, ...action.payload];
             return state;
+        },
+        setTrained: (state) => {
+            state.trained = true;
+            return state;
         }
     }
 }
@@ -40,5 +45,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk} = charaSlice.actions;
+export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk, setTrained} = charaSlice.actions;
 export default charaSlice.reducer;

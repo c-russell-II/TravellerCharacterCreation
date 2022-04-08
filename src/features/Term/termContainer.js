@@ -1,47 +1,34 @@
 import React, { useEffect, useState } from "react";
-import { careerTermHandler } from "../Career/careerHandler";
+import { useSelector, useDispatch } from "react-redux";
 import jobObject from "../Career/CareerDetails";
-import { useDispatch, useSelector } from "react-redux";
-import { useParams } from "react-router-dom";
-import { survivedTerm, advancedTerm, failedTerm } from '../Career/careerSlice';
-import { Term } from "./termRender";
-import { JobSkills } from "../Skills/JobSkills";
+import { careerTermHandler } from "../Career/careerHandler";
+import { setTrained } from "../Character/charaSlice";
+import { increaseToZero } from "../Skills/SkillsSlice";
+import { TermMidPoint } from "./TermMidPoint";
 
 export const TermContainer = (props) => {
-    const [survive, setSurvive] = useState();
-    const [advance, setAdvance] = useState();
-    const [isFirstTerm, setIsFirstTerm] = useState(true);
     const dispatch = useDispatch();
 
-    const params = useParams();
-    const job = jobObject[params.career];
+    const [currentTerm, setCurrentTerm] = useState()
 
     const stats = useSelector(state => state.stats);
-    const age = useSelector(state => state.stats.age);
+    const chara = useSelector(state => state.chara);
+    const job = useSelector (state => state.careers);
 
-    const termResults = careerTermHandler(job, stats);
-    setSurvive(termResults.survive);
-    setAdvance(termResults.advance);
-
-    useEffect(() => {  
-        const jobAction = {job: job.id, event: termResults.newEvent};
-
-        if (termResults.survive && termResults.advance) {
-            dispatch(advancedTerm(jobAction))
-        } else if (termResults.survive) {
-            dispatch(survivedTerm(jobAction));
-        } else {
-            dispatch(failedTerm(jobAction))
+    useEffect(() => {
+        const term = careerTermHandler(jobObject[job.currentJob], stats)
+        setCurrentTerm(term)
+        if(!chara.trained) {
+            term.jobDetails.skills.service.forEach((e) => dispatch(increaseToZero(e.skill)))
+            dispatch(setTrained())
+        }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }}, [age])
+    }, [stats.age])
 
-    const careers = useSelector(state => state.careers);
-    const skillLists = Object.keys(careers[job.id].skills);
 
     return (
         <div>
-            <Term survive={survive} advance={advance} job={job}/>
-            <JobSkills skillTables={careers[job.id].skills} isFirstTerm={isFirstTerm}/>
+            {currentTerm ? <TermMidPoint currentTerm={currentTerm} stats={stats} job={job}/> : <h3>Loading...</h3>}
         </div>
     )
 }

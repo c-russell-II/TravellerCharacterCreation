@@ -93,7 +93,7 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've successfully passed the entrance exams!</h5>
-                <Link to="/university_term/0">Off to school!</Link>
+                <Link to="/university_term">Off to school!</Link>
             </Popup>
             <Popup
                 open={milAcademyLink}

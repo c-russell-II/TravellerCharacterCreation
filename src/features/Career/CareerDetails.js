@@ -1,4 +1,7 @@
 const agent = {
+    qualification: true,
+    qualificationStat: 'int',
+    qualificationDC: 6,
     description: 'Law enforcement agencies, corporate operatives, spies, and others who work in the shadows.',
     eventList: {
         

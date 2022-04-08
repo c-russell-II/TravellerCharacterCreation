@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increaseToZero, setValue } from "../Skills/SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
-import {useParams} from 'react-router-dom'
 import { Graduation } from "./GraduationContainer";
 import { skillCheck } from "../Career/careerHandler";
 import { SelectSpecialty } from "../Skills/selectSpecialty";
@@ -11,16 +10,15 @@ export const UniversityTerm = (props) => {
     const dispatch = useDispatch();
     const stats = useSelector(state => state.stats);
     const skills = useSelector(state=> state.skills);
-    const {term} = useParams();
     const [selectedSpecialty, setSelectedSpecialty] = useState('');
     const [majorIsActive, setMajorIsActive] = useState(true);
+    const [minorIsActive, setMinorIsActive] = useState(false);
     const [selectedMajor, setSelectedMajor] = useState('');
     const [selectedMinor, setSelectedMinor] = useState('');
     const [activeSpecialty, setActiveSpecialty] = useState('')
     const [graduateDialogue, setGraduateDialogue] = useState(false);
 
     const allChoices = ['Admin', 'Advocate', 'Animals', 'Art', 'Astrogation', 'Electronics', 'Engineer', 'Language', 'Medic', 'Navigation', 'Profession', 'Science']
-    const choicesNoSpec = ['Admin', 'Advocate', 'Astrogation', 'Medic', 'Navigation']
     const choiceSpecArray = ['Animals', 'Art', 'Electronics', 'Engineer', 'Language', 'Profession', 'Science']
     const animalSpec = ['training', 'veterinary']
 
@@ -43,6 +41,7 @@ export const UniversityTerm = (props) => {
             setActiveSpecialty(selectedMajor);
         } else {
             setMajorIsActive(false);
+            setMinorIsActive(true);
         }
         return;
     }
@@ -56,6 +55,7 @@ export const UniversityTerm = (props) => {
         }
         dispatch(increaseToZero(selectedMinor));
         dispatch(increaseStat('edu'));
+        setMinorIsActive(false);
         setGraduateDialogue(true);
         return;
     }
@@ -64,6 +64,7 @@ export const UniversityTerm = (props) => {
         setSelectedSpecialty(spec);
         setActiveSpecialty('');
         setMajorIsActive(false);
+        setMinorIsActive(!minorIsActive);
     }
 
     const graduateCheck = skillCheck(stats.edu);
@@ -72,11 +73,11 @@ export const UniversityTerm = (props) => {
 
     return (
         <div className="university_term">
-            <h1>EVENTS ARE NOT FINISHED. CONDITIONAL INTERWOVEN EVENTS SUCK</h1>
-            <h3>School years, year: {term}</h3>
-            <h4>Select your major and minor for this year- the two skills you set out to focus your studies on.</h4>
+            <h3>Back to School. . .</h3>
+            {!graduateDialogue && <h4>Select your major and minor for this year- the two skills you set out to focus your studies on.</h4>}
             {majorIsActive &&
                 <div>
+                    
                     <h5>Major--</h5>
                     {selectedMajor !== '' ? <p>Selected Major: {selectedMajor} {selectedSpecialty !== '' ? `Selected Specialty: ${selectedSpecialty}` : ''}</p> : ''}
                     <form onSubmit={majorSubmit}>
@@ -96,7 +97,7 @@ export const UniversityTerm = (props) => {
                     }
                 </div>
             }
-            {!majorIsActive  &&
+            {minorIsActive &&
                 <div>
                     <h5>Minor: --</h5>
                     <form onSubmit={handleSubmit}>

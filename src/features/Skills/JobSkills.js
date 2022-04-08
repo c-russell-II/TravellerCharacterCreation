@@ -1,46 +1,45 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import jobObject, {parentJobs} from "../Career/CareerDetails";
 import SplitButton from 'react-bootstrap/SplitButton';
 import Dropdown from 'react-bootstrap/Dropdown'
 import { genericIncrease } from "./SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "./selectSpecialty";
 
-export const JobSkills = () => {
+export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
     const [selectedSkill, setSelectedSkill] = useState({})
-    const props = {job: 'intelligence'};
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
-    const skillNames = ['personal', 'advanced', 'service', 'intelligence'];
-    const specialtySkill = parentJobs.agent.skills.specialties[props.job];
-    const genericList = [jobObject.intelligence.skills.personal, jobObject.intelligence.skills.advanced, jobObject.intelligence.skills.service]
-    const finishedList = [...genericList, specialtySkill];
-    
+    const {currentTerm, cleanup} = props;
+
+    const skillNames = ['personal', 'service', 'advanced', currentTerm.job.id]
+    const finishedList = [currentTerm.job.skills.personal, currentTerm.job.skills.service, currentTerm.job.skills.advanced, currentTerm.job.skills.specialties[currentTerm.job.id]]
+
     const handleClick = (table) => {
         const selection = table[Math.floor(Math.random() * table.length)]
         if (selection.type === 'skill') {
             if (skills[selection.skill].specialties) {
-                if (skills[selection.skill].trained) {
-                    if (!selection.specialty) {
-                        setSelectedSkill({...selection, specialty: skills[selection.skill].specialtiesList});
-                        setNeedSpecialty(true);
-                        return;
-                    }
-                    if (typeof selection.specialty === "string") {
-                        dispatch(genericIncrease({skill: selection.skill, specialty: selection.specialty}))
-                        return;
-                    }
-                    setSelectedSkill(selection);
+                if (!selection.specialty) {
+                    setSelectedSkill({...selection, specialty: skills[selection.skill].specialtiesList});
                     setNeedSpecialty(true);
                     return;
                 }
+                if (typeof selection.specialty === "string") {
+                    dispatch(genericIncrease({skill: selection.skill, specialty: selection.specialty}))
+                    cleanup();
+                    return;
+                }
+                setSelectedSkill(selection);
+                setNeedSpecialty(true);
+                return;
             }
             dispatch(genericIncrease({skill: selection.skill}))
+            cleanup();
             return;
         }
         dispatch(increaseStat(selection.stat));
+        cleanup();
         return;
     }
 
@@ -48,6 +47,7 @@ export const JobSkills = () => {
         dispatch(genericIncrease({skill:selectedSkill.skill, specialty:choice}));
         setNeedSpecialty(false);
         setSelectedSkill({});
+        cleanup();
     }
 
     return(
@@ -56,7 +56,7 @@ export const JobSkills = () => {
                 return (
                     <SplitButton
                         key={i}
-                        id={`dropdown-split-variants-info`}
+                        id={`skill dropdown menu`}
                         variant='info'
                         title={skillNames[i]}
                         size='lg'
@@ -70,6 +70,7 @@ export const JobSkills = () => {
             {needSpecialty &&
                 <SelectSpecialty skill={selectedSkill.skill} list={selectedSkill.specialty} passSpecialty={passSpecialty} />
             }
+            
         </div>
         )
 }

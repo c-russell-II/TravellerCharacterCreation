@@ -87,7 +87,7 @@ export const CharacterCreation = (props) => {
         }
     }
     const handleFinalize = () => {
-        Object.keys(stats).forEach((e) => {dispatch(changeStat({[e]:getModifiers(stats[e])})); dispatch(setDisplayValue({e:stats[e]}))})
+        Object.keys(stats).forEach((e) => {dispatch(changeStat({[e]:getModifiers(stats[e])})); dispatch(setDisplayValue({[e]:stats[e]}))})
         if (points > 0) {
         dispatch(addBenefit({type: 'cash', amount:points * 2000}));}
         navigate('/background_skills');
@@ -110,7 +110,7 @@ export const CharacterCreation = (props) => {
             <Popup
                 open={ready}
                 modal
-                closeOnDocumentClick="false"
+                closeOnDocumentClick={false}
             >
                 <h3>Finalize Stats?</h3>
                 <p>When you move on to careers or higher education, any unspent points will be lost, and your stats will be finalized until you create a new character.</p>

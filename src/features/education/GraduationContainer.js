@@ -4,6 +4,7 @@ import { genericIncrease } from "../Skills/SkillsSlice";
 import { changeStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "../Skills/selectSpecialty";
 import { addQualificationBonus } from '../Character/miscBonusSlice'
+import { GraduationDialogue } from "./GraduateDialogue";
 
 export const Graduation = (props) => {
     const { major, minor, specialty, graduate, honors } = props;
@@ -20,10 +21,11 @@ export const Graduation = (props) => {
             } else {
                 dispatch(addQualificationBonus({ parentCareers: ['Agent', 'Army', 'Marines', 'Navy', 'Scholar', 'Scouts'], careers: ['corporate', 'journalist'], value: 1, age: age, duration: null, source: 'University' }))
             }
-            if (specialty) {
+            if (specialty !== null) {
                 dispatch(genericIncrease({ skill: major, specialty: specialty }))
+            } else {
+                dispatch(genericIncrease({ skill: major }))
             }
-            dispatch(genericIncrease({ skill: major }))
             if (skills[minor].specialties) {
                 setNeedSpecialty(true);
             } else {
@@ -41,11 +43,10 @@ export const Graduation = (props) => {
 
     return (
         <div>
-            <p>WAAAAAAAAAAGh</p>
+            <GraduationDialogue major={major} honors={honors}/>
             {needSpecialty &&
                 <SelectSpecialty skill={minor} list={skills[minor].specialtiesList} passSpecialty={handleSpecialty} />
             }
-            
         </div>
     )
 }

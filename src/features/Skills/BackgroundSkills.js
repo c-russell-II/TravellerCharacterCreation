@@ -1,12 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {increaseToZero} from './SkillsSlice';
 
 export const BackgroundSkillsChoice = (props) => {
     const [skills, setSkills] = useState([]);
     const [checked, setChecked] = useState([false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false, false]);
-    const [ready, setReady] = useState(false);
+    const navigate = useNavigate();
     const dispatch = useDispatch();
     
     const stats = useSelector(state => state.stats);
@@ -39,7 +39,11 @@ export const BackgroundSkillsChoice = (props) => {
         skills.forEach((e) => {
             dispatch(increaseToZero(e));
         })
-        setReady(true);
+        if (skills.length === limit) {
+            navigate('/choose_education');
+        } else {
+            alert(`Please select ${limit - skills.length} more skills.`)
+        }
     }
 
     return (
@@ -52,18 +56,13 @@ export const BackgroundSkillsChoice = (props) => {
                     return (
                         <div key={i}>
                             <label>
-                                <input type="checkbox" name="skill" value={e} checked={checked[i]} onClick={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
+                                <input type="checkbox" name="skill" value={e} checked={checked[i]} onChange={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
                             </label>
                         </div>
                     )
                 })}
                 <input type="submit" value="Confirm"/>
             </form>
-            {ready &&
-                <>
-                    <Link to="/choose_education">Another step down your own trail...</Link><br/>
-                </>
-            }
         </div>
     )
 }

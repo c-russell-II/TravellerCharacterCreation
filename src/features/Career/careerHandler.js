@@ -27,7 +27,7 @@ export const careerTermHandler = (job, stats) => {
 
     const results = {
         job: job,
-        jobDetails: jobObject.job,
+        jobDetails: jobObject[job.id],
         newEvent: job.mishapList[roll()],
         isError: false,
         survive: false,
@@ -55,6 +55,7 @@ export const careerTermHandler = (job, stats) => {
     // returns the modified object
     return results;
 }
+
 
 export const careerFuncs = {
     handler: careerTermHandler,
