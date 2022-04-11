@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { skillCheck } from "../../Career/careerHandler";
 import { ClassicCharacterCreation } from "./ClassicCharacterCreation";
+import { Link } from "react-router-dom";
 
 export const ClassicContainer = (props) => {
     const statRolls = Array.from({length: 6}, () => skillCheck());
@@ -23,7 +24,7 @@ export const ClassicContainer = (props) => {
             return -3
         } else if (num === 1 || num === 2) {
             return (-2);
-        } else if (num > 3 && num < 6) {
+        } else if (num >= 3 && num < 6) {
             return (-1);
         } else if (num > 5 && num < 9) {
             return 0
@@ -41,6 +42,7 @@ export const ClassicContainer = (props) => {
             {currentStatArray.map((e, i) => {
                 return (<p key={i}>{e}: {currentStats[e]} ({getModifiers(currentStats[e])})</p>)
             })}
+            <Link to='/background_skills'>Next</Link>
         </div>
     )
 }

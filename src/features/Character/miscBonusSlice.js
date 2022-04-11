@@ -24,11 +24,20 @@ const options = {
                 expires: action.payload.age + action.payload.duration
             }
             return {...state, [`${action.payload.source}${action.payload.age}`]: bonusObj}
+        },
+        addBenefitBonus: (state, action) => {
+            const {career, value} = action.payload;
+            if (state.benefits[career][value]) {
+                state.benefits[career][value]++;
+            } else {
+                state.benefits[career][value] = 1;
+            }
+            return state;
         }
     }
 }
 
 const miscSlice = createSlice(options);
 
-export const {reset, addQualificationBonus} = miscSlice.actions;
+export const {reset, addQualificationBonus, addBenefitBonus} = miscSlice.actions;
 export default miscSlice.reducer;

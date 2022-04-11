@@ -1,6 +1,7 @@
 import React from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import DropdownButton from "react-bootstrap/DropdownButton";
+
 export const ClassicCharacterCreation = (props) => {
     const {statArray, availableStats, clickHandler, modifier} = props;
 
@@ -13,6 +14,7 @@ export const ClassicCharacterCreation = (props) => {
                     </DropdownButton>
                 )
             })}
+
         </div>
     )
 }

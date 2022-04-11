@@ -1,9 +1,11 @@
 import React, {useEffect, useState} from "react";
-import { skillCheck } from "../Career/careerHandler";
+import { roll, skillCheck } from "../Career/careerHandler";
 import { useSelector, useDispatch } from "react-redux";
 import {addEvent} from '../Character/charaSlice';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
+import { addBenefitBonus } from "../Character/miscBonusSlice";
+import {genericIncrease} from '../Skills/SkillsSlice'
 
 
 
@@ -27,24 +29,29 @@ const Choice = (props) => {
                     <button onClick={() => setIsOpen(false)}>{'Onwards!'}</button>
                 </div>
             }
-            {list.forEach((e, i) => {
-                return (
-                            <button onClick={() => {setIsActive(true); setChoice(e); event.choice = choice; dispatch(addEvent(choice))}}>{props.event[e].button}</button>
-                )
+            {!isActive &&
+                list.forEach((e, i) => {
+                    return (
+                        <button onClick={() => {setIsActive(true); setChoice(e); event.choice = e; dispatch(addEvent(props.event))}}>{props.event[e].button}</button>
+                    )
             })}
         </Popup>
     )
 }
 
 const CheckEvent = (props) => {
-    const stats = useSelector(state => state.stats);
-    const skills = useSelector(state=> state.skills);
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
-    const event = props.event;
-    const dc = props.event.checkDC
-    const result = dc <= skillCheck(stats[props.checkStat], skills[props.checkSkill]);
-    result ? delete event.fail : delete event.pass;
+
+    const {event, stats, skills} = props;
+    let mod = 0;
+    if (event.checkStat) {
+        mod = stats[event.checkStat];
+    } else if (event.checkSkill) {
+        mod = skills[event.checkSkill]
+    }
+    const result = event.checkDC <= skillCheck(mod);
+    event.passed = result;
     return (
         <Popup
             open={isOpen}
@@ -57,46 +64,22 @@ const CheckEvent = (props) => {
     )
 }
 
-const StatCheckEvent = (props) => {
-    const stats = useSelector(state => state.stats);
-    const [isOpen, setIsOpen] = useState(true);
-    const dispatch = useDispatch();
-    const event = props.event
-    const result = props.event.checkDC <= stats[props.event.checkStat];
-    result ? delete event.fail : delete event.pass;
-    return (
-        <Popup
-            open={isOpen}
-            modal
-        >
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{result ? props.event.pass.description : props.event.fail.description}</p>
-            <button onClick={() =>  {setIsOpen(false); dispatch(addEvent(event))}}>{result ? 'Well done.' : 'What a shame...'}</button>
-        </Popup>
-    )
-}
-
 const ChoiceCheckEvent = (props) => {
     const [isActive, setIsActive] = useState(false);
     const [passed, setPassed] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
-    const event = props.event;
-    const stats = useSelector(state => state.stats);
-    const skills = useSelector(state=> state.skills);
-    const stat = stats[props.event.stat];
-    const dc = props.event.checkDC;
-    const list = props.event.skillList;
+
+    const {event, skills} = props
+
+    const dc = event.checkDC;
+    const list = event.choiceList;
+
     const handleClick = (choice) => {
         const skill = skills[choice];
-        const result = dc <= skillCheck(skill, stat);
-        if (result) {
-            delete event.fail;
-            setPassed(true);
-        } else {
-            delete event.pass;
-            setPassed(false);
-        }
+        const result  = dc <= skillCheck(skill);
+        event.passed = result;
+        setPassed(result);
         setIsActive(true);
         return;
     }
@@ -109,14 +92,14 @@ const ChoiceCheckEvent = (props) => {
             <p>{props.event.description}</p>
             {list.forEach((e, i) => {
                 return (
-                            <button onClick={() => {handleClick(e)}}>Use {e}</button>
+                            <button onClick={() => {handleClick(e)}} key={i}>Use {e}</button>
                 )
             })}
             {isActive &&
-                <div> 
-                    <p>{passed ? props.event.pass.description : props.event.fail.description}</p>
+                <>
+                    <p>{passed ? event.pass.description : event.fail.description}</p>
                     <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>{passed ? 'Well done!' : 'Too bad...'}</button>
-                </div>
+                </>
             }
         </Popup>
     )
@@ -125,31 +108,37 @@ const ChoiceCheckEvent = (props) => {
 const Reward = (props) => {
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
+    const {event, career} = props;
+
     return (
         <Popup
             open={isOpen}
             modal
         >
             <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...' }</h5>
-            <p>{props.event.description}</p>
-            <button onClick={() => {setIsOpen(false); dispatch(addEvent(props.event))}}>Great!</button>
+            <p>{event.description}</p>
+            <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>Great!</button>
         </Popup>
     )
 }
 
+const checkHandler = (event, stats, skills) => {
+    switch (event.checkType) {
+        case 'choice':
+            return <ChoiceCheckEvent event={event} stats={stats} skills={skills}/>;
+        default:
+            return <CheckEvent event={event} stats={stats} skills={skills}/>;
+    }
+}
+
 export const Event = (props) => {
-    const event = (type) => {
+    const {stats, skills, event, career} = props
+    const eventRender = (type) => {
         switch (type) {
-            case 'choice': 
-                return <Choice event={props.event} isMishap={props.isMishap}/>;
-            case 'choiceCheck': 
-                return <ChoiceCheckEvent event={props.event} isMishap={props.isMishap}/>
-            case 'skillCheck':
-                return <CheckEvent event={props.event} isMishap={props.isMishap}/>;
-            case 'statCheck': 
-                return <StatCheckEvent event={props.event} isMishap={props.isMishap}/>
+            case 'check': 
+                return checkHandler(event, stats, skills);
             case 'reward':
-                return <Reward event={props.event} isMishap={props.isMishap}/>;
+                return <Reward event={event} career={career.id} isMishap={props.isMishap}/>;
             case 'redirect':
                 switch (props.event.direction) {
                     case 'injury':
@@ -168,7 +157,7 @@ export const Event = (props) => {
     }
     return (
         <div className="general_events">
-            {event(props.event.type)}
+            {eventRender(event.type)}
             <p>This needs to be filled out, missing: redirect...</p>
         </div>
     );

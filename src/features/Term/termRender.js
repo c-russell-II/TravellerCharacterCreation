@@ -8,16 +8,17 @@ import { Advanced, Failed, Passed } from "./termOutcomes";
 
 export const Term = (props) => {
     const [skillSelect, setSkillSelect] = useState(true);
+    const [survived, setSurvived] = useState(false);
+    const [advanced, setAdvanced] = useState(false);
     const { currentTerm, job } = props;
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const termCount = job[currentTerm.job.id].terms
-    let didAdvance;
-    let didSurvive;
+
     useEffect(() => {
         setSkillSelect(true);
-        didAdvance = currentTerm.advance;
-        didSurvive = currentTerm.survive;
+        setSurvived(currentTerm.survive);
+        setAdvanced(currentTerm.advance);
     }, [termCount])
 
     const continueClickHandler = (event) => {
@@ -35,14 +36,14 @@ export const Term = (props) => {
     return (
         <div className="term">
             <h2>{currentTerm.job.title}</h2>
-            {didAdvance ? <Advanced job={job} currentTerm={currentTerm} /> : didSurvive ? <Passed job={job} rank={job.rank} currentTerm={currentTerm} /> : <Failed job={job} rank={job.rank} currentTerm={currentTerm} />}
+            {advanced ? <Advanced job={job} currentTerm={currentTerm} /> : survived ? <Passed job={job} rank={job.rank} currentTerm={currentTerm} /> : <Failed job={job} rank={job.rank} currentTerm={currentTerm} />}
             {skillSelect && 
                 <>
                     <h3>Select a skill table:</h3><br/>
                     <JobSkills currentTerm={currentTerm} cleanup={cleanup} />
                 </>
             }
-            <Event event={currentTerm.newEvent} isMishap={!currentTerm.survive}/>
+            {/* <Event career={} event={currentTerm.newEvent} isMishap={!currentTerm.survive}/> */}
             {job[currentTerm.job.id].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
             <button onClick={newCareerClickHandler}>Choose a new career...</button>
             <Link to="/">Home...</Link>

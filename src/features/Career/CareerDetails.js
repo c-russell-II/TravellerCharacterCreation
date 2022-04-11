@@ -5,23 +5,23 @@ const agent = {
     description: 'Law enforcement agencies, corporate operatives, spies, and others who work in the shadows.',
     eventList: {
         
-        2: {type: 'redirect', destination: 'injury', roll: 2},
+        2: {type: 'redirect', relevant: true, destination: 'injury', description: 'You are severely injured...'},
         
-        3: {type: 'choiceCheck', roll: 3, skillList: ['Investigate', 'Streetwise'], checkDC: 8,
+        3: {type: 'check', relevant: true, checkType: 'choice', choices: ['Investigate', 'Streetwise'], checkDC: 8,
             pass: {description: 'During a dangerous investigation, you demonstrate and noticeably improve your tradecraft.', result: {type: 'skill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], value: 1}},
             fail: {description: 'During a dangerous investigation, you bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
         
-        4: {type: 'reward', roll: 4, result: {type: 'benefitPlus', value: 1}},
+        4: {type: 'reward', relevant: true, result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
         
-        5: {type: 'reward', roll: 5, result:{type: 'contacts', value: 'roll d3'}},
+        5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: '3'}, description: 'You establish a network of contacts'},
         
-        6: {type: 'statCheck', roll: 6, checkStat: 'edu', checkDC: 8, 
+        6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, 
             pass: {description: 'You take full advantage of an opportunity for specialist training.', result: {type: 'skill', choices: 'any'}},
             fail: {description: "You are offered an opportunity for specialist training, but you do not measure up to your instructors' standards."}},
         
-        7: {type: 'redirect', destination: 'life', roll: 7},
+        7: {type: 'redirect', destination: 'life'},
         
-        8: {type: 'skillCheck', roll: 8, checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
+        8: {type: 'check', checktype: 'skill', checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
                 result: {type: 'eventskill', choiceList:['rogue', 'citizen'], choices: {rogue: 'Rogue Skills', citizen: 'Citizen Skills'}, eventList:['rogue', 'citizen'], events: {rogue: 'rogue events', citizen: 'citizen events'}}},
             fail: {description: 'You fail to deceive your targets...', 
@@ -208,3 +208,7 @@ export default jobObject
 //     skills,
 //     benefits
 // }
+
+const rewardDetails = {
+    rewardType: ['skill', 'stat', 'benefit', 'qualification', 'advancement', ]
+}

@@ -7,7 +7,6 @@ export const roll = (num = 6) => {
         throw new Error('expected a number!');
     }
     return Math.floor(Math.random() * num);
-    
 }
 
 export const skillCheck = (stat = 0, skill = 0) => {
@@ -21,7 +20,7 @@ export const careerTermHandler = (job, stats) => {
 
     const {survivalSkill, advancementSkill} = job;
 
-    const event = job.eventList[roll() + roll()]
+    const event = job.eventList[roll() + roll() + 2]
 
     // builds the object we'll eventually return
 
@@ -29,30 +28,21 @@ export const careerTermHandler = (job, stats) => {
         job: job,
         jobDetails: jobObject[job.id],
         newEvent: job.mishapList[roll()],
-        isError: false,
         survive: false,
         advance: false,
     }
 
     // checks if you pass the survival check for this term and set relevant property in results obj
 
-    const surviveRoll = skillCheck(stats[survivalSkill]);
+    results.survive = job.survivalDC <= skillCheck(stats[survivalSkill]);
 
-    const advanceRoll = skillCheck(stats[advancementSkill]);
+    results.advance = job.advancementDC <= skillCheck(stats[advancementSkill]);
 
-    if (surviveRoll >= job.survivalDC) {
-
-        results.survive = true;
+    if (results.survive) {
         results.newEvent = event;
-        // checks if you pass the advancement check for this term and sets the relevant property in the results obj
-        
-        if (advanceRoll >= job.advancementDC) {
-
-            results.advance = true;
-
-        }
     }
     // returns the modified object
+
     return results;
 }
 
