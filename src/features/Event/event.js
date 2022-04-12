@@ -1,12 +1,10 @@
-import React, {useEffect, useState} from "react";
+import React, {useState} from "react";
 import { roll, skillCheck } from "../Career/careerHandler";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import {addEvent} from '../Character/charaSlice';
+import { addContact, addBenefitBonus, addAdvancementBonus } from "../Character/miscBonusSlice";
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
-import { addBenefitBonus } from "../Character/miscBonusSlice";
-import {genericIncrease} from '../Skills/SkillsSlice'
-
 
 
 const Choice = (props) => {
@@ -108,7 +106,31 @@ const ChoiceCheckEvent = (props) => {
 const Reward = (props) => {
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
-    const {event, career} = props;
+    const {event, career, stats} = props;
+
+    const rewardHelper = () => {
+        switch (event.result.type) {
+            case 'benefit':
+                dispatch(addBenefitBonus({career: career, value: event.result.value}))
+                return;
+            case 'contacts':
+                if (event.result.value === 'roll') {
+                    dispatch(addContact({career: career, value: roll(event.result.roll)}))
+                } else {
+                    dispatch(addContact({career: career, value: event.result.value}))
+                }
+                return;
+            case 'advancement':
+                dispatch(addAdvancementBonus({career: career, age:stats.age, duration: 4, value: event.result.value}))
+                return;
+            case 'choice':
+                return;
+            case 'promotion':
+                return 
+            default: 
+                return;
+        }
+    }
 
     return (
         <Popup
@@ -138,7 +160,7 @@ export const Event = (props) => {
             case 'check': 
                 return checkHandler(event, stats, skills);
             case 'reward':
-                return <Reward event={event} career={career.id} isMishap={props.isMishap}/>;
+                return <Reward event={event} career={career.id} stats={stats} isMishap={props.isMishap}/>;
             case 'redirect':
                 switch (props.event.direction) {
                     case 'injury':

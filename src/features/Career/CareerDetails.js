@@ -27,13 +27,13 @@ const agent = {
             fail: {description: 'You fail to deceive your targets...', 
                 result: {type: 'mishap', eventList: ['rogue', 'citizen'], events: {rogue: 'rogue mishaps', citizen: 'citizen mishaps'}}}},
         
-        9: {type: 'reward', roll: 9, result:{type: 'advancement bonus', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
+        9: {type: 'reward', roll: 9, result:{type: 'advancement', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
         
         10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'skillChoice', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
         
         11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', {type: 'advancement bonus', value: 4}]}},
         
-        12: {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.'}
+        12: {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.', result:{type: 'promotion'}}
     },
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},

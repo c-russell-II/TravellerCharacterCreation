@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     benefits: {},
-    contacts: [],
+    contacts: {},
     allies: [],
     rivals: [],
     enemies: [],
@@ -20,10 +20,10 @@ const options = {
             const bonusObj = {
                 careers: action.payload.careers,
                 value: action.payload.value,
-                age: action.payload.age,
                 expires: action.payload.age + action.payload.duration
             }
-            return {...state, [`${action.payload.source}${action.payload.age}`]: bonusObj}
+            state.qualification[`${action.payload.source}${action.payload.age}`] = bonusObj
+            return state;
         },
         addBenefitBonus: (state, action) => {
             const {career, value} = action.payload;
@@ -33,11 +33,30 @@ const options = {
                 state.benefits[career][value] = 1;
             }
             return state;
+        },
+        addContact: (state, action) => {
+            const {career, value} = action.payload;
+            if (state.contacts[career]) {
+                state.contacts[career]+= value;
+            } else {
+                state.contacts[career] = value;
+            }
+            return state;
+        },
+        addAdvancementBonus: (state, action) => {
+            const bonusObj = {
+                career: action.payload.career,
+                value: action.payload.value,
+                age: action.payload.age,
+                expires: action.payload.age + action.payload.duration
+            }
+            state.advancement[`${action.payload.career}${action.payload.age}`] = bonusObj;
+            return state;
         }
     }
 }
 
 const miscSlice = createSlice(options);
 
-export const {reset, addQualificationBonus, addBenefitBonus} = miscSlice.actions;
+export const {reset, addQualificationBonus, addBenefitBonus, addContact, addAdvancementBonus} = miscSlice.actions;
 export default miscSlice.reducer;
