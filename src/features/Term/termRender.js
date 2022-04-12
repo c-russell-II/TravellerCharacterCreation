@@ -43,7 +43,7 @@ export const Term = (props) => {
                     <JobSkills currentTerm={currentTerm} cleanup={cleanup} />
                 </>
             }
-            {/* <Event career={} event={currentTerm.newEvent} isMishap={!currentTerm.survive}/> */}
+            {/* <Event career={currentTerm.job.id} event={currentTerm.newEvent} isMishap={!currentTerm.survive}/> */}
             {job[currentTerm.job.id].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
             <button onClick={newCareerClickHandler}>Choose a new career...</button>
             <Link to="/">Home...</Link>
