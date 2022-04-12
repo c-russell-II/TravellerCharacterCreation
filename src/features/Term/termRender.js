@@ -36,14 +36,14 @@ export const Term = (props) => {
     return (
         <div className="term">
             <h2>{currentTerm.job.title}</h2>
-            {advanced ? <Advanced job={job} currentTerm={currentTerm} /> : survived ? <Passed job={job} rank={job.rank} currentTerm={currentTerm} /> : <Failed job={job} rank={job.rank} currentTerm={currentTerm} />}
+            {survived ? advanced ? <Advanced job={job} currentTerm={currentTerm} /> : <Passed job={job} rank={job.rank} currentTerm={currentTerm} /> : <Failed job={job} rank={job.rank} currentTerm={currentTerm} />}
             {skillSelect && 
                 <>
                     <h3>Select a skill table:</h3><br/>
                     <JobSkills currentTerm={currentTerm} cleanup={cleanup} />
                 </>
             }
-            {/* <Event career={currentTerm.job.id} event={currentTerm.newEvent} isMishap={!currentTerm.survive}/> */}
+
             {job[currentTerm.job.id].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
             <button onClick={newCareerClickHandler}>Choose a new career...</button>
             <Link to="/">Home...</Link>

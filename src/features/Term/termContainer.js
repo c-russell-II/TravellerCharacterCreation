@@ -12,6 +12,7 @@ export const TermContainer = (props) => {
     const [currentTerm, setCurrentTerm] = useState()
 
     const stats = useSelector(state => state.stats);
+    const skills = useSelector(state=> state.skills);
     const chara = useSelector(state => state.chara);
     const job = useSelector (state => state.careers);
 
@@ -28,7 +29,7 @@ export const TermContainer = (props) => {
 
     return (
         <div>
-            {currentTerm ? <TermMidPoint currentTerm={currentTerm} stats={stats} job={job}/> : <h3>Loading...</h3>}
+            {currentTerm ? <TermMidPoint currentTerm={currentTerm} stats={stats} job={job} skills={skills}/> : <h3>Loading...</h3>}
         </div>
     )
 }

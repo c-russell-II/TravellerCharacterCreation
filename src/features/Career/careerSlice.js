@@ -26,6 +26,7 @@ const options = {
             state.currentJob = job;
             state[job].events.push(event);
             state[job].terms++;
+            state[job].muster = false;
             return state;
         },
         advancedTerm: (state, action) => {
@@ -45,6 +46,7 @@ const options = {
             if (state[job].rank < 6) {
                 state[job].rank++;
             }
+            state[job].muster = false;
             return state;
         },
         failedTerm: (state, action) => {
@@ -65,7 +67,7 @@ const options = {
         },
         selectJob: (state, action) => {
             const {job} = action.payload;
-            if (state.jobArray[0] !== job){
+            if (state.jobArray[state.jobArray.length - 1] !== job){
                 state.jobArray.push(job);
             }
             if (state.currentJob !== job) {
@@ -81,12 +83,20 @@ const options = {
                     muster: false,
                 }
             }
+            state[job].muster = false;
+            return state;
 
+        },
+        promotion: (state, action) => {
+            if (state[state.currentJob] < 6){
+                state[state.currentJob].rank++;
+            }
+            return state;
         }
     }
 }
 
 const careerSlice = createSlice(options);
-export const {survivedTerm, advancedTerm, failedTerm, selectJob} = careerSlice.actions;
+export const {survivedTerm, advancedTerm, failedTerm, selectJob, promotion} = careerSlice.actions;
 export default careerSlice.reducer;
 

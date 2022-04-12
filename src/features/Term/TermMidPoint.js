@@ -2,9 +2,10 @@ import React, {useEffect} from "react";
 import { useDispatch } from "react-redux";
 import { survivedTerm, advancedTerm, failedTerm } from '../Career/careerSlice';
 import { Term } from "./termRender";
+import { Event } from "../Event/event";
 
 export const TermMidPoint = (props) => {
-    const {stats, currentTerm} = props;
+    const {stats, currentTerm, skills} = props;
     const age = stats.age;
     const dispatch = useDispatch();
     
@@ -22,6 +23,7 @@ export const TermMidPoint = (props) => {
     return (
         <div>
             <Term currentTerm={currentTerm} job={props.job} />
+            <Event career={currentTerm.job.id} event={currentTerm.newEvent} stats={stats} skills={skills} isMishap={!currentTerm.survive}/>
         </div>
     )
 }

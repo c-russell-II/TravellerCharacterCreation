@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
-import {changeStat, setDisplayValue} from './StatsSlice';
+import {changeStat} from './StatsSlice';
 import {addBenefit, setName} from './charaSlice';
 import Popup from "reactjs-popup";
 import { useNavigate } from "react-router-dom";
@@ -87,7 +87,7 @@ export const CharacterCreation = (props) => {
         }
     }
     const handleFinalize = () => {
-        Object.keys(stats).forEach((e) => {dispatch(changeStat({[e]:getModifiers(stats[e])})); dispatch(setDisplayValue({[e]:stats[e]}))})
+        Object.keys(stats).forEach((e) => {dispatch(changeStat({stat: e, value: stats[e]}));})
         if (points > 0) {
         dispatch(addBenefit({type: 'cash', amount:points * 2000}));}
         navigate('/background_skills');

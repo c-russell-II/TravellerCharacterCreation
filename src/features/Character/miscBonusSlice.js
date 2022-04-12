@@ -27,9 +27,14 @@ const options = {
         },
         addBenefitBonus: (state, action) => {
             const {career, value} = action.payload;
-            if (state.benefits[career][value]) {
-                state.benefits[career][value]++;
-            } else {
+            if (state.benefits[career]){
+                if (state.benefits[career][value]) {
+                    state.benefits[career][value]++;
+                } else {
+                    state.benefits[career][value] = 1;
+                }
+            }
+            else {
                 state.benefits[career][value] = 1;
             }
             return state;
