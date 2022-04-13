@@ -1,23 +1,134 @@
-import React, { useState } from "react";
-import {useSelector} from 'react-redux';
+import React, { useEffect, useState } from "react";
+import {useDispatch, useSelector} from 'react-redux';
+import { Link, useParams } from "react-router-dom";
 import jobObject from "./CareerDetails";
 import { roll } from "./careerHandler";
+import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
+import ToggleButton from 'react-bootstrap/ToggleButton';
+import { removeBenefitBonus } from "../Character/miscBonusSlice";
+import { addBenefit } from "../Character/charaSlice";
+import { resolveBenefit } from "./careerSlice";
+
 
 export const BenefitsContainer = (props) => {
     const careers = useSelector(state => state.careers);
     const benefits = useSelector(state => state.misc.benefits);
-    const [index, setIndex] = useState(0);
+    const chara = useSelector(state => state.chara);
+    const skills = useSelector(state => state.skills);
     const [numCash, setNumCash] = useState(0);
-
-    const getBenefit = (career) => {
-        const numRolls = career.terms;
-        const rollArray = [];
-        for (let i = 0; i < numRolls; i++) {
-            rollArray.push(jobObject[career.title].benefits[roll()]);
-        }
-        return rollArray;
+    const [numBenefits, setNumBenefits] = useState(0);
+    const [value, setValue] = useState(2);
+    const [benefitArray, setBenefitArray] = useState([]);
+    const dispatch = useDispatch();
+    const {career} = useParams();
+    let benefitBonuses;
+    let bonusList;
+    if (benefits[career]) {
+        benefitBonuses = benefits[career]
+        bonusList = Object.keys(benefitBonuses);
+    } else {
+        benefitBonuses = {}
+        bonusList = [];
     }
+    useEffect(() => {
+        setValue(2);
+        setNumCash(chara.numOfCashBenefits);
+        setNumBenefits(careers[career].benefits);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
+
+    const noBonusClick = (event) => {
+        event.preventDefault();
+        setNumBenefits(prev => prev--)
+        let mod = 0;
+        let type = 'misc'
+        if (value === 1) {
+            setNumCash(prev => prev++)
+            type = 'money'
+            if (skills.Gambler.value >= 0) {
+                mod++;
+            }
+        }
+        if (careers[career].rank > 4) {
+            mod ++;
+        }
+        const getRoll = () => {
+            const tempRoll = roll() + mod;
+            if (tempRoll > 6) {
+                return 6;
+            }
+            return tempRoll;
+        }
+        const rollValue = getRoll()
+        const rolledBenefit = jobObject[career].benefits[rollValue][type]
+        dispatch(addBenefit({type: type, value: rolledBenefit}))
+        dispatch(resolveBenefit(career));
+        setBenefitArray(prev => [...prev, {type: type, value:rolledBenefit}]);
+    }
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        //remove the benefit from the redux store, roll the dice on the relevant table, etc
+        let mod = event.target.value;
+        let type = 'misc'
+        dispatch(removeBenefitBonus({career: career, value: event.target.value}))
+        if (benefitBonuses[mod] > 1) {
+            benefitBonuses[mod]--;
+        } else if (benefitBonuses[mod] === 1) {
+            benefitBonuses[mod]--;
+            const index = bonusList.indexOf(mod);
+            bonusList.splice(index, 1)
+        }
+        if (value === 1) {
+            type="money"
+            setNumCash(prev => prev++)
+            if (skills.Gambler.value >= 0) {
+                mod++;
+            }
+        }
+        if (careers[career].rank > 4) {
+            mod ++;
+        }
+        const getRoll = () => {
+            const tempRoll = roll();
+            if (tempRoll + mod > 6) {
+                return 6;
+            }
+            return tempRoll + mod;
+        }
+        setBenefitArray(prev => [...prev, {type: type, value:jobObject[career].benefits[getRoll()][type]}]);
+        return;
+    }
+
+    const handleChange = val => setValue(val);
     return (
-        <div><p>... benefits ...</p></div>
+        <div>
+            <h3>{jobObject[career].title} Benefits:</h3>
+            {numBenefits > 0 && <>
+                {numCash < 3 &&
+                <ToggleButtonGroup key={Math.random()} type="radio" name="typeSelector" value={value} onChange={handleChange}>
+                    <ToggleButton key={Math.random()} id="tbg-btn-1" value={1}>
+                        Cash
+                    </ToggleButton>
+                    <ToggleButton key={Math.random()} id="tbg-btn-2" value={2}>
+                        Other
+                    </ToggleButton>
+                </ToggleButtonGroup>}
+                {bonusList.length > 0 ?
+                    <form onSubmit={handleSubmit} name='selectedBenefit'>
+                        {bonusList.map((e, i) => <label for={e} key={i}><input type="radio" id={e} value={e} name='selectedBenefit'/>Use Bonus: +{e}</label>)}
+                        <label for='none'><input type="radio" value="none" id='none' name='selectedBenefit'/> No bonus.</label>
+                        <label for='submit'><input type="submit" name='selectedBenefit'/>Roll for a benefit!</label>
+                    </form>
+                : <button onClick={noBonusClick}>Roll for a benefit!</button>} </> 
+            }
+            {benefitArray.length > 0 &&
+                <ul>
+                    {benefitArray.map((e, i) => {return <li key={i}>{e.type==='money' ? `Cash: ${e.value}` : `Misc: ${e.value}`}</li>})}
+                </ul>
+            }
+            {numBenefits <= 0 &&
+                <Link to="/choose_career">New Career!</Link>
+            }
+        </div>
     )
 }

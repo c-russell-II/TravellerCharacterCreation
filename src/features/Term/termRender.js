@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import { ageUp } from "../Character/StatsSlice";
-import { Event } from "../Event/event";
 import { JobSkills } from "../Skills/JobSkills";
 import { Advanced, Failed, Passed } from "./termOutcomes";
 
@@ -19,6 +18,7 @@ export const Term = (props) => {
         setSkillSelect(true);
         setSurvived(currentTerm.survive);
         setAdvanced(currentTerm.advance);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [termCount])
 
     const continueClickHandler = (event) => {
@@ -29,7 +29,7 @@ export const Term = (props) => {
     const newCareerClickHandler = (event) => {
         event.preventDefault();
         dispatch(ageUp());
-        navigate('/choose_career');
+        navigate(`/leave_career/${currentTerm.job.id}`);
     }
 
     const cleanup = () => {setSkillSelect(false)}
@@ -45,7 +45,7 @@ export const Term = (props) => {
             }
 
             {job[currentTerm.job.id].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
-            <button onClick={newCareerClickHandler}>Choose a new career...</button>
+            <button onClick={newCareerClickHandler}>On to greener pastures...</button>
             <Link to="/">Home...</Link>
         </div>
     )

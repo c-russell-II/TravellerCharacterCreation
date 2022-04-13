@@ -20,12 +20,14 @@ const options = {
                     events: [event],
                     terms: 0,
                     rank: 0,
+                    benefits: 0,
                     muster: false,
                 }
             }
             state.currentJob = job;
             state[job].events.push(event);
             state[job].terms++;
+            state[job].benefits++;
             state[job].muster = false;
             return state;
         },
@@ -37,12 +39,14 @@ const options = {
                     events: [event],
                     terms: 0,
                     rank: 0,
+                    benefits: 0,
                     muster: false,
                 }
             }
             state.currentJob = job;
             state[job].events.push(event);
             state[job].terms++;
+            state[job].benefits++;
             if (state[job].rank < 6) {
                 state[job].rank++;
             }
@@ -57,6 +61,7 @@ const options = {
                     events: [event],
                     terms: 0,
                     rank: 0,
+                    benefits: 0,
                     muster: false,
                 }
             }
@@ -80,6 +85,7 @@ const options = {
                     events: [],
                     terms: 0,
                     rank: 0,
+                    benefits: 0,
                     muster: false,
                 }
             }
@@ -92,11 +98,15 @@ const options = {
                 state[state.currentJob].rank++;
             }
             return state;
+        },
+        resolveBenefit: (state, action) => {
+            state[action.payload].benefits--;
+            return state;
         }
     }
 }
 
 const careerSlice = createSlice(options);
-export const {survivedTerm, advancedTerm, failedTerm, selectJob, promotion} = careerSlice.actions;
+export const {survivedTerm, advancedTerm, failedTerm, selectJob, promotion, resolveBenefit} = careerSlice.actions;
 export default careerSlice.reducer;
 

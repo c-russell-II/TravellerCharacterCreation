@@ -33,11 +33,22 @@ const options = {
                 } else {
                     state.benefits[career][value] = 1;
                 }
-            }
-            else {
-                state.benefits[career][value] = 1;
+            } else {
+                state.benefits[career]= {[value]: 1};
             }
             return state;
+        },
+        removeBenefitBonus: (state, action) => {
+            const {career, value} = action.payload;
+            if (state.benefits[career]) {
+                if (state.benefits[career][value] > 1) {
+                    state.benefits[career][value]--;
+                    return state;
+                } else if (state.benefits[career][value] === 1) {
+                    state.benefits[career][value] = null;
+                    return state;
+                }
+            } return state;
         },
         addContact: (state, action) => {
             const {career, value} = action.payload;
@@ -63,5 +74,5 @@ const options = {
 
 const miscSlice = createSlice(options);
 
-export const {reset, addQualificationBonus, addBenefitBonus, addContact, addAdvancementBonus} = miscSlice.actions;
+export const {reset, addQualificationBonus, addBenefitBonus, addContact, addAdvancementBonus, removeBenefitBonus} = miscSlice.actions;
 export default miscSlice.reducer;

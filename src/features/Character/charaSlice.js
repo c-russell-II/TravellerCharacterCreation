@@ -5,6 +5,7 @@ const initialChara = {
     background: 'none',
     events: [],
     benefits: [],
+    numOfCashBenefits: 0,
     trained: false,
 }
 
@@ -28,6 +29,9 @@ const options = {
             return state;
         },
         addBenefit: (state, action) => {
+            if (action.payload.type === 'money') {
+                state.numOfCashBenefits++;
+            }
             state.benefits.push(action.payload);
             return state;
         },

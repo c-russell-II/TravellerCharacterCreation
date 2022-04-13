@@ -11,6 +11,7 @@ import { UniversityTerm } from './features/education/UniversityTerm';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'reactjs-popup/dist/index.css';
 import { ClassicContainer } from './features/Character/Classic/ClassicContainer';
+import { BenefitsContainer } from './features/Career/benefitsContainer';
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="/mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
         <Route path="/choose_career" element={<CareerChooser />}/>
         <Route path="/term/:career" element={<TermContainer/>}/>
+        <Route path="/leave_career/:career" element={<BenefitsContainer/>}/>
       </Routes>
     </Router>
       );

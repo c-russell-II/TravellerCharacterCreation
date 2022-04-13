@@ -209,6 +209,6 @@ export default jobObject
 //     benefits
 // }
 
-const rewardDetails = {
-    rewardType: ['skill', 'stat', 'benefit', 'qualification', 'advancement', ]
-}
+// const rewardDetails = {
+//     rewardType: ['skill', 'stat', 'benefit', 'qualification', 'advancement', ]
+// }
