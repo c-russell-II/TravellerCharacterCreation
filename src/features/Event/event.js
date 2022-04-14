@@ -2,7 +2,6 @@ import React from "react";
 import { roll } from "../Career/careerHandler";
 import { useDispatch } from "react-redux";
 import { addContact, addBenefitBonus, addAdvancementBonus } from "../Character/miscBonusSlice";
-import 'reactjs-popup/dist/index.css';
 import { promotion } from "../Career/careerSlice";
 import { genericIncrease } from "../Skills/SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";

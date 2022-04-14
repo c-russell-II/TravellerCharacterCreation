@@ -1,5 +1,4 @@
 import React from "react";
-import 'reactjs-popup/dist/index.css';
 import { Link } from "react-router-dom";
 
 export const GraduationDialogue = (props) => {

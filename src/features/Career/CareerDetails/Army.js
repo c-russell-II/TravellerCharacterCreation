@@ -44,7 +44,7 @@ export const infantry = {
     eventList: army.eventList,
     mishapList: army.mishapList,
     ranks: [
-        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', value: 1}},
+        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', specialty: 'any', value: 1}},
         {title:'Lance Corporal', bonus: {type: 'skill', skill: 'Recon', value: 1}},
         {title: 'Corporal', bonus: false},
         {title: 'Lance Sergeant', bonus: {type:'skill', skill: 'Leadership', value: 1}},
@@ -68,7 +68,7 @@ export const cavalry = {
     eventList: army.eventList,
     mishapList: army.mishapList,
     ranks: [
-        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', value: 1}},
+        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', specialty: 'any', value: 1}},
         {title:'Lance Corporal', bonus: {type: 'skill', skill: 'Recon', value: 1}},
         {title: 'Corporal', bonus: false},
         {title: 'Lance Sergeant', bonus: {type:'skill', skill: 'Leadership', value: 1}},

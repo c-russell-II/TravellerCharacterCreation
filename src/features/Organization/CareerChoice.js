@@ -3,9 +3,6 @@ import React from "react";
 import { useSelector } from "react-redux";
 import {parentJobs} from "../Career/CareerDetails";
 
-
-
-
 export const CareerChooser = (props) => {
     const parentList = parentJobs.list;
     const name = useSelector(state => state.chara.charaName);

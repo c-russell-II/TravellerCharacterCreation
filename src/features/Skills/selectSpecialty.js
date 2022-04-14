@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import Popup from "reactjs-popup";
-import 'reactjs-popup/dist/index.css';
 
 export const SelectSpecialty = (props) => {
     const {skill, list, passSpecialty} = props;

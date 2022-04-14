@@ -3,7 +3,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
 import Popup from "reactjs-popup";
-import 'reactjs-popup/dist/index.css';
 
 export const UniversityChoice = (props) => {
     const navigate = useNavigate();

@@ -125,7 +125,7 @@ export const corporate = {
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
         {title: 'Senior Field Agent', rank: 3},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', value: 1}},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', specialty: 'any', value: 1}},
         {title: 'Assistant Director'},
         {title: 'Director'}
     ],
@@ -150,7 +150,7 @@ export const lawEnforcement = {
         {title: 'Detective', rank: 3},
         {title:'Lieutenant', rank: 4, bonus: {type: 'skill', skill: 'Investigate', value: 1}},
         {title:'Chief', rank: 5, bonus: {type: 'skill', skill:'Admin', value: 1}},
-        {title:'Commisioner', rank: 6, bonus: {type: 'state', stat: 'soc', value: 1}},
+        {title:'Commisioner', rank: 6, bonus: {type: 'stat', stat: 'soc', value: 1}},
     ],
     eventList: agent.eventList,
     mishapList: agent.mishapList,
@@ -171,7 +171,7 @@ export const intelligence = {
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
         {title: 'Senior Field Agent', rank: 3},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', value: 1}},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', specialty: 'any', value: 1}},
         {title: 'Assistant Director'},
         {title: 'Director'}
     ],

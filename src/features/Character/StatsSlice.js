@@ -58,6 +58,10 @@ const options = {
             state[action.payload] = getModifiers(state.displayValues[action.payload]);
             return state;
         },
+        changeByAmount: (state, action) => {
+            state.displayValues[action.payload.stat] += action.payload.value;
+            return state;
+        },
         setDisplayValue: (state, action) => {
             state.displayValues = {...state.displayValues, ...action.payload}
             return state;
@@ -70,5 +74,5 @@ const options = {
 }
 
 const statsSlice = createSlice(options);
-export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp} = statsSlice.actions;
+export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp, changeByAmount} = statsSlice.actions;
 export default statsSlice.reducer;
