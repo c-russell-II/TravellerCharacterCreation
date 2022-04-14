@@ -3,7 +3,7 @@ import { useDispatch } from 'react-redux';
 import {changeStat} from './StatsSlice';
 import {addBenefit, setName} from './charaSlice';
 import Popup from "reactjs-popup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 export const CharacterCreation = (props) => {
     const [value, setValue] = useState();
@@ -114,7 +114,7 @@ export const CharacterCreation = (props) => {
             >
                 <h3>Finalize Stats?</h3>
                 <p>When you move on to careers or higher education, any unspent points will be lost, and your stats will be finalized until you create a new character.</p>
-                <button onClick={handleFinalize}>Let's continue.</button>
+                <button onClick={handleFinalize}>Let's continue.</button> <Link to="/print">Print!</Link>
             </Popup>
         </div>
     )

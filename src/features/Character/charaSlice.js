@@ -39,6 +39,12 @@ const options = {
             state = [...state, ...action.payload];
             return state;
         },
+        resolveCashBenefit: (state) => {
+            if (state.numOfCashBenefits > 0) {
+                state.numOfCashBenefits--;
+            } 
+            return state;
+        },
         setTrained: (state) => {
             state.trained = true;
             return state;
@@ -49,5 +55,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk, setTrained} = charaSlice.actions;
+export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk, setTrained, resolveCashBenefit} = charaSlice.actions;
 export default charaSlice.reducer;

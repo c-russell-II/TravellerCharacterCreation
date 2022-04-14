@@ -12,6 +12,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'reactjs-popup/dist/index.css';
 import { ClassicContainer } from './features/Character/Classic/ClassicContainer';
 import { BenefitsContainer } from './features/Career/benefitsContainer';
+import PrintPage from './features/Organization/PrintPage';
 
 function App() {
   return (
@@ -27,6 +28,7 @@ function App() {
         <Route path="/choose_career" element={<CareerChooser />}/>
         <Route path="/term/:career" element={<TermContainer/>}/>
         <Route path="/leave_career/:career" element={<BenefitsContainer/>}/>
+        <Route path="/print" element={<PrintPage/>}/>
       </Routes>
     </Router>
       );

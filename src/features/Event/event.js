@@ -1,142 +1,16 @@
-import React, {useEffect, useState} from "react";
-import { roll, skillCheck } from "../Career/careerHandler";
+import React from "react";
+import { roll } from "../Career/careerHandler";
 import { useDispatch } from "react-redux";
-import {addEvent} from '../Character/charaSlice';
 import { addContact, addBenefitBonus, addAdvancementBonus } from "../Character/miscBonusSlice";
-import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import { promotion } from "../Career/careerSlice";
 import { genericIncrease } from "../Skills/SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
+import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
+import { CheckEvent } from "./CheckEvent";
+import { Reward } from "./Reward";
+import { Choice } from "./Choice";
 
-
-const Choice = (props) => {
-    const [isOpen, setIsOpen] = useState(true);
-    const [isActive, setIsActive] = useState(false);
-    const [choice, setChoice] = useState('');
-    const dispatch = useDispatch();
-    const {event, helper} = props;
-    const list = event.choiceList;
-
-    const handleClick = (choice) => {
-        setChoice(choice);
-        event.choice = choice;
-        dispatch(addEvent(event));
-        return (helper(event[choice].type, setIsActive))
-    }
-    return (
-        <Popup
-            open={isOpen}
-            modal
-        >
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{props.event.description}</p>
-            {isActive &&
-                <div>
-                    <p>{props.event[choice].description}</p>
-                    <button onClick={() => setIsOpen(false)}>{'Onwards!'}</button>
-                </div>
-            }
-            {!isActive &&
-                list.map((e, i) => {
-                    return (
-                        <button key={i} onClick={() => handleClick(e)}>{props.event[e].button}</button>
-                    )
-            })}
-        </Popup>
-    )
-}
-
-const CheckEvent = (props) => {
-    const [isOpen, setIsOpen] = useState(true);
-    const dispatch = useDispatch();
-
-    const {event, stats, skills} = props;
-    let mod = 0;
-    if (event.checkStat) {
-        mod = stats[event.checkStat];
-    } else if (event.checkSkill) {
-        mod = skills[event.checkSkill]
-    }
-    const result = event.checkDC <= skillCheck(mod);
-    return (
-        <Popup
-            open={isOpen}
-            modal
-        >
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{result ? props.event.pass.description : props.event.fail.description}</p>
-            <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>{result ? 'Well done.' : 'What a shame...'}</button>
-        </Popup>
-    )
-}
-
-const ChoiceCheckEvent = (props) => {
-    const [isActive, setIsActive] = useState(false);
-    const [passed, setPassed] = useState(false);
-    const [isOpen, setIsOpen] = useState(true);
-    const dispatch = useDispatch();
-
-    const {event, skills, handler} = props
-
-    const dc = event.checkDC;
-    const list = event.choiceList;
-
-    const checkPassed = () => {
-        if (passed) {
-            return handler(event.pass.result, setIsActive)
-        } else {
-            return handler(event.fail.result, setIsActive);
-        }
-    }
-
-    const handleClick = (choice) => {
-        const skill = skills[choice];
-        const result  = dc <= skillCheck(skill);
-        event.passed = result;
-        setPassed(result);
-        return checkPassed();
-    }
-    return (
-        <Popup
-            open={isOpen}
-            modal
-        >
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
-            <p>{props.event.description}</p>
-            {list.map((e, i) => {
-                return (
-                            <button onClick={() => {handleClick(e)}} key={i}>Use {e}</button>
-                )
-            })}
-            {isActive &&
-                <>
-                    <p>{passed ? event.pass.description : event.fail.description}</p>
-                    {}
-                    <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>{passed ? 'Well done!' : 'Too bad...'}</button>
-                </>
-            }
-        </Popup>
-    )
-}
-
-const Reward = (props) => {
-    const [isOpen, setIsOpen] = useState(true);
-    const [isReady, setIsReady] = useState(false);
-    const dispatch = useDispatch();
-    const {event, handler} = props;
-    useEffect(() => {setIsOpen(true); setIsReady(false);}, [])
-    return (
-        <Popup
-            open={isOpen}
-            modal
-        >
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...' }</h5>
-            <p>{event.description}</p>
-            {isReady ? <button onClick={() => {setIsOpen(false); dispatch(addEvent(event))}}>Great!</button> : handler(event.result.type, setIsReady)}
-        </Popup>
-    )
-}
 
 const checkHandler = (event, stats, skills, helper) => {
     switch (event.checkType) {
@@ -219,7 +93,7 @@ export const Event = (props) => {
     return (
         <div className="general_events">
             {eventRender(event.type)}
-            <p>This needs to be filled out, missing: redirect...</p>
+            <p>Event rendering still missing redirects!</p>
         </div>
     );
 }

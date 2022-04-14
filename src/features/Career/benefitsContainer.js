@@ -6,7 +6,7 @@ import { roll } from "./careerHandler";
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { removeBenefitBonus } from "../Character/miscBonusSlice";
-import { addBenefit } from "../Character/charaSlice";
+import { addBenefit, resolveCashBenefit } from "../Character/charaSlice";
 import { resolveBenefit } from "./careerSlice";
 
 
@@ -31,11 +31,10 @@ export const BenefitsContainer = (props) => {
         bonusList = [];
     }
     useEffect(() => {
-        setValue(2);
         setNumCash(chara.numOfCashBenefits);
         setNumBenefits(careers[career].benefits);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [careers[career].benefits, chara.numOfCashBenefits])
 
     const noBonusClick = (event) => {
         event.preventDefault();
@@ -43,7 +42,7 @@ export const BenefitsContainer = (props) => {
         let mod = 0;
         let type = 'misc'
         if (value === 1) {
-            setNumCash(prev => prev++)
+            dispatch(resolveCashBenefit());
             type = 'money'
             if (skills.Gambler.value >= 0) {
                 mod++;
@@ -80,7 +79,7 @@ export const BenefitsContainer = (props) => {
         }
         if (value === 1) {
             type="money"
-            setNumCash(prev => prev++)
+            dispatch(resolveCashBenefit());
             if (skills.Gambler.value >= 0) {
                 mod++;
             }
@@ -103,7 +102,7 @@ export const BenefitsContainer = (props) => {
     return (
         <div>
             <h3>{jobObject[career].title} Benefits:</h3>
-            {numBenefits > 0 && <>
+            {numBenefits > 0 && <> <p>Benefits Remaining: {numBenefits}</p>
                 {numCash < 3 &&
                 <ToggleButtonGroup key={Math.random()} type="radio" name="typeSelector" value={value} onChange={handleChange}>
                     <ToggleButton key={Math.random()} id="tbg-btn-1" value={1}>

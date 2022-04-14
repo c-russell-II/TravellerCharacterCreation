@@ -1,0 +1,83 @@
+export const army = {
+    qualification: true,
+    qualificationStat: 'end',
+    qualificationDC: 5,
+    description: 'Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles, and campaigns. Such individuals may also be mercenaries for hire.',
+    eventList: {},
+    mishapList: [],
+    skills: {},
+    benefits: [],
+    specialtiesList: ['support', 'infantry', 'cavalry'],
+}
+
+ export const support = {
+    id: 'support',
+    title: 'Support',
+    description: 'You are an engineer, cook, or in some other role behind the front lines.',
+    survivalSkill: 'end',
+    survivalDC: 5,
+    advancementSkill: 'edu',
+    advancementDC: 7,
+    eventList: army.eventList,
+    mishapList: army.mishapList,
+    ranks: [
+        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', value: 1}},
+        {title:'Lance Corporal', bonus: {type: 'skill', skill: 'Recon', value: 1}},
+        {title: 'Corporal', bonus: false},
+        {title: 'Lance Sergeant', bonus: {type:'skill', skill: 'Leadership', value: 1}},
+        {title: 'Sergeant', bonus: false},
+        {title: 'Gunnery Sergeant', bonus: false},
+        {title: 'Sergeant Major', bonus: false},
+    ],
+    skills: army.skills,
+    benefits: army.benefits,
+    parent: 'army'
+}
+export const infantry = {
+    id: 'infantry',
+    title: 'Infantry',
+    description: 'You are one of the Poor Bloody Infantry on the ground.',
+    survivalSkill: 'str',
+    survivalDC: 6,
+    advancementSkill: 'edu',
+    advancementDC: 6,
+    eventList: army.eventList,
+    mishapList: army.mishapList,
+    ranks: [
+        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', value: 1}},
+        {title:'Lance Corporal', bonus: {type: 'skill', skill: 'Recon', value: 1}},
+        {title: 'Corporal', bonus: false},
+        {title: 'Lance Sergeant', bonus: {type:'skill', skill: 'Leadership', value: 1}},
+        {title: 'Sergeant', bonus: false},
+        {title: 'Gunnery Sergeant', bonus: false},
+        {title: 'Sergeant Major', bonus: false},
+    ],
+    skills: army.skills,
+    benefits: army.benefits,
+    parent: 'army',
+}
+
+export const cavalry = {
+    id: 'cavalry',
+    title: 'Cavalry',
+    description: 'You are one of the crew of a gunship or tank.',
+    survivalSkill: 'int',
+    survivalDC: 7,
+    advancementSkill: 'int',
+    advancementDC: 5,
+    eventList: army.eventList,
+    mishapList: army.mishapList,
+    ranks: [
+        {title:'Private', bonus: {type: 'skill', skill: 'GunCombat', value: 1}},
+        {title:'Lance Corporal', bonus: {type: 'skill', skill: 'Recon', value: 1}},
+        {title: 'Corporal', bonus: false},
+        {title: 'Lance Sergeant', bonus: {type:'skill', skill: 'Leadership', value: 1}},
+        {title: 'Sergeant', bonus: false},
+        {title: 'Gunnery Sergeant', bonus: false},
+        {title: 'Sergeant Major', bonus: false},
+    ],
+    skills: army.skills,
+    benefits: army.benefits,
+    parent: 'army',
+}
+
