@@ -55,8 +55,9 @@ export const BenefitsContainer = (props) => {
             const tempRoll = roll() + mod;
             if (tempRoll > 6) {
                 return 6;
-            }
+            } else {
             return tempRoll;
+            }
         }
         const rollValue = getRoll()
         const rolledBenefit = jobObject[career].benefits[rollValue][type]
@@ -91,10 +92,12 @@ export const BenefitsContainer = (props) => {
             const tempRoll = roll();
             if (tempRoll + mod > 6) {
                 return 6;
+            } else {
+                return tempRoll + mod;
             }
-            return tempRoll + mod;
         }
-        setBenefitArray(prev => [...prev, {type: type, value:jobObject[career].benefits[getRoll()][type]}]);
+        const roll = getRoll()
+        setBenefitArray(prev => [...prev, {type: type, value:jobObject[career].benefits[roll][type]}]);
         return;
     }
 

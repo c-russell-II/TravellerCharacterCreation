@@ -5,16 +5,19 @@ import Dropdown from 'react-bootstrap/Dropdown'
 import { genericIncrease } from "./SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "./selectSpecialty";
+import { useParams } from "react-router-dom";
 
 export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
     const [selectedSkill, setSelectedSkill] = useState({})
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
-    const {currentTerm, cleanup} = props;
+    const {cleanup} = props;
+    const term = useSelector(state => state.term);
+    const {career} = useParams();
 
-    const skillNames = ['personal', 'service', 'advanced', currentTerm.job.id]
-    const finishedList = [currentTerm.job.skills.personal, currentTerm.job.skills.service, currentTerm.job.skills.advanced, currentTerm.job.skills.specialties[currentTerm.job.id]]
+    const skillNames = ['personal', 'service', 'advanced', career]
+    const finishedList = [term.jobDetails.skills.personal, term.jobDetails.skills.service, term.jobDetails.skills.advanced, term.jobDetails.skills.specialties[career]]
 
     const handleClick = (table) => {
         const selection = table[Math.floor(Math.random() * table.length)]

@@ -1,6 +1,6 @@
 import React from "react";
 import { roll } from "../Career/careerHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addContact, addBenefitBonus, addAdvancementBonus } from "../Character/miscBonusSlice";
 import { promotion } from "../Career/careerSlice";
 import { genericIncrease } from "../Skills/SkillsSlice";
@@ -9,34 +9,38 @@ import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
+import { useParams } from "react-router-dom";
 
 
-const checkHandler = (event, stats, skills, helper) => {
+const checkHandler = (event, helper) => {
     switch (event.checkType) {
         case 'choice':
-            return <ChoiceCheckEvent event={event} stats={stats} skills={skills} handler={helper}/>;
+            return <ChoiceCheckEvent handler={helper}/>;
         default:
-            return <CheckEvent event={event} stats={stats} skills={skills} handler={helper}/>;
+            return <CheckEvent handler={helper}/>;
     }
 }
 
 export const Event = (props) => {
-    const {stats, skills, event, career} = props
+    const stats = useSelector(state => state.stats);
+    const event = useSelector(state => state.term.event);
+    const {career} = useParams();
+
     const dispatch = useDispatch();
 
-    const rewardHelper = (type, readySetter) => {
+    const rewardHelper = (type) => {
         switch (type) {
             case 'benefit':
                 dispatch(addBenefitBonus({career: career, value: event.result.value}))
-                readySetter(true);
                 return;
-            case 'skill':
+            case 'setSkill':
+                //check if skill is already above set point, if so, return, else dispatch set
+                return;
+            case 'increaseSkill':
                 dispatch(genericIncrease(event.result.skill))
-                readySetter(true);
                 return;
             case 'stat':
                 dispatch(increaseStat(event.result.stat));
-                readySetter(true);
                 return;
             case 'contacts':
                 if (event.result.value === 'roll') {
@@ -44,23 +48,18 @@ export const Event = (props) => {
                 } else {
                     dispatch(addContact({career: career, value: event.result.value}))
                 }
-                readySetter(true);
                 return;
             case 'advancement':
                 dispatch(addAdvancementBonus({career: career, age:stats.age, duration: 4, value: event.result.value}))
-                readySetter(true);
                 return;
             case 'choice':
-                return (<><h4>Select Reward:</h4><br/>{event.result.choice.map((e, i) => <button key={i} onClick={() => {rewardHelper(event.result.choiceDetail[e].type, readySetter); readySetter(true);}}>{e}</button>)}</>);
+                return (<><h4>Select Reward:</h4><br/>{event.result.choice.map((e, i) => <button key={i} onClick={() => {rewardHelper(event.result.choiceDetail[e].type);}}>{e}</button>)}</>);
             case 'promotion':
                 dispatch(promotion());
-                readySetter(true);
                 return;
             case 'redirect':
-                readySetter(true);
                 return //need a redirect handler!
             default:
-                readySetter(true);
                 return;
         }
     }
@@ -68,11 +67,11 @@ export const Event = (props) => {
     const eventRender = (type) => {
         switch (type) {
             case 'check': 
-                return checkHandler(event, stats, skills, rewardHelper);
+                return checkHandler(rewardHelper);
             case 'reward':
-                return <Reward event={event} career={career.id} stats={stats} isMishap={props.isMishap} handler={rewardHelper}/>;
+                return <Reward handler={rewardHelper}/>;
             case 'choice':
-                return <Choice event={event} handler={rewardHelper}/>
+                return <Choice handler={rewardHelper}/>
             case 'redirect':
                 switch (props.event.direction) {
                     case 'injury':

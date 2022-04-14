@@ -28,7 +28,7 @@ export const Specialties = (props) => {
                 return;
             }
         } else {
-            dispatch(selectJob({ job: job }));
+            dispatch(selectJob({ job: job, details: [props.specialty] }));
             navigate('/term/' + job);
             return;
         }

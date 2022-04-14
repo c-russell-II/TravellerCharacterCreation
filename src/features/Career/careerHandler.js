@@ -20,26 +20,27 @@ export const careerTermHandler = (job, stats) => {
 
     const {survivalSkill, advancementSkill} = job;
 
-    const event = job.eventList[roll() + roll() + 2]
+ 
 
     // builds the object we'll eventually return
 
     const results = {
-        job: job,
-        jobDetails: jobObject[job.id],
-        newEvent: job.mishapList[roll()],
-        survive: false,
-        advance: false,
+        job: job.id,
+        jobDetails: job,
+        event: job.mishapList[roll()],
+        survived: false,
+        advanced: false,
     }
 
     // checks if you pass the survival check for this term and set relevant property in results obj
 
-    results.survive = job.survivalDC <= skillCheck(stats[survivalSkill]);
+    results.survived = job.survivalDC <= skillCheck(stats[survivalSkill]);
 
-    results.advance = job.advancementDC <= skillCheck(stats[advancementSkill]);
+    results.advanced = job.advancementDC <= skillCheck(stats[advancementSkill]);
 
-    if (results.survive) {
-        results.newEvent = event;
+    if (results.survived) {
+        const event = job.eventList[roll() + roll() + 2]
+        results.event = event;
     }
     // returns the modified object
 

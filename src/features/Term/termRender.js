@@ -1,23 +1,21 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
-import { Link, useNavigate } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import { ageUp } from "../Character/StatsSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { Advanced, Failed, Passed } from "./termOutcomes";
 
 export const Term = (props) => {
     const [skillSelect, setSkillSelect] = useState(true);
-    const [survived, setSurvived] = useState(false);
-    const [advanced, setAdvanced] = useState(false);
-    const { currentTerm, job } = props;
+    const term = useSelector(state => state.term);
+    const {career} = useParams();
+    const careerState = useSelector(state => state.careers);
     const dispatch = useDispatch();
     const navigate = useNavigate();
-    const termCount = job[currentTerm.job.id].terms
+    const termCount = careerState[career].terms
 
     useEffect(() => {
         setSkillSelect(true);
-        setSurvived(currentTerm.survive);
-        setAdvanced(currentTerm.advance);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [termCount])
 
@@ -29,22 +27,22 @@ export const Term = (props) => {
     const newCareerClickHandler = (event) => {
         event.preventDefault();
         dispatch(ageUp());
-        navigate(`/leave_career/${currentTerm.job.id}`);
+        navigate(`/leave_career/${career}`);
     }
 
     const cleanup = () => {setSkillSelect(false)}
     return (
         <div className="term">
-            <h2>{currentTerm.job.title}</h2>
-            {survived ? advanced ? <Advanced job={job} currentTerm={currentTerm} /> : <Passed job={job} rank={job.rank} currentTerm={currentTerm} /> : <Failed job={job} rank={job.rank} currentTerm={currentTerm} />}
+            <h2>{term.jobDetails.title}</h2>
+            {term.survived ? term.advanced ? <Advanced /> : <Passed /> : <Failed />}
             {skillSelect && 
                 <>
                     <h3>Select a skill table:</h3><br/>
-                    <JobSkills currentTerm={currentTerm} cleanup={cleanup} />
+                    <JobSkills cleanup={cleanup} />
                 </>
             }
 
-            {job[currentTerm.job.id].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
+            {careerState[career].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
             <button onClick={newCareerClickHandler}>On to greener pastures...</button>
             <Link to="/">Home...</Link>
         </div>

@@ -5,31 +5,35 @@ import { careerTermHandler } from "../Career/careerHandler";
 import { setTrained } from "../Character/charaSlice";
 import { increaseToZero } from "../Skills/SkillsSlice";
 import { TermMidPoint } from "./TermMidPoint";
+import { Event } from "../Event/event";
+import { useParams } from "react-router-dom";
+import { setCurrentTerm } from "./TermSlice";
 
 export const TermContainer = (props) => {
     const dispatch = useDispatch();
 
-    const [currentTerm, setCurrentTerm] = useState()
+    const [ready, setReady] = useState(false);
 
     const stats = useSelector(state => state.stats);
-    const skills = useSelector(state=> state.skills);
     const chara = useSelector(state => state.chara);
-    const job = useSelector (state => state.careers);
+    const term = useSelector(state => state.term);
+    const {career} = useParams()
 
     useEffect(() => {
-        const term = careerTermHandler(jobObject[job.currentJob], stats)
-        setCurrentTerm(term)
+        const currentTerm = careerTermHandler(jobObject[career], stats)
+        dispatch(setCurrentTerm(currentTerm))
         if(!chara.trained) {
-            term.jobDetails.skills.service.forEach((e) => dispatch(increaseToZero(e.skill)))
+            currentTerm.jobDetails.skills.service.forEach((e) => dispatch(increaseToZero(e.skill)))
             dispatch(setTrained())
         }
+        setReady(true);
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [stats.age])
 
 
     return (
         <div>
-            {currentTerm ? <TermMidPoint currentTerm={currentTerm} stats={stats} job={job} skills={skills}/> : <h3>Loading...</h3>}
+            {ready ? <><TermMidPoint />{term.event && <Event />}</> : <h3>Loading...</h3>}
         </div>
     )
 }

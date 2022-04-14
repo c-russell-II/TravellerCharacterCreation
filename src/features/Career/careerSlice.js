@@ -14,16 +14,6 @@ const options = {
     reducers: {
         survivedTerm: (state, action) => {
             const {job, event} = action.payload;
-            if (!state[job]) {
-                state[job] = {
-                    title: job, 
-                    events: [event],
-                    terms: 0,
-                    rank: 0,
-                    benefits: 0,
-                    muster: false,
-                }
-            }
             state.currentJob = job;
             state[job].events.push(event);
             state[job].terms++;
@@ -33,16 +23,6 @@ const options = {
         },
         advancedTerm: (state, action) => {
             const {job, event} = action.payload;
-            if (!state[job]) {
-                state[job] = {
-                    title: job, 
-                    events: [event],
-                    terms: 0,
-                    rank: 0,
-                    benefits: 0,
-                    muster: false,
-                }
-            }
             state.currentJob = job;
             state[job].events.push(event);
             state[job].terms++;
@@ -53,25 +33,15 @@ const options = {
             state[job].muster = false;
             return state;
         },
-        failedTerm: (state, action) => {
+        failedTerm: (state, action, details) => {
             const {job, event} = action.payload;
-            if (!state[job]) {
-                state[job] = {
-                    title: job, 
-                    events: [event],
-                    terms: 0,
-                    rank: 0,
-                    benefits: 0,
-                    muster: false,
-                }
-            }
             state.previousJob = job;
             state[job].events.push(event);
             state[job].muster = true;
             return state;
         },
         selectJob: (state, action) => {
-            const {job} = action.payload;
+            const {job, details} = action.payload;
             if (state.jobArray[state.jobArray.length - 1] !== job){
                 state.jobArray.push(job);
             }
@@ -87,6 +57,7 @@ const options = {
                     rank: 0,
                     benefits: 0,
                     muster: false,
+                    details: details
                 }
             }
             state[job].muster = false;

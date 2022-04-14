@@ -1,16 +1,21 @@
 import React, {useEffect, useState} from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { survivedTerm, advancedTerm, failedTerm } from '../Career/careerSlice';
 import { Term } from "./termRender";
-import { Event } from "../Event/event";
+
 import { setValue } from "../Skills/SkillsSlice";
 import { SelectSpecialty } from "../Skills/selectSpecialty";
 import { changeByAmount, changeStat } from "../Character/StatsSlice";
 import Popup from "reactjs-popup";
+import { useParams } from "react-router-dom";
 
 export const TermMidPoint = (props) => {
-    const {stats, currentTerm, skills, job} = props;
+    const stats = useSelector(state => state.stats);
     const age = stats.age;
+    const term = useSelector(state=> state.term);
+    const skills = useSelector(state => state.skills);
+    const {career} = useParams();
+    const currentRank = useSelector(state => state.careers[career].rank);
     const dispatch = useDispatch();
     const [chooseSkill, setChooseSkill] = useState({open: false, value: 0, list: [], rawList: [], specialties: []});
     const [needSpecialty, setNeedSpecialty] = useState(false);
@@ -27,7 +32,7 @@ export const TermMidPoint = (props) => {
 
     const specialtyHandler = (bonus, relevantSkill) => {
         if (bonus.specialty === 'any') {
-            const editedList = relevantSkill.specialtiesList.map((e) => relevantSkill[e] < bonus.value);
+            const editedList = relevantSkill.specialtiesList.filter((e) => relevantSkill[e] < bonus.value);
             if (editedList.length < 1) {
                 return;
             } 
@@ -59,12 +64,14 @@ export const TermMidPoint = (props) => {
 
     const choiceHandler = (bonus) => {
         if (bonus.specialty === 'both') {
-            if (skills[bonus.choiceList[0]][bonus.specialtiesList[0]] > bonus.value && skills[bonus.choiceList[1]][bonus.specialtiesList[1]] > bonus.value) {
+            const skillValZero = skills[bonus.choiceList[0]][bonus.specialtiesList[0]]
+            const skillValOne = skills[bonus.choiceList[1]][bonus.specialtiesList[1]]
+            if (skillValZero > bonus.value && skillValOne > bonus.value) {
                 return;
-            } else if (skills[bonus.choiceList[0]][bonus.specialtiesList[0]] > bonus.value) {
+            } else if (skillValZero > bonus.value) {
                 dispatch(setValue({skill: bonus.choiceList[1], value: bonus.value, specialty: [bonus.specialtiesList[1]]}))
                 return;
-            } else if (skills[bonus.choiceList[1]][bonus.specialtiesList[1]]) {
+            } else if (skillValOne > bonus.value) {
                 dispatch(setValue({skill: bonus.choiceList[0], value: bonus.value, specialty: [bonus.specialtiesList[0]]}))
                 return;
             }
@@ -95,14 +102,14 @@ export const TermMidPoint = (props) => {
                 specialtyHandler(bonus, skills[bonus.skill]);
                 return;
             }
-            if (skills[bonus.skill.value] < bonus.value) {
+            if (skills[bonus.skill].value < bonus.value) {
                 dispatch(setValue({skill: bonus.skill, value: bonus.value}))
                 return;
             }
         }
         if (bonus.type === 'stat') {
             if (bonus.value === 'conditional') {
-                if (stats[bonus.stat] + bonus.value < bonus.threshold) {
+                if (stats.displayValues[bonus.stat] + bonus.value < bonus.threshold) {
                     dispatch(changeStat({stat: bonus.stat, value: bonus.threshold}));
                     return;
                 }
@@ -124,14 +131,14 @@ export const TermMidPoint = (props) => {
     }
 
     useEffect(() => {
-        const jobAction = {job: currentTerm.job.id, event: currentTerm.newEvent};
+        const jobAction = {job: career, event: term.event};
 
-        if (currentTerm.survive && currentTerm.advance) {
-            if (currentTerm.jobDetails.ranks[job.rank].bonus) {
-                rankUpHandler(currentTerm.jobDetails.ranks[job.rank].bonus);
+        if (term.survived && term.advanced) {
+            if (typeof term.jobDetails.ranks[currentRank].bonus === 'object') {
+                rankUpHandler(term.jobDetails.ranks[currentRank].bonus);
             }
             dispatch(advancedTerm(jobAction))
-        } else if (currentTerm.survive) {
+        } else if (term.survived) {
             dispatch(survivedTerm(jobAction));
         } else {
             dispatch(failedTerm(jobAction))
@@ -139,10 +146,9 @@ export const TermMidPoint = (props) => {
     }}, [age])
     return (
         <div>
-            <Term currentTerm={currentTerm} job={job} />
+            <Term/>
             {needSpecialty && <SelectSpecialty {...specialtyDetails}/>}
             <Popup open={chooseSkill.open} modal><><h4>Choose a skill</h4>{chooseSkill.list.map((e, i) => <button onClick={() => clickHandler(chooseSkill, i)}>{e}</button>)}</></Popup>
-            <Event career={currentTerm.job.id} event={currentTerm.newEvent} stats={stats} skills={skills} isMishap={!currentTerm.survive}/>
         </div>
     )
 }

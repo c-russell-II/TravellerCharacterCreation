@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import { skillCheck } from "../Career/careerHandler";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from '../Character/charaSlice';
 import Popup from 'reactjs-popup';
+import { resolveEvent } from "../Term/TermSlice";
 
 export const ChoiceCheckEvent = (props) => {
     const [isActive, setIsActive] = useState(false);
     const [passed, setPassed] = useState(false);
     const [isOpen, setIsOpen] = useState(true);
     const dispatch = useDispatch();
-
-    const { event, skills, handler } = props;
+    const event = useSelector(state => state.term.event);
+    const { handler } = props;
+    const skills = useSelector(state => state.skills);
 
     const dc = event.checkDC;
     const list = event.choiceList;
@@ -46,7 +48,7 @@ export const ChoiceCheckEvent = (props) => {
                 <>
                     <p>{passed ? event.pass.description : event.fail.description}</p>
 
-                    <button onClick={() => { setIsOpen(false); dispatch(addEvent(event)); }}>{passed ? 'Well done!' : 'Too bad...'}</button>
+                    <button onClick={() => { setIsOpen(false); dispatch(addEvent(event)); dispatch(resolveEvent()); }}>{passed ? 'Well done!' : 'Too bad...'}</button>
                 </>}
         </Popup>
     );

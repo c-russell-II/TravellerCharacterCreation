@@ -121,13 +121,13 @@ export const corporate = {
     advancementSkill: 'int',
     advancementDC: 8,
     ranks: [
-        {title: 'Novice Agent'},
+        {title: 'Novice Agent', bonus: false},
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
-        {title: 'Senior Field Agent', rank: 3},
+        {title: 'Senior Field Agent', bonus: false},
         {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', specialty: 'any', value: 1}},
-        {title: 'Assistant Director'},
-        {title: 'Director'}
+        {title: 'Assistant Director', bonus: false},
+        {title: 'Director', bonus: false}
     ],
     eventList: agent.eventList,
     mishapList: agent.mishapList,
@@ -144,10 +144,10 @@ export const lawEnforcement = {
     advancementSkill: 'int',
     advancementDC: 6,
     ranks: [
-        {title: 'Rookie', rank: 0},
+        {title: 'Rookie', bonus: false},
         {title: 'Corporal', rank: 1, bonus:{type: 'skill', skill: 'Streetwise', value: 1}},
-        {title: 'Sergeant', rank: 2},
-        {title: 'Detective', rank: 3},
+        {title: 'Sergeant', bonus: false},
+        {title: 'Detective', bonus: false},
         {title:'Lieutenant', rank: 4, bonus: {type: 'skill', skill: 'Investigate', value: 1}},
         {title:'Chief', rank: 5, bonus: {type: 'skill', skill:'Admin', value: 1}},
         {title:'Commisioner', rank: 6, bonus: {type: 'stat', stat: 'soc', value: 1}},
@@ -167,13 +167,13 @@ export const intelligence = {
     advancementSkill: 'int',
     advancementDC: 5,
     ranks: [
-        {title: 'Novice Agent'},
+        {title: 'Novice Agent', bonus: false},
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
-        {title: 'Senior Field Agent', rank: 3},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', specialty: 'any', value: 1}},
-        {title: 'Assistant Director'},
-        {title: 'Director'}
+        {title: 'Senior Field Agent', bonus: false},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', specialty: 'any', value: 1}},
+        {title: 'Assistant Director', bonus: false},
+        {title: 'Director', bonus: false}
     ],
     eventList: agent.eventList,
     mishapList: agent.mishapList,

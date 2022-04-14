@@ -33,6 +33,7 @@ const initialSkills = {
     Broker: { specialties: false, value: -3 },
     Carouse: { specialties: false, value: -3 },
     Diplomat: { specialties: false, value: -3 },
+    Deception: { specialties: false, value: -3},
     Drive: {
         specialties: true,
         specialtiesList: ['hovercraft', 'mole', 'track', 'walker', 'wheel'],
