@@ -32,7 +32,7 @@ export const Term = (props) => {
 
     const cleanup = () => {setSkillSelect(false)}
     return (
-        <div className="term">
+        <>
             <h2>{term.jobDetails.title}</h2>
             {term.survived ? term.advanced ? <Advanced /> : <Passed /> : <Failed />}
             {skillSelect && 
@@ -45,6 +45,6 @@ export const Term = (props) => {
             {careerState[career].muster ? '': <button onClick={continueClickHandler}>Another term...</button>}<br/>
             <button onClick={newCareerClickHandler}>On to greener pastures...</button>
             <Link to="/">Home...</Link>
-        </div>
+        </>
     )
 }

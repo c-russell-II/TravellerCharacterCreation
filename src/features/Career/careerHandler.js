@@ -20,8 +20,6 @@ export const careerTermHandler = (job, stats) => {
 
     const {survivalSkill, advancementSkill} = job;
 
- 
-
     // builds the object we'll eventually return
 
     const results = {

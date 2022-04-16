@@ -5,48 +5,49 @@ import { changeStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "../Skills/selectSpecialty";
 import { addQualificationBonus } from '../Character/miscBonusSlice'
 import { GraduationDialogue } from "./GraduateDialogue";
+import Popup from "reactjs-popup";
 
 export const Graduation = (props) => {
-    const { major, minor, specialty, graduate, honors } = props;
+    const educationState = useSelector(state => state.education);
     const dispatch = useDispatch();
     const { edu, age } = useSelector(state => state.stats);
     const skills = useSelector(state => state.skills);
     const [needSpecialty, setNeedSpecialty] = useState(false);
 
     useEffect(() => {
-        if (graduate) {
+        if (educationState.graduated) {
             dispatch(changeStat({ edu: edu + 2 }))
-            if (honors) {
+            if (educationState.honors) {
                 dispatch(addQualificationBonus({ parentCareers: ['Agent', 'Army', 'Marines', 'Navy', 'Scholar', 'Scouts'], careers: ['corporate', 'journalist'], value: 2, age: age, duration: null, source: 'University' }))
             } else {
                 dispatch(addQualificationBonus({ parentCareers: ['Agent', 'Army', 'Marines', 'Navy', 'Scholar', 'Scouts'], careers: ['corporate', 'journalist'], value: 1, age: age, duration: null, source: 'University' }))
             }
-            if (specialty !== null) {
-                dispatch(genericIncrease({ skill: major, specialty: specialty }))
+            if (educationState.majorSpecialty) {
+                dispatch(genericIncrease({ skill: educationState.major, specialty: educationState.majorSpecialty }))
             } else {
-                dispatch(genericIncrease({ skill: major }))
+                dispatch(genericIncrease({ skill: educationState.major }))
             }
-            if (skills[minor].specialties) {
+            if (skills[educationState.minor].specialties) {
                 setNeedSpecialty(true);
             } else {
-                dispatch(genericIncrease({ skill: minor }))
+                dispatch(genericIncrease({ skill: educationState.minor }))
             }
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     const handleSpecialty = (spec) => {
-        dispatch(genericIncrease({ skill: minor, specialty: spec }));
+        dispatch(genericIncrease({ skill: educationState.minor, specialty: spec }));
         setNeedSpecialty(false);
         return;
     }
 
     return (
         <div>
-            <GraduationDialogue major={major} honors={honors}/>
-            {needSpecialty &&
-                <SelectSpecialty skill={minor} list={skills[minor].specialtiesList} passSpecialty={handleSpecialty} />
-            }
+            <GraduationDialogue />
+            <Popup open={needSpecialty} modal closeOnDocumentClick="false">
+                <SelectSpecialty skill={educationState.minor} list={educationState.minor === 'Animals' ? ['training', 'veterinary'] : skills[educationState.minor].specialtiesList} passSpecialty={handleSpecialty} />
+            </Popup>
         </div>
     )
 }

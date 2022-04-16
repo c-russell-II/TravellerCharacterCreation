@@ -1,4 +1,5 @@
 export const agent = {
+    title: 'Agent',
     qualification: true,
     qualificationStat: 'int',
     qualificationDC: 6,
@@ -8,7 +9,7 @@ export const agent = {
         2: {type: 'redirect', destination: 'injury', description: 'You are severely injured...'},
         
         3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], checkDC: 8, description: 'An investigation turns dangerous...',
-            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.', result: {type: 'choice', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], value: 1}},
+            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.', result: {type: 'choice', choiceType: 'increaseSkill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'}, value: 1}},
             fail: {description: 'You bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
         
         4: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
@@ -29,7 +30,7 @@ export const agent = {
         
         9: {type: 'reward', roll: 9, result:{type: 'advancement', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
         
-        10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'choice', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], choiceDetail:{'Drive':'skill', 'Flyer':'skill', 'Pilot':'skill', 'Gunner':'skill'}, value: 1}},
+        10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'choice', choiceType: 'setSkill', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
         
         11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
         
@@ -108,7 +109,7 @@ export const agent = {
         {money: 5000, misc: 'Ship Share', miscType:'item'},
         {money: 7500, misc: 'Weapon Choice', miscType:'item'},
         {money: 10000, misc: 'Combat Implant Choice', miscType:'item'},
-        {money: 25000, misc: 'soc +1 or Combat Implant', miscType:'Choice'},
+        {money: 25000, misc: 'soc +1 or Combat Implant', miscType:'choice'},
         {money: 50000, misc: 'TAS membership', miscType:'item'}],
     specialtiesList: ['intelligence', 'lawEnforcement', 'corporate'],
 }

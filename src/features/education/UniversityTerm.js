@@ -1,118 +1,66 @@
+import MinorSelection from './MinorSelection';
+import MajorSelection from './MajorSelection';
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increaseToZero, setValue } from "../Skills/SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { Graduation } from "./GraduationContainer";
 import { skillCheck } from "../Career/careerHandler";
-import { SelectSpecialty } from "../Skills/selectSpecialty";
+import { setGraduated, setHonors } from './EducationSlice';
 
 export const UniversityTerm = (props) => {
     const dispatch = useDispatch();
     const stats = useSelector(state => state.stats);
-    const skills = useSelector(state=> state.skills);
-    const [selectedSpecialty, setSelectedSpecialty] = useState('');
+    const educationState = useSelector(state => state.education);
     const [majorIsActive, setMajorIsActive] = useState(true);
     const [minorIsActive, setMinorIsActive] = useState(false);
-    const [selectedMajor, setSelectedMajor] = useState('');
-    const [selectedMinor, setSelectedMinor] = useState('');
-    const [activeSpecialty, setActiveSpecialty] = useState('')
     const [graduateDialogue, setGraduateDialogue] = useState(false);
 
     const allChoices = ['Admin', 'Advocate', 'Animals', 'Art', 'Astrogation', 'Electronics', 'Engineer', 'Language', 'Medic', 'Navigation', 'Profession', 'Science']
     const choiceSpecArray = ['Animals', 'Art', 'Electronics', 'Engineer', 'Language', 'Profession', 'Science']
     const animalSpec = ['training', 'veterinary']
 
-
-    const handleChange = (event) => {
-        event.preventDefault();
-        setSelectedMajor(event.target.value);
-        return;
+    const majorCleanup = () => {
+        setMajorIsActive(false);
+        setMinorIsActive(true);
     }
 
-    const minorChange = (event) => {
+    const minorCleanup = (event) => {
         event.preventDefault();
-        setSelectedMinor(event.target.value);
-        return;
-    }
-
-    const majorSubmit = (event) => {
-        event.preventDefault();
-        if (choiceSpecArray.includes(selectedMajor)) {
-            setActiveSpecialty(selectedMajor);
+        if (educationState.majorSpecialty) {
+            dispatch(setValue({skill: educationState.major, value: 1, specialty: educationState.majorSpecialty}))
         } else {
-            setMajorIsActive(false);
-            setMinorIsActive(true);
+            dispatch(setValue({skill: educationState.major, value: 1}));
         }
-        return;
-    }
-
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        if (selectedSpecialty) {
-            dispatch(setValue({skill: selectedMajor, value: 1, specialty: selectedSpecialty}))
-        } else {
-            dispatch(setValue({skill: selectedMajor, value: 1}));
-        }
-        dispatch(increaseToZero(selectedMinor));
+        dispatch(increaseToZero(educationState.minor));
         dispatch(increaseStat('edu'));
         setMinorIsActive(false);
         setGraduateDialogue(true);
+        const graduateCheck = skillCheck(stats.edu);
+        const didGraduate = graduateCheck >= 7;
+        const hasHonors = graduateCheck >= 11;
+        if (didGraduate && hasHonors) {
+            dispatch(setHonors());
+        } else if (didGraduate) {
+            dispatch(setGraduated());
+        }
         return;
     }
 
-    const passSpecialty = (spec) => {
-        setSelectedSpecialty(spec);
-        setActiveSpecialty('');
-        setMajorIsActive(false);
-        setMinorIsActive(!minorIsActive);
-    }
 
-    const graduateCheck = skillCheck(stats.edu);
-    const didGraduate = graduateCheck >= 7;
-    const hasHonors = graduateCheck >= 11;
 
     return (
         <div className="university_term">
             <h3>Back to School. . .</h3>
             {!graduateDialogue && <h4>Select your major and minor for this year- the two skills you set out to focus your studies on.</h4>}
             {majorIsActive &&
-                <div>
-                    
-                    <h5>Major--</h5>
-                    {selectedMajor !== '' ? <p>Selected Major: {selectedMajor} {selectedSpecialty !== '' ? `Selected Specialty: ${selectedSpecialty}` : ''}</p> : ''}
-                    <form onSubmit={majorSubmit}>
-                        {allChoices.map((e, i) => {
-                            return (
-                                <div key={i}>
-                                    <label key={i}>
-                                        <input key={Math.random()} type="radio" value={e} name={e} checked={selectedMajor === e} onChange={handleChange}/>  {e}
-                                    </label>
-                                </div>
-                                )
-                        })}
-                        <button key={Math.random()} type="submit">Confirm major.</button>
-                    </form> <br/>
-                    {activeSpecialty !== '' &&
-                        <SelectSpecialty skill={selectedMajor} list={selectedMajor === 'Animals' ? animalSpec : skills[selectedMajor].specialtiesList} passSpecialty={passSpecialty}/>
-                    }
-                </div>
+                <MajorSelection cleanup={majorCleanup} allChoices={allChoices} choiceSpecArray={choiceSpecArray} animalSpec={animalSpec}/>
             }
             {minorIsActive &&
-                <div>
-                    <h5>Minor: --</h5>
-                    <form onSubmit={handleSubmit}>
-                        {allChoices.map((e, i) => {
-                            if (e === selectedMajor) {
-                                return <div key={i}></div>
-                            }
-                            return (<div key={i}><label key={i}><input key={Math.random()} type="radio" value={e} name={e} checked={selectedMinor === e} onChange={minorChange}/>{e}</label></div>)
-                        })}
-                        <button type="submit">Confirm Minor.</button>
-                    </form>
-                </div>
+                <MinorSelection allChoices={allChoices} cleanup={minorCleanup}/>
             }
             {graduateDialogue &&
-                <Graduation major={selectedMajor} minor={selectedMinor} specialty={selectedSpecialty ? selectedSpecialty : null} graduate={didGraduate} honors={hasHonors}/>
+                <Graduation />
             }
         </div>
     )

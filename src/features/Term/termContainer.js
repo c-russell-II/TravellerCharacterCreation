@@ -32,7 +32,7 @@ export const TermContainer = (props) => {
 
 
     return (
-        <div>
+        <div className="term">
             {ready ? <><TermMidPoint />{term.event && <Event />}</> : <h3>Loading...</h3>}
         </div>
     )

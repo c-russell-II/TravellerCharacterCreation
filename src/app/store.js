@@ -5,6 +5,7 @@ import careerSliceReducer from '../features/Career/careerSlice';
 import charaSlice from '../features/Character/charaSlice';
 import miscSlice from '../features/Character/miscBonusSlice';
 import TermSlice from '../features/Term/TermSlice';
+import EducationSlice from '../features/education/EducationSlice';
 
 
 export const store = configureStore({
@@ -14,6 +15,7 @@ export const store = configureStore({
     skills: SkillsSlice,
     chara: charaSlice,
     misc: miscSlice,
-    term: TermSlice
+    term: TermSlice,
+    education: EducationSlice
   },
 });

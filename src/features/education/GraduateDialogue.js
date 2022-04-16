@@ -1,8 +1,10 @@
 import React from "react";
+import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
 
 export const GraduationDialogue = (props) => {
-    const {major, honors} = props;
+    const educationState = useSelector(state => state.education);
+    const {major, honors} = educationState;
     return (
         <div className="graduation">
             <h5>After four years of your life...</h5>

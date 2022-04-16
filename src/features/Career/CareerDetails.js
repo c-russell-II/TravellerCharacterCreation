@@ -20,14 +20,66 @@ const jobObject = {
 
 export default jobObject
 // export const  = {
+//     title: ,
 //     qualification: ,
 //     qualificationStat: ,
 //     qualificationDC: ,
 //     description: ,
-//     eventList: {},
-//     mishapList: [],
-//     skills: {},
-//     benefits: [],
+//     eventList: {2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {}, 10: {}, 11: {}, 12: {}},
+//     mishapList: [{}, {}, {}, {}, {}, {}],
+//     skills: {
+//         personal: [],
+//         service: [
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//         ],
+//         advanced: [
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//             {type: 'skill', skill:''},
+//         ],
+//         specialties: {
+//             1: [
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//             ],
+//             2: [
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//             ],
+//             3: [
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//                 {type: 'skill', skill:''},
+//             ]
+//         }
+//     },
+//     benefits: [
+//         {money: , misc: ''},
+//         {money: , misc: ''},
+//         {money: , misc: ''},
+//         {money: , misc: ''},
+//         {money: , misc: ''},
+//         {money: , misc: ''},
+//     ],
 //     specialtiesList: [],
 // }
 

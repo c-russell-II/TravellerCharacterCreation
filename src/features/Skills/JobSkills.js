@@ -6,6 +6,7 @@ import { genericIncrease } from "./SkillsSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "./selectSpecialty";
 import { useParams } from "react-router-dom";
+import Popup from "reactjs-popup";
 
 export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
@@ -70,9 +71,10 @@ export const JobSkills = (props) => {
                     </SplitButton>
                 )
             })}
-            {needSpecialty &&
-                <SelectSpecialty skill={selectedSkill.skill} list={selectedSkill.specialty} passSpecialty={passSpecialty} />
-            }
+                <Popup open={needSpecialty} modal closeOnDocumentClick="false">
+                    <SelectSpecialty skill={selectedSkill.skill} list={selectedSkill.specialty} passSpecialty={passSpecialty} />
+                </Popup>
+
             
         </div>
         )

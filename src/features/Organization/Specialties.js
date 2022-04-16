@@ -7,8 +7,8 @@ import { skillCheck } from "../Career/careerHandler";
 export const Specialties = (props) => {
     const [isActive, setIsActive] = useState(false);
     const stats = useSelector(state => state.stats);
-    const { title, description } = props.specialty;
-    const { parent } = props;
+    const { parent, job, specialty } = props;
+    const {title, description} = specialty;
     const jobState = useSelector(state => state.careers);
     const navigate = useNavigate();
     const dispatch = useDispatch();
@@ -43,7 +43,7 @@ export const Specialties = (props) => {
             {isActive &&
                 <div className="specialtyContent">
                     <p>{description}</p>
-                    <button onClick={() => { clickHandler(props.job); }} className="jobSelectButton">Select Job.</button>
+                    <button onClick={() => { clickHandler(job); }} className="jobSelectButton">Select Job.</button>
                 </div>}
 
         </div>

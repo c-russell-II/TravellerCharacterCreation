@@ -2,10 +2,12 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
+import { chooseSchool } from "./EducationSlice";
 import Popup from "reactjs-popup";
 
 export const UniversityChoice = (props) => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [uniPass, setUniPass] = useState(false);
     const [milAcademyLink, setMilAcademyLink] = useState(false);
     const [choiceButtons, setChoiceButtons] = useState(true);
@@ -33,6 +35,7 @@ export const UniversityChoice = (props) => {
         if (result) {
             setUniPass(true);
             setChoiceButtons(false);
+            dispatch(chooseSchool('University'))
             return;
         }
         setToCareers(true);

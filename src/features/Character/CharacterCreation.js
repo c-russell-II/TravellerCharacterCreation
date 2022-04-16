@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import {changeStat} from './StatsSlice';
 import {addBenefit, setName} from './charaSlice';
 import Popup from "reactjs-popup";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 export const CharacterCreation = (props) => {
     const [value, setValue] = useState();
-    const [points, setPoints] = useState(84);
+    const [points, setPoints] = useState(12);
     const [ready, setReady] = useState(false);
-    const [stats, setStats] = useState({str:0, dex:0, end:0, int:0, edu:0, soc:0})
+    const [stats, setStats] = useState({str:7, dex:7, end:7, int:7, edu:7, soc:7})
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -95,9 +95,7 @@ export const CharacterCreation = (props) => {
     return (
         <div className="CharacterCreation">
             <h2>This is where character creation will actually occur</h2>
-            <ul>
-                <li>So: Careers, data tracking from careers, and maybe backgrounds and races?</li>
-            </ul>
+            <p>Decide your natural aptitudes and abilities, that will carry you into whatever the future has in store.</p>
             <h3>Name:</h3><form onSubmit={handleSubmit}><input type="text" onChange={handleChange} placeholder="name"/><input type="submit" value="Submit"/></form>
             <h3>Points remaining: {points}</h3>
             <button onClick={() => decrease('str')}>-</button><span>Str: {stats.str}</span>  Mod: {getModifiers(stats.str)}<button onClick={() => increase('str')}>+</button>  Next Point: {costCalc(stats.str)}<br/>
@@ -114,7 +112,7 @@ export const CharacterCreation = (props) => {
             >
                 <h3>Finalize Stats?</h3>
                 <p>When you move on to careers or higher education, any unspent points will be lost, and your stats will be finalized until you create a new character.</p>
-                <button onClick={handleFinalize}>Let's continue.</button> <Link to="/print">Print!</Link>
+                <button onClick={handleFinalize}>Let's continue.</button> <button onClick={() => {setReady(false)}}>Not Ready</button>
             </Popup>
         </div>
     )
