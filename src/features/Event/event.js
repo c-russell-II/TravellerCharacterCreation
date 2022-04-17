@@ -1,32 +1,36 @@
-import React from "react";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
+import Popup from "reactjs-popup";
 
-const checkHandler = (event) => {
-    switch (event.checkType) {
+const checkHandler = (checkType) => {
+    switch (checkType) {
         case 'choice':
-            return <ChoiceCheckEvent />;
+            return <ChoiceCheckEvent/>;
         default:
-            return <CheckEvent />;
+            return <CheckEvent/>;
     }
 }
 
 export const Event = (props) => {
     const event = useSelector(state => state.term.event);
+    const [isOpen, setIsOpen] = useState(true);
+    
+    const cleanup = () => setIsOpen(false);
 
-    const eventRender = (type) => {
-        switch (type) {
+    const eventRender = (event, cleanup) => {
+        switch (event.type) {
             case 'check': 
-                return checkHandler();
+                return checkHandler(event.checkType);
             case 'reward':
-                return <Reward/>;
+                return <Reward cleanup={cleanup} />;
             case 'choice':
                 return <Choice/>
             case 'redirect':
-                switch (props.event.destination) {
+                switch (event.destination) {
                     case 'injury':
                         return <blah></blah>;
                     case 'life':
@@ -42,9 +46,10 @@ export const Event = (props) => {
         }
     }
     return (
-        <div className="general_events">
-            {eventRender(event.type)}
+        <Popup open={isOpen} modal closeOnDocumentClick={false} className="general_events">
+            {isOpen && eventRender(event, cleanup)}
             <p>Event rendering still missing redirects!</p>
-        </div>
+            <button onClick={() => cleanup()}>Override</button>
+        </Popup>
     );
 }

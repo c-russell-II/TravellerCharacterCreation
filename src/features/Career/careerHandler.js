@@ -13,8 +13,6 @@ export const skillCheck = (stat = 0, skill = 0) => {
     return roll() + roll() + stat + skill + 2;
 }
 
-// carrer handler function
-
 export const careerTermHandler = (job, stats) => {
     // assigns the stats from the job in the job object to local variables
 

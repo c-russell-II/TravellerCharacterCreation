@@ -13,18 +13,16 @@ const options = {
     initialState: jobState,
     reducers: {
         survivedTerm: (state, action) => {
-            const {job, event} = action.payload;
+            const {job} = action.payload;
             state.currentJob = job;
-            state[job].events.push(event);
             state[job].terms++;
             state[job].benefits++;
             state[job].muster = false;
             return state;
         },
         advancedTerm: (state, action) => {
-            const {job, event} = action.payload;
+            const {job} = action.payload;
             state.currentJob = job;
-            state[job].events.push(event);
             state[job].terms++;
             state[job].benefits++;
             if (state[job].rank < 6) {
@@ -34,9 +32,8 @@ const options = {
             return state;
         },
         failedTerm: (state, action, details) => {
-            const {job, event} = action.payload;
+            const {job} = action.payload;
             state.previousJob = job;
-            state[job].events.push(event);
             state[job].muster = true;
             return state;
         },
@@ -52,7 +49,6 @@ const options = {
             if (!state[job]) {
                 state[job] = {
                     title: job, 
-                    events: [],
                     terms: 0,
                     rank: 0,
                     benefits: 0,

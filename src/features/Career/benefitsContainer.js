@@ -33,8 +33,7 @@ export const BenefitsContainer = (props) => {
     useEffect(() => {
         setNumCash(chara.numOfCashBenefits);
         setNumBenefits(careers[career].benefits);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [careers[career].benefits, chara.numOfCashBenefits])
+    }, [career, careers, chara.numOfCashBenefits])
 
     const noBonusClick = (event) => {
         event.preventDefault();

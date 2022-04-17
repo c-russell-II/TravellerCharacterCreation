@@ -175,6 +175,7 @@ const initialSkills = {
     },
     VaccSuit: { specialties: false, value: -3 },
     specialtySkills: ['Animals', 'Athletics', 'Art', 'Drive', 'Electronics', 'Engineer', 'Flyer', 'Gunner', 'Gun Combat', 'Heavy Weapons', 'Language', 'Melee', 'Pilot', 'Science', 'Seafarer', 'Tactics'],
+    trainedSkills: [],
 }
 
 const options = {
@@ -184,6 +185,9 @@ const options = {
         reset: state => initialSkills,
         increaseToZero: (state, action) => {
             const skill = action.payload;
+            if(!state.trainedSkills.includes(skill)) {
+                state.trainedSkills.push(skill);
+            }
             if (state[skill].value >= 0) {
                 return state;
             }
@@ -203,6 +207,9 @@ const options = {
         genericIncrease: (state, action) => {
             const skill = action.payload.skill
             let val = 1
+            if(!state.trainedSkills.includes(skill)) {
+                state.trainedSkills.push(skill);
+            }
             if (action.payload.value) {
                 val = action.payload.value;
             }
@@ -236,6 +243,9 @@ const options = {
         setValue: (state, action) => {
             const skill = action.payload.skill;
             const value = action.payload.value;
+            if(!state.trainedSkills.includes(skill)) {
+                state.trainedSkills.push(skill);
+            }
             if (state[skill].specialties) {
                 state[skill].trained = true;
                 const list = state[skill].specialtiesList;

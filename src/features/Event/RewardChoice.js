@@ -1,16 +1,29 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import IncreaseSkillChoice from "../Skills/IncreaseSkillChoice";
 import SetSkillChoice from "../Skills/SetSkillChoice";
 
 const RewardChoice = (props) => {
+    const skills = useSelector(state => state.skills);
     const event = useSelector(state => state.term.event);
+    const [open, setOpen] = useState(false);
 
-    const cleanup = () => {}
+    const {cleanup} = props;
 
     const choiceTypeChecker = (type) => {
         switch (type) {
             case 'setSkill':
-                return  <SetSkillChoice skillList={event.choices} specialtyList={event.specialtyList} value={event.value} cleanup={cleanup}/>
+                setOpen(true);
+                return <>{open && <SetSkillChoice skillList={event.choices} specialtyList={event.specialtyList} value={event.value} cleanup={cleanup}/>}</>
+            case 'increaseSkill':
+                setOpen(true);
+                return <>{open && <IncreaseSkillChoice skillList={event.choices} specialtyList={event.specialtyList} cleanup={cleanup}/>}</>
+            case 'anySkill':
+                const skillList = [];
+                const specialtyList = {};
+                skills.trainedSkills.forEach((e) => {skillList.push(e); specialtyList[e] = skills[e].specialtiesList;})
+                setOpen(true);
+                return <>{open && <IncreaseSkillChoice skillList={skillList} specialtyList={specialtyList} cleanup={cleanup}/>}</>
             default: 
                 return;
         }

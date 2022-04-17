@@ -33,8 +33,7 @@ export const Graduation = (props) => {
                 dispatch(genericIncrease({ skill: educationState.minor }))
             }
         }
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [])
+    }, [age, dispatch, edu, educationState.graduated, educationState.honors, educationState.major, educationState.majorSpecialty, educationState.minor, skills])
 
     const handleSpecialty = (spec) => {
         dispatch(genericIncrease({ skill: educationState.minor, specialty: spec }));

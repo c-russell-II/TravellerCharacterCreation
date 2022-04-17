@@ -9,7 +9,7 @@ export const agent = {
         2: {type: 'redirect', destination: 'injury', description: 'You are severely injured...'},
         
         3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], checkDC: 8, description: 'An investigation turns dangerous...',
-            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.', result: {type: 'choice', choiceType: 'increaseSkill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'}, value: 1}},
+            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.', result: {type: 'choice', choiceType: 'setSkill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'}, value: 1}},
             fail: {description: 'You bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
         
         4: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
@@ -17,8 +17,8 @@ export const agent = {
         5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 3}, description: 'You establish a network of contacts'},
         
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choices: 'any'}},
-            fail: {description: "You do not manage to measure up to your instructors' standards."}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'anySkill'}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
         
         7: {type: 'redirect', destination: 'life'},
         
@@ -32,7 +32,7 @@ export const agent = {
         
         10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'choice', choiceType: 'setSkill', choice: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
         
-        11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choice: ['Investigate', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
+        11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choiceType: 'multiple', choice: ['Investigate', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
         
         12: {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.', result:{type: 'promotion'}}
     },
@@ -126,7 +126,7 @@ export const corporate = {
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
         {title: 'Senior Field Agent', bonus: false},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'Gun Combat', specialty: 'any', value: 1}},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', specialty: 'any', value: 1}},
         {title: 'Assistant Director', bonus: false},
         {title: 'Director', bonus: false}
     ],

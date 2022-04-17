@@ -1,38 +1,60 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { survivedTerm, advancedTerm, failedTerm } from '../Career/careerSlice';
 import { Term } from "./termRender";
 import { useParams } from "react-router-dom";
+import { Event } from "../Event/event";
+import { increaseToZero } from "../Skills/SkillsSlice";
+import { setTrained } from "../Character/charaSlice";
 import RankUpBonus from "./RankUpBonus";
 
 export const TermMidPoint = (props) => {
-    const stats = useSelector(state => state.stats);
-    const age = stats.age;
+    const age = useSelector(state => state.stats.age)
     const term = useSelector(state=> state.term);
+    const trained = useSelector(state=> state.chara.trained);
     const {career} = useParams();
-    const currentRank = useSelector(state => state.careers[career].rank);
-    const dispatch = useDispatch();
+    const currentRank = useSelector( state => state.careers[career].rank);
     const [rankBonus, setRankBonus] = useState(false);
+    const dispatch = useDispatch();
 
-    const cleanup = () => setRankBonus(false);
+    const bonus = term.jobDetails.ranks[currentRank].bonus;
+    useEffect(() => {
+        if (bonus) {
+            setRankBonus(true);
+        }
+    }, [bonus])
+
+    const cleanup = () => {
+        setRankBonus(false);
+    }
 
     useEffect(() => {
-        const jobAction = {job: career, event: term.event};
-        if (term.survived && term.advanced) {
-            if (typeof term.jobDetails.ranks[currentRank].bonus === 'object') {
-                setRankBonus(true);
-            }
-            dispatch(advancedTerm(jobAction))
-        } else if (term.survived) {
+        if (!trained) {
+            term.jobDetails.skills.service.forEach(e => dispatch(increaseToZero(e.skill)));
+            dispatch(setTrained());
+        }
+    });
+
+    const jobAction = useMemo(() => ({
+            job: career
+        }), [career]);
+    const { survived, advanced } = term;
+    useEffect(() => {
+        if (survived && advanced) {
+            dispatch(advancedTerm(jobAction));
+            return;
+        } else if (survived) {
             dispatch(survivedTerm(jobAction));
+            return;
         } else {
             dispatch(failedTerm(jobAction))
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }}, [age])
+            return;
+    }}, [advanced, age, dispatch, jobAction, survived])
     return (
         <>
+            <RankUpBonus open={rankBonus} cleanup={cleanup}/> 
             <Term/>
-           {rankBonus && <RankUpBonus cleanup={cleanup}/>}
+            {term.event && <Event/>}
         </>
     )
 }
