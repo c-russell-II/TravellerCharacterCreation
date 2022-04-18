@@ -12,6 +12,7 @@ import jobObject from "../Career/CareerDetails";
 export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
     const [selectedSkill, setSelectedSkill] = useState({})
+    const [skillChoice, setSkillChoice] = useState({})
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
     const {cleanup} = props;
@@ -21,31 +22,47 @@ export const JobSkills = (props) => {
     const skillNames = ['personal', 'service', 'advanced', career]
     const finishedList = [careerSkills.personal, careerSkills.service, careerSkills.advanced, careerSkills.specialties[career]]
 
-    const handleClick = (table) => {
-        const selection = table[Math.floor(Math.random() * table.length)]
-        if (selection.type === 'skill') {
-            if (skills[selection.skill].specialties) {
-                if (!selection.specialty) {
-                    setSelectedSkill({...selection, specialty: skills[selection.skill].specialtiesList});
-                    setNeedSpecialty(true);
-                    return;
-                }
-                if (typeof selection.specialty === "string") {
-                    dispatch(genericIncrease({skill: selection.skill, specialty: selection.specialty}))
-                    cleanup();
-                    return;
-                }
-                setSelectedSkill(selection);
-                setNeedSpecialty(true);
-                return;
-            }
+    const skillHandler = (selection) => {
+        if (!skills[selection.skill].specialties) {
             dispatch(genericIncrease({skill: selection.skill}))
             cleanup();
             return;
         }
-        dispatch(increaseStat(selection.stat));
-        cleanup();
+        if (!selection.specialty) {
+            setSelectedSkill({...selection, specialty: skills[selection.skill].specialtiesList});
+            setNeedSpecialty(true);
+            return;
+        }
+        if (typeof selection.specialty === "string") {
+            dispatch(genericIncrease({skill: selection.skill, specialty: selection.specialty}))
+            cleanup();
+            return;
+        }
+        setSelectedSkill(selection);
+        setNeedSpecialty(true);
         return;
+    }
+
+    const handleClick = (table) => {
+        const selection = table[Math.floor(Math.random() * table.length)]
+        if (selection.type === 'stat') {
+            dispatch(increaseStat(selection.stat));
+            cleanup();
+            return;
+        }
+        if (selection.type === 'choice') {
+            setSkillChoice({active: true, details: selection})
+            return;
+        }
+        if (selection.type === 'skill') {
+            skillHandler(selection)
+        }
+    }
+
+    const handleChoice = (event) => {
+        event.preventDefault();
+        const specialty = skillChoice.details.specialties[event.target.value]
+        skillHandler({skill: event.target.value, specialty: specialty})
     }
 
     const passSpecialty = (choice) => {
@@ -72,8 +89,13 @@ export const JobSkills = (props) => {
                     </SplitButton>
                 )
             })}
-                <Popup open={needSpecialty} modal closeOnDocumentClick="false">
+                <Popup open={needSpecialty} modal closeOnDocumentClick={false}>
                     <SelectSpecialty skill={selectedSkill.skill} list={selectedSkill.specialty} passSpecialty={passSpecialty} />
+                </Popup>
+
+                <Popup open={skillChoice.active} modal closeOnDocumentClick={false}>
+                    <p>Select a skill:</p>
+                    {skillChoice.details.list.map((e, i) => {return <button onClick={handleChoice} value={e} key={i}>{e}</button>})}
                 </Popup>
 
             

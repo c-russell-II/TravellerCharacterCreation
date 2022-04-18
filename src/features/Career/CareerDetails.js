@@ -1,13 +1,17 @@
 import {agent, intelligence, lawEnforcement, corporate} from './CareerDetails/Agent'
 import { cavalry, infantry, support, army } from './CareerDetails/Army'
 import { citizen, colonist, manager, worker } from './CareerDetails/Citizen'
+import { barbarian, drifter, scavenger, wanderer } from './CareerDetails/Drifter'
+import { artist, entertainer, journalist, performer } from './CareerDetails/Entertainer'
 // const eventArray = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 export const parentJobs = {
     agent: agent,
     army: army,
     citizen: citizen,
-    list: ['agent', 'army', 'citizen']
+    drifter: drifter,
+    entertainer: entertainer,
+    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer']
 }
 
 const jobObject = {
@@ -20,6 +24,12 @@ const jobObject = {
     manager: manager,
     worker: worker,
     colonist: colonist,
+    barbarian: barbarian,
+    wanderer: wanderer,
+    scavenger: scavenger,
+    artist: artist,
+    journalist: journalist,
+    performer: performer,
 }
 
 export default jobObject
@@ -87,7 +97,7 @@ export default jobObject
 //     specialtiesList: [],
 // }
 
-// const = {
+// export const = {
 //     title:,
 //     description: '',
 //     survivalSkill,
@@ -97,6 +107,7 @@ export default jobObject
 //     eventList,
 //     mishapList,
 //     ranks: [
+//         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},
@@ -107,7 +118,7 @@ export default jobObject
 //     skills,
 //     benefits
 // }
-// const = {
+// export const = {
 //     title:,
 //     description: '',
 //     survivalSkill,
@@ -117,6 +128,7 @@ export default jobObject
 //     eventList,
 //     mishapList,
 //     ranks: [
+//         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},
@@ -127,7 +139,7 @@ export default jobObject
 //     skills,
 //     benefits
 // }
-// const = {
+// export const = {
 //     title:,
 //     description: '',
 //     survivalSkill,
@@ -137,6 +149,7 @@ export default jobObject
 //     eventList,
 //     mishapList,
 //     ranks: [
+//         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},
 //         {title: '', bonus: false},

@@ -5,7 +5,7 @@ export const drifter = {
     qualificationStat: null,
     qualificationDC: null,
     eventList: {
-        2: {type: 'redirect', destination: 'injury', description: 'You are severely injured...'},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', description: "A patron offers you a chance at a job.", choiceList: ['a', 'b'],
         a: {description: 'You accept, but they hint that they will collect that favor one day.', button: 'Accept', result: {type: 'multiple', list: ['qual', 'patron'], 
             qual:{type:'qual', value: 4, expires: false}, patron: {type: 'favor', description: 'Patron who offered you a chance at a job when you were a drifer.'}}},
@@ -21,22 +21,29 @@ export const drifter = {
         9: {type: 'choice', description: 'You are offered the chance to participate in a risky but rewarding venture.', choiceList: ['a', 'b'],
             a:{description: 'You agree, and...', result: {type: 'random'}},
             b:{description: 'You decide to play it safe.', result: null}},
-        10: {},
-        11: {},
+        10: {type: 'reward', description: 'Life on the edge hones your abilities.', result: {type: 'choice', choiceType: 'increaseAny'}},
+        11: {type: 'reward', description: 'You are forcible drafted.', result: {type: 'career', career: 'draft'}},
         12: {type: 'reward', description: 'You thrive on adversity', result: {type: 'promotion'}}
     },
-    mishapList: [{}, {}, {}, {}, {}, {}],
+    mishapList: [
+        {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
+        {type: 'redirect', destination: 'injury table'},
+        {type: 'reward', description: 'You run afoul of a criminal gang, corrupt bureaucrat, or other foe.', result: {type: 'enemy', value: 1, description:'Enemy who drove you out of your drifter niche.'}},
+        {type: 'reward', description: 'You suffer from a life threatening illness.', result: {type: 'stat', stat: 'end', value: -1}},
+        {type: null, description: 'Betrayed by a friend...'},
+        {type: 'reward', description: 'You have no idea what happened to you - there is a gap in your memory.', result: {type: 'none'}}
+    ],
     skills: {
         personal: [
             {type: 'stat', stat: 'str'},
             {type: 'stat', stat: 'end'},
             {type: 'stat', stat: 'dex'},
-            {type: 'skill', skill:'Language', specialty: 'any'},
-            {type: 'skill', skill:'Profession', specialty: 'any'},
+            {type: 'skill', skill:'Language'},
+            {type: 'skill', skill:'Profession'},
             {type: 'skill', skill:'JackOfAllTrades'},
         ],
         service: [
-            {type: 'skill', skill:'Athletics', specialty: 'any'},
+            {type: 'skill', skill:'Athletics'},
             {type: 'skill', skill:'Melee', specialty: 'unarmed'},
             {type: 'skill', skill:'Recon'},
             {type: 'skill', skill:'Streetwise'},
@@ -45,7 +52,7 @@ export const drifter = {
         ],
         specialties: {
             barbarian: [
-                {type: 'skill', skill:'Animals', specialty: 'any'},
+                {type: 'skill', skill:'Animals'},
                 {type: 'skill', skill:'Carouse'},
                 {type: 'skill', skill:'Melee', specialty: 'blade'},
                 {type: 'skill', skill:'Stealth'},
@@ -53,7 +60,7 @@ export const drifter = {
                 {type: 'skill', skill:'Survival'},
             ],
             wanderer: [
-                {type: 'skill', skill:'Drive', specialty: 'any'},
+                {type: 'skill', skill:'Drive'},
                 {type: 'skill', skill:'Deception'},
                 {type: 'skill', skill:'Recon'},
                 {type: 'skill', skill:'Stealth'},
@@ -65,8 +72,8 @@ export const drifter = {
                 {type: 'skill', skill:'Mechanic'},
                 {type: 'skill', skill:'Astrogation'},
                 {type: 'skill', skill:'VaccSuit'},
-                {type: 'skill', skill:'Profession', specialty: 'any'},
-                {type: 'skill', skill:'GunCombat', specialty: 'any'},
+                {type: 'skill', skill:'Profession'},
+                {type: 'skill', skill:'GunCombat'},
             ]
         }
     },
@@ -82,63 +89,66 @@ export const drifter = {
     specialtiesList: ['barbarian', 'wanderer', 'scavenger'],
 }
 
-// const = {
-//     title:,
-//     description: '',
-//     survivalSkill,
-//     survivalDC,
-//     advancementSkill,
-//     advancementDC,
-//     eventList,
-//     mishapList,
-//     ranks: [
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//     ],
-//     skills,
-//     benefits
-// }
-// const = {
-//     title:,
-//     description: '',
-//     survivalSkill,
-//     survivalDC,
-//     advancementSkill,
-//     advancementDC,
-//     eventList,
-//     mishapList,
-//     ranks: [
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//     ],
-//     skills,
-//     benefits
-// }
-// const = {
-//     title:,
-//     description: '',
-//     survivalSkill,
-//     survivalDC,
-//     advancementSkill,
-//     advancementDC,
-//     eventList,
-//     mishapList,
-//     ranks: [
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//         {title: '', bonus: false},
-//     ],
-//     skills,
-//     benefits
-// }
+export const barbarian = {
+    title: 'Barbarian',
+    description: 'You live on a primitive world, without the benefits of technology.',
+    survivalSkill: 'end',
+    survivalDC: 7,
+    advancementSkill: 'str',
+    advancementDC: 7,
+    eventList: drifter.eventList,
+    mishapList: drifter.mishapList,
+    ranks: [
+        {title: 'Lout', bonus: false},
+        {title: 'Brute', bonus: {type: 'skill', skill: 'Survival', value: 1}},
+        {title: 'Warrior', bonus: {type: 'skill', skill: 'Melee', specialty: 'blade', value: 1}},
+        {title: 'Champion', bonus: false},
+        {title: 'Chieftain', bonus: {type: 'skill', skill: 'Leadership', value: 1}},
+        {title: 'High Chieftain', bonus: false},
+        {title: 'Warlord', bonus: false}
+    ],
+    skills: drifter.skills,
+    benefits: drifter.benefits,
+}
+export const wanderer = {
+    title: 'Wanderer',
+    description: 'You are a space bum, living hand-to-mouth in slums and spaceports across the galaxy.',
+    survivalSkill: 'end',
+    survivalDC: 7,
+    advancementSkill: 'int',
+    advancementDC: 7,
+    eventList: drifter.eventList,
+    mishapList: drifter.eventList,
+    ranks: [
+        {title: 'Stray', bonus: false},
+        {title: 'Vagrant', bonus: {type: 'skill', skill: 'Streetwise', value: 1}},
+        {title: 'Floater', bonus: false},
+        {title: 'Vagabond', bonus: {type: 'skill', skill: 'Deception', value: 1}},
+        {title: 'Roamer', bonus: false},
+        {title: 'Explorer', bonus: false},
+        {title: 'Nomad', bonus: false}
+    ],
+    skills: drifter.skills,
+    benefits: drifter.benefits
+}
+export const scavenger = {
+    title: 'Scavenger',
+    description: 'You work as a belter (an asteroid miner) or on a salvage crew.',
+    survivalSkill: 'dex',
+    survivalDC: 7,
+    advancementSkill: 'end',
+    advancementDC: 7,
+    eventList: drifter.eventList,
+    mishapList: drifter.mishapList,
+    ranks: [
+        {title: 'Greenhorn', bonus: false},
+        {title: 'Fungie', bonus: {type: 'skill', skill: 'VaccSuit', value: 1}},
+        {title: 'Scavver', bonus: false},
+        {title: 'Hauler', bonus: {type: 'skill', skill: 'choice', choiceList: ['Profession', 'Mechanic'], specialties: {Profession: 'belter', mechanic: null}}},
+        {title: 'Heavy Hauler', bonus: false},
+        {title: 'Scav Boss', bonus: false},
+        {title: 'Scav Head', bonus: false}
+    ],
+    skills: drifter.skills,
+    benefits: drifter.benefits,
+}

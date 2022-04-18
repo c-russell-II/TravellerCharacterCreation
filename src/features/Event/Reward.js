@@ -2,7 +2,7 @@ import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from '../Character/charaSlice';
 import { advancementBonus, resolveEvent } from "../Term/TermSlice";
-import { addAdvancementBonus, addBenefitBonus, addContact } from "../Character/miscBonusSlice";
+import { addBenefitBonus, addContact } from "../Character/miscBonusSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { promotion } from "../Career/careerSlice";
 import { roll } from "../Career/careerHandler";
@@ -15,7 +15,6 @@ import { genericIncrease, setValue } from "../Skills/SkillsSlice";
 export const Reward = (props) => {
     const career = useParams();
     const event = useSelector(state => state.term.event);
-    const age = useSelector (state => state.stats.age);
     const skills = useSelector(state=> state.skills);
     const [isReady, setIsReady] = useState(true);
     const {needSpecialty, setNeedSpecialty} = useState({active: false, skill: null})
@@ -130,7 +129,7 @@ export const Reward = (props) => {
     default:
       return;
   }
-}, [age, career, dispatch, event, isReady, needSpecialty, setNeedSpecialty, skills]);
+}, [career, dispatch, event, isReady, needSpecialty, setNeedSpecialty, skills]);
     useEffect(() => {
         setEventBody(rewardHelper(event.type))
     }, [event.type, rewardHelper])

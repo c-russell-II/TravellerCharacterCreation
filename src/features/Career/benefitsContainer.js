@@ -56,9 +56,8 @@ export const BenefitsContainer = (props) => {
             const tempRoll = roll() + mod;
             if (tempRoll > 6) {
                 return 6;
-            } else {
-            return tempRoll;
             }
+            return tempRoll;
         }
         const rollValue = getRoll()
         const rolledBenefit = jobObject[career].benefits[rollValue][type]
@@ -68,7 +67,6 @@ export const BenefitsContainer = (props) => {
     }
     const handleSubmit = (event) => {
         event.preventDefault();
-        //remove the benefit from the redux store, roll the dice on the relevant table, etc
         let mod = event.target.value;
         let type = 'misc'
         dispatch(removeBenefitBonus({career: career, value: event.target.value}))

@@ -19,23 +19,26 @@ const IncreaseSkillChoice = (props) => {
     const handleClick = (event) => {
         event.preventDefault();
         const skill = event.target.value;
-        if (skills[skill].specialties) {
-            if (specialtyList[skill] === 'any') {
-                setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
-                return;
-            } else if (Array.isArray(specialtyList[skill])) {
-                setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
-                return;
-            } else if (typeof specialtyList[skill] === 'string') {
-                dispatch(genericIncrease({skill: skill, specialty: specialtyList[skill]}))
-                cleanup();
-                return;
-            }
+        if (!skills[skill].specialties) {
+            dispatch(genericIncrease({skill: skill}));
+            cleanup();
+            return;
         }
-        dispatch(genericIncrease({skill: skill}));
-        cleanup();
-        return;
+        if (specialtyList[skill] === 'any') {
+            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
+            return;
+        } 
+        if (Array.isArray(specialtyList[skill])) {
+            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
+            return;
+        } 
+        if (typeof specialtyList[skill] === 'string') {
+            dispatch(genericIncrease({skill: skill, specialty: specialtyList[skill]}))
+            cleanup();
+            return;
+        }
     }
+
 
     return (
         <>

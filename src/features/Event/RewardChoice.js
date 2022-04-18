@@ -18,12 +18,14 @@ const RewardChoice = (props) => {
             case 'increaseSkill':
                 setOpen(true);
                 return <>{open && <IncreaseSkillChoice skillList={event.choices} specialtyList={event.specialtyList} cleanup={cleanup}/>}</>
-            case 'anySkill':
+            case 'increaseAny':
                 const skillList = [];
                 const specialtyList = {};
                 skills.trainedSkills.forEach((e) => {skillList.push(e); specialtyList[e] = skills[e].specialtiesList;})
                 setOpen(true);
                 return <>{open && <IncreaseSkillChoice skillList={skillList} specialtyList={specialtyList} cleanup={cleanup}/>}</>
+            case 'multiple':
+                return;
             default: 
                 return;
         }

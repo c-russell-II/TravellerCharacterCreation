@@ -18,6 +18,10 @@ export const Specialties = (props) => {
             return;
         }
         if (parent.qualification) {
+            if (parent.qualificationStat === 'choice') {
+                //gotta put in the stat choice stuff here...
+                
+            }
             const result = parent.qualificationDC <= skillCheck(stats[parent.qualificationStat]);
             if (result) {
                 dispatch(selectJob({ job: job }));
@@ -44,7 +48,8 @@ export const Specialties = (props) => {
                 <div className="specialtyContent">
                     <p>{description}</p>
                     <button onClick={() => { clickHandler(job); }} className="jobSelectButton">Select Job.</button>
-                </div>}
+                </div>
+            }
 
         </div>
     );

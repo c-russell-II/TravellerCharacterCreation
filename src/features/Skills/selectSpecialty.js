@@ -13,8 +13,7 @@ export const SelectSpecialty = (props) => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        const spec = isChecked.spec;
-        passSpecialty(spec);
+        passSpecialty(isChecked.spec);
     }
 
     const iterator = (e, i) => {

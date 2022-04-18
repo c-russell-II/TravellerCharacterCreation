@@ -29,6 +29,7 @@ const CareerTerm = (props) => {
             jobDetails.skills.service.forEach(e => dispatch(increaseToZero(e.skill)));
             dispatch(setTrained());
             setIsReady(true);
+            return;
         }
         setSkillSelect(true);
     }

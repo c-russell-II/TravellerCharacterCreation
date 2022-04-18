@@ -15,20 +15,21 @@ const SetSkillChoice = (props) => {
     const {filteredSpecialties, filteredSpecialtyList, allSkills} = setSkillHandler(skills, skillList, specialtyList, value)
 
     const finalize = (choice) => {
-        if (filteredSpecialties.includes(choice)) {
-            if (typeof filteredSpecialtyList[choice] === 'string') {
-                dispatch(setValue({skill: choice, specialty: filteredSpecialtyList[choice], value: value}))
-                cleanup();
-                return;
-            }
-            setChosenSkill({skill: choice, list: filteredSpecialtyList[choice]});
-            setChooseSpecialty(true);
+        if (!filteredSpecialties.includes(choice)) {
+            dispatch(setValue({skill: choice, specialty: false, value: value}))
             cleanup();
             return;
         }
-        dispatch(setValue({skill: choice, specialty: false, value: value}))
+        if (typeof filteredSpecialtyList[choice] === 'string') {
+            dispatch(setValue({skill: choice, specialty: filteredSpecialtyList[choice], value: value}))
+            cleanup();
+            return;
+        }
+        setChosenSkill({skill: choice, list: filteredSpecialtyList[choice]});
+        setChooseSpecialty(true);
         cleanup();
         return;
+
     }
     const passSpecialty = (choice) => {
         dispatch(setValue({skill:chosenSkill.skill, specialty:choice, value: value}));

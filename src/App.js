@@ -1,5 +1,5 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import {CharacterCreation} from './features/Character/CharacterCreation';
 import {TermRouter} from './features/Term/termRouter.js';
 import {LandingPage} from './features/Organization/LandingPage';
@@ -16,7 +16,7 @@ import PrintPage from './features/Organization/PrintPage';
 
 function App() {
   return (
-    <BrowserRouter>
+    <Router>
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/background_skills" element={<BackgroundSkillsChoice/>}/>
@@ -30,7 +30,7 @@ function App() {
         <Route path="/leave_career/:career" element={<BenefitsContainer/>}/>
         <Route path="/print" element={<PrintPage/>}/>
       </Routes>
-    </BrowserRouter>
+    </Router>
       );
 }
 

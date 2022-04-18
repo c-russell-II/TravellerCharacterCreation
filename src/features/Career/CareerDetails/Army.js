@@ -5,20 +5,20 @@ export const army = {
     qualificationDC: 5,
     description: 'Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles, and campaigns. Such individuals may also be mercenaries for hire.',
     eventList: {
-        2: {type: 'redirect', destination: 'injury', description: 'You are severely injured...'},
-        3: {type: 'reward', description: 'You are assigned to a planet with a hostile or wild environment.', result:{type: 'choice', choice: ['VaccSuit', 'Engineer', 'Animals', 'Recon'], choiceType: 'setSkill', choiceDetail:{'VaccSuit':'skill', 'Enginner':'skill', 'Animals':'skill', 'Recon':'skill'}, value: 1}},
-        4: {type: 'reward', description: 'You are assigned to an urbanised planet torn by war.', result:{type: 'choice', choice: ['Stealth', 'Streetwise', 'Persuade', 'Recon'], choiceType: 'setSkill', choiceDetail:{'Stealth':'skill', 'Streetwise':'skill', 'Persuade':'skill', 'Recon':'skill'}, value: 1}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        3: {type: 'reward', description: 'You are assigned to a planet with a hostile or wild environment.', result:{type: 'choice', choiceList: ['VaccSuit', 'Engineer', 'Animals', 'Recon'], choiceType: 'setSkill', choiceDetail:{'VaccSuit':'skill', 'Enginner':'skill', 'Animals':'skill', 'Recon':'skill'}, value: 1}},
+        4: {type: 'reward', description: 'You are assigned to an urbanised planet torn by war.', result:{type: 'choice', choiceList: ['Stealth', 'Streetwise', 'Persuade', 'Recon'], choiceType: 'setSkill', choiceDetail:{'Stealth':'skill', 'Streetwise':'skill', 'Persuade':'skill', 'Recon':'skill'}, value: 1}},
         5: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You are given a special assignment or duty in your unit.'},
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are thrown into a brutal ground war.',
-                pass: {description: 'You avoid injury through the entire war, and improve your skills.', result: {type: 'choice', choiceType: 'increaseSkill', choice: ['GunCombat', 'Leadership']}},
+                pass: {description: 'You avoid injury through the entire war, and improve your skills.', result: {type: 'choice', choiceType: 'increaseSkill', choiceList: ['GunCombat', 'Leadership']}},
                 fail: {description: "You are injured early in the fighting, gaining nothing but a scar and a story."}},
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choices: 'any'}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'any'}},
             fail: {description: "You do not manage to measure up to your instructors' standards."}},
         9: {type: 'reward', description: 'Surrounded and outnumbered by the enemy, you manage to hold out until relief arrives.', result: {type: 'advancement', value: 2}},
-        10: {type: 'reward', description: 'You are assigned to a peacekeeping role.', result:{type: 'choice', choice: ['Admin', 'Investigate', 'Deception', 'Recon'], choiceDetail:{'Admin':'skill', 'Investigate':'skill', 'Deception':'skill', 'Recon':'skill'}, value: 1}},
-        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choice: ['Tactics', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
+        10: {type: 'reward', description: 'You are assigned to a peacekeeping role.', result:{type: 'choice', choiceList: ['Admin', 'Investigate', 'Deception', 'Recon'], choiceDetail:{'Admin':'skill', 'Investigate':'skill', 'Deception':'skill', 'Recon':'skill'}, value: 1}},
+        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
         12: {type: 'reward', roll: 12, description: 'You display heroism in battle.', result:{type: 'promotion'}}
     },
     mishapList: [
@@ -66,7 +66,7 @@ export const army = {
         ],
         specialties: {
             support: [
-                {type: 'skill', skill:'Drive'},
+                {type: 'choice', list: ['Drive', 'Flyer'], specialties: {Drive: null, Flyer: null}},
                 {type: 'skill', skill:'Mechanic'},
                 {type: 'skill', skill:'Profession'},
                 {type: 'skill', skill:'Explosives'},

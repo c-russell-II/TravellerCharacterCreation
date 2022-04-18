@@ -36,14 +36,16 @@ export const BackgroundSkillsChoice = (props) => {
     };
     const handleSubmit = (event) => {
         event.preventDefault();
+
+        if (!skills.length === limit) {
+            alert(`Please select ${limit - skills.length} more skills.`)
+            return;
+        }
         skills.forEach((e) => {
             dispatch(increaseToZero(e));
         })
-        if (skills.length === limit) {
-            navigate('/choose_education');
-        } else {
-            alert(`Please select ${limit - skills.length} more skills.`)
-        }
+        navigate('/choose_education');
+        return;
     }
 
     return (
@@ -54,11 +56,9 @@ export const BackgroundSkillsChoice = (props) => {
                 <h5>Points Remaining: {limit - skills.length}</h5>
                 {options.map((e, i) => {
                     return (
-                        <div key={i}>
-                            <label>
+                            <label key={i}>
                                 <input type="checkbox" name="skill" value={e} checked={checked[i]} onChange={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
                             </label>
-                        </div>
                     )
                 })}
                 <input type="submit" value="Confirm"/>
