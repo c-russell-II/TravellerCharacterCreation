@@ -12,7 +12,7 @@ const options = {
     name: 'careers',
     initialState: jobState,
     reducers: {
-        survivedTerm: (state, action) => {
+        saveSurvivedTerm: (state, action) => {
             const {job} = action.payload;
             state.currentJob = job;
             state[job].terms++;
@@ -20,18 +20,7 @@ const options = {
             state[job].muster = false;
             return state;
         },
-        advancedTerm: (state, action) => {
-            const {job} = action.payload;
-            state.currentJob = job;
-            state[job].terms++;
-            state[job].benefits++;
-            if (state[job].rank < 6) {
-                state[job].rank++;
-            }
-            state[job].muster = false;
-            return state;
-        },
-        failedTerm: (state, action, details) => {
+        saveFailedTerm: (state, action, details) => {
             const {job} = action.payload;
             state.previousJob = job;
             state[job].muster = true;
@@ -74,6 +63,6 @@ const options = {
 }
 
 const careerSlice = createSlice(options);
-export const {survivedTerm, advancedTerm, failedTerm, selectJob, promotion, resolveBenefit} = careerSlice.actions;
+export const {saveSurvivedTerm, saveFailedTerm, selectJob, promotion, resolveBenefit} = careerSlice.actions;
 export default careerSlice.reducer;
 

@@ -5,15 +5,34 @@ const initialState = {
     survived: false,
     advanced: false,
     event: null,
-    jobDetails: {}
+    jobDetails: {},
+    advancementBonus: 0,
+    muster: false,
 }
 
 const options = {
     name: 'term',
     initialState: initialState,
     reducers: {
-        setCurrentTerm: (state, action) => {
-            return {...action.payload};
+        survivedTerm: (state, action) => {
+            const {job, event, jobDetails} = action.payload;
+            state.job = job;
+            state.survived = true;
+            state.event = event;
+            state.jobDetails = jobDetails;
+            return state;
+        },
+        failedTerm: (state, action) => {
+            const {job, event, jobDetails} = action.payload;
+            state.job = job;
+            state.survived = false;
+            state.event = event;
+            state.jobDetails = jobDetails;
+            return state;
+        },
+        advancementBonus: (state, action) => {
+            state.advancementBonus = action.payload;
+            return state;
         },
         updateEvent: (state, action) => {
             state.event = action.payload;
@@ -23,10 +42,14 @@ const options = {
             state.event = null;
             return state;
         },
+        resolveTerm: (state) => {
+            state = initialState;
+            return state;
+        }
     },
 }
 
 const termSlice = createSlice(options);
 
-export const {setCurrentTerm, updateEvent, resolveEvent} = termSlice.actions;
+export const {survivedTerm, failedTerm, advancementBonus, updateEvent, resolveEvent, resolveTerm} = termSlice.actions;
 export default termSlice.reducer;

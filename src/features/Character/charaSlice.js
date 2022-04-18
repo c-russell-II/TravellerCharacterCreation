@@ -23,26 +23,11 @@ const options = {
             state.events.push(action.payload);
             return state;
         },
-        addEventBulk: (state, action) => {
-            const eventArray = action.payload;
-            state = [...state, ...eventArray];
-            return state;
-        },
         addBenefit: (state, action) => {
             if (action.payload.type === 'money') {
                 state.numOfCashBenefits++;
             }
             state.benefits.push(action.payload);
-            return state;
-        },
-        addBenefitBulk: (state, action) => {
-            state = [...state, ...action.payload];
-            return state;
-        },
-        resolveCashBenefit: (state) => {
-            if (state.numOfCashBenefits > 0) {
-                state.numOfCashBenefits--;
-            } 
             return state;
         },
         setTrained: (state) => {
@@ -55,5 +40,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addEventBulk, addBenefit, addBenefitBulk, setTrained, resolveCashBenefit} = charaSlice.actions;
+export const {reset, setName, addEvent, addBenefit, setTrained} = charaSlice.actions;
 export default charaSlice.reducer;

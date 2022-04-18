@@ -6,7 +6,7 @@ import { roll } from "./careerHandler";
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { removeBenefitBonus } from "../Character/miscBonusSlice";
-import { addBenefit, resolveCashBenefit } from "../Character/charaSlice";
+import { addBenefit } from "../Character/charaSlice";
 import { resolveBenefit } from "./careerSlice";
 
 
@@ -33,6 +33,9 @@ export const BenefitsContainer = (props) => {
     useEffect(() => {
         setNumCash(chara.numOfCashBenefits);
         setNumBenefits(careers[career].benefits);
+        if (chara.numOfCashBenefits >= 3) {
+            setValue(2);
+        }
     }, [career, careers, chara.numOfCashBenefits])
 
     const noBonusClick = (event) => {
@@ -41,7 +44,6 @@ export const BenefitsContainer = (props) => {
         let mod = 0;
         let type = 'misc'
         if (value === 1) {
-            dispatch(resolveCashBenefit());
             type = 'money'
             if (skills.Gambler.value >= 0) {
                 mod++;
@@ -79,7 +81,6 @@ export const BenefitsContainer = (props) => {
         }
         if (value === 1) {
             type="money"
-            dispatch(resolveCashBenefit());
             if (skills.Gambler.value >= 0) {
                 mod++;
             }

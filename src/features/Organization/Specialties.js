@@ -21,7 +21,7 @@ export const Specialties = (props) => {
             const result = parent.qualificationDC <= skillCheck(stats[parent.qualificationStat]);
             if (result) {
                 dispatch(selectJob({ job: job }));
-                navigate('/term/' + job);
+                navigate('/term/' + job + '/start');
                 return;
             } else {
                 alert('failed to qualify');
@@ -29,7 +29,7 @@ export const Specialties = (props) => {
             }
         } else {
             dispatch(selectJob({ job: job, details: [props.specialty] }));
-            navigate('/term/' + job);
+            navigate('/term/' + job + '/start');
             return;
         }
     };

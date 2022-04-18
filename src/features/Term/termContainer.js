@@ -1,15 +1,14 @@
-import React, {useState} from "react";
-import CareerTerm from "../Career/CareerTerm";
-import { TermMidPoint } from "./TermMidPoint";
+import React from "react";
+import { Outlet, useParams } from "react-router-dom";
+import jobObject from "../Career/CareerDetails";
 
-export const TermContainer = (props) => {
-    const [ready, setReady] = useState(false);
-
-    const cleanup = () => setReady(true);
+const TermContainer = () => {
 
     return (
         <div className="term">
-            {ready ? <TermMidPoint/> : <CareerTerm cleanup={cleanup}/>}
+
         </div>
     )
 }
+
+export default TermContainer;

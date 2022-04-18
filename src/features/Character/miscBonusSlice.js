@@ -6,7 +6,6 @@ const initialState = {
     allies: [],
     rivals: [],
     enemies: [],
-    advancement: {},
     qualification: {},
     injuries: {}
 }
@@ -22,6 +21,8 @@ const options = {
                 value: action.payload.value,
                 expires: action.payload.age + action.payload.duration
             }
+            const tempList = state.qualification.list.concat(action.payload.careers);
+            state.qualification.list = tempList;
             state.qualification[`${action.payload.source}${action.payload.age}`] = bonusObj
             return state;
         },
@@ -59,20 +60,10 @@ const options = {
             }
             return state;
         },
-        addAdvancementBonus: (state, action) => {
-            const bonusObj = {
-                career: action.payload.career,
-                value: action.payload.value,
-                age: action.payload.age,
-                expires: action.payload.age + action.payload.duration
-            }
-            state.advancement[`${action.payload.career}${action.payload.age}`] = bonusObj;
-            return state;
-        }
     }
 }
 
 const miscSlice = createSlice(options);
 
-export const {reset, addQualificationBonus, addBenefitBonus, addContact, addAdvancementBonus, removeBenefitBonus} = miscSlice.actions;
+export const {reset, addQualificationBonus, addBenefitBonus, addContact, removeBenefitBonus} = miscSlice.actions;
 export default miscSlice.reducer;

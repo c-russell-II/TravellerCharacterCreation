@@ -47,5 +47,4 @@ export const careerTermHandler = (job, stats) => {
 export const careerFuncs = {
     handler: careerTermHandler,
     job: jobObject,
-    list: jobObject.list
 }

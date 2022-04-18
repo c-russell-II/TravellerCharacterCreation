@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from '../Character/charaSlice';
-import { resolveEvent } from "../Term/TermSlice";
+import { advancementBonus, resolveEvent } from "../Term/TermSlice";
 import { addAdvancementBonus, addBenefitBonus, addContact } from "../Character/miscBonusSlice";
 import { increaseStat } from "../Character/StatsSlice";
 import { promotion } from "../Career/careerSlice";
@@ -112,12 +112,7 @@ export const Reward = (props) => {
       }
 
     case 'advancement':
-      dispatch(addAdvancementBonus({
-        career: career,
-        age: age,
-        duration: 4,
-        value: event.result.value
-      }));
+      dispatch(advancementBonus(event.result.value));
       return;
 
     case 'choice':

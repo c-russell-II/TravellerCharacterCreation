@@ -7,6 +7,7 @@ import { increaseStat } from "../Character/StatsSlice";
 import { SelectSpecialty } from "./selectSpecialty";
 import { useParams } from "react-router-dom";
 import Popup from "reactjs-popup";
+import jobObject from "../Career/CareerDetails";
 
 export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
@@ -14,11 +15,11 @@ export const JobSkills = (props) => {
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
     const {cleanup} = props;
-    const term = useSelector(state => state.term);
     const {career} = useParams();
+    const careerSkills = jobObject[career].skills;
 
     const skillNames = ['personal', 'service', 'advanced', career]
-    const finishedList = [term.jobDetails.skills.personal, term.jobDetails.skills.service, term.jobDetails.skills.advanced, term.jobDetails.skills.specialties[career]]
+    const finishedList = [careerSkills.personal, careerSkills.service, careerSkills.advanced, careerSkills.specialties[career]]
 
     const handleClick = (table) => {
         const selection = table[Math.floor(Math.random() * table.length)]

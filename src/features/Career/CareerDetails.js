@@ -1,11 +1,13 @@
 import {agent, intelligence, lawEnforcement, corporate} from './CareerDetails/Agent'
 import { cavalry, infantry, support, army } from './CareerDetails/Army'
+import { citizen, colonist, manager, worker } from './CareerDetails/Citizen'
 // const eventArray = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 export const parentJobs = {
     agent: agent,
     army: army,
-    list: ['agent', 'army'],
+    citizen: citizen,
+    list: ['agent', 'army', 'citizen']
 }
 
 const jobObject = {
@@ -15,16 +17,18 @@ const jobObject = {
     cavalry: cavalry,
     infantry: infantry,
     support: support,
-    list: ['intelligence', 'lawEnforcement', 'corporate', 'cavalry', 'infantry', 'support']
+    manager: manager,
+    worker: worker,
+    colonist: colonist,
 }
 
 export default jobObject
 // export const  = {
 //     title: ,
+//     description: '',
 //     qualification: ,
 //     qualificationStat: ,
 //     qualificationDC: ,
-//     description: ,
 //     eventList: {2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {}, 10: {}, 11: {}, 12: {}},
 //     mishapList: [{}, {}, {}, {}, {}, {}],
 //     skills: {
@@ -85,13 +89,61 @@ export default jobObject
 
 // const = {
 //     title:,
+//     description: '',
 //     survivalSkill,
 //     survivalDC,
 //     advancementSkill,
 //     advancementDC,
 //     eventList,
 //     mishapList,
-//     ranks,
+//     ranks: [
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//     ],
+//     skills,
+//     benefits
+// }
+// const = {
+//     title:,
+//     description: '',
+//     survivalSkill,
+//     survivalDC,
+//     advancementSkill,
+//     advancementDC,
+//     eventList,
+//     mishapList,
+//     ranks: [
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//     ],
+//     skills,
+//     benefits
+// }
+// const = {
+//     title:,
+//     description: '',
+//     survivalSkill,
+//     survivalDC,
+//     advancementSkill,
+//     advancementDC,
+//     eventList,
+//     mishapList,
+//     ranks: [
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//         {title: '', bonus: false},
+//     ],
 //     skills,
 //     benefits
 // }

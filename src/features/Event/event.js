@@ -4,7 +4,6 @@ import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
-import Popup from "reactjs-popup";
 
 const checkHandler = (checkType) => {
     switch (checkType) {
@@ -19,7 +18,7 @@ export const Event = (props) => {
     const event = useSelector(state => state.term.event);
     const [isOpen, setIsOpen] = useState(true);
     
-    const cleanup = () => setIsOpen(false);
+    const cleanup = () => setIsOpen(false); props.cleanup();
 
     const eventRender = (event, cleanup) => {
         switch (event.type) {
@@ -46,10 +45,10 @@ export const Event = (props) => {
         }
     }
     return (
-        <Popup open={isOpen} modal closeOnDocumentClick={false} className="general_events">
+        <>
             {isOpen && eventRender(event, cleanup)}
             <p>Event rendering still missing redirects!</p>
             <button onClick={() => cleanup()}>Override</button>
-        </Popup>
+        </>
     );
 }

@@ -17,7 +17,7 @@ export const agent = {
         5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 3}, description: 'You establish a network of contacts'},
         
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'anySkill'}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'any'}},
             fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
         
         7: {type: 'redirect', destination: 'life'},
@@ -42,16 +42,16 @@ export const agent = {
         {type: 'choice', 
             description: 'Someone you are investigating offers you a deal...',
             choiceList: ['a', 'b'],
-            a: {description: 'You leave the career, sacrificing some honor, but losing little else...', results: 'lose benefit, leave career', button: 'Accept the deal...'},
-            b: {description: 'You leave the career after being injured by the one whose deal you refused...', results: ['injury table', 'enemy', 'skill level'], button: 'Decline the deal...'}},
+            a: {description: 'You leave the career, sacrificing some honor, but losing little else...', result: 'lose benefit, leave career', button: 'Accept the deal...'},
+            b: {description: 'You leave the career after being injured by the one whose deal you refused...', result: ['injury table', 'enemy', 'skill level'], button: 'Decline the deal...'}},
         
         {type: 'skillCheck', checkType: 'Advocate', checkDC: 8, description: 'An investigation goes horribly wrong-- or right-- ending your career.',
             pass: {description: 'You manage to defend yourself well enough that you are able to leave amicably...'},
             fail: {description: "You are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
         
-        {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', results:{type: 'multiple', resultList:['enemy', 'skill'], skill:'Deception', }},
+        {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', result:{type: 'multiple', resultList:['enemy', 'skill'], skill:'Deception', }},
         
-        {type: null, description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', results:{target: 'contact, ally, or family member', bonus:'injury'}},
+        {type: null, description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', result:{target: 'contact, ally, or family member', bonus:'injury'}},
         
         {type: 'redirect', destination: 'injury table'}
     ],

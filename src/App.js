@@ -1,7 +1,7 @@
 import React from 'react';
-import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route, BrowserRouter} from "react-router-dom"
 import {CharacterCreation} from './features/Character/CharacterCreation';
-import {TermContainer} from './features/Term/termContainer.js';
+import {TermRouter} from './features/Term/termRouter.js';
 import {LandingPage} from './features/Organization/LandingPage';
 import { CareerChooser } from './features/Organization/CareerChoice';
 import { BackgroundSkillsChoice } from './features/Skills/BackgroundSkills';
@@ -16,7 +16,7 @@ import PrintPage from './features/Organization/PrintPage';
 
 function App() {
   return (
-    <Router>
+    <BrowserRouter>
       <Routes>
         <Route path="/" element={<LandingPage/>}/>
         <Route path="/background_skills" element={<BackgroundSkillsChoice/>}/>
@@ -26,11 +26,11 @@ function App() {
         <Route path="/university_term" element={<UniversityTerm/>}/>
         <Route path="/mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
         <Route path="/choose_career" element={<CareerChooser />}/>
-        <Route path="/term/:career" element={<TermContainer/>}/>
+        <Route path="/term/:career/*" element={<TermRouter/>}/>
         <Route path="/leave_career/:career" element={<BenefitsContainer/>}/>
         <Route path="/print" element={<PrintPage/>}/>
       </Routes>
-    </Router>
+    </BrowserRouter>
       );
 }
 
