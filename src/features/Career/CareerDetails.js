@@ -1,8 +1,10 @@
 import {agent, intelligence, lawEnforcement, corporate} from './CareerDetails/Agent'
-import { cavalry, infantry, support, army } from './CareerDetails/Army'
+import { cavalry, infantry, supportArmy, army } from './CareerDetails/Army'
 import { citizen, colonist, manager, worker } from './CareerDetails/Citizen'
 import { barbarian, drifter, scavenger, wanderer } from './CareerDetails/Drifter'
 import { artist, entertainer, journalist, performer } from './CareerDetails/Entertainer'
+import { groundAssault, marine, starMarine, supportMarine } from './CareerDetails/Marine'
+import { broker, freeTrader, merchant, merchantMarine } from './CareerDetails/Merchant'
 // const eventArray = ['one', 'two', 'three', 'four', 'five', 'six'];
 
 export const parentJobs = {
@@ -11,7 +13,9 @@ export const parentJobs = {
     citizen: citizen,
     drifter: drifter,
     entertainer: entertainer,
-    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer']
+    marine: marine,
+    merchant: merchant,
+    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant']
 }
 
 const jobObject = {
@@ -20,7 +24,7 @@ const jobObject = {
     corporate: corporate,
     cavalry: cavalry,
     infantry: infantry,
-    support: support,
+    supportArmy: supportArmy,
     manager: manager,
     worker: worker,
     colonist: colonist,
@@ -30,6 +34,12 @@ const jobObject = {
     artist: artist,
     journalist: journalist,
     performer: performer,
+    supportMarine: supportMarine,
+    starMarine: starMarine,
+    groundAssault: groundAssault,
+    merchantMarine: merchantMarine,
+    freeTrader: freeTrader,
+    broker: broker,
 }
 
 export default jobObject

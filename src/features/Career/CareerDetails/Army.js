@@ -14,7 +14,7 @@ export const army = {
                 fail: {description: "You are injured early in the fighting, gaining nothing but a scar and a story."}},
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'any'}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
             fail: {description: "You do not manage to measure up to your instructors' standards."}},
         9: {type: 'reward', description: 'Surrounded and outnumbered by the enemy, you manage to hold out until relief arrives.', result: {type: 'advancement', value: 2}},
         10: {type: 'reward', description: 'You are assigned to a peacekeeping role.', result:{type: 'choice', choiceList: ['Admin', 'Investigate', 'Deception', 'Recon'], choiceDetail:{'Admin':'skill', 'Investigate':'skill', 'Deception':'skill', 'Recon':'skill'}, value: 1}},
@@ -24,7 +24,7 @@ export const army = {
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'reward', description: 'Your unit is slaughtered in a disastrous battle, for which you blame your commander. In retaliation, said commander has you removed from service.', result: {type: 'enemy', value: 1}},
-        {type: 'reward', description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.', result: {type: 'multiple', resultList: ['skill', 'enemy'], skillList: ['Recon', 'Survival'], skillValue: 'increase', enemyDescription: 'Rebels you fought against.'}},
+        {type: 'reward', description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.', result: {type: 'multiple', resultList: ['skill', 'enemy'], skill:{type: 'choice', choiceList: ['Recon', 'Survival'], choiceType: 'increaseSkill', specialtyList:{Recon: null, Survival: null}}, enemy:{type: 'enemy', value: 1, description:'Rebels you fought against.'}}},
         {type: 'choice', description: 'You discover that your commanding officer is engaged in some illegal activity, such as weapon smuggling.', choiceList: ['a', 'b'],
             a: {description: 'You join their ring for a time, until the inevitable investigation gets you discharged.', result: {type: 'ally', value: 1, description: 'Commanding officer you commited crimes with.'}, button: 'Join them'},
             b: {description: 'You choose to co-operate with the military police, ', result: 'benefit', button: 'Cooperate with MPs'},},
@@ -103,7 +103,7 @@ export const army = {
     specialtiesList: ['support', 'infantry', 'cavalry'],
 }
 
- export const support = {
+ export const supportArmy = {
     id: 'support',
     title: 'Support',
     description: 'You are an engineer, cook, or in some other role behind the front lines.',

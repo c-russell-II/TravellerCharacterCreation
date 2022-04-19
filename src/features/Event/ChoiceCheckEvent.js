@@ -10,10 +10,19 @@ export const ChoiceCheckEvent = (props) => {
 
     const dc = term.event.checkDC;
     const list = term.event.choiceList;
+    
 
     const handleClick = (choice) => {
         const skill = skills[choice];
-        const result = dc <= skillCheck(skill);
+        const specList = term.event.specialtyList[choice] === 'any' ? skill.specialtyList : term.event.specialtyList[choice];
+        let result;
+        if (!skill.specialties) {
+            result = dc <= skillCheck(skill.value);
+        } else {
+            let mod = -3
+            specList.forEach((e) => {if (skill[e] > mod) {mod = skill[e]}})
+            result = dc <= skillCheck(mod);
+        }
         if (result) {
             dispatch(updateEvent({type: 'reward', description: term.event.description + ' ' + term.event.pass.description, result: term.event.pass.result}));
             return;

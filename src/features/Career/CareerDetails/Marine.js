@@ -5,19 +5,37 @@ export const marine = {
     qualificationStat: 'end',
     qualificationDC: 6,
     eventList: {
-        2: {},
-        3: {},
-        4: {},
-        5: {},
-        6: {},
-        7: {},
-        8: {},
-        9: {},
-        10: {},
-        11: {},
-        12: {}
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        3: {type: 'reward', description: 'Trapped behind enemy lines, you have to survive on your own.', result: {type: 'choice', choiceType: 'setSkill', choiceList: ['Survival', 'Stealth', 'Deception', 'Streetwise'], specialtyList: {Survival: null, Stealth: null, Deception: null, Streetwise: null}, value: 1}},
+        4: {type: 'reward', description: 'You are assigned to the security staff of a space station.', result: {type: 'choice', choiceType: 'increaseSkill', choiceList:['VaccSuit', 'Athletics'], specialtyList: {Vaccsuit: 'null', Athletics:'dexterity'}}},
+        5: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: 'none'}}},
+        6: {type: 'choiceCheck', choiceList: ['GunCombat', 'Melee'], specialtyList: {GunCombat: 'any', Melee: 'any'}, checkDC: 8, description: 'You lead an assault on an enemy fortress...',
+            pass: {description: 'Your assault is a smashing success.', result: {type: 'choice', choiceType: 'increaseSkill', choiceList: ['Tactics', 'Leadership'], specialtyList: {Tactics: 'military', Leadership: null}}},
+            fail: {description: 'Your assault is a failure, and you are injured.', result: {type: 'choice', choiceType: 'stat', choiceList: ['end', 'str', 'dex'], value: -1}}
+        },
+        7: {type: 'redirect', destination: 'life'},
+        8: {type: 'reward', description: 'You are on the front lines of a planetary assault and occupation.', result:{type:'choice', choiceType: 'setSkill', choiceList:['Recon', 'GunCombat', 'Leadership', 'Electronics'], specialtyList: {Recon: null, GunCombat: 'any', Leadership: null, Electronics: 'comms'}}},
+        9: {type: 'choice', choiceList: ['a', 'b'], description: "A mission goes disastrously wrong due to your commander's error or incompetence, but you emerge unscathed.",
+            a:{button: 'Report them!', description: "You report their failure, gaining approval from higher ups, and a new enemy...", result: {type: 'multiple', list: ['advancement', 'enemy'], advancement:{type: 'advancement', value: 2}, enemy: {type: 'enemy', value: 1, description: 'A commanding officer whose incompetence you outed after a disastrous mission.'}}},
+            b:{button: 'Cover for them!', description: "You cover for them, earning a lifelong ally.", result: {type: 'ally', value: 1, description: 'A commanding officer whose disastrous failure you helped cover for.'}}
+        },
+        10: {type: 'reward', description: 'You are assigned to a black ops mission.', result: {type: 'advancement', value: 2}},
+        11: {type: 'reward', description: 'Your commanding officer takes an interest in your career.', result: {type: 'choice', choiceType: 'multiple', choiceList: ['advancement', 'Tactics'], advancement: {type: 'advancement', value: 4}, tactics: {type: 'skill', skill: 'Tactics', value: 1}}},
+        12: {type: 'reward', description: 'You display heroism in battle, earning an automatic promotion.', result: {type: 'promotion'}}
     },
-    mishapList: [{}, {}, {}, {}, {}, {}],
+    mishapList: [
+        {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
+        {type: 'reward', description: 'A mission goes wrong- you and several others are captured and mistreated by the enemy.', result: {type: 'multiple', list: ['enemy', 'stat'], enemy: {type: 'enemy', value: 1, description: 'Jailers from your disastrous mission in the marines'}, stat: {type: 'choice', choiceType: 'stat', choiceList: ['str', 'dex'], value: -1}}},
+        {type: 'reward', description: 'A  mission goes wrong, and you are stranded behind enemy lines.', result: {type: 'choice', choiceType: 'increaseSkill', choiceList:['Stealth', 'Survival'], specialtyList: {Stealth: null, Survival: null}}},
+        {type: 'choice', choiceList: ['a', 'b'], description: 'You are ordered to take part in a black ops mission that goes against what you think is right.', 
+            a: {button: 'Follow orders', result: {type: 'multiple', list: ['enemy', 'noMuster'], enemy: {type: 'enemy', description: 'Lone survivor of a morally dubious black ops mission you participated in.'}, noMuster: {type: 'noMuster'}}},
+            b: {button: "Do what's right", result: {type: 'none'}}
+        },
+        {type: 'reward', description: 'You are tormented by a superior officer or fellow marine.', result: {type: 'enemy', value: 1, description: 'A superior or fellow marine who drove you out of the service.'}},
+        {type: 'redirect', destination: 'injury'}
+    ],
     skills: {
         personal: [
             {type: 'stat', stat: 'str'},
@@ -90,7 +108,7 @@ export const marine = {
     specialtiesList: ['support', 'starMarine', 'groundAssault'],
 }
 
-export const support = {
+export const supportMarine = {
     title: 'Support Marine',
     description: 'You are a quartermaster, engineer, or battlefield medic in the marines.',
     survivalSkill: 'end',

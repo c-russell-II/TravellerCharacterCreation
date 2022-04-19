@@ -14,10 +14,10 @@ const RewardChoice = (props) => {
         switch (type) {
             case 'setSkill':
                 setOpen(true);
-                return <>{open && <SetSkillChoice skillList={event.choices} specialtyList={event.specialtyList} value={event.value} cleanup={cleanup}/>}</>
+                return <>{open && <SetSkillChoice skillList={event.choiceList} specialtyList={event.specialtyList} value={event.value} cleanup={cleanup}/>}</>
             case 'increaseSkill':
                 setOpen(true);
-                return <>{open && <IncreaseSkillChoice skillList={event.choices} specialtyList={event.specialtyList} cleanup={cleanup}/>}</>
+                return <>{open && <IncreaseSkillChoice skillList={event.choiceList} specialtyList={event.specialtyList} cleanup={cleanup}/>}</>
             case 'increaseAny':
                 const skillList = [];
                 const specialtyList = {};
