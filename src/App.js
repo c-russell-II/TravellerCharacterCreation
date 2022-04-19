@@ -13,6 +13,7 @@ import 'reactjs-popup/dist/index.css';
 import { ClassicContainer } from './features/Character/Classic/ClassicContainer';
 import { BenefitsContainer } from './features/Career/benefitsContainer';
 import PrintPage from './features/Organization/PrintPage';
+import PrisonContainer from './features/Prison/PrisonContainer';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
         <Route path="/choose_career" element={<CareerChooser />}/>
         <Route path="/term/:career/*" element={<TermRouter/>}/>
         <Route path="/leave_career/:career" element={<BenefitsContainer/>}/>
+        <Route path="/prison" element={<PrisonContainer/>}/>
         <Route path="/print" element={<PrintPage/>}/>
       </Routes>
     </Router>
