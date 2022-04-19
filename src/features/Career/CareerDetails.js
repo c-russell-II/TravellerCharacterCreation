@@ -5,7 +5,7 @@ import { barbarian, drifter, scavenger, wanderer } from './CareerDetails/Drifter
 import { artist, entertainer, journalist, performer } from './CareerDetails/Entertainer'
 import { groundAssault, marine, starMarine, supportMarine } from './CareerDetails/Marine'
 import { broker, freeTrader, merchant, merchantMarine } from './CareerDetails/Merchant'
-// const eventArray = ['one', 'two', 'three', 'four', 'five', 'six'];
+import { engineerGunner, flight, lineCrew, navy } from './CareerDetails/Navy'
 
 export const parentJobs = {
     agent: agent,
@@ -15,7 +15,8 @@ export const parentJobs = {
     entertainer: entertainer,
     marine: marine,
     merchant: merchant,
-    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant']
+    navy: navy,
+    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant', 'navy']
 }
 
 const jobObject = {
@@ -40,6 +41,9 @@ const jobObject = {
     merchantMarine: merchantMarine,
     freeTrader: freeTrader,
     broker: broker,
+    lineCrew: lineCrew,
+    engineerGunner: engineerGunner,
+    flight: flight
 }
 
 export default jobObject

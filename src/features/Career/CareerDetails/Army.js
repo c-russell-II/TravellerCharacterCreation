@@ -18,7 +18,7 @@ export const army = {
             fail: {description: "You do not manage to measure up to your instructors' standards."}},
         9: {type: 'reward', description: 'Surrounded and outnumbered by the enemy, you manage to hold out until relief arrives.', result: {type: 'advancement', value: 2}},
         10: {type: 'reward', description: 'You are assigned to a peacekeeping role.', result:{type: 'choice', choiceList: ['Admin', 'Investigate', 'Deception', 'Recon'], choiceDetail:{'Admin':'skill', 'Investigate':'skill', 'Deception':'skill', 'Recon':'skill'}, value: 1}},
-        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
+        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Tactics': 'skill', 'advancement':'advancement'}}},
         12: {type: 'reward', roll: 12, description: 'You display heroism in battle.', result:{type: 'promotion'}}
     },
     mishapList: [
