@@ -5,8 +5,122 @@ export const noble = {
     qualificationStat: 'Threshold',
     qualificationThreshold: {stat: 'soc', value: 10},
     qualificationDC: 10,
-    eventList: {2: {}, 3: {}, 4: {}, 5: {}, 6: {}, 7: {}, 8: {}, 9: {}, 10: {}, 11: {}, 12: {}},
-    mishapList: [{}, {}, {}, {}, {}, {}],
+    eventList: {
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        3: {type: 'choice', choiceList: ['a', 'b'], description: 'You get challenged to a duel for your honour and standing.',
+            a: {button: 'Fight the Duel!', result: {type: 'check', checkType: 'skill', checkSkill: 'Melee', checkDC: 8,
+                pass: {description: 'You fight well, and honorably, and win the honour duel.', 
+                    result: {type: 'multiple', list: ['choice', 'stat'], 
+                        choice: {type: 'choice', choiceType: 'increaseSkill', 
+                            choiceList: ['Melee', 'Leadership', 'Tactics', 'Deception'], 
+                            specialtyList: {Melee: 'blade', Leadership: null, Tactics: 'any', Deception: null}
+                        },
+                        stat: {type: 'stat', stat: 'soc', value: 1}
+                    },
+                },
+                fail:{description: 'You fight well- but not well enough. You lose the honour duel.', 
+                    result: {type: 'multiple', list: ['redirect', 'stat', 'choice'],
+                        redirect: {type:'redirect', destination: 'injury'},
+                        stat: {type: 'stat', stat: 'soc', value: -1},
+                        choice: {type: 'choice', choiceType: 'increaseSkill', 
+                            choiceList: ['Melee', 'Leadership', 'Tactics', 'Deception'], 
+                            specialtyList: {Melee: 'blade', Leadership: null, Tactics: 'any', Deception: null}
+                        }
+                    }
+                }
+            }},
+            b: {button: 'Play it safe.', description: 'You refuse, guaranteeing your safety- but, perhaps, not all your dignity.', result: {type: 'none'}}
+        },
+        4: {type: 'reward', description: 'Your time as a ruler or player gives you a wide range of experiences.', 
+            result: {type: 'choice', choiceType: 'setSkill', 
+                choiceList: ['Animals', 'Art', 'Carouse', 'Streetwise'], 
+                specialtyList: {Animals: 'riding', Art: 'any', Carouse: null, Streetwise: null}, value: 1
+            }
+        },
+        5: {type: 'reward', description: 'You inherit a gift from a rich relative.', result: {type: 'benefit', value: 1}},
+        6: {type: 'reward', description: 'You become deeply involved in politics on your world of residence, becoming a player in the political intrigues of government.', 
+            result:{type: 'multiple', list: ['choice', 'rival',],
+                choice: {type: 'choice',
+                    choiceType: 'increaseSkill',
+                    choiceList: ['Advocate', 'Admin', 'Diplomacy', 'Persuade']
+                },
+                rival: {type: 'rival', value: 1, description: 'Rival from political intruge related to your Noble career.'}
+            }
+        },
+        7: {type: 'redirect', destination: 'life'},
+        8: {type: 'choice', choiceList: ['a', 'b'], description: 'A conspiracy of nobles attempt to recruit you.',
+            a:{button: 'Join them.', 
+                result: {type: 'check', checkType: 'choice',
+                    choiceList: ['Deception', 'Persuade'],
+                    checkDC: 8,
+                    pass: {description: 'You masterfully navigate the difficulties involved in such a conspiracy.',
+                        result: {type: 'choice',
+                            choiceType: 'increaseSkill',
+                            choiceList: ['Deception', 'Persuade', 'Tactics', 'Carouse'],
+                            specialtyList: {Deception: null, Persuade: null, Tactics: 'any', Carouse: null}
+                        }
+                    },
+                    fail: {description: "The intricacies of this type of conspiracy are too much for you and your fellows, and the conspiracy collapses.",
+                        result: {type: 'redirect', destination: 'mishap'}
+                    },
+                }
+            },
+            b:{button: 'Refuse the offer.', 
+                description: 'You refuse the offer, in the process angering quite a few powerful nobles.', 
+                result: {type: 'enemy', value: 1, description: 'Conspiracy of nobles whose offer of membership you refused outright.'}
+            }
+        },
+        9: {type: 'reward', description: "Your reign is acclaimed by all as being fair and wise- or, in the case of a dilettante, you sponge off your family's wealth.",
+            result: {type: 'multiple', 
+                list: ['enemy', 'advancement'],
+                enemy: {type: 'enemy', value: 1, description: 'A jealous relative or unhappy subject from your time in the noble career path.'},
+                advancement: {type: 'advancement', value: 2}
+            }
+        },
+        10: {type: 'reward', description: 'You manipulate and charm through high society.',
+            result: {type: 'multiple',
+                list: ['skill', 'rival', 'ally'],
+                skill: {type: 'choice',
+                    choiceType: 'increaseSkill',
+                    choiceList: ['Carouse', 'Diplomat', 'Persuade', 'Steward']
+                },
+                rival: {type: 'rival', value: 1, description: 'Someone who you manipulated for your own gain during your time on the Noble career path.'},
+                ally: {type: 'ally', value: 1, description: 'Someone who you charmed or helped along the way, during your time on the Noble career path.'},
+            }
+        },
+        11: {type: 'reward', description: 'You make an alliance with a powerful and charismatic noble.',
+            result: {type: 'multiple',
+                list: ['ally', 'choice'],
+                ally: {type: 'ally', value: 1, description: 'A powerful and charismatic noble who supported you during your Noble career,'},
+                choice: {type: 'choice',
+                    choiceType: 'multiple',
+                    choiceList: ['advancement', 'Leadership'],
+                    advancement: {type: 'advancement', value: 4},
+                    Leadership: {type: 'increaseSkill', skill: 'Leadership'}
+                }
+            }
+        },
+        12: {type: 'reward', description: "Your efforts do not go unnoticed by the Imperium.", result: {type: 'promotion'}}
+    },
+    mishapList: [
+        {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
+        {type: 'reward', description: 'A family scandal forces you out of your position.', result: {type: 'stat', stat: 'soc', value: -1}},
+        {type: 'check', checkType: 'choice', choiceList: ['Stealth', 'Deception'], checkDC: 8, description: 'A disaster- natural or manmade- strikes.',
+            pass: {description: "You manage to escape unhurt.", result: {type: 'none'}},
+            fail: {description: "You are injured while attempting escape.", result: {type: 'redirect', destination: 'injury'}},
+        },
+        {type: 'reward', description: 'Political manoeuvrings usurp your position.',
+            result: {type: 'multiple', list: ['choice', 'rival'],
+                choice: {type: 'choice', choiceType: 'increaseSkill', choiceList: ['Diplomat', 'Advocate']},
+                rival: {type: 'rival', value: 1, description: 'Someone who outmanoeuvered you politically, ending your career as a Noble.'}
+            }
+        },
+        {type: 'check', checkType: 'stat', checkStat: 'end', checkDC: 8, description: 'An assassin attempts to end your life.',
+            pass: {description: 'You manage to survive the attempt with only minor wounds to show for it.', result: {type: 'none'}},
+            fail: {description: "The assassin manages to injure you.", result: {type: 'redirect', destination: 'injury'}}
+        },
+        {type: 'redirect', destination: 'injury table'}
+    ],
     skills: {
         personal: [
             {type: 'stat', stat: 'str'},

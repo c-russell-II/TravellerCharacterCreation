@@ -6,29 +6,86 @@ export const army = {
     description: 'Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles, and campaigns. Such individuals may also be mercenaries for hire.',
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
-        3: {type: 'reward', description: 'You are assigned to a planet with a hostile or wild environment.', result:{type: 'choice', choiceList: ['VaccSuit', 'Engineer', 'Animals', 'Recon'], choiceType: 'setSkill', choiceDetail:{'VaccSuit':'skill', 'Enginner':'skill', 'Animals':'skill', 'Recon':'skill'}, value: 1}},
-        4: {type: 'reward', description: 'You are assigned to an urbanised planet torn by war.', result:{type: 'choice', choiceList: ['Stealth', 'Streetwise', 'Persuade', 'Recon'], choiceType: 'setSkill', choiceDetail:{'Stealth':'skill', 'Streetwise':'skill', 'Persuade':'skill', 'Recon':'skill'}, value: 1}},
+        3: {type: 'reward', description: 'You are assigned to a planet with a hostile or wild environment.',
+            result:{type: 'choice',
+                choiceList: ['VaccSuit', 'Engineer', 'Animals', 'Recon'],
+                choiceType: 'setSkill',
+                specialtyList:{VaccSuit: null, Engineer: 'any', Animals:['riding', 'training'], Recon: null},
+                value: 1
+            }
+        },
+        4: {type: 'reward', description: 'You are assigned to an urbanised planet torn by war.',
+            result:{type: 'choice',
+                choiceList: ['Stealth', 'Streetwise', 'Persuade', 'Recon'],
+                specialtyList: {Stealth: null, Streetwise: null, Persuade: null, Recon: null},
+                choiceType: 'setSkill',
+                value: 1
+            }
+        },
         5: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You are given a special assignment or duty in your unit.'},
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are thrown into a brutal ground war.',
-                pass: {description: 'You avoid injury through the entire war, and improve your skills.', result: {type: 'choice', choiceType: 'increaseSkill', choiceList: ['GunCombat', 'Leadership']}},
-                fail: {description: "You are injured early in the fighting, gaining nothing but a scar and a story."}},
+                pass: {description: 'You avoid injury through the entire war, and improve your skills.',
+                    result: {type: 'choice',
+                        choiceType: 'increaseSkill',
+                        choiceList: ['GunCombat', 'Leadership'],
+                        specialtyList: {GunCombat: 'any', Leadership: null}
+                    }
+                },
+                fail: {description: "You are injured early in the fighting, gaining nothing but a scar and a story."}
+            },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
-            fail: {description: "You do not manage to measure up to your instructors' standards."}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.',
+                result: {type: 'choice',
+                    choiceType: 'increaseAny'
+                }
+            },
+            fail: {description: "You do not manage to measure up to your instructors' standards."}
+        },
         9: {type: 'reward', description: 'Surrounded and outnumbered by the enemy, you manage to hold out until relief arrives.', result: {type: 'advancement', value: 2}},
-        10: {type: 'reward', description: 'You are assigned to a peacekeeping role.', result:{type: 'choice', choiceList: ['Admin', 'Investigate', 'Deception', 'Recon'], choiceDetail:{'Admin':'skill', 'Investigate':'skill', 'Deception':'skill', 'Recon':'skill'}, value: 1}},
-        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Tactics': 'skill', 'advancement':'advancement'}}},
-        12: {type: 'reward', roll: 12, description: 'You display heroism in battle.', result:{type: 'promotion'}}
+        10: {type: 'reward', description: 'You are assigned to a peacekeeping role.',
+            result:{type: 'choice',
+                choiceType:'setSkill',
+                choiceList: ['Admin', 'Investigate', 'Deception', 'Recon'],
+                specialtyList: {Admin: null, Investigate: null, Deception: null, Recon: null},
+                value: 1
+            }
+        },
+        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.',
+            result:{type: 'choice',
+                choiceList: ['Tactics', 'advancement'],
+                Tactics: {type: 'setSkill', value: 1, specialty: 'military'},
+                advancement:{type:'advancement', value: 4}
+            }
+        },
+        12: {type: 'reward', description: 'You display heroism in battle.', result:{type: 'promotion'}}
     },
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
-        {type: 'reward', description: 'Your unit is slaughtered in a disastrous battle, for which you blame your commander. In retaliation, said commander has you removed from service.', result: {type: 'enemy', value: 1}},
-        {type: 'reward', description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.', result: {type: 'multiple', resultList: ['skill', 'enemy'], skill:{type: 'choice', choiceList: ['Recon', 'Survival'], choiceType: 'increaseSkill', specialtyList:{Recon: null, Survival: null}}, enemy:{type: 'enemy', value: 1, description:'Rebels you fought against.'}}},
+        {type: 'reward', description: 'Your unit is slaughtered in a disastrous battle, for which you blame your commander. In retaliation, said commander has you removed from service.',
+            result: {type: 'enemy', value: 1}
+        },
+        {type: 'reward',
+            description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.',
+            result: {type: 'multiple',
+                resultList: ['skill', 'enemy'],
+                skill:{type: 'choice',
+                    choiceList: ['Recon', 'Survival'],
+                    choiceType: 'increaseSkill',
+                    specialtyList:{Recon: null, Survival: null}
+                },
+                enemy:{type: 'enemy', value: 1, description:'Rebels you fought against.'}
+            }
+        },
         {type: 'choice', description: 'You discover that your commanding officer is engaged in some illegal activity, such as weapon smuggling.', choiceList: ['a', 'b'],
-            a: {description: 'You join their ring for a time, until the inevitable investigation gets you discharged.', result: {type: 'ally', value: 1, description: 'Commanding officer you commited crimes with.'}, button: 'Join them'},
-            b: {description: 'You choose to co-operate with the military police, ', result: 'benefit', button: 'Cooperate with MPs'},},
-        {type:'reward', description: 'You are tormented by or quarrel with an officer or fellow soldier. That officer drives you out of the serivce.', result: {type: 'rival', value: 1, description: 'Drove you out of army career'}},
+            a: {description: 'You join their ring for a time, until the inevitable investigation gets you discharged.',
+                result: {type: 'ally', value: 1, description: 'Commanding officer you commited crimes with.'},
+                button: 'Join them'
+            },
+            b: {description: 'You choose to co-operate with the military police, ', result: {type:'addBenefit', value: 1}, button: 'Cooperate with MPs'},},
+        {type:'reward', description: 'You are tormented by or quarrel with an officer or fellow soldier. That officer drives you out of the serivce.',
+            result: {type: 'rival', value: 1, description: 'Drove you out of army career'}
+        },
         {type: 'redirect', destination: 'injury'},
     ],
     skills: {

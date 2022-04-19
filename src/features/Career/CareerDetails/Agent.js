@@ -9,32 +9,70 @@ export const agent = {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         
         3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], checkDC: 8, description: 'An investigation turns dangerous...',
-            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.', result: {type: 'choice', choiceType: 'setSkill', choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'], specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'}, value: 1}},
-            fail: {description: 'You bite off more than you can chew, and are injured.', result: {type: 'redirect', destination: 'mishap'}}},
+            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.',
+                result: {type: 'reward',
+                    rewardType: 'choice',
+                    choiceType: 'setSkill',
+                    choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'],
+                    specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'},
+                    value: 1
+                }
+            },
+            fail: {description: 'You bite off more than you can chew, and ...', result: {type: 'redirect', destination: 'mishap'}}},
         
         4: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
         
-        5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 3}, description: 'You establish a network of contacts'},
+        5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 2}, description: 'You establish a network of contacts'},
         
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'reward', rewardType: 'choice', choiceType: 'increaseAny'}},
             fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
         
         7: {type: 'redirect', destination: 'life'},
         
         8: {type: 'check', checktype: 'skill', checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
-                result: {type: 'eventskill', choiceList:['rogue', 'citizen'], choices: {rogue: 'Rogue Skills', citizen: 'Citizen Skills'}, eventList:['rogue', 'citizen'], events: {rogue: 'rogue events', citizen: 'citizen events'}}},
-            fail: {description: 'You fail to deceive your targets...', 
-                result: {type: 'mishap', eventList: ['rogue', 'citizen'], events: {rogue: 'rogue mishaps', citizen: 'citizen mishaps'}}}},
+                result: {type: 'choice',
+                    choiceType: 'redirect',
+                    choiceList:['rogue', 'citizen'],
+                    resultList: ['event', 'specialist'],
+                }
+            },
+            fail: {description: 'You fail to deceive your targets...',
+                result: {type: 'choice',
+                    choiceType: 'redirect',
+                    choiceList: ['rogue', 'citizen'],
+                    resultList: ['mishap']
+                }
+            }
+        },
+
+        9: {type: 'reward',
+            result:{type: 'advancement', value: 2},
+            description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'
+        },
         
-        9: {type: 'reward', roll: 9, result:{type: 'advancement', value: 2}, description: 'You go above and beyond the call of duty, and are told in no uncertain terms that your next promotion will come easier, should you stay on another term.'},
+        10: {type: 'reward',
+            description: 'You are given specialist training in vehicles.',
+            result:{type: 'choice',
+                choiceType: 'setSkill',
+                choiceList: ['Drive', 'Flyer', 'Pilot', 'Gunner'],
+                specialtyList: {Drive: 'any', Flyer: 'any', Pilot: 'any', Gunner: 'any'},
+                value: 1
+            }
+        },
         
-        10: {type: 'reward', roll: 10, description: 'You are given specialist training in vehicles.', result:{type: 'choice', choiceType: 'setSkill', choiceList: ['Drive', 'Flyer', 'Pilot', 'Gunner'], value: 1}},
+        11: {type: 'reward',
+            description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' ,
+            result:{type: 'choice',
+                choiceType: 'multiple',
+                choiceList: ['Investigate', 'advancement'],
+                Investigate: {type: 'setSkill', skill: 'Investigate', value: 1},
+                advancement: {type: 'advancement', value:4}
+            }
+        },
         
-        11: {type: 'reward', roll: 11, description: 'You are befriended by a senior agent, and they offer you either a friend in high places, or unique training opportunities...' , result:{type: 'choice', choiceType: 'multiple', choiceList: ['Investigate', 'advancement'], choiceDetail: {'Investigate': 'skill', 'advancement':'advancement'}}},
-        
-        12: {type: 'reward', roll: 12, description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.', result:{type: 'promotion'}}
+        12: {type: 'reward', description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.', result:{type: 'promotion'}}
     },
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
@@ -42,9 +80,19 @@ export const agent = {
         {type: 'choice', 
             description: 'Someone you are investigating offers you a deal...',
             choiceList: ['a', 'b'],
-            a: {description: 'You leave the career, sacrificing some honor, but losing little else...', result: 'lose benefit, leave career', button: 'Accept the deal...'},
-            b: {description: 'You leave the career after being injured by the one whose deal you refused...', result: ['injury table', 'enemy', 'skill level'], button: 'Decline the deal...'}},
-        
+            a: {description: 'You leave the career, sacrificing some honor, but losing little else...',
+                button: 'Accept the deal...',
+                result: {type: 'none'}
+            },
+            b: {description: 'You leave the career after being injured by the one whose deal you refused...',
+                button: 'Decline the deal...', 
+                result: { type: 'multiple', list: ['redirect', 'enemy', 'choice'],
+                    redirect: {type: 'redirect', destination: 'injury', modifier: 'disadvantage'},
+                    enemy: {type: 'enemy', value: 1, description: "Someone you were investigating while working your Agent career, who offered you a deal that you refused."},
+                    choice: {type: 'choice', choiceType: 'increaseAny'}
+                }
+            },
+        },
         {type: 'skillCheck', checkType: 'Advocate', checkDC: 8, description: 'An investigation goes horribly wrong-- or right-- ending your career.',
             pass: {description: 'You manage to defend yourself well enough that you are able to leave amicably...'},
             fail: {description: "You are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},

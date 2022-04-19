@@ -7,11 +7,22 @@ export const drifter = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', description: "A patron offers you a chance at a job.", choiceList: ['a', 'b'],
-        a: {description: 'You accept, but they hint that they will collect that favor one day.', button: 'Accept', result: {type: 'multiple', list: ['qual', 'patron'], 
-            qual:{type:'qual', value: 4, expires: false}, patron: {type: 'favor', description: 'Patron who offered you a chance at a job when you were a drifer.'}}},
-        b: {description: "You don't trust or want the handout, or 'opportunity' and move on with your life."}
+            a: {description: 'You accept, but they hint that they will collect that favor one day.',
+                button: 'Accept',
+                result: {type: 'multiple', list: ['qual', 'patron'], 
+                    qual:{type:'qual', value: 4, expires: false},
+                    patron: {type: 'favor', description: 'Patron who offered you a chance at a job when you were a drifer.'}
+                }
+            },
+            b: {description: "You don't trust or want the handout, or 'opportunity' and move on with your life."}
         },
-        4: {type: 'reward', description: 'You pick up a few useful skills here and there.', result: {type: 'choice', choiceType: 'increase', choiceList: ['JackOfAllTrades', 'Survival', 'Streetwise', 'Melee'], choiceDetails: {JackOfAllTrades: 'skill', Survival: 'skill', Streetwise: 'skill', Melee:'skill'}, specialty: {Melee: 'any'}}},
+        4: {type: 'reward', description: 'You pick up a few useful skills here and there.',
+            result: {type: 'choice',
+                choiceType: 'increaseSkill',
+                choiceList: ['JackOfAllTrades', 'Survival', 'Streetwise', 'Melee'],
+                specialtyList: {JackOfAllTrades: null, Survival: null, Streetwise: null, Melee: 'any'}
+            }
+        },
         5: {type: 'reward', description: 'You manage to scavenge something useful.', result: {type: 'benefit', value: 1}},
         6: {type: 'redirect', destination: 'unusual'},
         7: {type: 'redirect', destination: 'life'},
@@ -28,7 +39,9 @@ export const drifter = {
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
         {type: 'redirect', destination: 'injury table'},
-        {type: 'reward', description: 'You run afoul of a criminal gang, corrupt bureaucrat, or other foe.', result: {type: 'enemy', value: 1, description:'Enemy who drove you out of your drifter niche.'}},
+        {type: 'reward', description: 'You run afoul of a criminal gang, corrupt bureaucrat, or other foe.',
+            result: {type: 'enemy', value: 1, description:'Enemy who drove you out of your drifter niche.'}
+        },
         {type: 'reward', description: 'You suffer from a life threatening illness.', result: {type: 'stat', stat: 'end', value: -1}},
         {type: null, description: 'Betrayed by a friend...'},
         {type: 'reward', description: 'You have no idea what happened to you - there is a gap in your memory.', result: {type: 'none'}}

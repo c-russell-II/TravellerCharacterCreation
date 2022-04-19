@@ -11,15 +11,43 @@ export const navy = {
         5: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
             pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
             fail: {description: "You do not manage to measure up to your instructors' standards."}},
-        6: {type: 'reward', description: 'Your vessel participates in a notable military engagement, from which you learn quite a bit.', result: {type: 'choice', choiceType: 'setSkill', choiceList:['Electronics', 'Engineer', 'Gunner', 'Pilot'], specialtyList:{Electronics: 'any', Engineer: 'any', Gunner: 'any', Pilot: 'any'}, value: 1}},
+        6: {type: 'reward', description: 'Your vessel participates in a notable military engagement, from which you learn quite a bit.',
+            result: {type: 'choice',
+                choiceType: 'setSkill',
+                choiceList:['Electronics', 'Engineer', 'Gunner', 'Pilot'],
+                specialtyList:{Electronics: 'any', Engineer: 'any', Gunner: 'any', Pilot: 'any'},
+                value: 1
+            }
+        },
         7: {type: 'redirect', destination: 'life'},
-        8: {type: 'reward', description: "Your vessel participates in a diplomatic mission, teaching you new, more diplomatic skills.", result: {type: 'choice', choiceType: 'multiple', choiceList: ['Recon', 'Diplomat', 'Steward', 'contact'], choiceDetail: {Recon: 'skill', Diplomat: 'skill', Steward: 'skill', contact: 'contact'}, value: 1}},
-        9: {type: 'reward', description: 'You foil an attempted mutiny on board.', result: {type: 'multiple', list:['advancement', 'enemy'], enemy: {type: 'enemy', description:'Someone whose mutiny you foiled while in the Navy'}, advancement: {type: 'advancement', value: 2}}},
+        8: {type: 'reward', description: "Your vessel participates in a diplomatic mission, teaching you new, more diplomatic skills.",
+            result: {type: 'choice',
+                choiceType: 'multiple',
+                choiceList: ['Recon', 'Diplomat', 'Steward', 'contact'],
+                Recon: {type: 'setSkill', skill: 'Recon', specialty: null, value: 1},
+                Diplomat: {type: 'setSkill', skill: 'Diplomat', specialty: null, value: 1},
+                Steward: {type: 'setSkill', skill: 'Steward', specialty: null, value: 1},
+                contact: {type: 'contact', value: 1, description: 'Someone you met while on a diplomatic mission for the Navy.'}
+            }
+        },
+        9: {type: 'reward', description: 'You foil an attempted mutiny on board.',
+            result: {type: 'multiple',
+                list:['advancement', 'enemy'],
+                enemy: {type: 'enemy', description:'Someone whose mutiny you foiled while in the Navy'},
+                advancement: {type: 'advancement', value: 2}
+            }
+        },
         10: {type: 'choice', description: "You have the opportunity to abuse your position for profit.", choiceList: ['a', 'b'],
             a: {description: 'You make some money on the side, and no one is hurt by it- or ever finds out.', result: {type: 'addBenefit', value: 1}},
             b: {description: 'You refuse, and point out the possibility to someone in a position to fix the problem.', result: {type: 'advancement', value: 2}},
         },
-        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.', result:{type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Tactics': 'skill', 'advancement':'advancement'}}},
+        11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.',
+            result:{type: 'choice', choiceType: 'multiple',
+                choiceList: ['Tactics', 'advancement'],
+                Tactics: {type: 'setSkill', skill: 'Tactics', specialty: 'naval', value: 1},
+                advancement: {type: 'advancement', value: 4}
+            }
+        },
         12: {type: 'reward', description: 'Your heroism in battle saves your entire vessel.', result: {type: 'promotion'}}
     },
     mishapList: [

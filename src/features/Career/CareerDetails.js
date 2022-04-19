@@ -6,6 +6,9 @@ import { artist, entertainer, journalist, performer } from './CareerDetails/Ente
 import { groundAssault, marine, starMarine, supportMarine } from './CareerDetails/Marine'
 import { broker, freeTrader, merchant, merchantMarine } from './CareerDetails/Merchant'
 import { engineerGunner, flight, lineCrew, navy } from './CareerDetails/Navy'
+import { administrator, dilettante, diplomat, noble } from './CareerDetails/Noble'
+import { enforcer, pirate, rogue, thief } from './CareerDetails/Rogue'
+import { fieldResearcher, physician, scholar, scientist } from './CareerDetails/Scholar'
 
 export const parentJobs = {
     agent: agent,
@@ -16,7 +19,10 @@ export const parentJobs = {
     marine: marine,
     merchant: merchant,
     navy: navy,
-    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant', 'navy']
+    noble: noble,
+    rogue: rogue,
+    scholar: scholar,
+    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant', 'navy', 'noble', 'rogue', 'scholar']
 }
 
 const jobObject = {
@@ -43,7 +49,16 @@ const jobObject = {
     broker: broker,
     lineCrew: lineCrew,
     engineerGunner: engineerGunner,
-    flight: flight
+    flight: flight,
+    administrator: administrator,
+    diplomat: diplomat,
+    dilettante: dilettante,
+    thief: thief,
+    enforcer: enforcer,
+    pirate: pirate,
+    fieldResearcher: fieldResearcher,
+    scientist: scientist,
+    physician: physician,
 }
 
 export default jobObject
@@ -101,6 +116,7 @@ export default jobObject
 //         }
 //     },
 //     benefits: [
+//         {money: , misc: ''},
 //         {money: , misc: ''},
 //         {money: , misc: ''},
 //         {money: , misc: ''},

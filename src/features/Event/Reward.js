@@ -99,7 +99,7 @@ export const Reward = (props) => {
       if (event.result.value === 'roll') {
         dispatch(addContact({
           career: career,
-          value: roll(event.result.roll)
+          value: roll(event.result.roll) + 1
         }));
         return;
       } else {

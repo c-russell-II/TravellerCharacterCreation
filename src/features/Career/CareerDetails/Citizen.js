@@ -7,35 +7,77 @@ export const citizen = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: null},
-        4: {type: 'reward', description: 'You spend time maintaining and using heavy vehicles, either as part of your job or as a hobby.', result: {type: 'choice', choiceType: 'increaseSkill', choices: ['Mechanic', 'Drive', 'Flyer', 'Engineer'], specialtyList: {Drive: 'any', Flyer: 'any', Engineer: 'any'}}},
+        4: {type: 'reward', description: 'You spend time maintaining and using heavy vehicles, either as part of your job or as a hobby.',
+            result: {type: 'choice',
+                choiceType: 'increaseSkill',
+                choices: ['Mechanic', 'Drive', 'Flyer', 'Engineer'],
+                specialtyList: {Drive: 'any', Flyer: 'any', Engineer: 'any', Mechanic: null}
+            }
+        },
         5: {type: 'reward', description: 'Your business expands, your corporation grows, or your colony thrives.', result: {type: 'benefit', value: 1}},
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 10, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'setAny', value: 1}},
+            pass: {description: 'Taking full advantage, your skills noticeably increase.',
+                result: {type: 'choice', choiceType: 'setAny', value: 1}
+            },
             fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
         7: {type: 'redirect', destionation: 'life'},
         8: {type: 'choice', description: "You learn something you shouldn't have- a corporate secret, a political scandal - which you can profit from illegally, if you choose.", choiceList: ['a', 'b'],
-            a: {description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.', 
-                results: {type: 'choice', choiceList:['a', 'b'], choiceDetail: {a: 'multiple', b: 'multiple'},
-                    a: {type: 'multiple', list: ['a', 'b'], listDetail: {a: 'benefit', b: 'choice'},
-                        a: {type: 'benefit', value: 1}, 
-                        b: {type:'choice', choiceType: 'setSkill', choiceList:['Streetwise', 'Investigate'], choiceDetails: {Streetwise: 'skill', Investigate: 'skill'}, value: 1}},
-                    b: {type: 'multiple', list: ['a', 'b'], choiceDetail: {a: 'benefit', b: 'contact'},
-                        a: {type: 'benefit', value: 1},
-                        b: {type: 'contact', value: 1, description: 'Criminal who helped you illegally exploit a scandal or secret you uncovered as a Citizen.'}}}, button: 'Take advantage.'},
-            b: {description: 'You refuse to take advantage, earning little, but keeping your honor intact.', results: {type: 'none'}, button: "Stay away"},},},
+            a: {description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.',  button: 'Take advantage.',
+                results: {type: 'choice', choiceList:['SkillAndBenefit', 'ContactAndBenefit'],
+                    SkillAndBenefit: {type: 'multiple', list: ['benefit', 'choice'],
+                        benefit: {type: 'benefit', value: 1}, 
+                        choice: {type:'choice', choiceType: 'setSkill', choiceList:['Streetwise', 'Investigate'], specialtyList: {Streetwise: null, Investigate: null}, value: 1}
+                    },
+                    ContactAndBenefit: {type: 'multiple', list: ['benefit', 'contact'],
+                        benefit: {type: 'benefit', value: 1},
+                        contact: {type: 'contact', value: 1, description: 'Criminal who helped you illegally exploit a scandal or secret you uncovered as a Citizen.'}
+                    }
+                },
+            },
+            b: {description: 'You refuse to take advantage, earning little, but keeping your honor intact.', results: {type: 'none'}, button: "Stay away"},
+        },
         9: {type: 'reward', description: 'You are rewarded for your diligence or cunning.', results: {type: 'advancement', value: 2}},
-        10: {type: 'reward', description: 'You gain experience in a technical field as a computer operator or surveyor.', result: {type: 'choice', choiceType: 'increase', choiceList:['Electronics', 'Engineer'], specialty: {Electronics: 'any', Engineer: 'any'}}},
-        11: {type: 'reward', description: 'You befriend a superior in the corporation or colony.', result: {type: 'multiple', list: ['choice', 'ally'], choice: {type: 'choice', choiceList: ['Tactics', 'advancement'], choiceDetail: {'Tactics': 'skill', 'advancement':'advancement'}}, ally: {type: 'ally', value: 1, description: 'Superior from your time as a Citizen.'}},
+        10: {type: 'reward', description: 'You gain experience in a technical field as a computer operator or surveyor.',
+            result: {type: 'choice',
+                choiceType: 'increaseSkill',
+                choiceList:['Electronics', 'Engineer'],
+                specialty: {Electronics: 'any', Engineer: 'any'}
+            }
+        },
+        11: {type: 'reward', description: 'You befriend a superior in the corporation or colony.',
+            result: {type: 'multiple',
+                list: ['choice', 'ally'],
+                choice: {type: 'choice',
+                    choiceList: ['Diplomat', 'advancement'],
+                    Diplomat: {type: 'setSkill', value: 1, skill: 'Diplomat'},
+                    advancement: {type: 'advancement', value: 4}
+                },
+                ally: {type: 'ally', value: 1, description: 'Superior from your time as a Citizen.'}
+            },
+        },
         12: {type: 'reward', description: 'You rise to a position of power in your corporation or colony.', result: {type: 'promotion'} }
     },
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage'},
-        {type: 'reward', result: {type: 'enemy', description: 'Criminal gang who harassed you during your citizen career'}, description: 'You are harrased and your life ruined by a criminal gang.'},
-        {type: 'reward', result: {type: 'reduceStat', stat: 'soc', value: 1}, description: 'Hard times caused by a lack of interstellar trade cost you your job- and some respect.'},
+        {type: 'reward',
+            result: {type: 'enemy', description: 'Criminal gang who harassed you during your citizen career'},
+            description: 'You are harrased and your life ruined by a criminal gang.'
+        },
+        {type: 'reward', result: {type: 'stat', stat: 'soc', value: -1}, description: 'Hard times caused by a lack of interstellar trade cost you your job- and some respect.'},
         {type: 'choice', choiceList: ['a', 'b'], description: 'Your business or colony is investigated by interplanetary authorities, or interfered with by a special interest group.',
-            a:{type: 'reward', description: 'You cooperate, and the business or colony is shut down.', button: 'Cooperate', result: {type: 'qualification', value: 2}},
-            b:{type: 'reward', description: 'You refuse to cooperate, and are forced out of this career by the outside group- but your boss knows what you did, and is grateful for it.', button: 'Refuse', result: {type: 'ally', value: 1, description: 'Your boss from Citizen career, who you dealt with an outside force or interference for.'}}},
-        {type: 'check', checkType: 'skill', checkSkill: 'Streetwise', checkDC: 8, description: 'A revolution, attack, or other violent event throws your life into chaos, forcing you to move far away- perhaps even to a new planet.',
+            a:{type: 'reward',
+                description: 'You cooperate, and the business or colony is shut down.',
+                button: 'Cooperate',
+                result: {type: 'qualification', value: 2}
+            },
+            b:{type: 'reward',
+                description: 'You refuse to cooperate, and are forced out of this career by the outside group- but your boss knows what you did, and is grateful for it.',
+                button: 'Refuse',
+                result: {type: 'ally', value: 1, description: 'Your boss from Citizen career, who you dealt with an outside force or interference for.'}
+            }
+        },
+        {type: 'check', checkType: 'skill', checkSkill: 'Streetwise', checkDC: 8,
+            description: 'A revolution, attack, or other violent event throws your life into chaos, forcing you to move far away- perhaps even to a new planet.',
             pass: {type: 'reward', description: 'Navigating the upheaval, you sharpen your skills.', result: {type: 'choice', choiceType: 'increaseAny'}},
             fail: {type: null}},
         {type: 'redirect', destination: 'injury'}

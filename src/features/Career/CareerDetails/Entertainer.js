@@ -14,40 +14,43 @@ export const entertainer  = {
         4: {type: 'reward', description: "You are a part of your homeworld's celebrity circles.", 
             result: {type: 'choice', choiceType: 'multiple',
                 choiceList: ['Carouse', 'Persuade', 'Steward', 'contact'], 
-                choiceDetail: {Carouse: 'skill', Persuade: 'skill', Steward: 'skill', contact: 'contact'}, 
-                value: 1}
+                Carouse: {type: 'setSkill', skill: "Carouse", value: 1},
+                Persuade: {type: 'setSkill', skill: "Persuade", value: 1},
+                Steward: {type: 'setSkill', skill: 'Steward', value: 1},
+                contact: {type: 'contact', value: 1, description: 'Someone you came into contact with after becoming a celebrity on your homeworld.'}
+            }
         },
         5: {type: 'reward', description: 'One of your works is especially well received and popular.', result: {type: 'benefit', value: 1}},
-        6: {type: 'reward', description: 'You gain a patron in the arts.', result: {type: 'multiple', list: ['advancement', 'ally'], 
-            listDetail: {advancement: 'advancement', ally: 'ally'}, 
+        6: {type: 'reward', description: 'You gain a patron in the arts.', result: {type: 'multiple', list: ['advancement', 'ally'],
             advancement: {type: 'advancement', value: 1}, 
             ally: {type: 'ally', value: 1, description: 'Patron of the arts.'}}
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'choice', choiceList: ['a', 'b'], description: 'You have the opportunity to criticize or even bring down a questionable political leader on your homeworld.',
-            a: {type: 'check', checkType: 'choice', choiceList: ['Art', 'Persuade'], choiceDetail: {Art: 'skill', Persuade: 'skill'}, specialties: {Art: 'any', Persuade: null},
+            a: {button: "Take them on.", type: 'check', checkType: 'choice', choiceList: ['Art', 'Persuade'], choiceDetail: {Art: 'skill', Persuade: 'skill'}, specialtyList: {Art: 'any', Persuade: null},
                 description: 'You attempt to bring them down.', checkDC: 8,
-                pass: {type: 'reward', description: 'You succeed in bringing down the political leader.', 
+                pass: {description: 'You succeed in bringing down the political leader.',
                     result: {type: 'multiple', list: ['enemy', 'choice'], listDetail: {Enemy: 'enemy', choice: 'choice'},
                         enemy: {type: 'enemy', value: 1, description: 'Political leader you took out while working an entertainer career.'},
                         choice: {type: 'choice', choiceType: 'increaseAny'}
                     }
                 },
-                fail: {type: 'reward', description: 'You fail to bring down the political leader.', 
-                    result: {type: 'multiple', list: ['enemy', 'choice', 'redirect'], listDetail: {enemy: 'enemy', choice: 'choice', redirect: 'redirect'},
+                fail: {description: 'You fail to bring down the political leader.',
+                    result: {type: 'multiple',
+                        list: ['enemy', 'choice', 'redirect'],
                         enemy: {type: 'enemy', description: 'Political leader you tried- and failed- to take down while working as an entertainer.', value: 1},
-                        choice: {type: 'skill', choiceType: 'increaseAny'},
+                        choice: {type: 'choice', choiceType: 'increaseAny'},
                         redirect: {type: 'redirect', destination: 'mishap'}
                     }
                 },
             },
-            b: {type: 'reward', description: 'You decide to support the questionable political leader...', result: {type: 'none'}},
+            b: {button: "Support them", type: 'reward', description: 'You decide to support the questionable political leader...', result: {type: 'none'}},
         },
-        9: {type: 'reward', description: 'You go on a tour of the sector, visiting several worlds.', result: {type: 'contacts', value: 'roll', roll: 3}},
+        9: {type: 'reward', description: 'You go on a tour of the sector, visiting several worlds.', result: {type: 'contacts', value: 'roll', roll: 2}},
         10: {type: 'reward', description: 'One of your pieces of art is stolen, and the investigation brings you into the criminal underworld.',
             result: {type: 'choice', choiceType: 'setSkill', value: 1,
                 choiceList: ['Streetwise', 'Investigate', 'Recon', 'Stealth'], 
-                choiceDetail: {Streetwise: 'skill', Investigate: 'skill', Recon: 'skill', Stealth: 'skill',}
+                specialtyList: {Streetwise: null, Investigate: null, Recon: null, Stealth: null}
             }
         },
         11: {type: 'redirect', destination: 'unusual'},

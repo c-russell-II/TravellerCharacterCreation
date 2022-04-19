@@ -11,7 +11,7 @@ export const merchant = {
                     result: {type: 'check', checkType: 'choice', choiceList:['Deception', 'Persuade'], checkDC: 8, 
                         pass: {description: 'You successfully smuggle them on planet.', 
                             result: {type: 'multiple', list: ['Streetwise', 'benefit'], 
-                                Streetwise: {type: 'skill', skill: 'Streetwise', value: 1}, 
+                                Streetwise: {type: 'setSkill', skill: 'Streetwise', value: 1}, 
                                 benefit: {type: 'addBenefit', value: 1}
                             }, 
                         fail: {description: "You don't manage to bring the goods onto the planet, but no grudge is held", result: {type: 'none'}}
@@ -23,8 +23,17 @@ export const merchant = {
             }
         },
         4: {type: 'gamble'},
-        5: {type: 'reward', description: 'Your time amongst spacers and suppliers has taught you a few things.', result: {type: 'choice', choiceType: 'setSkill', choiceList: ['Profession', 'Electronics', 'Engineer', 'Animals', 'Science'], specialtyList: {Profession: 'any', Electronics: 'any', Engineer: 'any', Animals: 'any', Science: 'any'}, value: 1}},
-        6: {type: 'reward', description: 'You make an unexpected connection outside normal circles.', result: {type: 'contact', description: 'An unexpected connection, outside your normal circles, from your time as a Merchant.', value: 1}},
+        5: {type: 'reward', description: 'Your time amongst spacers and suppliers has taught you a few things.',
+            result: {type: 'choice',
+                choiceType: 'setSkill',
+                choiceList: ['Profession', 'Electronics', 'Engineer', 'Animals', 'Science'],
+                specialtyList: {Profession: 'any', Electronics: 'any', Engineer: 'any', Animals: 'any', Science: 'any'},
+                value: 1
+            }
+        },
+        6: {type: 'reward', description: 'You make an unexpected connection outside normal circles.',
+            result: {type: 'contact', description: 'An unexpected connection, outside your normal circles, from your time as a Merchant.', value: 1}
+        },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'reward', description: 'You are embroiled in legal trouble.',
             result: {type: 'multiple', list: ['skill', 'prisoner'],
@@ -52,10 +61,27 @@ export const merchant = {
     },
     mishapList: [
         {type: 'redirect', description: 'You are severely injured...', direction: 'injury', modifier: 'disadvantage'},
-        {type: 'reward', description: 'You are bankrupted by a rival.', result: {type: 'multiple', list: ['benefits', 'rival'], benefits: {type: 'benefits', value: 'loseAll'}, rival:{type:'rival', value: 1, description: 'Rival who bankrupted you, ending your Merchant career.'}}},
-        {type: 'reward', description: 'A sudden war destroys your trade routes and contacts, forcing you to flee that region of space.', results: {type: 'choice', choiceType: 'setSkill', choiceList: ['Pilot', 'GunCombat'], specialtyList: {Pilot: 'any', GunCombat: 'any'}, value: 1}},
-        {type: 'reward', description: 'Your ship or spaceport is destroyed by criminals.', result: {type: 'enemy', value: 1, description: 'Criminals who destroyed the ship or starport you worked on as a Merchant'}},
-        {type: 'reward', description: "Imperial trade restrictions force you out of business, but in the process, garner you many newly-criminal contacts...", result: {type: 'qualification', career: 'Rogue', value: 'auto'}},
+        {type: 'reward', description: 'You are bankrupted by a rival.',
+            result: {type: 'multiple',
+                list: ['benefits', 'rival'],
+                benefits: {type: 'benefits', value: 'loseAll'},
+                rival:{type:'rival', value: 1, description: 'Rival who bankrupted you, ending your Merchant career.'}
+            }
+        },
+        {type: 'reward', description: 'A sudden war destroys your trade routes and contacts, forcing you to flee that region of space.',
+            results: {type: 'choice',
+                choiceType: 'setSkill',
+                choiceList: ['Pilot', 'GunCombat'],
+                specialtyList: {Pilot: 'any', GunCombat: 'any'},
+                value: 1
+            }
+        },
+        {type: 'reward', description: 'Your ship or spaceport is destroyed by criminals.',
+            result: {type: 'enemy', value: 1, description: 'Criminals who destroyed the ship or starport you worked on as a Merchant'}
+        },
+        {type: 'reward', description: "Imperial trade restrictions force you out of business, but in the process, garner you many newly-criminal contacts...",
+            result: {type: 'qualification', career: 'Rogue', value: 'auto'}
+        },
         {type: 'reward', description: 'A series of bad deals and decisions force you into bankruptcy, but you salvage as much as you can...', result:{type:'addBenefit', value: 1}}
     ],
     skills: {
