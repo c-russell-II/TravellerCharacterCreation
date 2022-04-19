@@ -4,6 +4,7 @@ import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
+import SpecialEdu from "./SpecialEdu";
 
 const checkHandler = (checkType) => {
     switch (checkType) {
@@ -27,7 +28,9 @@ export const Event = (props) => {
             case 'reward':
                 return <Reward cleanup={cleanup} />;
             case 'choice':
-                return <Choice/>
+                return <Choice/>;
+            case 'specialEdu':
+                return <SpecialEdu/>
             case 'redirect':
                 switch (event.destination) {
                     case 'injury':

@@ -17,23 +17,22 @@ export const Specialties = (props) => {
             alert("Spend a term elsewhere!");
             return;
         }
-        if (parent.qualification) {
-            if (parent.qualificationStat === 'choice') {
-                //gotta put in the stat choice stuff here...
-                
-            }
-            const result = parent.qualificationDC <= skillCheck(stats[parent.qualificationStat]);
-            if (result) {
-                dispatch(selectJob({ job: job }));
-                navigate('/term/' + job + '/start');
-                return;
-            } else {
-                alert('failed to qualify');
-                return;
-            }
-        } else {
+        if (!parent.qualification) {
             dispatch(selectJob({ job: job, details: [props.specialty] }));
             navigate('/term/' + job + '/start');
+            return;
+        }
+        if (parent.qualificationStat === 'choice') {
+            //gotta put in the stat choice stuff here...
+            
+        }
+        const result = parent.qualificationDC <= skillCheck(stats[parent.qualificationStat]);
+        if (result) {
+            dispatch(selectJob({ job: job }));
+            navigate('/term/' + job + '/start');
+            return;
+        } else {
+            alert('failed to qualify');
             return;
         }
     };

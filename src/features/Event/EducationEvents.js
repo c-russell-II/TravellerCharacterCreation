@@ -1,4 +1,3 @@
-//FUCK
 
 export const EduEvents = {
     2: {type: 'Psi'},
@@ -15,7 +14,7 @@ export const EduEvents = {
         fail: {description: 'You take up a political movement as something of a hobby or fad, and it quickly fades into memory as you move on to other pursuits.'},
     },
     9: {type: 'reward', result: {type: 'skillChoice', choice: ['any']}, description: 'You develop a healthy hobby- and, perhaps more importantly, one you could tell your dorm-mates was productive.' },
-    10: {type: 'checkChoice', choices: ['fucking', 'how'], },
-    11: {type: 'WAR', result: 'placeholder'},
-    12: {},
+    10: {type: 'specialEdu', special: 'newTutor'},
+    11: {type: 'specialEdu', special: 'war'},
+    12: {type: 'reward', description: 'You gain wide-ranging recognition of your intiative and innovative approach to study.', result: {type: 'stat', stat: 'soc', value: 1}},
 }
