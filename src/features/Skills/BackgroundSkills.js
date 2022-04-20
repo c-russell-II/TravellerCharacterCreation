@@ -51,9 +51,8 @@ export const BackgroundSkillsChoice = (props) => {
     return (
         <div className="background_skills_choice">
             <h3>Select Background Skills...</h3>
-            <h4>Up to {limit}</h4>
-            <form onSubmit={handleSubmit}>
-                <h5>Points Remaining: {limit - skills.length}</h5>
+            <h4>Up to {limit}</h4> <h5>Points Remaining: {limit - skills.length}</h5>
+            <form onSubmit={handleSubmit} className="background_skills">
                 {options.map((e, i) => {
                     return (
                             <label key={i}>
@@ -62,7 +61,9 @@ export const BackgroundSkillsChoice = (props) => {
                     )
                 })}
                 <input type="submit" value="Confirm"/>
-            </form>
+            </form><br/>
+            <h4>Current Skills:</h4>
+            {skills?.map((e) => {return <span>{e}</span>})}
         </div>
     )
 }

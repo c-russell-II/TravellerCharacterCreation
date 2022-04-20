@@ -27,7 +27,7 @@ export const TermMidPoint = (props) => {
     return (
         <>
             <h2>You survived- but is that all?</h2>
-            {hasEvent ? <Event cleanup={cleanup}/> : 
+            {hasEvent ? <Event cleanup={cleanup}/> :
                 <>
                     <p>And after that, a promotion ... ?</p>
                     <button onClick={handleClick}>Try for it</button>

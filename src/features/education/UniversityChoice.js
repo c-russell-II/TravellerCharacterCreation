@@ -12,9 +12,7 @@ export const UniversityChoice = (props) => {
     const [milAcademyLink, setMilAcademyLink] = useState(false);
     const [choiceButtons, setChoiceButtons] = useState(true);
     const [toCareers, setToCareers] = useState(false);
-    const [armyPass, setArmyPass] = useState(false);
-    const [navyPass, setNavyPass] = useState(false);
-    const [marinesPass, setMarinesPass] = useState(false);
+    const [milAcademy, setMilAcademy] = useState({pass: false, branch: ''});
 
     const stats = useSelector(state => state.stats);
     const jobArray = useSelector(state=> state.careers.jobArray);
@@ -50,7 +48,7 @@ export const UniversityChoice = (props) => {
     const armyEnroll = () => {
         const result = 8 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
-            setArmyPass(true);
+            setMilAcademy({pass: true, branch: 'army'});
             setMilAcademyLink(false);
             return;
         }
@@ -61,7 +59,7 @@ export const UniversityChoice = (props) => {
     const navyEnroll = () => {
         const result = 9 <= skillCheck(stats.int) - getCareerModifier(true);
         if (result) {
-            setNavyPass(true);
+            setMilAcademy({pass: true, branch: 'navy'});
             setMilAcademyLink(false);
             return;
         }
@@ -71,7 +69,7 @@ export const UniversityChoice = (props) => {
     const marinesEnroll = () => {
         const result = 9 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
-            setMarinesPass(true);
+            setMilAcademy({pass: true, branch: 'marines'});
             setMilAcademyLink(false);
             return;
         }
@@ -80,7 +78,7 @@ export const UniversityChoice = (props) => {
     }
     return (
         <div className="university_choice">
-            <h4>You're officially an adult, with choices laid out in front of you...</h4>
+            <h2>You're officially an adult, with choices laid out in front of you...</h2>
             <p>Now what? You can choose to do pre-career education, either via your planetary university, or through the military academy.</p>
             <p>Alternatively, you can jump straight into pursuing a career of your choice, skipping out on the extra time in school.</p>
             {choiceButtons &&
@@ -107,31 +105,18 @@ export const UniversityChoice = (props) => {
                 <button onClick={marinesEnroll}>Marines</button>
             </Popup>
             <Popup
-                open={armyPass}
+                open={milAcademy.pass}
                 modal
             >
-                <h5>You've joined your planetary Army's military academy!</h5>
-                <Link to="/mil_academy/army">Hooah!</Link>
-            </Popup>
-            <Popup
-                open={navyPass}
-                modal
-            >
-                <h5>You've joined your planetary Navy's military academy!</h5>
-                <Link to="/mil_academy/navy">Hooyah!</Link>
-            </Popup>
-            <Popup
-                open={marinesPass}
-                modal
-            >
-                <h5>You've joined your planetary Marines military academy!</h5>
-                <Link to="/mil_academy/marines">Oorah!</Link>
+                <h5>You've qualified  your planetary {milAcademy.branch}'s military academy!</h5>
+                <Link to={`/mil_academy/${milAcademy.branch}`}>Hooah!</Link>
             </Popup>
             {toCareers &&
-                <div>
-                    <h4>Learning on the job!</h4>
+                <>
+                    <h4>Tough luck.</h4>
+                    <p>You failed to qualify for your chosen school- but you still qualify to try to enroll for the first three terms of your life.</p>
                     <Link to="/choose_career">Choose a job</Link>
-                </div>
+                </>
             }
         </div>
     )

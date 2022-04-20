@@ -176,6 +176,7 @@ const initialSkills = {
     VaccSuit: { specialties: false, value: -3 },
     specialtySkills: ['Animals', 'Athletics', 'Art', 'Drive', 'Electronics', 'Engineer', 'Flyer', 'Gunner', 'Gun Combat', 'Heavy Weapons', 'Language', 'Melee', 'Pilot', 'Science', 'Seafarer', 'Tactics'],
     trainedSkills: [],
+    isTrained: false,
 }
 
 const options = {
@@ -183,15 +184,38 @@ const options = {
     initialState: initialSkills,
     reducers: {
         reset: state => initialSkills,
+        basicTraining: (state, action) => {
+            action.payload.forEach((e) => {
+                state.isTrained = true;
+                state[e].trained = true;
+                if(!state.trainedSkills.includes(e)) {
+                    state.trainedSkills.push(e);
+                }
+                if (state[e].value >= 0) {
+                    return;
+                }
+                if (!state[e].specialties) {
+                    state[e].value = 0;
+                    return;
+                }
+                if (state[e].specialtiesList.length > 0) {
+                    state[e].specialtiesList.forEach((f) => {
+                        state[e][f] = 0;
+                    });
+                }
+                return;
+            })
+            return state;
+        },
         increaseToZero: (state, action) => {
             const skill = action.payload;
             if(!state.trainedSkills.includes(skill)) {
                 state.trainedSkills.push(skill);
             }
-            if (state[skill].value >= 0) {
+            if (state[skill]?.value >= 0) {
                 return state;
             }
-            if (state[skill].specialties) {
+            if (state[skill]?.specialties) {
                 if (state[skill].specialtiesList.length > 0) {
                     state[skill].specialtiesList.forEach((e) => {
                         state[skill][e] = 0;
@@ -246,7 +270,7 @@ const options = {
             if(!state.trainedSkills.includes(skill)) {
                 state.trainedSkills.push(skill);
             }
-            if (state[skill].specialties) {
+            if (state[skill]?.specialties) {
                 state[skill].trained = true;
                 const list = state[skill].specialtiesList;
                 const specialty = action.payload.specialty;
@@ -273,5 +297,5 @@ const options = {
 
 const skillsSlice = createSlice(options);
 
-export const { reset, increaseToZero, genericIncrease, setValue } = skillsSlice.actions;
+export const { reset, basicTraining, increaseToZero, genericIncrease, setValue } = skillsSlice.actions;
 export default skillsSlice.reducer;

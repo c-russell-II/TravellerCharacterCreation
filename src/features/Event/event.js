@@ -4,7 +4,7 @@ import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
-import SpecialEdu from "./SpecialEdu";
+import SpecialEdu from "../education/SpecialEdu";
 
 const checkHandler = (checkType) => {
     switch (checkType) {

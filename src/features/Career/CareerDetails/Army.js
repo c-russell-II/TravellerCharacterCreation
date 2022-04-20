@@ -98,7 +98,7 @@ export const army = {
             {type: 'skill', skill:'Melee'},
         ],
         service: [
-            {type: 'skill', skill: 'VaccSuit'},
+            {type: 'choice', list: ['Drive', 'VaccSuit']},
             {type: 'skill', skill:'Athletics'},
             {type: 'skill', skill:'GunCombat'},
             {type: 'skill', skill:'Recon'},

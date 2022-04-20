@@ -93,18 +93,20 @@ export const CharacterCreation = (props) => {
         navigate('/background_skills');
     }
     return (
-        <div className="CharacterCreation">
-            <h2>This is where character creation will actually occur</h2>
+        <div className="character_creation">
+            <h2>Select your Stats and Name</h2><br/>
             <p>Decide your natural aptitudes and abilities, that will carry you into whatever the future has in store.</p>
             <h3>Name:</h3><form onSubmit={handleSubmit}><input type="text" onChange={handleChange} placeholder="name"/><input type="submit" value="Submit"/></form>
-            <h3>Points remaining: {points}</h3>
-            <button onClick={() => decrease('str')}>-</button><span>Str: {stats.str}</span>  Mod: {getModifiers(stats.str)}<button onClick={() => increase('str')}>+</button>  Next Point: {costCalc(stats.str)}<br/>
-            <button onClick={() => decrease('dex')}>-</button><span>Dex: {stats.dex}</span>  Mod: {getModifiers(stats.dex)}<button onClick={() => increase('dex')}>+</button>  Next Point: {costCalc(stats.dex)}<br/>
-            <button onClick={() => decrease('end')}>-</button><span>End: {stats.end}</span>  Mod: {getModifiers(stats.end)}<button onClick={() => increase('end')}>+</button>  Next Point: {costCalc(stats.end)}<br/>
-            <button onClick={() => decrease('int')}>-</button><span>Int: {stats.int}</span>  Mod: {getModifiers(stats.int)}<button onClick={() => increase('int')}>+</button>  Next Point: {costCalc(stats.int)}<br/>
-            <button onClick={() => decrease('edu')}>-</button><span>Edu: {stats.edu}</span>  Mod: {getModifiers(stats.edu)}<button onClick={() => increase('edu')}>+</button>  Next Point: {costCalc(stats.edu)}<br/>
-            <button onClick={() => decrease('soc')}>-</button><span>Soc: {stats.soc}</span>  Mod: {getModifiers(stats.soc)}<button onClick={() => increase('soc')}>+</button>  Next Point: {costCalc(stats.soc)}<br/>
+            <h3>Points remaining: <span>{points}</span></h3>
+            <div className="stats">
+            <button onClick={() => decrease('str')}>-</button><span>Str: {stats.str} Mod: {getModifiers(stats.str)} </span><button onClick={() => increase('str')}>+</button>  Next Point: {costCalc(stats.str)}<br/>
+            <button onClick={() => decrease('dex')}>-</button><span>Dex: {stats.dex} Mod: {getModifiers(stats.dex)} </span><button onClick={() => increase('dex')}>+</button>  Next Point: {costCalc(stats.dex)}<br/>
+            <button onClick={() => decrease('end')}>-</button><span>End: {stats.end} Mod: {getModifiers(stats.end)} </span><button onClick={() => increase('end')}>+</button>  Next Point: {costCalc(stats.end)}<br/>
+            <button onClick={() => decrease('int')}>-</button><span>Int: {stats.int} Mod: {getModifiers(stats.int)} </span><button onClick={() => increase('int')}>+</button>  Next Point: {costCalc(stats.int)}<br/>
+            <button onClick={() => decrease('edu')}>-</button><span>Edu: {stats.edu} Mod: {getModifiers(stats.edu)} </span><button onClick={() => increase('edu')}>+</button>  Next Point: {costCalc(stats.edu)}<br/>
+            <button onClick={() => decrease('soc')}>-</button><span>Soc: {stats.soc} Mod: {getModifiers(stats.soc)} </span><button onClick={() => increase('soc')}>+</button>  Next Point: {costCalc(stats.soc)}<br/>
             <button onClick={handleReady}>Finalize stats.</button>
+            </div>
             <Popup
                 open={ready}
                 modal

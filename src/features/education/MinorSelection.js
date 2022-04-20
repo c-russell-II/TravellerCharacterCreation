@@ -18,7 +18,7 @@ function MinorSelection(props) {
     return ( 
         <div>
             <h5>Minor: --</h5>
-            <form onSubmit={cleanup}>
+            <form onSubmit={cleanup} className="select_minor">
                 {allChoices.map((e, i) => {
                     if (e === educationState.major) {
                         return <div key={i}></div>;

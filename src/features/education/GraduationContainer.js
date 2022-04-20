@@ -18,9 +18,9 @@ export const Graduation = (props) => {
         if (educationState.graduated) {
             dispatch(changeStat({ edu: edu + 2 }))
             if (educationState.honors) {
-                dispatch(addQualificationBonus({ parentCareers: ['Agent', 'Army', 'Marines', 'Navy', 'Scholar', 'Scouts'], careers: ['corporate', 'journalist'], value: 2, age: age, duration: null, source: 'University' }))
+                dispatch(addQualificationBonus({ parentCareers: ['agent', 'army', 'marines', 'navy', 'scholar', 'scouts'], careers: ['corporate', 'journalist'], value: 2, age: age, duration: null, source: 'University' }))
             } else {
-                dispatch(addQualificationBonus({ parentCareers: ['Agent', 'Army', 'Marines', 'Navy', 'Scholar', 'Scouts'], careers: ['corporate', 'journalist'], value: 1, age: age, duration: null, source: 'University' }))
+                dispatch(addQualificationBonus({ parentCareers: ['agent', 'army', 'marines', 'navy', 'scholar', 'scouts'], careers: ['corporate', 'journalist'], value: 1, age: age, duration: null, source: 'University' }))
             }
             if (educationState.majorSpecialty) {
                 dispatch(genericIncrease({ skill: educationState.major, specialty: educationState.majorSpecialty }))

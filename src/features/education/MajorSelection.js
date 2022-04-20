@@ -41,7 +41,7 @@ function MajorSelection(props) {
     <div>
         <h5>Major--</h5>
         {selectedMajor !== '' ? <p>Selected Major: {selectedMajor} {educationState.majorSpecialty ? `Selected Specialty: ${educationState.majorSpecialty}` : ''}</p> : ''}
-        <form onSubmit={majorSubmit}>
+        <form onSubmit={majorSubmit} className="select_major">
             {allChoices.map((e, i) => {
                 return (
                     <div key={i}>
@@ -52,9 +52,9 @@ function MajorSelection(props) {
             })}
             <button key={Math.random()} type="submit">Confirm major.</button>
         </form> <br />
-        <Popup open={activeSpecialty} modal closeOnDocumentClick="false">
-            <SelectSpecialty skill={selectedMajor} list={selectedMajor === 'Animals' ? animalSpec : skills[selectedMajor].specialtiesList} passSpecialty={passSpecialty} />
-        </Popup>
+        {activeSpecialty &&
+            <SelectSpecialty skill={selectedMajor} list={selectedMajor === 'Animals' ? animalSpec : skills[selectedMajor]?.specialtiesList} passSpecialty={passSpecialty} />
+        }
     </div>);
 }
 

@@ -5,14 +5,14 @@ import { useNavigate, useParams } from "react-router-dom";
 import { roll, skillCheck } from "../Career/careerHandler";
 import { failedTerm, survivedTerm } from "./TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
-import { increaseToZero } from "../Skills/SkillsSlice";
+import { basicTraining, increaseToZero } from "../Skills/SkillsSlice";
 import { setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
 
 const CareerTerm = (props) => {
     const {career} = useParams();
     const stats = useSelector(state => state.stats);
-    const trained = useSelector(state=> state.chara.trained);
+    const trained = useSelector(state=> state.skills.isTrained);
     const [skillSelect, setSkillSelect] = useState(false);
     const [isReady, setIsReady] = useState(false);
     const [intro, setIntro] = useState(true);
@@ -26,7 +26,8 @@ const CareerTerm = (props) => {
         event.preventDefault();
         setIntro(false);
         if (!trained) {
-            jobDetails.skills.service.forEach(e => dispatch(increaseToZero(e.skill)));
+            const basicTrainingArray = jobDetails.skills.service.map(e => e.skill);
+            dispatch(basicTraining(basicTrainingArray))
             dispatch(setTrained());
             setIsReady(true);
             return;

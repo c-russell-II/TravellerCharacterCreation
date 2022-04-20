@@ -12,7 +12,7 @@ import jobObject from "../Career/CareerDetails";
 export const JobSkills = (props) => {
     const [needSpecialty, setNeedSpecialty] = useState(false);
     const [selectedSkill, setSelectedSkill] = useState({})
-    const [skillChoice, setSkillChoice] = useState({})
+    const [skillChoice, setSkillChoice] = useState({active: false, details: {skill: null, list: null}})
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
     const {cleanup} = props;
@@ -73,7 +73,7 @@ export const JobSkills = (props) => {
     }
 
     return(
-        <div>
+        <div className="job_skills">
             {finishedList.map((e, i) => {
                 return (
                     <SplitButton
@@ -93,10 +93,14 @@ export const JobSkills = (props) => {
                     <SelectSpecialty skill={selectedSkill.skill} list={selectedSkill.specialty} passSpecialty={passSpecialty} />
                 </Popup>
 
-                <Popup open={skillChoice.active} modal closeOnDocumentClick={false}>
+{
+skillChoice.active
+&&                 <Popup open={skillChoice.active} modal closeOnDocumentClick={false}>
                     <p>Select a skill:</p>
                     {skillChoice.details.list.map((e, i) => {return <button onClick={handleChoice} value={e} key={i}>{e}</button>})}
                 </Popup>
+
+}
 
             
         </div>

@@ -7,6 +7,7 @@ import { TermFailed } from "./TermFailed";
 import AdvancedTerm from "./AdvancedTerm";
 import jobObject from "../Career/CareerDetails";
 
+
 export const TermRouter = (props) => {
     const {career} = useParams();
     const title = jobObject[career].title
@@ -14,11 +15,12 @@ export const TermRouter = (props) => {
         <div className="term">
         <h1>{title}</h1>
         <Routes>
-            <Route path="/" element={<TermContainer/>}/>
+            <Route path="/" element={<TermContainer/>}>
                 <Route path="start" element={<CareerTerm/>}/>
                 <Route path="survived" element={<TermMidPoint/>}/>
                 <Route path="failed" element={<TermFailed/>}/>
                 <Route path="advanced" element={<AdvancedTerm/>}/>
+            </Route>
         </Routes>
         </div>
     )
