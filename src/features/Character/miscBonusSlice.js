@@ -6,7 +6,7 @@ const initialState = {
     allies: [],
     rivals: [],
     enemies: [],
-    qualification: {},
+    qualification: {list: [], temp: {list: []}},
     injuries: {}
 }
 
@@ -16,14 +16,25 @@ const options = {
     reducers: {
         reset: state => initialState,
         addQualificationBonus: (state, action) => {
-            const bonusObj = {
-                careers: action.payload.careers,
-                value: action.payload.value,
-                expires: action.payload.age + action.payload.duration
+            const {careers, value, isTemp, age} = action.payload;
+            if (isTemp) {
+                careers.forEach((e) => {
+                    state.qualification.temp[e].value += value;
+                    state.qualification.temp[e].expiration = age;
+                    state.qualification.temp.list.push([e])
+                })
+
             }
-            const tempList = state.qualification.list.concat(action.payload.careers);
-            state.qualification.list = tempList;
-            state.qualification[`${action.payload.source}${action.payload.age}`] = bonusObj
+            careers.forEach((e) => {
+                if (e in state.qualification) {
+                    if (!state.qualification[e]?.value) {
+                        state.qualification[e].value += value;
+                        return state;
+                    }
+                    state.qualification[e].value = value;
+                }
+            state.qualification[e] = {value: value}
+            })
             return state;
         },
         addBenefitBonus: (state, action) => {

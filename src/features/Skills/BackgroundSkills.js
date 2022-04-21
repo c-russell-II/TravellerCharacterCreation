@@ -10,7 +10,7 @@ export const BackgroundSkillsChoice = (props) => {
     const dispatch = useDispatch();
     
     const stats = useSelector(state => state.stats);
-    const options = ['Admin', 'Animals', 'Athletics', 'Art', 'Carouse', 'Drive', 'Electronics', 'Flyer', 'Language', 'Mechanic', 'Medic', 'Profession', 'Science', 'Seafarer', 'Streetwise', 'Survival', 'Vacc Suit'];
+    const options = ['Admin', 'Animals', 'Athletics', 'Art', 'Carouse', 'Drive', 'Electronics', 'Flyer', 'Language', 'Mechanic', 'Medic', 'Profession', 'Science', 'Seafarer', 'Streetwise', 'Survival', 'VaccSuit'];
     const limit = stats.edu + 3
 
     const handleChange = (event, e, i) => {
@@ -63,7 +63,7 @@ export const BackgroundSkillsChoice = (props) => {
                 <input type="submit" value="Confirm"/>
             </form><br/>
             <h4>Current Skills:</h4>
-            {skills?.map((e) => {return <span>{e}</span>})}
+            {skills?.map((e, i) => {return <span key={i}>{e}</span>})}
         </div>
     )
 }

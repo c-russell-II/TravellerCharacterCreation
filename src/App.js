@@ -16,6 +16,7 @@ import PrintPage from './features/Organization/PrintPage';
 import PrisonContainer from './features/Prison/PrisonContainer';
 import Layout from './features/Organization/Layout';
 import './App.css';
+import Qualification from './features/Organization/Qualification';
 
 function App() {
   return (
@@ -31,7 +32,9 @@ function App() {
             <Route path="choose_education" element={<UniversityChoice/>}/>
             <Route path="university_term" element={<UniversityTerm/>}/>
             <Route path="mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
-            <Route path="choose_career" element={<CareerChooser />}/>
+            <Route path="choose_career" element={<CareerChooser />}>
+              <Route path="/qualification/:career" element={<Qualification/>}/>
+            </Route>
             <Route path="term/:career/*" element={<TermRouter/>}/>
             <Route path="leave_career/:career" element={<BenefitsContainer/>}/>
             <Route path="prison" element={<PrisonContainer/>}/>

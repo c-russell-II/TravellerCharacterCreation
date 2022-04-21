@@ -39,7 +39,7 @@ const options = {
             return state;
         },
         resolveEvent: (state) => {
-            state.event = null;
+            state.event = {resolved: true};
             return state;
         },
         resolveTerm: (state) => {

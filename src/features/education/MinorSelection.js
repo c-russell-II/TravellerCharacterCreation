@@ -1,17 +1,20 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { chooseMinor } from "./EducationSlice";
 
 function MinorSelection(props) {
     const [selectedMinor, setSelectedMinor] = useState('');
 
     const {allChoices, cleanup} = props;
     const educationState = useSelector(state => state.education);
+    const dispatch = useDispatch();
 
 
 
     const minorChange = (event) => {
         event.preventDefault();
         setSelectedMinor(event.target.value);
+        dispatch(chooseMinor({skill: event.target.value}))
         return;
     }
 

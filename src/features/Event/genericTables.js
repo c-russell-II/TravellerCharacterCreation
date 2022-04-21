@@ -25,12 +25,12 @@ const unusual = [
 ]
 
 const injury = [
-    {type: 'nearlyKilled'},
-    {type: 'severelyInjured'},
-    {type: 'missingEyeOrLimb'},
-    {type: 'scarred'},
-    {type: 'injured'},
-    {type: 'lightlyInjured'}
+    {type: 'worst'},
+    {type: 'severe'},
+    {type: 'moderate'},
+    {type: 'medium'},
+    {type: 'mild'},
+    {type: 'none'}
 ]
 
 const genericTables = {

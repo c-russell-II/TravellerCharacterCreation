@@ -2,10 +2,10 @@ import React, { useState } from "react";
 import jobObject from "../Career/CareerDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { roll, skillCheck } from "../Career/careerHandler";
+import { skillCheck, roll } from "../Career/careerHandler";
 import { failedTerm, survivedTerm } from "./TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
-import { basicTraining, increaseToZero } from "../Skills/SkillsSlice";
+import { basicTraining } from "../Skills/SkillsSlice";
 import { setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
 
@@ -37,7 +37,8 @@ const CareerTerm = (props) => {
 
     const handleClick = (event) => {
         event.preventDefault();
-        const surviveCheck = survivalDC <= skillCheck(stats[survivalSkill]);
+        const surviveRoll = (skillCheck(stats[survivalSkill]))
+        const surviveCheck = surviveRoll === 2 ? false : survivalDC <= surviveRoll;
         const mishap = jobDetails.mishapList[roll()]
         const jobEvent = jobObject[career].eventList[roll() + roll() + 2];
 

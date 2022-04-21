@@ -116,7 +116,7 @@ export const Reward = (props) => {
 
     case 'choice':
       setIsReady(false);
-      return <>{!isReady && <RewardChoice cleanup={cleanup} />}</>;
+      return <>{!isReady && <RewardChoice />}</>;
 
     case 'promotion':
       dispatch(promotion());
@@ -139,7 +139,7 @@ export const Reward = (props) => {
             <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
             <p>{event.description}</p>
             {eventBody}
-            {isReady && <button onClick={() => { props.cleanup(); dispatch(addEvent(event)); dispatch(resolveEvent());}}>Onwards!</button>}
+            {isReady && <button onClick={() => { dispatch(addEvent(event)); dispatch(resolveEvent());}}>Onwards!</button>}
         </>
     );
 };

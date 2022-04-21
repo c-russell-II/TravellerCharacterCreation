@@ -20,7 +20,7 @@ const options = {
             state[job].muster = false;
             return state;
         },
-        saveFailedTerm: (state, action, details) => {
+        saveFailedTerm: (state, action) => {
             const {job} = action.payload;
             state.previousJob = job;
             state[job].muster = true;
@@ -50,7 +50,7 @@ const options = {
 
         },
         promotion: (state, action) => {
-            if (state[state.currentJob] < 6){
+            if (state[state.currentJob].rank < 6){
                 state[state.currentJob].rank++;
             }
             return state;

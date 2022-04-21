@@ -9,6 +9,7 @@ import { engineerGunner, flight, lineCrew, navy } from './CareerDetails/Navy'
 import { administrator, dilettante, diplomat, noble } from './CareerDetails/Noble'
 import { enforcer, pirate, rogue, thief } from './CareerDetails/Rogue'
 import { fieldResearcher, physician, scholar, scientist } from './CareerDetails/Scholar'
+import { courier, explorer, scout, surveyor } from './CareerDetails/Scout'
 
 export const parentJobs = {
     agent: agent,
@@ -22,7 +23,8 @@ export const parentJobs = {
     noble: noble,
     rogue: rogue,
     scholar: scholar,
-    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant', 'navy', 'noble', 'rogue', 'scholar']
+    scout: scout,
+    list: ['agent', 'army', 'citizen', 'drifter', 'entertainer', 'marine', 'merchant', 'navy', 'noble', 'rogue', 'scholar', 'scout']
 }
 
 const jobObject = {
@@ -59,6 +61,9 @@ const jobObject = {
     fieldResearcher: fieldResearcher,
     scientist: scientist,
     physician: physician,
+    courier: courier,
+    surveyor: surveyor,
+    explorer: explorer,
 }
 
 export default jobObject

@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { ChoiceCheckEvent } from "./ChoiceCheckEvent";
 import { CheckEvent } from "./CheckEvent";
 import { Reward } from "./Reward";
 import { Choice } from "./Choice";
 import SpecialEdu from "../education/SpecialEdu";
+import { resolveEvent } from "../Term/TermSlice";
 
 const checkHandler = (checkType) => {
     switch (checkType) {
@@ -17,41 +18,28 @@ const checkHandler = (checkType) => {
 
 export const Event = (props) => {
     const event = useSelector(state => state.term.event);
-    const [isOpen, setIsOpen] = useState(true);
-    
-    const cleanup = () => setIsOpen(false); props.cleanup();
+    const dispatch = useDispatch();
 
-    const eventRender = (event, cleanup) => {
+    const eventRender = (event) => {
         switch (event.type) {
             case 'check': 
                 return checkHandler(event.checkType);
             case 'reward':
-                return <Reward cleanup={cleanup} />;
+                return <Reward />;
             case 'choice':
                 return <Choice/>;
             case 'specialEdu':
                 return <SpecialEdu/>
             case 'redirect':
-                switch (event.destination) {
-                    case 'injury':
-                        return <blah></blah>;
-                    case 'life':
-                        return <blah></blah>;
-                    case 'mishap': 
-                        return <blah></blah>;
-                    case 'rare': 
-                        return <blah></blah>;
-                    default: 
-                        return;
-                }
+                return;
             default: break;
         }
     }
     return (
         <>
-            {isOpen && eventRender(event, cleanup)}
+            {!event.resolved && eventRender(event)}
             <p>Event rendering still missing redirects!</p>
-            <button onClick={() => cleanup()}>Override</button>
+            <button onClick={() => dispatch(resolveEvent())}>Override</button>
         </>
     );
 }

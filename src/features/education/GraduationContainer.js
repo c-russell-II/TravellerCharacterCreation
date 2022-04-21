@@ -6,21 +6,25 @@ import { SelectSpecialty } from "../Skills/selectSpecialty";
 import { addQualificationBonus } from '../Character/miscBonusSlice'
 import { GraduationDialogue } from "./GraduateDialogue";
 import Popup from "reactjs-popup";
+import { parentJobs } from "../Career/CareerDetails";
 
 export const Graduation = (props) => {
     const educationState = useSelector(state => state.education);
     const dispatch = useDispatch();
-    const { edu, age } = useSelector(state => state.stats);
+    const { edu } = useSelector(state => state.stats);
     const skills = useSelector(state => state.skills);
     const [needSpecialty, setNeedSpecialty] = useState(false);
 
     useEffect(() => {
         if (educationState.graduated) {
             dispatch(changeStat({ edu: edu + 2 }))
+            const qualBonusList = ['corporate', 'journalist'];
+            const parentList = ['agent', 'army', 'marine', 'navy', 'scholar', 'scout'];
+            parentList.forEach((e) => parentJobs[e].specialtiesList.forEach((f) => qualBonusList.push(f)))
             if (educationState.honors) {
-                dispatch(addQualificationBonus({ parentCareers: ['agent', 'army', 'marines', 'navy', 'scholar', 'scouts'], careers: ['corporate', 'journalist'], value: 2, age: age, duration: null, source: 'University' }))
+                dispatch(addQualificationBonus({careers: qualBonusList, isTemp: false, value: 2}))
             } else {
-                dispatch(addQualificationBonus({ parentCareers: ['agent', 'army', 'marines', 'navy', 'scholar', 'scouts'], careers: ['corporate', 'journalist'], value: 1, age: age, duration: null, source: 'University' }))
+                dispatch(addQualificationBonus({careers: qualBonusList, value: 1, isTemp: false}))
             }
             if (educationState.majorSpecialty) {
                 dispatch(genericIncrease({ skill: educationState.major, specialty: educationState.majorSpecialty }))
@@ -33,7 +37,8 @@ export const Graduation = (props) => {
                 dispatch(genericIncrease({ skill: educationState.minor }))
             }
         }
-    }, [age, dispatch, edu, educationState.graduated, educationState.honors, educationState.major, educationState.majorSpecialty, educationState.minor, skills])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     const handleSpecialty = (spec) => {
         dispatch(genericIncrease({ skill: educationState.minor, specialty: spec }));

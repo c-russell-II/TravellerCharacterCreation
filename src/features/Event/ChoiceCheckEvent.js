@@ -14,7 +14,7 @@ export const ChoiceCheckEvent = (props) => {
 
     const handleClick = (choice) => {
         const skill = skills[choice];
-        const specList = term.event.specialtyList[choice] === 'any' ? skill.specialtyList : term.event.specialtyList[choice];
+        const specList = term.event.specialtyList?.[choice] === 'any' ? skill.specialtyList : term.event.specialtyList?.[choice];
         let result;
         if (!skill.specialties) {
             result = dc <= skillCheck(skill.value);
