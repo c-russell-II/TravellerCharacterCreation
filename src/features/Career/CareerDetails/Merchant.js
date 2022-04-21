@@ -167,7 +167,8 @@ export const merchantMarine = {
         {title: 'Captain', bonus: false},
     ],
     skills: merchant.skills,
-    benefits: merchant.benefits
+    benefits: merchant.benefits,
+    parent: 'merchant'
 }
 export const freeTrader = {
     title: 'Free Trader',
@@ -209,5 +210,6 @@ export const broker = {
         {title: "Trader's Bane", bonus: false},
     ],
     skills: merchant.skills,
-    benefits: merchant.benefits
+    benefits: merchant.benefits,
+    parent: 'merchant'
 }

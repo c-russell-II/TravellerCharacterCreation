@@ -2,22 +2,24 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
 import { selectJob } from '../Career/careerSlice';
-import { skillCheck } from "../Career/careerHandler";
 
 export const Specialties = (props) => {
     const [isActive, setIsActive] = useState(false);
-    const stats = useSelector(state => state.stats);
     const { parent, job, specialty } = props;
     const {title, description} = specialty;
     const jobState = useSelector(state => state.careers);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const clickHandler = (job) => {
         if (jobState.previousJob === job && jobState[job].muster) {
             alert("Spend a term elsewhere!");
             return;
         }
         if (parent.qualification) {
-            navigate('../qualification/' + job)
+            navigate('qualification/' + job)
+        } else {
+            dispatch(selectJob({job: job, details: specialty}))
+            navigate('/term/' + job + '/')
         }
     };
     return (

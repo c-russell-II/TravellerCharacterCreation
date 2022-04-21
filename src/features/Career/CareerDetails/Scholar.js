@@ -219,7 +219,8 @@ export const fieldResearcher = {
         {title: 'Renowned Investigator', bonus: false},
     ],
     skills: scholar.skills,
-    benefits: scholar.benefits
+    benefits: scholar.benefits,
+    parent: 'scholar'
 }
 export const scientist = {
     title: 'Scientist',
@@ -240,7 +241,8 @@ export const scientist = {
         {title: 'Titan of Research', bonus: false},
     ],
     skills: scholar.skills,
-    benefits: scholar.benefits
+    benefits: scholar.benefits,
+    parent: 'scholar'
 }
 export const physician = {
     title: 'Physician',
@@ -261,5 +263,6 @@ export const physician = {
         {title: 'Head Doctor', bonus: false},
     ],
     skills: scholar.skills,
-    benefits: scholar.benefits
+    benefits: scholar.benefits,
+    parent: 'scholar'
 }

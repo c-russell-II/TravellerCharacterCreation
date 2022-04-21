@@ -152,7 +152,8 @@ export const artist = {
         {title: 'Acclaimed Artist', bonus: false},
     ],
     skills: entertainer.skills,
-    benefits: entertainer.benefits
+    benefits: entertainer.benefits,
+    parent: 'entertainer'
 }
 export const journalist = {
     title: 'Journalist',
@@ -173,7 +174,8 @@ export const journalist = {
         {title: 'Senior Correspondent', bonus: {type: 'stat', stat: 'soc', value: 1}},
     ],
     skills: entertainer.skills,
-    benefits: entertainer.benefits
+    benefits: entertainer.benefits,
+    parent: 'entertainer'
 }
 export const performer = {
     title: 'Performer',
@@ -194,5 +196,6 @@ export const performer = {
         {title: 'All-Star Performer', bonus: false},
     ],
     skills: entertainer.skills,
-    benefits: entertainer.benefits
+    benefits: entertainer.benefits,
+    parent: 'entertainer'
 }

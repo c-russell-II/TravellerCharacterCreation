@@ -175,7 +175,8 @@ export const thief = {
         {title: 'Mythical Thief', bonus: false},
     ],
     skills: rogue.skills,
-    benefits: rogue.benefits
+    benefits: rogue.benefits,
+    parent: 'rogue'
 }
 export const enforcer = {
     title: 'Enforcer',
@@ -196,7 +197,8 @@ export const enforcer = {
         {title: 'Assassin', bonus: false},
     ],
     skills: rogue.skills,
-    benefits: rogue.benefits
+    benefits: rogue.benefits,
+    parent: 'rogue'
 }
 export const pirate = {
     title: 'Pirate',
@@ -217,5 +219,6 @@ export const pirate = {
         {title: 'Captain', bonus: false},
     ],
     skills: rogue.skills,
-    benefits: rogue.benefits
+    benefits: rogue.benefits,
+    parent: 'rogue'
 }

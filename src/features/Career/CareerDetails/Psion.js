@@ -128,7 +128,8 @@ export const wildTalent = {
         {title: 'Thaumaturge', bonus: false},
     ],
     skills: psion.skills,
-    benefits: psion.benefits
+    benefits: psion.benefits,
+    parent: 'psion'
 }
 export const adept = {
     title: 'Adept',
@@ -149,7 +150,8 @@ export const adept = {
         {title: 'Master', bonus: false},
     ],
     skills: psion.skills,
-    benefits: psion.benefits
+    benefits: psion.benefits,
+    parent: 'psion'
 }
 export const psiWarrior = {
     title: 'Psi-Warrior',
@@ -170,5 +172,6 @@ export const psiWarrior = {
         {title: '', bonus: false},
     ],
     skills: psion.skills,
-    benefits: psion.benefits
+    benefits: psion.benefits,
+    parent: 'psion'
 }

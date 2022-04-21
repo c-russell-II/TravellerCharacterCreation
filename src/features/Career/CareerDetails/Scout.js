@@ -190,7 +190,8 @@ export const courier = {
         {title: 'Shellback', bonus: false},
     ],
     skills: scout.skills,
-    benefits: scout.benefits
+    benefits: scout.benefits,
+    parent: 'scout'
 }
 export const surveyor = {
     title: 'Surveyor',
@@ -211,7 +212,8 @@ export const surveyor = {
         {title: 'Shellback', bonus: false},
     ],
     skills: scout.skills,
-    benefits: scout.benefits
+    benefits: scout.benefits,
+    parent: 'scout'
 }
 export const explorer = {
     title: "Explorer",
@@ -232,5 +234,6 @@ export const explorer = {
         {title: 'Shellback', bonus: false},
     ],
     skills: scout.skills,
-    benefits: scout.benefits
+    benefits: scout.benefits,
+    parent: 'scout'
 }

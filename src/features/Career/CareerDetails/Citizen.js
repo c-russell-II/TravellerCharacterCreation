@@ -165,7 +165,8 @@ export const manager = {
         {title: 'Director', bonus: false}
     ],
     skills: citizen.skills,
-    benefits: citizen.benefits
+    benefits: citizen.benefits,
+    parent: 'citizen'
 }
 export const worker = {
     title: 'Worker Citizen',
@@ -186,7 +187,8 @@ export const worker = {
         {title: 'Master Technician', bonus: {type: 'skill', skill: 'Engineer', specialty: 'any', value: 1}},
     ],
     skills: citizen.skills,
-    benefits: citizen.benefits
+    benefits: citizen.benefits,
+    parent: 'citizen'
 }
 export const colonist = {
     title: 'Colonist',
@@ -207,5 +209,6 @@ export const colonist = {
         {title: 'Trailblazer', bonus: {type: 'skill', skill: 'GunCombat', specialty: 'any', value: 1}}
     ],
     skills: citizen.skills,
-    benefits: citizen.benefits
+    benefits: citizen.benefits,
+    parent: 'citizen'
 }

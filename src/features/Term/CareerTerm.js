@@ -42,15 +42,16 @@ const CareerTerm = (props) => {
         const mishap = jobDetails.mishapList[roll()]
         const jobEvent = jobObject[career].eventList[roll() + roll() + 2];
 
-        setIntro(true);
         if (surviveCheck) {
             dispatch(survivedTerm({job: career, event: jobEvent, jobDetails: jobDetails}));
             dispatch(saveSurvivedTerm({job: career}))
             navigate(`/term/${career}/survived`)
+            setIntro(true);
             return;
         } else {
             dispatch(failedTerm({job: career, event: mishap, jobDetails: jobDetails}));
             navigate(`/term/${career}/failed`);
+            setIntro(true);
             return;
         }
     }

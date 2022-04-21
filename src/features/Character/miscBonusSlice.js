@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
     benefits: {},
-    contacts: {},
+    contacts: [],
     allies: [],
     rivals: [],
     enemies: [],
@@ -27,11 +27,12 @@ const options = {
             }
             careers.forEach((e) => {
                 if (e in state.qualification) {
-                    if (!state.qualification[e]?.value) {
+                    if ('value' in state.qualification[e]) {
                         state.qualification[e].value += value;
                         return state;
                     }
                     state.qualification[e].value = value;
+                    return state;
                 }
             state.qualification[e] = {value: value}
             })
@@ -63,12 +64,8 @@ const options = {
             } return state;
         },
         addContact: (state, action) => {
-            const {career, value} = action.payload;
-            if (state.contacts[career]) {
-                state.contacts[career]+= value;
-            } else {
-                state.contacts[career] = value;
-            }
+            const { value, description } = action.payload;
+            state.contacts.push({number: value, description: description})
             return state;
         },
     }

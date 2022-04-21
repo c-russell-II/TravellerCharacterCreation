@@ -2,6 +2,7 @@ export const navy = {
     title: 'Navy',
     description: 'Members of the interstellar navy which patrols space between the stars. The navy has the responsibility for the protection of society from foreign powers and lawless elements in the interstellar trade channels.',
     qualification: true,
+    qualificationAge: 34,
     qualificationStat: 'int',
     qualificationDC: 6,
     eventList: {
@@ -157,7 +158,8 @@ export const lineCrew = {
         {title: 'Master Chief Petty Officer', bonus: false},
     ],
     skills: navy.skills,
-    benefits: navy.benefits
+    benefits: navy.benefits,
+    parent: 'navy'
 }
 export const engineerGunner = {
     title: 'Engineer/Gunner',
@@ -178,7 +180,8 @@ export const engineerGunner = {
         {title: 'Master Chief Petty Officer', bonus: false},
     ],
     skills: navy.skills,
-    benefits: navy.benefits
+    benefits: navy.benefits,
+    parent: 'navy'
 }
 export const flight = {
     title: 'Flight',
@@ -199,5 +202,6 @@ export const flight = {
         {title: 'Master Chief Petty Officer', bonus: false},
     ],
     skills: navy.skills,
-    benefits: navy.benefits
+    benefits: navy.benefits,
+    parent: 'navy'
 }

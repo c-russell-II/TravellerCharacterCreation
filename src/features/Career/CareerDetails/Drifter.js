@@ -122,6 +122,7 @@ export const barbarian = {
     ],
     skills: drifter.skills,
     benefits: drifter.benefits,
+    parent: 'drifter'
 }
 export const wanderer = {
     title: 'Wanderer',
@@ -142,7 +143,8 @@ export const wanderer = {
         {title: 'Nomad', bonus: false}
     ],
     skills: drifter.skills,
-    benefits: drifter.benefits
+    benefits: drifter.benefits,
+    parent: 'drifter'
 }
 export const scavenger = {
     title: 'Scavenger',
@@ -164,4 +166,5 @@ export const scavenger = {
     ],
     skills: drifter.skills,
     benefits: drifter.benefits,
+    parent: 'drifter'
 }

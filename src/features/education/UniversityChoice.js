@@ -49,6 +49,7 @@ export const UniversityChoice = (props) => {
         const result = 8 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
             setMilAcademy({pass: true, branch: 'army'});
+            dispatch(chooseSchool('Army'))
             setMilAcademyLink(false);
             return;
         }
@@ -60,6 +61,7 @@ export const UniversityChoice = (props) => {
         const result = 9 <= skillCheck(stats.int) - getCareerModifier(true);
         if (result) {
             setMilAcademy({pass: true, branch: 'navy'});
+            dispatch(chooseSchool('Navy'))
             setMilAcademyLink(false);
             return;
         }
@@ -69,7 +71,8 @@ export const UniversityChoice = (props) => {
     const marinesEnroll = () => {
         const result = 9 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
-            setMilAcademy({pass: true, branch: 'marines'});
+            setMilAcademy({pass: true, branch: 'marine'});
+            dispatch(chooseSchool('Marine'))
             setMilAcademyLink(false);
             return;
         }

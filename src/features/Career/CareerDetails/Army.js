@@ -2,6 +2,7 @@ export const army = {
     title: 'Army',
     qualification: true,
     qualificationStat: 'end',
+    qualificationAge: 30,
     qualificationDC: 5,
     description: 'Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles, and campaigns. Such individuals may also be mercenaries for hire.',
     eventList: {

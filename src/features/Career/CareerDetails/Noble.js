@@ -2,7 +2,7 @@ export const noble = {
     title: 'Noble',
     description: 'Individuals of the upper class who perform little consistent function, but often have large amounts of ready money.',
     qualification: true,
-    qualificationStat: 'Threshold',
+    qualificationStat: 'threshold',
     qualificationThreshold: {stat: 'soc', value: 10},
     qualificationDC: 10,
     eventList: {
@@ -204,7 +204,8 @@ export const administrator = {
         {title: 'Minister', bonus: false},
     ],
     skills: noble.skills,
-    benefits: noble.benefits
+    benefits: noble.benefits,
+    parent: 'noble'
 }
 export const diplomat = {
     title: 'Diplomat',
@@ -225,7 +226,8 @@ export const diplomat = {
         {title: 'Ambassador', bonus: false},
     ],
     skills: noble.skills,
-    benefits: noble.benefits
+    benefits: noble.benefits,
+    parent: 'noble'
 }
 export const dilettante = {
     title: "Dilettante",
@@ -246,5 +248,6 @@ export const dilettante = {
         {title: 'Scoundrel', bonus: {type: 'skill', skill: 'JackOfAllTrades', value: 1}},
     ],
     skills: noble.skills,
-    benefits: noble.benefits
+    benefits: noble.benefits,
+    parent: 'noble'
 }

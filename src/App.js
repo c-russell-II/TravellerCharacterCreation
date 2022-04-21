@@ -16,7 +16,9 @@ import PrintPage from './features/Organization/PrintPage';
 import PrisonContainer from './features/Prison/PrisonContainer';
 import Layout from './features/Organization/Layout';
 import './App.css';
-import Qualification from './features/Organization/Qualification';
+import Qualification from './features/Organization/Qualification/Qualification';
+import QualFail from './features/Organization/Qualification/QualFail';
+import CareerChoiceLayout from './features/Organization/CareerChoiceLayout';
 
 function App() {
   return (
@@ -32,8 +34,10 @@ function App() {
             <Route path="choose_education" element={<UniversityChoice/>}/>
             <Route path="university_term" element={<UniversityTerm/>}/>
             <Route path="mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
-            <Route path="choose_career" element={<CareerChooser />}>
-              <Route path="/qualification/:career" element={<Qualification/>}/>
+            <Route path="choose_career/" element={<CareerChoiceLayout />}>
+              <Route index element={<CareerChooser/>}/>
+              <Route path="qualification/:career" element={<Qualification/>}/>
+              <Route path="qualification/:career/fail" element={<QualFail/>}/>
             </Route>
             <Route path="term/:career/*" element={<TermRouter/>}/>
             <Route path="leave_career/:career" element={<BenefitsContainer/>}/>

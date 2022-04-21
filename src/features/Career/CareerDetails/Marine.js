@@ -2,6 +2,7 @@ export const marine = {
     title: 'Marine',
     description: 'Members of the armed fighting forces carried aboard starships, marines deal with piracy and boarding actions in space, defend the starports and bases belonging to the navy and supplement ground forces such as the army.',
     qualification: true,
+    qualificationAge: 30,
     qualificationStat: 'end',
     qualificationDC: 6,
     eventList: {
@@ -212,7 +213,8 @@ export const starMarine = {
         {title: 'Sergeant Major', bonus: false},
     ],
     skills: marine.skills,
-    benefits: marine.benefits
+    benefits: marine.benefits,
+    parent: 'marine'
 }
 export const groundAssault = {
     title: 'Ground Assault Marine',
@@ -233,5 +235,6 @@ export const groundAssault = {
         {title: 'Sergeant Major', bonus: false},
     ],
     skills: marine.skills,
-    benefits: marine.benefits
+    benefits: marine.benefits,
+    parent: 'marine'
 }

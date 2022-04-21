@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { addEvent } from '../Character/charaSlice';
 import { advancementBonus, resolveEvent } from "../Term/TermSlice";
 import { addBenefitBonus, addContact } from "../Character/miscBonusSlice";
-import { increaseStat } from "../Character/StatsSlice";
+import { changeByAmount, increaseStat } from "../Character/StatsSlice";
 import { promotion } from "../Career/careerSlice";
 import { roll } from "../Career/careerHandler";
 import { useParams } from "react-router-dom";
@@ -92,19 +92,19 @@ export const Reward = (props) => {
       return;
 
     case 'stat':
-      dispatch(increaseStat(event.result.stat));
+      dispatch(changeByAmount({stat: event.result.stat, value: event.result.value}));
       return;
 
     case 'contacts':
       if (event.result.value === 'roll') {
         dispatch(addContact({
-          career: career,
+          description: event.result.description,
           value: roll(event.result.roll) + 1
         }));
         return;
       } else {
         dispatch(addContact({
-          career: career,
+          description: event.result.description,
           value: event.result.value
         }));
         return;

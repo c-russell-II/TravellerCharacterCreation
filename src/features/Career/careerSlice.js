@@ -4,6 +4,7 @@ const jobState = {
     jobArray: [],
     currentJob: null,
     previousJob: null,
+    careerCount: 0
 }
 
 
@@ -44,6 +45,7 @@ const options = {
                     muster: false,
                     details: details
                 }
+                state.careerCount++;
             }
             state[job].muster = false;
             return state;
