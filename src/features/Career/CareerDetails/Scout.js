@@ -1,5 +1,5 @@
 export const scout  = {
-    title: 'Scout',
+    title: 'Scouts',
     description: 'Members of the exploratory service. Scouts explore new areas, map and survey known or newly discovered areas, and maintain communication ships which carry information and messages between the worlds of the galaxy.',
     qualification: true,
     qualificationStat: 'int',

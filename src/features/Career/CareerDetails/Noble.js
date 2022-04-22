@@ -49,7 +49,7 @@ export const noble = {
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'choice', choiceList: ['a', 'b'], description: 'A conspiracy of nobles attempt to recruit you.',
-            a:{button: 'Join them.', 
+            a:{button: 'Join them.',
                 result: {type: 'check', checkType: 'choice',
                     choiceList: ['Deception', 'Persuade'],
                     checkDC: 8,

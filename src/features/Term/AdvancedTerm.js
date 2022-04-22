@@ -18,6 +18,8 @@ const AdvancedTerm = (props) => {
     useEffect(() => {
         if (bonus) {
             setHasBonus(true);
+        }else {
+            setHasBonus(false);
         }
     }, [bonus])
     const handleContinue = (event) => {
@@ -32,7 +34,7 @@ const AdvancedTerm = (props) => {
         <>
             <h2>You've been promoted!</h2>
             <p>You are now a/an {term.jobDetails.ranks[currentRank].title}, after {careerState[career].terms * 4} years at this job.</p>
-            {hasBonus && <RankUpBonus open={hasBonus}/>}
+            {hasBonus && <RankUpBonus open={hasBonus} cleanup={() => setHasBonus(false)}/>}
             <p>If you'd like to continue in this career, click this button:</p>
             <button onClick={handleContinue}>Continue</button>
             <p>If you'd like to spend the next four years doing something new, click below.</p>

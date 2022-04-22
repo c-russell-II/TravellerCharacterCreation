@@ -19,6 +19,8 @@ import './App.css';
 import Qualification from './features/Organization/Qualification/Qualification';
 import QualFail from './features/Organization/Qualification/QualFail';
 import CareerChoiceLayout from './features/Organization/CareerChoiceLayout';
+import DraftHandler from './features/Organization/Qualification/DraftHandler';
+import DrifterRedirect from './features/Organization/Qualification/DrifterRedirect';
 
 function App() {
   return (
@@ -36,8 +38,10 @@ function App() {
             <Route path="mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
             <Route path="choose_career/" element={<CareerChoiceLayout />}>
               <Route index element={<CareerChooser/>}/>
+              <Route path="drafted" element={<DraftHandler/>}/>
+              <Route path="drift" element={<DrifterRedirect/>}/>
               <Route path="qualification/:career" element={<Qualification/>}/>
-              <Route path="qualification/:career/fail" element={<QualFail/>}/>
+              <Route path="qualification/:career/failed" element={<QualFail/>}/>
             </Route>
             <Route path="term/:career/*" element={<TermRouter/>}/>
             <Route path="leave_career/:career" element={<BenefitsContainer/>}/>

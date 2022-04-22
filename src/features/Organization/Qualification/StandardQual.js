@@ -13,7 +13,7 @@ const StandardQual = (props) => {
     const [ready, setReady] = useState(false);
     const [passed, setPassed] = useState(false);
     const details = jobObject[career];
-    const parent = parentJobs[career.parent];
+    const parent = parentJobs[details.parent];
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const qualBonus = career in allBonuses ? allBonuses[career].value : 0;

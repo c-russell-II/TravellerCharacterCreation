@@ -7,6 +7,7 @@ const initialChara = {
     benefits: [],
     numOfCashBenefits: 0,
     trained: false,
+    drafted: false,
 }
 
 
@@ -33,6 +34,10 @@ const options = {
         setTrained: (state) => {
             state.trained = true;
             return state;
+        },
+        setDrafted: (state) => {
+            state.drafted = true;
+            return state;
         }
     }
 }
@@ -40,5 +45,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addBenefit, setTrained} = charaSlice.actions;
+export const {reset, setName, addEvent, addBenefit, setTrained, setDrafted} = charaSlice.actions;
 export default charaSlice.reducer;

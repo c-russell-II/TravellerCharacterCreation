@@ -26,6 +26,7 @@ const RankUpBonus = (props) => {
   const passSpecialty = (choice) => {
       dispatch(setValue({skill: specialtyDetails.skill, specialty: choice, value: specialtyDetails.value}))
       setSpecialtyDetails({active: false, skill: null, list: null, value: null})
+      setBonusBody(<p>Gained skill: {specialtyDetails.skill}({choice}) at rank {specialtyDetails.value}</p>)
       return;
   }
 
