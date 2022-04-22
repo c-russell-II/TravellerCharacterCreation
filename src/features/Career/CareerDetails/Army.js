@@ -26,17 +26,16 @@ export const army = {
         5: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You are given a special assignment or duty in your unit.'},
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are thrown into a brutal ground war.',
                 pass: {description: 'You avoid injury through the entire war, and improve your skills.',
-                    result: {type: 'choice',
-                        choiceType: 'increaseSkill',
-                        choiceList: ['GunCombat', 'Leadership'],
-                        specialtyList: {GunCombat: 'any', Leadership: null}
-                    }
+                    type: 'choice',
+                    choiceType: 'increaseSkill',
+                    choiceList: ['GunCombat', 'Leadership'],
+                    specialtyList: {GunCombat: 'any', Leadership: null}
                 },
                 fail: {description: "You are injured early in the fighting, gaining nothing but a scar and a story."}
             },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.',
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.',
                 result: {type: 'choice',
                     choiceType: 'increaseAny'
                 }

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { changeByAmount } from "../../Character/StatsSlice";
+import { resolveEvent } from "../../Term/TermSlice";
 
 const MildInjury = (props) => {
     const [selection, setSelection] = useState('');
@@ -14,6 +15,7 @@ const MildInjury = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(changeByAmount({stat: event.target.value, value: -1}));
+        dispatch(resolveEvent())
         return;
     }
     return (

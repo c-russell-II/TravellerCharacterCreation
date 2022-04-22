@@ -7,14 +7,14 @@ export const scout  = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'check', checkType: 'choice', choiceList: ['Pilot', 'Persuade'], specialtyList: {Pilot: 'any', Persuade: null}, description: "Your ship is ambushed by enemy vessels.", checkDC: 8,
-            pass: {description: "Either through parley or just cheesing it, you get away unscathed.",
+            pass: {type: 'reward', description: "Either through parley or just cheesing it, you get away unscathed.",
                 result: {type: 'multiple',
                     list: ['skill', 'enemy'],
                     skill: {type: 'setSkill', skill: 'Electronics', specialty: 'sensors', value: 1},
                     enemy: {type: 'enemy', value: 1, description: "An enemy who ambushed you, you either talked or flew your way out, while working as a Scout."}
                 }
             },
-            fail: {description: "You fail to talk or fly your way out, and your ship is destroyed.",
+            fail: {type: 'reward', description: "You fail to talk or fly your way out, and your ship is destroyed.",
                 result: {type: 'multiple',
                     list: ['muster', 'enemy'],
                     muster: {type: 'muster'},
@@ -55,27 +55,27 @@ export const scout  = {
         },
         9: {type: 'check', checkType: 'choice', choiceList: ['Medic', 'Engineer'], specialtyList: {Medic: null, Engineer: 'any'}, checkDC: 8,
             description: "Your scout ship is one of the first on the scene to rescue the survivors of the disaster.",
-            pass: {description: "Your aid is instrumental in rescuing as many survivors as possible.",
+            pass: {type: 'reward', description: "Your aid is instrumental in rescuing as many survivors as possible.",
                 result: {type: 'multiple',
                     list: ['advancement', 'contact'],
                     advancement: {type: 'advancement', value: 2},
                     contact: {type: 'contact', value: 1, description: "Someone you helped save from a disaster as a Scout- or someone you worked with to deal with that disaster."}
                 }
             },
-            fail: {description: "Despite your best efforts, you make little difference to the ultimate fate of the survivors.",
+            fail: {type: 'reward', description: "Despite your best efforts, you make little difference to the ultimate fate of the survivors.",
                 result: {type: 'enemy', value: 1, description: "Someone who is upset at your failure to aid more survivors in a disaster you came across as a Scout."}
             },
         },
         10: {type: 'check', checkType: 'choice', choiceList: ['Survival', 'Pilot'], specialtyList: {Survival: null, Pilot: 'any'}, checkDC: 8,
             description: "You spend a great deal of time on the fringes of Charted Space.",
-            pass: {description: "You make contact with an alien race!",
+            pass: {type: 'reward', description: "You make contact with an alien race!",
                 result: {type: 'multiple',
                     list: ['contact', 'skill'],
                     contact: {type: 'contact', value: 1, description: "An alien you met after quite a while on the fringes of Charted Space."},
                     skill: {type: 'increaseAny'}
                 }
             },
-            fail: {description: "You don't hold up so well to the wild space you found yourself in.", result: {type: 'redirect', destination: 'mishap', result: {type: 'noMuster'}}},
+            fail: {description: "You don't hold up so well to the wild space you found yourself in.", type: 'redirect', destination: 'mishap', result: {type: 'noMuster'}},
         },
         11: {type: 'reward', description: "You serve as the courier for an important message from the imperium.",
             result: {type: 'choice',
@@ -104,7 +104,7 @@ export const scout  = {
                 skill: {type: 'setSkill', value: 1, skill: 'Diplomat'}
             }
         },
-        {type: 'reward', description: "You have no idea what happened to you. You were found drifting on the fringes of friendly space."},
+        {type: 'generic', description: "You have no idea what happened to you. You were found drifting on the fringes of friendly space."},
         {type: 'redirect', destination: 'injury table'}
     ],
     skills: {

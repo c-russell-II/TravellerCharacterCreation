@@ -29,8 +29,8 @@ export const scholar = {
             result: {type: 'benefit', value: 1}
         },
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'setAny', value: 1}},
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: 'none'}}
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'setAny', value: 1}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'choice', choiceList:['a', 'b'], description: "You have an opportunity to cheat in some fashion, advancing your own causes by stealing another's work, using an alien device, taking an unethical shortcut, etc.",
@@ -38,8 +38,9 @@ export const scholar = {
                 result: {type: 'check',
                     checkType: 'choice',
                     choiceList: ['Deception', 'Admin'],
+                    specialtyList: {Deception: null, Admin: null},
                     checkDC: 8,
-                    pass:{description: "You exploit the opportunity to the fullest.",
+                    pass:{type: 'reward', description: "You exploit the opportunity to the fullest.",
                         result: {type: 'multiple',
                             list: ['benefit', 'skill', 'enemy'],
                             benefit: {type: 'benefit', value: 2},
@@ -47,11 +48,11 @@ export const scholar = {
                             enemy: {type: 'enemy', value: 1, description: "Someone who was harmed by your choice to cheat in some form or fashion while working as a Scholar."}
                         }
                     },
-                    fail:{description: "You fail to gain any significant advantage, at cost to yourself.",
+                    fail:{type: 'reward', description: "You fail to gain any significant advantage, at cost to yourself.",
                         result: {type: 'multiple',
-                            list: ['enemy', 'benefit'],
+                            list: ['enemy', 'addBenefit'],
                             enemy: {type: 'enemy', value: 1, description: "Someone who your tried unsuccessfully to cheat out of their hard-earned credit and money."},
-                            benefit: {type: 'addBenefit', value: -1}
+                            addBenefit: {type: 'addBenefit', value: -1}
                         }
                     }
                 }
@@ -122,8 +123,8 @@ export const scholar = {
             },
             b: {button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.",
                 result: {type: 'multiple',
-                    list: ['benefit', 'noMuster'],
-                    benefit: {type: 'loseAllBenefits'},
+                    list: ['addBenefit', 'noMuster'],
+                    addBenefit: {type: 'addBenefit', value: 'all'},
                     noMuster: {type: 'noMuster'}
                 }
             }

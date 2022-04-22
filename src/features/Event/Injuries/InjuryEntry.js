@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { ReactReduxContext, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import {roll} from "../../Career/careerHandler"
 import genericTables from "../genericTables";
 import MediumInjury from "./MediumInjury";

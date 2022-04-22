@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { changeByAmount } from "../../Character/StatsSlice";
+import { resolveEvent } from "../../Term/TermSlice";
 const WorstInjury = (props) => {
     const dispatch = useDispatch();
     const [selection, setSelection] = useState('')
@@ -13,6 +14,7 @@ const WorstInjury = (props) => {
         const final = array.filter(e => e !== selection);
         dispatch(changeByAmount({stat: selection, value: -val}))
         final.forEach(e => dispatch(changeByAmount({stat: e, value: -2})))
+        dispatch(resolveEvent());
     }
 
     const handleChange = (event) => {

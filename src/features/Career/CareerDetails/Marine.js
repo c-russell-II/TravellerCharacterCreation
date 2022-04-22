@@ -23,17 +23,17 @@ export const marine = {
             }
         },
         5: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'setAny', value: 1}},
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: 'none'}}},
-        6: {type: 'choiceCheck', choiceList: ['GunCombat', 'Melee'], specialtyList: {GunCombat: 'any', Melee: 'any'}, checkDC: 8, description: 'You lead an assault on an enemy fortress...',
-            pass: {description: 'Your assault is a smashing success.',
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'setAny', value: 1}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}},
+        6: {type: 'check', checkType: 'choice', choiceList: ['GunCombat', 'Melee'], specialtyList: {GunCombat: 'any', Melee: 'any'}, checkDC: 8, description: 'You lead an assault on an enemy fortress...',
+            pass: {type: 'reward', description: 'Your assault is a smashing success.',
                 result: {type: 'choice',
                     choiceType: 'increaseSkill',
                     choiceList: ['Tactics', 'Leadership'],
                     specialtyList: {Tactics: 'military', Leadership: null}
                 }
             },
-            fail: {description: 'Your assault is a failure, and you are injured.', result: {type: 'choice', choiceType: 'stat', choiceList: ['end', 'str', 'dex'], value: -1}}
+            fail: {type: 'reward', description: 'Your assault is a failure, and you are injured.', result: {type: 'choice', choiceType: 'stat', choiceList: ['end', 'str', 'dex'], value: -1}}
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'reward', description: 'You are on the front lines of a planetary assault and occupation.',
@@ -44,7 +44,7 @@ export const marine = {
             }
         },
         9: {type: 'choice', choiceList: ['a', 'b'], description: "A mission goes disastrously wrong due to your commander's error or incompetence, but you emerge unscathed.",
-            a:{button: 'Report them!', description: "You report their failure, gaining approval from higher ups, and a new enemy...",
+            a:{button: 'Report them!', type: 'reward', description: "You report their failure, gaining approval from higher ups, and a new enemy...",
                 result: {type: 'multiple',
                     list: ['advancement', 'enemy'],
                     advancement:{type: 'advancement', value: 2},
@@ -70,9 +70,9 @@ export const marine = {
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'reward', description: 'A mission goes wrong- you and several others are captured and mistreated by the enemy.',
             result: {type: 'multiple',
-                list: ['enemy', 'stat'],
+                list: ['enemy', 'choice'],
                 enemy: {type: 'enemy', value: 1, description: 'Jailers from your disastrous mission in the marines'},
-                stat: {type: 'choice',
+                choice: {type: 'choice',
                     choiceType: 'stat',
                     choiceList: ['str', 'dex'],
                     value: -1

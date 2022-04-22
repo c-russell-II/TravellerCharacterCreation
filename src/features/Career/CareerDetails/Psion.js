@@ -17,8 +17,8 @@ export const psion = {
         },
         5: {type: 'choice', description: "You have a chance to use your psionic powers unethically.", choiceList: ['a', 'b'],
             a: {button: 'Do it.',type: 'check', checkType: 'stat', checkStat: 'psi', checkDC: 8,
-                pass: {description: "Your attempt bears profitable fruit.", result: {type: 'choice', choiceType: 'multiple', list: ['benefit', 'stat'], benefit: {type: 'addBenefit'}, stat: {type: 'stat', stat: 'soc', value: 1}}},
-                fail: {description: "Your attempt backfires.", result: {type: 'stat', stat: 'soc', value: -1}}
+                pass: {type: 'reward', description: "Your attempt bears profitable fruit.", result: {type: 'choice', choiceType: 'multiple', list: ['addBenefit', 'stat'], addBenefit: {type: 'addBenefit'}, stat: {type: 'stat', stat: 'soc', value: 1}}},
+                fail: {type: 'reward', description: "Your attempt backfires.", result: {type: 'stat', stat: 'soc', value: -1}}
             },
             b: {button: "Refrain.", description: "You let your better judgement prevail.", result: {type: 'none'}}
         },
@@ -28,8 +28,8 @@ export const psion = {
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'reward', description: "You achieve a new level of Psionic strength.", result:{type: 'stat', stat: 'psi', value: 1}},
         9: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'increaseAny'}},
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: 'none'}}},
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'increaseAny'}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}},
         10: {type: 'reward', description: "You pick up potentially useful information from your passive Psionic powers.", result: {type: 'benefit', value: 1}},
         11: {type: 'reward', description: "You gain a mentor.", result: {type: 'multiple', list: ['ally', 'advancement'], ally: {type: 'ally', value: 1, description: "Mentor from Psion career."}, advancement: {type: 'advancement', value: 4}}},
         12: {type: 'reward', description: "You achieve a new level of discipline with your powers.", result: {type: 'promotion'}}
@@ -37,7 +37,7 @@ export const psion = {
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'reward', description: "You telepathically contact something dangerous, and are plagued by consistent, terrifying nightmares.", result: {type: 'stat', stat: 'psi', value: -1}},
-        {type: 'anti-psi-cult'},
+        {type: 'other'},
         {type: 'choice', description: "You are asked to use your psionic powers in an unethical fashion.", choiceList: ['a', 'b'],
             a: {button: "Agree.", description: "You do so, and it turns out to have been a test- you have been approved to continue your training.", result: {type: 'multiple', list: ['noMuster', 'enemy'], noMuster: {type: 'noMuster'}, enemy: {type: 'enemy', value: 1, description: "Someone you hurt doing something unethical during your psion career."}}},
             b: {button: "Refuse", description: "It was a test by your superiors, and they decide you are not a good fit for continued enrollment in their organization."}

@@ -9,8 +9,6 @@ export const TermMidPoint = (props) => {
     const stats = useSelector(state => state.stats)
     const term = useSelector(state=> state.term);
     const {career} = useParams();
-    const [hasEvent, setHasEvent] = useState(true);
-    const cleanup = () => setHasEvent(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -27,7 +25,7 @@ export const TermMidPoint = (props) => {
     return (
         <>
             <h2>You survived- but is that all?</h2>
-            {hasEvent ? <Event cleanup={cleanup}/> :
+            {term.event.resolved ? <Event /> :
                 <>
                     <p>And after that, a promotion ... ?</p>
                     <button onClick={handleClick}>Try for it</button>

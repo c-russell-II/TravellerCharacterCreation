@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { changeByAmount } from "../../Character/StatsSlice";
+import { resolveEvent } from "../../Term/TermSlice";
 
 const SevereInjury = (props) => {
     const [selection, setSelection] = useState('')
@@ -11,6 +12,7 @@ const SevereInjury = (props) => {
         event.preventDefault();
         const val = roll() + 1;
         dispatch(changeByAmount({stat: selection, value: -1 * val}))
+        dispatch(resolveEvent());
         return;
     }
 

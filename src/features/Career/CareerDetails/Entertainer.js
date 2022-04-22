@@ -7,9 +7,9 @@ export const entertainer  = {
     qualificationDC: 5,
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
-        3: {type: 'check', checkType: 'choice', choiceList: ['Art', 'Investigate'], checkDC: 8, description: 'You are invited to take part in a controversial exhibition or event.',
-            pass: {description: 'The event goes over remarkably well, noticeably boosting your status.', result: {type: 'stat', stat: 'soc', value: 1}},
-            fail: {description: 'The controversy overtakes the art, and your status in society noticeably declines.', result: {type: 'stat', stat: 'soc', value: -1}},
+        3: {type: 'check', checkType: 'choice', choiceList: ['Art', 'Investigate'], specialtyList: {Art: 'any', Persuade: null}, checkDC: 8, description: 'You are invited to take part in a controversial exhibition or event.',
+            pass: {type: 'reward', description: 'The event goes over remarkably well, noticeably boosting your status.', result: {type: 'stat', stat: 'soc', value: 1}},
+            fail: {type: 'reward', description: 'The controversy overtakes the art, and your status in society noticeably declines.', result: {type: 'stat', stat: 'soc', value: -1}},
         },
         4: {type: 'reward', description: "You are a part of your homeworld's celebrity circles.", 
             result: {type: 'choice', choiceType: 'multiple',
@@ -27,15 +27,15 @@ export const entertainer  = {
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'choice', choiceList: ['a', 'b'], description: 'You have the opportunity to criticize or even bring down a questionable political leader on your homeworld.',
-            a: {button: "Take them on.", type: 'check', checkType: 'choice', choiceList: ['Art', 'Persuade'], choiceDetail: {Art: 'skill', Persuade: 'skill'}, specialtyList: {Art: 'any', Persuade: null},
+            a: {button: "Take them on.", type: 'check', checkType: 'choice', choiceList: ['Art', 'Persuade'], specialtyList: {Art: 'any', Persuade: null},
                 description: 'You attempt to bring them down.', checkDC: 8,
-                pass: {description: 'You succeed in bringing down the political leader.',
+                pass: {type: 'reward', description: 'You succeed in bringing down the political leader.',
                     result: {type: 'multiple', list: ['enemy', 'choice'], listDetail: {Enemy: 'enemy', choice: 'choice'},
                         enemy: {type: 'enemy', value: 1, description: 'Political leader you took out while working an entertainer career.'},
                         choice: {type: 'choice', choiceType: 'increaseAny'}
                     }
                 },
-                fail: {description: 'You fail to bring down the political leader.',
+                fail: {type: 'reward', description: 'You fail to bring down the political leader.',
                     result: {type: 'multiple',
                         list: ['enemy', 'choice', 'redirect'],
                         enemy: {type: 'enemy', description: 'Political leader you tried- and failed- to take down while working as an entertainer.', value: 1},
@@ -44,7 +44,7 @@ export const entertainer  = {
                     }
                 },
             },
-            b: {button: "Support them", type: 'reward', description: 'You decide to support the questionable political leader...', result: {type: 'none'}},
+            b: {button: "Support them", type: 'generic', description: 'You decide to support the questionable political leader...'},
         },
         9: {type: 'reward', description: 'You go on a tour of the sector, visiting several worlds.', result: {type: 'contacts', value: 'roll', roll: 2}},
         10: {type: 'reward', description: 'One of your pieces of art is stolen, and the investigation brings you into the criminal underworld.',
@@ -68,7 +68,7 @@ export const entertainer  = {
                 specialties: {Pilot: 'any'}, value: 1
             }
         },
-        {type: 'reward', description: 'You are forced out due to censorship or controversy. What truth did you get too close to?', result:{type: 'qualification', value: 2}}
+        {type: 'reward', description: 'You are forced out due to censorship or controversy. What truth did you get too close to?', result:{type: 'qualification', career: 'any', value: 2}}
     ],
     skills: {
         personal: [

@@ -8,42 +8,41 @@ export const agent = {
         
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         
-        3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], checkDC: 8, description: 'An investigation turns dangerous...',
-            pass: {description: 'You manage to demonstrate and noticeably improve your tradecraft.',
-                result: {type: 'reward',
-                    rewardType: 'choice',
+        3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], specialtyList: {Investigate: null, Streetwise: null}, checkDC: 8, description: 'An investigation turns dangerous...',
+            pass: { type: 'reward', description: 'You manage to demonstrate and noticeably improve your tradecraft.',
+                result: {
+                    type: 'choice',
                     choiceType: 'setSkill',
                     choices: ['Deception', 'Jack-of-All-Trades', 'Persuade', 'Tactics'],
                     specialtyList:{'Deception': null, 'Jack-of-All-Trades': null, 'Persuade': null, 'Tactics': 'any'},
                     value: 1
                 }
             },
-            fail: {description: 'You bite off more than you can chew, and ...', result: {type: 'redirect', destination: 'mishap'}}},
+            fail: {type: 'redirect', description: 'You bite off more than you can chew, and ...', destination: 'mishap'}
+        },
         
         4: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
         
         5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 2}, description: 'You establish a network of contacts'},
         
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'reward', rewardType: 'choice', choiceType: 'increaseAny'}},
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
+            fail: {type: 'generic', description: "However, you do not manage to measure up to your instructors' standards."}},
         
         7: {type: 'redirect', destination: 'life'},
         
-        8: {type: 'check', checktype: 'skill', checkSkill: 'Deception', checkDC: 8, description: "You go undercover to investigate an enemy group...",
+        8: {type: 'check', checkType: 'skill', checkSkill: 'Deception', specialty: null, checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
-                result: {type: 'choice',
-                    choiceType: 'redirect',
-                    choiceList:['rogue', 'citizen'],
-                    resultList: ['event', 'specialist'],
-                }
+                type: 'choice',
+                choiceType: 'redirect',
+                choiceList:['rogue', 'citizen'],
+                resultList: ['event', 'specialist'],
             },
             fail: {description: 'You fail to deceive your targets...',
-                result: {type: 'choice',
-                    choiceType: 'redirect',
-                    choiceList: ['rogue', 'citizen'],
-                    resultList: ['mishap']
-                }
+                type: 'choice',
+                choiceType: 'redirect',
+                choiceList: ['rogue', 'citizen'],
+                resultList: ['mishap']
             }
         },
 
@@ -93,9 +92,9 @@ export const agent = {
                 }
             },
         },
-        {type: 'skillCheck', checkType: 'Advocate', checkDC: 8, description: 'An investigation goes horribly wrong-- or right-- ending your career.',
-            pass: {description: 'You manage to defend yourself well enough that you are able to leave amicably...'},
-            fail: {description: "You are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
+        {type: 'check', checkType: 'skill', checkSkill: 'Advocate', specialty: null, checkDC: 8, description: 'An investigation goes horribly wrong-- or right-- ending your career.',
+            pass: {type: 'generic', description: 'You manage to defend yourself well enough that you are able to leave amicably...'},
+            fail: {type: 'prisoner', description: "You are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
         
         {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', result:{type: 'multiple', resultList:['enemy', 'skill'], skill:'Deception', }},
         

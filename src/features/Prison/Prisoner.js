@@ -69,14 +69,14 @@ export const prisoner  = {
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'ParoleUp', description: "You are accused of assaulting a prison guard.", value: 2},
         {type: 'choice', choiceList: ['a', 'b'], description:"A prison gang is harassing you- do you let them take few things you have, or do you fight back?",
-            a: {button: "Don't fight.", description: "Deciding it isn't worth it, you let them take what they want.", result: {type: 'loseBenefits'}},
+            a: {button: "Don't fight.", description: "Deciding it isn't worth it, you let them take what they want.", result: {type: 'addBenefit', value: 'all'}},
             b: {button: "Fight them!",
                 result: {type: 'check',
                     checkType: 'skill',
                     checkSkill: 'Melee',
                     specialty: 'unarmed',
                     checkDC: 8,
-                    pass: {description: "You beat several shades out of all your assailants!",
+                    pass: {type: 'reward', description: "You beat several shades out of all your assailants!",
                         result: {type: 'multiple',
                             list: ['Enemy', 'ParoleUp'],
                             Enemy: {type: 'enemy', value: 1, description: "Gang member you met in prison, holds a grudge over you beating the heck out of him and his gang single-handedly."},
@@ -84,7 +84,7 @@ export const prisoner  = {
                         }
                     },
                     fail: {description: "You don't manage to win the fight, but they focus more on beating you up than stealing from you.",
-                        result: {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'}
+                        type: 'redirect', destination:'injury', modifier: 'disadvantage',
                     }
                 }
             }

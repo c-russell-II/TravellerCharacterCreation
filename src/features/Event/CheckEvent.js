@@ -1,34 +1,67 @@
-import React from "react";
-import { skillCheck } from "../Career/careerHandler";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { skillCheck } from "../Career/careerHandler";
 import { updateEvent } from "../Term/TermSlice";
+import ChoiceCheck from "./ChoiceCheck";
 
-export const CheckEvent = (props) => {
-    const dispatch = useDispatch();
+const CheckEvent = (props) => {
     const event = useSelector(state => state.term.event);
-    const stats = useSelector(state => state.stats);
-    const skills = useSelector(state => state.skills);
+    const stats = useSelector(state=> state.stats);
+    const skills = useSelector(state => state.skill);
+    const [isChoice, setIsChoice] = useState();
+    const dispatch = useDispatch();
 
-    const handleClick = () => {
-        let mod = 0;
-        if (event.checkStat) {
+    const handleCheck = () => {
+        const type = event.checkType;
+        let mod;
+
+        if (type === 'stat') {
             mod = stats[event.checkStat];
-        } else if (event.checkSkill) {
+        }
+
+        if (type === 'skill') {
             mod = skills[event.checkSkill];
         }
-        const result = event.checkDC <= skillCheck(mod);
+        const outcome = skillCheck(mod) >= event.checkDC;
+        return outcome;
+    }
+
+    const resolveCheck = (result, event) => {
+        let description = event.description;
+        let contents;
+
         if (result) {
-            dispatch(updateEvent({type: 'reward', description: event.description + ' ' + event.pass.description, result: event.pass.result}))
+            contents = event.pass;
+            description += ' ' + event.pass.description;
         } else {
-            dispatch(updateEvent({type: 'reward', description: event.description + ' ' + event.fail.description, result: event.fail.result}))
+            contents = event.fail;
+            description += ' ' + event.fail.description;
         }
+
+        const newEvent = { ...contents,
+            description: description
+        };
+        dispatch(updateEvent(newEvent));
         return;
     }
+
+    const handleClick = () => {
+        if (event.checkType === 'choice') {
+            setIsChoice(true);
+            return;
+        }
+        resolveCheck(handleCheck(), event);
+        return;
+    }
+
     return (
         <>
-            <h5>{props.isMishap ? "This year's disaster..." : 'This year in your life...'}</h5>
             <p>{event.description}</p>
-            <button onClick={handleClick}>Let's try it!</button>
+            {isChoice ? <ChoiceCheck cleanup={() => setIsChoice(false)}/>
+            : <button onClick={handleClick}>Next</button>
+            }
         </>
-    );
-};
+    )
+}
+
+export default CheckEvent;

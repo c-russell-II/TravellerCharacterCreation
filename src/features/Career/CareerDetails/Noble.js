@@ -8,8 +8,8 @@ export const noble = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You get challenged to a duel for your honour and standing.',
-            a: {button: 'Fight the Duel!', result: {type: 'check', checkType: 'skill', checkSkill: 'Melee', checkDC: 8,
-                pass: {description: 'You fight well, and honorably, and win the honour duel.', 
+            a: {button: 'Fight the Duel!', result: {type: 'check', checkType: 'skill', checkSkill: 'Melee', specialty: 'any', checkDC: 8,
+                pass: {type: 'reward', description: 'You fight well, and honorably, and win the honour duel.', 
                     result: {type: 'multiple', list: ['choice', 'stat'], 
                         choice: {type: 'choice', choiceType: 'increaseSkill', 
                             choiceList: ['Melee', 'Leadership', 'Tactics', 'Deception'], 
@@ -18,7 +18,7 @@ export const noble = {
                         stat: {type: 'stat', stat: 'soc', value: 1}
                     },
                 },
-                fail:{description: 'You fight well- but not well enough. You lose the honour duel.', 
+                fail:{type: 'reward', description: 'You fight well- but not well enough. You lose the honour duel.', 
                     result: {type: 'multiple', list: ['redirect', 'stat', 'choice'],
                         redirect: {type:'redirect', destination: 'injury'},
                         stat: {type: 'stat', stat: 'soc', value: -1},
@@ -53,7 +53,7 @@ export const noble = {
                 result: {type: 'check', checkType: 'choice',
                     choiceList: ['Deception', 'Persuade'],
                     checkDC: 8,
-                    pass: {description: 'You masterfully navigate the difficulties involved in such a conspiracy.',
+                    pass: {type: 'generic', description: 'You masterfully navigate the difficulties involved in such a conspiracy.',
                         result: {type: 'choice',
                             choiceType: 'increaseSkill',
                             choiceList: ['Deception', 'Persuade', 'Tactics', 'Carouse'],
@@ -61,7 +61,7 @@ export const noble = {
                         }
                     },
                     fail: {description: "The intricacies of this type of conspiracy are too much for you and your fellows, and the conspiracy collapses.",
-                        result: {type: 'redirect', destination: 'mishap'}
+                        type: 'redirect', destination: 'mishap'
                     },
                 }
             },
@@ -106,8 +106,8 @@ export const noble = {
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
         {type: 'reward', description: 'A family scandal forces you out of your position.', result: {type: 'stat', stat: 'soc', value: -1}},
         {type: 'check', checkType: 'choice', choiceList: ['Stealth', 'Deception'], checkDC: 8, description: 'A disaster- natural or manmade- strikes.',
-            pass: {description: "You manage to escape unhurt.", result: {type: 'none'}},
-            fail: {description: "You are injured while attempting escape.", result: {type: 'redirect', destination: 'injury'}},
+            pass: {description: "You manage to escape unhurt.", type: 'generic'},
+            fail: {description: "You are injured while attempting escape.", type: 'redirect', destination: 'injury'},
         },
         {type: 'reward', description: 'Political manoeuvrings usurp your position.',
             result: {type: 'multiple', list: ['choice', 'rival'],
@@ -116,8 +116,8 @@ export const noble = {
             }
         },
         {type: 'check', checkType: 'stat', checkStat: 'end', checkDC: 8, description: 'An assassin attempts to end your life.',
-            pass: {description: 'You manage to survive the attempt with only minor wounds to show for it.', result: {type: 'none'}},
-            fail: {description: "The assassin manages to injure you.", result: {type: 'redirect', destination: 'injury'}}
+            pass: {description: 'You manage to survive the attempt with only minor wounds to show for it.', type: 'generic'},
+            fail: {description: "The assassin manages to injure you.", type: 'redirect', destination: 'injury'}
         },
         {type: 'redirect', destination: 'injury table'}
     ],

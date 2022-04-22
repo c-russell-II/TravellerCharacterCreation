@@ -26,14 +26,14 @@ export const drifter = {
         5: {type: 'reward', description: 'You manage to scavenge something useful.', result: {type: 'benefit', value: 1}},
         6: {type: 'redirect', destination: 'unusual'},
         7: {type: 'redirect', destination: 'life'},
-        8: {type: 'check', checkType: 'choice', choiceList: ['Melee', 'GunCombat', 'Stealth'], checkDC: 8,
-            pass: {description: 'You manage to avoid injury.', result: null},
-            fail: {description: 'You fail to avoid injury.', result: {type: 'redirect', destination: 'injury'}}},
+        8: {type: 'check', checkType: 'choice', choiceList: ['Melee', 'GunCombat', 'Stealth'], specialtyList: {Melee: 'any', GunCombat: 'any', Stealth: null}, checkDC: 8,
+            pass: {description: 'You manage to avoid injury.', type: 'generic'},
+            fail: {description: 'You fail to avoid injury.', type: 'redirect', destination: 'injury'}},
         9: {type: 'choice', description: 'You are offered the chance to participate in a risky but rewarding venture.', choiceList: ['a', 'b'],
             a:{description: 'You agree, and...', result: {type: 'random'}},
             b:{description: 'You decide to play it safe.', result: null}},
         10: {type: 'reward', description: 'Life on the edge hones your abilities.', result: {type: 'choice', choiceType: 'increaseAny'}},
-        11: {type: 'reward', description: 'You are forcible drafted.', result: {type: 'career', career: 'draft'}},
+        11: {type: 'career', description: 'You are forcible drafted.', career: 'draft'},
         12: {type: 'reward', description: 'You thrive on adversity', result: {type: 'promotion'}}
     },
     mishapList: [

@@ -16,19 +16,19 @@ export const citizen = {
         },
         5: {type: 'reward', description: 'Your business expands, your corporation grows, or your colony thrives.', result: {type: 'benefit', value: 1}},
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 10, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.',
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.',
                 result: {type: 'choice', choiceType: 'setAny', value: 1}
             },
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: null}}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}},
         7: {type: 'redirect', destionation: 'life'},
         8: {type: 'choice', description: "You learn something you shouldn't have- a corporate secret, a political scandal - which you can profit from illegally, if you choose.", choiceList: ['a', 'b'],
             a: {description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.',  button: 'Take advantage.',
-                results: {type: 'choice', choiceList:['SkillAndBenefit', 'ContactAndBenefit'],
-                    SkillAndBenefit: {type: 'multiple', list: ['benefit', 'choice'],
+                results: {type: 'choice', choiceList:['multipleA', 'multipleB'],
+                    multipleA: {type: 'multiple', list: ['benefit', 'choice'],
                         benefit: {type: 'benefit', value: 1}, 
                         choice: {type:'choice', choiceType: 'setSkill', choiceList:['Streetwise', 'Investigate'], specialtyList: {Streetwise: null, Investigate: null}, value: 1}
                     },
-                    ContactAndBenefit: {type: 'multiple', list: ['benefit', 'contact'],
+                    multipleB: {type: 'multiple', list: ['benefit', 'contact'],
                         benefit: {type: 'benefit', value: 1},
                         contact: {type: 'contact', value: 1, description: 'Criminal who helped you illegally exploit a scandal or secret you uncovered as a Citizen.'}
                     }
@@ -68,7 +68,7 @@ export const citizen = {
             a:{type: 'reward',
                 description: 'You cooperate, and the business or colony is shut down.',
                 button: 'Cooperate',
-                result: {type: 'qualification', value: 2}
+                result: {type: 'qualification',career: 'any', value: 2}
             },
             b:{type: 'reward',
                 description: 'You refuse to cooperate, and are forced out of this career by the outside group- but your boss knows what you did, and is grateful for it.',
@@ -76,10 +76,10 @@ export const citizen = {
                 result: {type: 'ally', value: 1, description: 'Your boss from Citizen career, who you dealt with an outside force or interference for.'}
             }
         },
-        {type: 'check', checkType: 'skill', checkSkill: 'Streetwise', checkDC: 8,
+        {type: 'check', checkType: 'skill', checkSkill: 'Streetwise', specialty: null, checkDC: 8,
             description: 'A revolution, attack, or other violent event throws your life into chaos, forcing you to move far away- perhaps even to a new planet.',
             pass: {type: 'reward', description: 'Navigating the upheaval, you sharpen your skills.', result: {type: 'choice', choiceType: 'increaseAny'}},
-            fail: {type: null}},
+            fail: {type: 'generic', description: 'You barely manage to escape the planet unscathed, and start trying to put your life back on track.'}},
         {type: 'redirect', destination: 'injury'}
     ],
     skills: {

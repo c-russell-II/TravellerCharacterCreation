@@ -8,13 +8,13 @@ export const merchant = {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You are offered the opportunity to smuggle illegal goods onto a planet.',
             a: {button: 'Smuggle them', description: "You agree to smuggle the goods, and...", 
-                    result: {type: 'check', checkType: 'choice', choiceList:['Deception', 'Persuade'], checkDC: 8, 
-                        pass: {description: 'You successfully smuggle them on planet.', 
+                    result: {type: 'check', checkType: 'choice', choiceList:['Deception', 'Persuade'], specialtyList: {Deception: null, Persuade: null}, checkDC: 8, 
+                        pass: {type: 'reward', description: 'You successfully smuggle them on planet.', 
                             result: {type: 'multiple', list: ['Streetwise', 'benefit'], 
                                 Streetwise: {type: 'setSkill', skill: 'Streetwise', value: 1}, 
                                 benefit: {type: 'addBenefit', value: 1}
                             }, 
-                        fail: {description: "You don't manage to bring the goods onto the planet, but no grudge is held", result: {type: 'none'}}
+                        fail: {description: "You don't manage to bring the goods onto the planet, but no grudge is held", type: 'generic'}
                         }
                     }
                 },
@@ -45,8 +45,8 @@ export const merchant = {
             }
         },
         9: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
-            pass: {description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
-            fail: {description: "You do not manage to measure up to your instructors' standards.", result: {type: 'none'}}},
+            pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
+            fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}},
         10: {type: 'reward', description: "A good deal ensures you're living the high life for a few years.", result: {type: 'benefit', value: 1}},
         11: {type: 'reward', description: "You befriend a useful ally in one sphere.", 
             result: {type: 'multiple', list:['ally', 'choice'],
@@ -64,7 +64,7 @@ export const merchant = {
         {type: 'reward', description: 'You are bankrupted by a rival.',
             result: {type: 'multiple',
                 list: ['benefits', 'rival'],
-                benefits: {type: 'benefits', value: 'loseAll'},
+                benefits: {type: 'addBenefit', value: 'all'},
                 rival:{type:'rival', value: 1, description: 'Rival who bankrupted you, ending your Merchant career.'}
             }
         },
@@ -80,7 +80,7 @@ export const merchant = {
             result: {type: 'enemy', value: 1, description: 'Criminals who destroyed the ship or starport you worked on as a Merchant'}
         },
         {type: 'reward', description: "Imperial trade restrictions force you out of business, but in the process, garner you many newly-criminal contacts...",
-            result: {type: 'qualification', career: 'Rogue', value: 'auto'}
+            result: {type: 'qualification', career: 'Rogue', value: 12}
         },
         {type: 'reward', description: 'A series of bad deals and decisions force you into bankruptcy, but you salvage as much as you can...', result:{type:'addBenefit', value: 1}}
     ],

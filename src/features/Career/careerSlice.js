@@ -60,11 +60,16 @@ const options = {
         resolveBenefit: (state, action) => {
             state[action.payload].benefits--;
             return state;
+        },
+        addBenefit: (state, action) => {
+            const {job, value} = action.payload;
+            state[job].benefits += value;
+            return state;
         }
     }
 }
 
 const careerSlice = createSlice(options);
-export const {saveSurvivedTerm, saveFailedTerm, selectJob, promotion, resolveBenefit} = careerSlice.actions;
+export const {saveSurvivedTerm, saveFailedTerm, selectJob, promotion, resolveBenefit, addBenefit} = careerSlice.actions;
 export default careerSlice.reducer;
 
