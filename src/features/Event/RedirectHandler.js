@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
 import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
-import { updateEvent } from "../Term/TermSlice";
+import { resolveEvent, updateEvent } from "../Term/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
 
 const RedirectHandler = (props) => {
@@ -40,7 +40,7 @@ const RedirectHandler = (props) => {
             default:
                 return;
         }
-    }, [event, lifeRedirect])
+    }, [dispatch, event, lifeRedirect, mishapRedirect, unusualRedirect])
     return (
         <>
             {event?.description && <p>{event.description}</p>}

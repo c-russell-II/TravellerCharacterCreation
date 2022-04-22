@@ -11,6 +11,33 @@ const CheckEvent = (props) => {
     const [isChoice, setIsChoice] = useState();
     const dispatch = useDispatch();
 
+    const getFinalMod = (skill) => {
+        if (skills[skill].specialties) {
+            let specialtyVal = -3;
+            if (event.result.specialtyList[skill] === 'any') {
+                skills[skill].specialtyList.forEach((e) => {
+                    if (skills[skill][e] > specialtyVal) {
+                        specialtyVal = skills[skill][e];
+                    };
+                    return;
+                })
+                return specialtyVal;
+            }
+            if (Array.isArray(event.result.specialtyList[skill])) {
+                event.result.specialtyList[skill].forEach((e) => {
+                    if (skills[skill][e] > specialtyVal) {
+                        specialtyVal = skills[skill][e];
+                    }
+                    return;
+                })
+                return specialtyVal;
+            }
+            specialtyVal = skills[skill][event.result.specialtyList[skill]];
+            return specialtyVal;
+        }
+        return skills[skill].value;
+    }
+
     const handleCheck = () => {
         const type = event.checkType;
         let mod;
@@ -20,7 +47,7 @@ const CheckEvent = (props) => {
         }
 
         if (type === 'skill') {
-            mod = skills[event.checkSkill];
+            mod = getFinalMod(event.checkSkill);
         }
         const outcome = skillCheck(mod) >= event.checkDC;
         return outcome;

@@ -4,16 +4,12 @@ import { promotion } from "../../Career/careerSlice";
 import { resolveEvent } from "../../Term/TermSlice";
 
 const PromotionReward = (props) => {
-    const {isMultiple} = props;
     const dispatch = useDispatch();
 
     const handleClick = (event) => {
         event.preventDefault();
-
         dispatch(promotion());
-        if (!isMultiple) {
-            dispatch(resolveEvent())
-        }
+        dispatch(resolveEvent())
     }
     return (
         <>

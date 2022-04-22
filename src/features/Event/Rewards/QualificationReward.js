@@ -5,34 +5,23 @@ import { addQualificationBonus } from "../../Character/miscBonusSlice";
 import { resolveEvent } from "../../Term/TermSlice";
 
 const QualificationReward = (props) => {
-    const {isMultiple} = props;
     const event = useSelector(state => state.term.event);
     const dispatch = useDispatch();
     const age = useSelector(state => state.stats.age);
 
-    const value = isMultiple ? event.result.qualification.value : event.result.value;
+    const value = event.result.value;
 
     const handleClick = (ev) => {
         ev.preventDefault();
         let careers = [];
-        if (isMultiple) {
-            if (event.result.qualification.career === 'any') {
-                Object.keys(jobObject).forEach(e => careers.push(e))
-            } else {
-                careers.push(event.result.qualification.career)
-            }
+        if (event.result.career === 'any') {
+            Object.keys(jobObject).forEach(e=> careers.push(e))
         } else {
-            if (event.result.career === 'any') {
-                Object.keys(jobObject).forEach(e=> careers.push(e))
-            } else {
-                careers.push(event.result.career);
-            }
+            careers.push(event.result.career);
         }
 
         dispatch(addQualificationBonus({careers: careers, value: value, age: age + 4, isTemp: true}));
-        if (!isMultiple) {
-            dispatch(resolveEvent());
-        }
+        dispatch(resolveEvent());
         return;
     }
     return (

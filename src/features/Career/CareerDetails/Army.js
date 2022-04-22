@@ -53,6 +53,7 @@ export const army = {
         },
         11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.',
             result:{type: 'choice',
+                choiceType: 'multiple',
                 choiceList: ['Tactics', 'advancement'],
                 Tactics: {type: 'setSkill', value: 1, specialty: 'military'},
                 advancement:{type:'advancement', value: 4}

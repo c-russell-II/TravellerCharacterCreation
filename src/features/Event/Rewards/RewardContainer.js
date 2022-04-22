@@ -4,6 +4,7 @@ import AddBenefit from "./AddBenefit";
 import AdvancementReward from "./AdvancementReward";
 import Ally from "./Ally";
 import BenefitBonusReward from "./BenefitBonusReward";
+import ChoiceReward from "./ChoiceReward";
 import Contact from "./Contact";
 import Enemy from "./Enemy";
 import PromotionReward from "./PromotionReward";
@@ -19,6 +20,7 @@ const RewardContainer = (props) => {
     useEffect(() => {
         switch (type) {
             case 'choice':
+                setBody(<ChoiceReward/>)
                 return;
             case 'multiple':
                 return;
@@ -59,7 +61,7 @@ const RewardContainer = (props) => {
 
     return (
         <>
-            {!isMultiple && <p>{event?.description}</p>}
+            <p>{event?.description}</p>
             {body}
         </>
     )

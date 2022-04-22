@@ -5,18 +5,15 @@ import { addBenefitBonus } from "../../Character/miscBonusSlice";
 import { resolveEvent } from "../../Term/TermSlice";
 
 const BenefitBonusReward = (props) => {
-    const {isMultiple} = props;
     const event = useSelector(state => state.term.event);
     const {career} = useParams();
     const dispatch = useDispatch();
-    const value = isMultiple ? event.result.benefit.value : event.result.value;
+    const value = event.result.value;
 
     const handleClick = (ev) => {
         ev.preventDefault();
         dispatch(addBenefitBonus({career: career, value: value}))
-        if (!isMultiple) {
-            dispatch(resolveEvent())
-        }
+        dispatch(resolveEvent())
         return;
     }
     return (

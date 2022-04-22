@@ -23,7 +23,7 @@ export const citizen = {
         7: {type: 'redirect', destionation: 'life'},
         8: {type: 'choice', description: "You learn something you shouldn't have- a corporate secret, a political scandal - which you can profit from illegally, if you choose.", choiceList: ['a', 'b'],
             a: {description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.',  button: 'Take advantage.',
-                results: {type: 'choice', choiceList:['multipleA', 'multipleB'],
+                results: {type: 'choice', choiceType: 'multiple', choiceList:['multipleA', 'multipleB'],
                     multipleA: {type: 'multiple', list: ['benefit', 'choice'],
                         benefit: {type: 'benefit', value: 1}, 
                         choice: {type:'choice', choiceType: 'setSkill', choiceList:['Streetwise', 'Investigate'], specialtyList: {Streetwise: null, Investigate: null}, value: 1}
@@ -48,6 +48,7 @@ export const citizen = {
             result: {type: 'multiple',
                 list: ['choice', 'ally'],
                 choice: {type: 'choice',
+                    choiceType: 'multiple',
                     choiceList: ['Diplomat', 'advancement'],
                     Diplomat: {type: 'setSkill', value: 1, skill: 'Diplomat'},
                     advancement: {type: 'advancement', value: 4}
