@@ -2,9 +2,13 @@ import React, { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import AddBenefit from "./AddBenefit";
 import AdvancementReward from "./AdvancementReward";
+import Ally from "./Ally";
 import BenefitBonusReward from "./BenefitBonusReward";
+import Contact from "./Contact";
+import Enemy from "./Enemy";
 import PromotionReward from "./PromotionReward";
 import QualificationReward from "./QualificationReward";
+import Rival from "./Rival";
 import StatReward from "./StatReward";
 
 const RewardContainer = (props) => {
@@ -37,12 +41,16 @@ const RewardContainer = (props) => {
                 setBody(<QualificationReward isMultiple={isMultiple}/>)
                 return;
             case 'rival':
+                setBody(<Rival isMultiple={isMultiple}/>)
                 return;
             case 'contact':
+                setBody(<Contact isMultiple={isMultiple}/>)
                 return;
             case 'ally':
+                setBody(<Ally isMultiple={isMultiple}/>)
                 return;
             case 'enemy':
+                setBody(<Enemy isMultiple={isMultiple}/>)
                 return;
             default:
                 return;
@@ -51,7 +59,7 @@ const RewardContainer = (props) => {
 
     return (
         <>
-            <p>{event?.description}</p>
+            {!isMultiple && <p>{event?.description}</p>}
             {body}
         </>
     )

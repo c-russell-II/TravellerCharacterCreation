@@ -68,10 +68,25 @@ const options = {
             state.contacts.push({number: value, description: description})
             return state;
         },
+        addRival: (state, action) => {
+            const {value, description} = action.payload;
+            state.rivals.push({number: value, description: description})
+            return state;
+        },
+        addAlly: (state, action) => {
+            const {value, description} = action.payload;
+            state.allies.push({number: value, description: description});
+            return state;
+        },
+        addEnemy: (state, action) => {
+            const {value, description} = action.payload;
+            state.enemies.push({number: value, description: description});
+            return state;
+        }
     }
 }
 
 const miscSlice = createSlice(options);
 
-export const {reset, addQualificationBonus, addBenefitBonus, addContact, removeBenefitBonus} = miscSlice.actions;
+export const {reset, addQualificationBonus, addBenefitBonus, addContact, removeBenefitBonus, addRival, addAlly, addEnemy} = miscSlice.actions;
 export default miscSlice.reducer;
