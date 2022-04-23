@@ -142,7 +142,7 @@ const RankUpBonus = (props) => {
           return <p>Gained skill: {bonus.skill} {bonus.value}</p>
         }
 
-        return;
+        return <p>What you learn at the training for your new rank is nothing you didn't already know.</p>;
 
       case 'setStat':
         if (bonus.value + stats.displayValues[bonus.stat] < bonus.threshold) {
@@ -167,7 +167,7 @@ const RankUpBonus = (props) => {
         return <p>{bonus.stat} increased by {bonus.value}</p>;
 
       default:
-        return;
+        return <p>Unhandled Rank-up bonus!</p>
     }
   }, [dispatch, singleSkillHandler, skills, stats.displayValues]);
   useEffect(() => {setIsReady(false)}, [stats.age])

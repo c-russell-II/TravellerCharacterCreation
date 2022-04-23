@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
+import { resolveEvent } from '../../Term/TermSlice';
 import SetSkillReward from './SetSkillReward';
 import SkillIncreaseReward from './SkillIncreaseReward';
 import StatChoiceReward from './StatChoiceReward';
@@ -10,7 +11,7 @@ const ChoiceReward = (props) => {
     const [body, setBody] = useState();
 
     useEffect(() => {
-        switch(event.choiceType) {
+        switch(event.result.choiceType) {
             case 'increaseAny':
                 setBody(<SkillIncreaseReward/>);
                 return;
@@ -31,9 +32,11 @@ const ChoiceReward = (props) => {
                 setBody(<StatChoiceReward/>)
                 return;
             default:
+                alert("Unhandled Reward Choice Event! " + event.result.choiceType)
+                dispatch(resolveEvent())
                 return;
         }
-    }, [event.choiceType])
+    }, [event.result.choiceType, dispatch])
 
     return (
         <>

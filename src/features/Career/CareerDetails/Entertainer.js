@@ -14,10 +14,10 @@ export const entertainer  = {
         4: {type: 'reward', description: "You are a part of your homeworld's celebrity circles.", 
             result: {type: 'choice', choiceType: 'multiple',
                 choiceList: ['Carouse', 'Persuade', 'Steward', 'contact'], 
-                Carouse: {type: 'setSkill', skill: "Carouse", value: 1},
-                Persuade: {type: 'setSkill', skill: "Persuade", value: 1},
-                Steward: {type: 'setSkill', skill: 'Steward', value: 1},
-                contact: {type: 'contact', value: 1, description: 'Someone you came into contact with after becoming a celebrity on your homeworld.'}
+                Carouse: {type: 'setSkill', skill: "Carouse", value: 1, button: "Carouse 1"},
+                Persuade: {type: 'setSkill', skill: "Persuade", value: 1, button: "Persuade 1"},
+                Steward: {type: 'setSkill', skill: 'Steward', value: 1, button: "Steward 1"},
+                contact: {type: 'contact', value: 1, description: 'Someone you came into contact with after becoming a celebrity on your homeworld.', button:"Contact"}
             }
         },
         5: {type: 'reward', description: 'One of your works is especially well received and popular.', result: {type: 'benefit', value: 1}},
@@ -30,7 +30,7 @@ export const entertainer  = {
             a: {button: "Take them on.", type: 'check', checkType: 'choice', choiceList: ['Art', 'Persuade'], specialtyList: {Art: 'any', Persuade: null},
                 description: 'You attempt to bring them down.', checkDC: 8,
                 pass: {type: 'reward', description: 'You succeed in bringing down the political leader.',
-                    result: {type: 'multiple', list: ['enemy', 'choice'], listDetail: {Enemy: 'enemy', choice: 'choice'},
+                    result: {type: 'multiple', list: ['enemy', 'choice'],
                         enemy: {type: 'enemy', value: 1, description: 'Political leader you took out while working an entertainer career.'},
                         choice: {type: 'choice', choiceType: 'increaseAny'}
                     }

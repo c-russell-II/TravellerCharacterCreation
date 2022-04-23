@@ -20,7 +20,7 @@ const StatChoiceReward = (props) => {
     return (
         <>
             <form name="stat" onSubmit={handleSubmit}>
-                {event.result.choiceList.map((e, i) => <label key={i}><input type="radio" name="stat" value={e} checked={choice === e} onChange={handleChange}/>{e}</label>)}
+                {event.result.choiceList.map((e, i) => <label key={i}><input key={Math.random()} type="radio" name="stat" value={e} checked={choice === e} onChange={handleChange}/>{e}</label>)}
                 <input type="submit" value="Choose" name="stat"/>
             </form>
         </>

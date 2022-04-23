@@ -7,14 +7,14 @@ export const drifter = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', description: "A patron offers you a chance at a job.", choiceList: ['a', 'b'],
-            a: {description: 'You accept, but they hint that they will collect that favor one day.',
+            a: {type: 'reward', description: 'You accept, but they hint that they will collect that favor one day.',
                 button: 'Accept',
                 result: {type: 'multiple', list: ['qual', 'patron'], 
-                    qual:{type:'qual', value: 4, expires: false},
+                    qual:{type:'qualification', value: 4, expires: false},
                     patron: {type: 'favor', description: 'Patron who offered you a chance at a job when you were a drifer.'}
                 }
             },
-            b: {description: "You don't trust or want the handout, or 'opportunity' and move on with your life."}
+            b: {type: 'generic', description: "You don't trust or want the handout, or 'opportunity' and move on with your life.", button: "Refuse"}
         },
         4: {type: 'reward', description: 'You pick up a few useful skills here and there.',
             result: {type: 'choice',
@@ -30,7 +30,7 @@ export const drifter = {
             pass: {description: 'You manage to avoid injury.', type: 'generic'},
             fail: {description: 'You fail to avoid injury.', type: 'redirect', destination: 'injury'}},
         9: {type: 'choice', description: 'You are offered the chance to participate in a risky but rewarding venture.', choiceList: ['a', 'b'],
-            a:{description: 'You agree, and...', result: {type: 'random'}},
+            a:{type: 'random', description: 'You agree, and...', result: {type: 'random'}},
             b:{description: 'You decide to play it safe.', result: null}},
         10: {type: 'reward', description: 'Life on the edge hones your abilities.', result: {type: 'choice', choiceType: 'increaseAny'}},
         11: {type: 'career', description: 'You are forcible drafted.', career: 'draft'},

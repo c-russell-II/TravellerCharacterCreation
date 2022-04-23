@@ -60,6 +60,7 @@ const options = {
         },
         changeByAmount: (state, action) => {
             state.displayValues[action.payload.stat] += action.payload.value;
+            state[action.payload.stat] = getModifiers(state.displayValues[action.payload.stat]);
             return state;
         },
         setDisplayValue: (state, action) => {

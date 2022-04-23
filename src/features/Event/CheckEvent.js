@@ -7,7 +7,7 @@ import ChoiceCheck from "./ChoiceCheck";
 const CheckEvent = (props) => {
     const event = useSelector(state => state.term.event);
     const stats = useSelector(state=> state.stats);
-    const skills = useSelector(state => state.skill);
+    const skills = useSelector(state => state.skills);
     const [isChoice, setIsChoice] = useState();
     const dispatch = useDispatch();
 

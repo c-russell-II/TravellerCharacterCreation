@@ -25,10 +25,10 @@ export const navy = {
             result: {type: 'choice',
                 choiceType: 'multiple',
                 choiceList: ['Recon', 'Diplomat', 'Steward', 'contact'],
-                Recon: {type: 'setSkill', skill: 'Recon', specialty: null, value: 1},
-                Diplomat: {type: 'setSkill', skill: 'Diplomat', specialty: null, value: 1},
-                Steward: {type: 'setSkill', skill: 'Steward', specialty: null, value: 1},
-                contact: {type: 'contact', value: 1, description: 'Someone you met while on a diplomatic mission for the Navy.'}
+                Recon: {type: 'setSkill', skill: 'Recon', specialty: null, value: 1, button: "Recon 1"},
+                Diplomat: {type: 'setSkill', skill: 'Diplomat', specialty: null, value: 1, button: "Diplomat 1"},
+                Steward: {type: 'setSkill', skill: 'Steward', specialty: null, value: 1, button: "Steward 1"},
+                contact: {type: 'contact', value: 1, description: 'Someone you met while on a diplomatic mission for the Navy.', button: "New Contact"}
             }
         },
         9: {type: 'reward', description: 'You foil an attempted mutiny on board.',
@@ -39,14 +39,14 @@ export const navy = {
             }
         },
         10: {type: 'choice', description: "You have the opportunity to abuse your position for profit.", choiceList: ['a', 'b'],
-            a: {description: 'You make some money on the side, and no one is hurt by it- or ever finds out.', result: {type: 'addBenefit', value: 1}},
-            b: {description: 'You refuse, and point out the possibility to someone in a position to fix the problem.', result: {type: 'advancement', value: 2}},
+            a: {type: 'reward', description: 'You make some money on the side, and no one is hurt by it- or ever finds out.', result: {type: 'addBenefit', value: 1}},
+            b: {type: 'reward', description: 'You refuse, and point out the possibility to someone in a position to fix the problem.', result: {type: 'advancement', value: 2}},
         },
         11: {type: 'reward', description: 'Your commanding officer takes an active interest in your career.',
             result:{type: 'choice', choiceType: 'multiple',
                 choiceList: ['Tactics', 'advancement'],
-                Tactics: {type: 'setSkill', skill: 'Tactics', specialty: 'naval', value: 1},
-                advancement: {type: 'advancement', value: 4}
+                Tactics: {type: 'setSkill', skill: 'Tactics', specialty: 'naval', value: 1, button: "Tactics(naval) 1"},
+                advancement: {type: 'advancement', value: 4, button: "Advancement + 4"}
             }
         },
         12: {type: 'reward', description: 'Your heroism in battle saves your entire vessel.', result: {type: 'promotion'}}
@@ -56,7 +56,7 @@ export const navy = {
         {type: 'reward', description: "You were woken from cryosleep improperly.", result: {type: 'multiple', list: ['choice', 'noMuster'], choice: {type: 'choice', choiceType: 'stat', choiceList: ['str', 'dex', 'end'], value: -1}, noMuster:{type: 'noMuster'}}},
         {type: 'other'},
         {type: 'choice', description: "You were blamed for an accident that causes the deaths of several of your crewmates.", choiceList: ['a', 'b'],
-            a:{button: 'It was you...', description: "Your shame drives you to excel before your court martial sees you ejected from the career.", result: {type: 'skill', skill: 'table'}},
+            a:{button: 'It was you...', description: "Your shame drives you to excel before your court martial sees you ejected from the career.", type: 'reward', result: {type: 'skill', skill: 'table'}},
             b:{button: "It wasn't!", description: "You manage to (partially) clear your name, but are still quietly ejected as part of the official whitewash.",
                 result: {type: 'multiple', list:['enemy', 'addBenefit'],
                     addBenefit: {type: 'addBenefit', value: 1},

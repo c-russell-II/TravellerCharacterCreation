@@ -7,18 +7,17 @@ export const merchant = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You are offered the opportunity to smuggle illegal goods onto a planet.',
-            a: {button: 'Smuggle them', description: "You agree to smuggle the goods, and...", 
-                    result: {type: 'check', checkType: 'choice', choiceList:['Deception', 'Persuade'], specialtyList: {Deception: null, Persuade: null}, checkDC: 8, 
-                        pass: {type: 'reward', description: 'You successfully smuggle them on planet.', 
-                            result: {type: 'multiple', list: ['Streetwise', 'benefit'], 
-                                Streetwise: {type: 'setSkill', skill: 'Streetwise', value: 1}, 
-                                benefit: {type: 'addBenefit', value: 1}
-                            }, 
-                        fail: {description: "You don't manage to bring the goods onto the planet, but no grudge is held", type: 'generic'}
-                        }
+            a: {button: 'Smuggle them', description: "You agree to smuggle the goods, and...", type: 'check',
+                    checkType: 'choice', choiceList:['Deception', 'Persuade'], specialtyList: {Deception: null, Persuade: null}, checkDC: 8, 
+                    pass: {type: 'reward', description: 'You successfully smuggle them on planet.', 
+                        result: {type: 'multiple', list: ['Streetwise', 'benefit'], 
+                            Streetwise: {type: 'setSkill', skill: 'Streetwise', value: 1}, 
+                            benefit: {type: 'addBenefit', value: 1}
+                        }, 
+                    fail: {description: "You don't manage to bring the goods onto the planet, but no grudge is held", type: 'generic'}
                     }
                 },
-            b: {button: "Refuse.", description: "You refuse, and report the person offering to your superiors.", 
+            b: {button: "Refuse.", description: "You refuse, and report the person offering to your superiors.", type: 'reward',
                 result: {type: 'enemy', description: 'Someone you turned in to the authorities while working as a merchant.', value: 1}
             }
         },
@@ -52,8 +51,8 @@ export const merchant = {
             result: {type: 'multiple', list:['ally', 'choice'],
                 ally: {type: 'ally', description: 'A friend you made while working as a Merchant...'},
                 choice: {type: 'choice', choiceType: 'multiple', choiceList: ['Carouse', 'advancement'],
-                    Carouse:{type: 'increaseSkill', skill: 'Carouse'},
-                    advancement:{type: 'advancement', value: 4}
+                    Carouse:{type: 'increaseSkill', skill: 'Carouse', button: "Carouse Increase"},
+                    advancement:{type: 'advancement', value: 4, button: "Advancement + 4"}
                 }
             }
         },

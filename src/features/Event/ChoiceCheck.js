@@ -52,7 +52,7 @@ const ChoiceCheck = (props) => {
     return (
         <>
             <form name="choice" onSubmit={handleSubmit}>
-                {event.choiceList.forEach((e, i) => {
+                {event.choiceList.map((e, i) => {
                     return (
                         <label key={i}><input type="radio" value={e} name="choice" checked={choice===e} onChange={handleChange}/>{e}</label>
                     )

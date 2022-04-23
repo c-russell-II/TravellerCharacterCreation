@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { addDeferredEvents, resolveEvent } from "../../Term/TermSlice";
 import AddBenefit from "./AddBenefit";
 import AdvancementReward from "./AdvancementReward";
 import Ally from "./Ally";
@@ -13,51 +14,55 @@ import Rival from "./Rival";
 import StatReward from "./StatReward";
 
 const RewardContainer = (props) => {
-    const {isMultiple, type} = props;
     const event = useSelector(state => state.term.event);
     const [body, setBody] = useState();
+    const dispatch = useDispatch();
 
     useEffect(() => {
-        switch (type) {
+        switch (event.result.type) {
             case 'choice':
                 setBody(<ChoiceReward/>)
                 return;
             case 'multiple':
+                dispatch(addDeferredEvents(event.result.list.map((e) => {return {type: 'reward', description: '', result: event.result[e]}})));
+                dispatch(resolveEvent());
                 return;
             case 'benefit':
-                setBody(<BenefitBonusReward isMultiple={isMultiple}/>)
+                setBody(<BenefitBonusReward />)
                 return;
             case 'addBenefit':
-                setBody(<AddBenefit isMultiple={isMultiple}/>)
+                setBody(<AddBenefit  />)
                 return;
             case 'promotion':
-                setBody(<PromotionReward isMultiple={isMultiple}/>)
+                setBody(<PromotionReward />)
                 return;
             case 'advancement':
-                setBody(<AdvancementReward isMultiple={isMultiple}/>)
+                setBody(<AdvancementReward />)
                 return;
             case 'stat':
-                setBody(<StatReward isMultiple={isMultiple}/>)
+                setBody(<StatReward />)
                 return;
             case 'qualification':
-                setBody(<QualificationReward isMultiple={isMultiple}/>)
+                setBody(<QualificationReward />)
                 return;
             case 'rival':
-                setBody(<Rival isMultiple={isMultiple}/>)
+                setBody(<Rival />)
                 return;
             case 'contact':
-                setBody(<Contact isMultiple={isMultiple}/>)
+                setBody(<Contact />)
                 return;
             case 'ally':
-                setBody(<Ally isMultiple={isMultiple}/>)
+                setBody(<Ally />)
                 return;
             case 'enemy':
-                setBody(<Enemy isMultiple={isMultiple}/>)
+                setBody(<Enemy />)
                 return;
             default:
+                alert("Unhandled Reward Event! " + event.result.type)
+                dispatch(resolveEvent())
                 return;
         }
-    }, [isMultiple, type])
+    }, [event, dispatch])
 
     return (
         <>

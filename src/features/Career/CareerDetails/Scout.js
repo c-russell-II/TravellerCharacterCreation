@@ -81,8 +81,8 @@ export const scout  = {
             result: {type: 'choice',
                 choiceType: 'multiple',
                 list: ['Diplomat', 'advancement'],
-                Diplomat: {type: 'increaseSkill', skill: 'Diplomat'},
-                advancement: {type:'advancement', value: 4}
+                Diplomat: {type: 'increaseSkill', skill: 'Diplomat', button: "Increase Diplomat"},
+                advancement: {type:'advancement', value: 4, button: "Advancement + 4"}
             }
         },
         12: {type: 'reward', description: "You discover a world, item, or information important to the Imperium.", result: {type: 'promotion'}}

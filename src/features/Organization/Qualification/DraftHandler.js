@@ -37,7 +37,7 @@ const DraftHandler = (props) => {
     const specialtySubmit = (event) => {
         event.preventDefault();
 
-        setResult(prev => {return {...prev, specialty: event.target.value}})
+        setResult(prev => {return {...prev, specialty: specialty}})
 
     }
 

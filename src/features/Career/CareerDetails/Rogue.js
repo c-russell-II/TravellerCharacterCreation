@@ -7,7 +7,7 @@ export const rogue = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: "You are arrested and charged.",
-            a:{button: "Hire a Lawyer", description: "The lawyer you hired managed to successfully get the charges against you dropped.",
+            a:{type: 'reward', button: "Hire a Lawyer", description: "The lawyer you hired managed to successfully get the charges against you dropped.",
                 result: {type: 'multiple',
                     list: ['contact', 'addBenefit'],
                     contact: {type: 'contact', value: 1, description: "Lawyer who helped you beat charges while you were a Rogue"},
@@ -15,18 +15,17 @@ export const rogue = {
                 }
             },
             b:{button: "Defend yourself.", description: "You choose to defend yourself.",
-                result: {type: 'check',
-                    checkType: 'skill',
-                    checkSkill: 'Advocate',
-                    specialty: null,
-                    checkDC: 8,
-                    pass: {description: "You successfully get the charges against you dropped.", type: 'generic'},
-                    fail: {type: 'reward', description: "You fail to defend yourself in court, and are sent to prison.",
-                        result: {type: 'multiple',
-                            list: ['prisoner', 'enemy'],
-                            enemy: {type: 'enemy', description: 'Someone you hurt or implicated while failing to defend yourself against legal action as a Rogue.', value: 1},
-                            prisoner: {type: 'prisoner'},
-                        }
+                type: 'check',
+                checkType: 'skill',
+                checkSkill: 'Advocate',
+                specialty: null,
+                checkDC: 8,
+                pass: {description: "You successfully get the charges against you dropped.", type: 'generic'},
+                fail: {type: 'reward', description: "You fail to defend yourself in court, and are sent to prison.",
+                    result: {type: 'multiple',
+                        list: ['prisoner', 'enemy'],
+                        enemy: {type: 'enemy', description: 'Someone you hurt or implicated while failing to defend yourself against legal action as a Rogue.', value: 1},
+                        prisoner: {type: 'prisoner'},
                     }
                 }
             }
@@ -47,8 +46,8 @@ export const rogue = {
             }
         },
         6: {type: 'choice', choiceList: ['a', 'b'], description: "You have the opportunity to backstab a fellow rogue for personal gain.",
-            a:{button: 'Do it.', description: "You make a tidy profit off of betraying your fellow.", result:{type: 'advancement', value: 4}},
-            b:{button: "Refuse.", description: "You decide to have some honor, regardless of the saying.", result: {type: 'ally', value: 1, description: "A fellow rogue you had the chance to backstab but chose not to."}},
+            a:{type: 'reward', button: 'Do it.', description: "You make a tidy profit off of betraying your fellow.", result:{type: 'advancement', value: 4}},
+            b:{type: 'reward', button: "Refuse.", description: "You decide to have some honor, regardless of the saying.", result: {type: 'ally', value: 1, description: "A fellow rogue you had the chance to backstab but chose not to."}},
         },
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'reward', description: "You spend months in the dangerous criminal underworld.",
@@ -70,8 +69,8 @@ export const rogue = {
             result:{type: 'choice',
                 choiceType: 'multiple',
                 choiceList: ['Tactics', 'advancement'],
-                Tactics: {type: 'setSkill', skill: 'Tactics', specialty: 'military', value: 1},
-                advancement: {type: 'advancement', value:4}
+                Tactics: {type: 'setSkill', skill: 'Tactics', specialty: 'military', value: 1, button: "Tactics(military) 1"},
+                advancement: {type: 'advancement', value:4, button: "Advancement + 4"}
             }
         },
         12: {type: 'reward', description: 'You commit a legendary crime.', result:{type:'promotion'}}

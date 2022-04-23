@@ -7,7 +7,7 @@ export const scholar = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', description: "You are called upon to perform work that goes against your conscience.", choiceList: ['a', 'b'],
-            a: {button: "Do it anyway", description: 'You choose to ignore your conscience in the name of your science, your career, or the greater good...',
+            a: {type: 'reward', button: "Do it anyway", description: 'You choose to ignore your conscience in the name of your science, your career, or the greater good...',
                 result: {type: 'multiple',
                     list: ['benefit', 'skill', 'enemy'],
                     benefit: {type: 'addBenefit', value: 1},
@@ -15,7 +15,7 @@ export const scholar = {
                     enemy: {type: 'enemy', value: 'roll', roll: 2, description: "People who were and are morally opposed to questionable research you were involved in as a Scholar."}
                 }
             },
-            b: {button: "This is wrong.", description: "You choose to follow your conscience, and stay out of it.", result:{type: 'none'}}
+            b: {button: "This is wrong.", description: "You choose to follow your conscience, and stay out of it.", type: 'generic'}
         },
         4: {type: 'reward', description: 'You are assigned to work on a secret project for a patron or organization.',
             result: {type: 'choice',
@@ -35,25 +35,24 @@ export const scholar = {
         7: {type: 'redirect', destination: 'life'},
         8: {type: 'choice', choiceList:['a', 'b'], description: "You have an opportunity to cheat in some fashion, advancing your own causes by stealing another's work, using an alien device, taking an unethical shortcut, etc.",
             a: {button: "Do it.", description: "You choose to take advantage of the opportunity.",
-                result: {type: 'check',
-                    checkType: 'choice',
-                    choiceList: ['Deception', 'Admin'],
-                    specialtyList: {Deception: null, Admin: null},
-                    checkDC: 8,
-                    pass:{type: 'reward', description: "You exploit the opportunity to the fullest.",
-                        result: {type: 'multiple',
-                            list: ['benefit', 'skill', 'enemy'],
-                            benefit: {type: 'benefit', value: 2},
-                            skill: {type: 'increaseAny'},
-                            enemy: {type: 'enemy', value: 1, description: "Someone who was harmed by your choice to cheat in some form or fashion while working as a Scholar."}
-                        }
-                    },
-                    fail:{type: 'reward', description: "You fail to gain any significant advantage, at cost to yourself.",
-                        result: {type: 'multiple',
-                            list: ['enemy', 'addBenefit'],
-                            enemy: {type: 'enemy', value: 1, description: "Someone who your tried unsuccessfully to cheat out of their hard-earned credit and money."},
-                            addBenefit: {type: 'addBenefit', value: -1}
-                        }
+                type: 'check',
+                checkType: 'choice',
+                choiceList: ['Deception', 'Admin'],
+                specialtyList: {Deception: null, Admin: null},
+                checkDC: 8,
+                pass:{type: 'reward', description: "You exploit the opportunity to the fullest.",
+                    result: {type: 'multiple',
+                        list: ['benefit', 'skill', 'enemy'],
+                        benefit: {type: 'benefit', value: 2},
+                        skill: {type: 'increaseAny'},
+                        enemy: {type: 'enemy', value: 1, description: "Someone who was harmed by your choice to cheat in some form or fashion while working as a Scholar."}
+                    }
+                },
+                fail:{type: 'reward', description: "You fail to gain any significant advantage, at cost to yourself.",
+                    result: {type: 'multiple',
+                        list: ['enemy', 'addBenefit'],
+                        enemy: {type: 'enemy', value: 1, description: "Someone who your tried unsuccessfully to cheat out of their hard-earned credit and money."},
+                        addBenefit: {type: 'addBenefit', value: -1}
                     }
                 }
             },
@@ -75,8 +74,8 @@ export const scholar = {
                 choice: {type: 'choice',
                     choiceType: 'multiple',
                     choiceList: ['advancement', 'Science'],
-                    advancement: {type: 'advancement', value: 4},
-                    Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'}
+                    advancement: {type: 'advancement', value: 4, button: "Advancement + 4"},
+                    Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any', button: "Increase Science(any)"}
                 }
             }
         },
@@ -92,7 +91,7 @@ export const scholar = {
             }
         },
         {type: 'choice', choiceList: ['a', 'b'], description: 'The planetary government interferes with your work for religious or political reasons.',
-            a: {button: 'Continue openly.', description: "You continue with your work without regard for the government, making few friends.",
+            a: {type: 'reward', button: 'Continue openly.', description: "You continue with your work without regard for the government, making few friends.",
                 result: {type: 'multiple',
                     list: ['Science', 'enemy', 'noMuster'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
@@ -100,7 +99,7 @@ export const scholar = {
                     noMuster: {type: 'noMuster'},
                 }
             },
-            b: {button: 'Continue secretly.', description: "You choose to be significantly quieter about your work from now on.",
+            b: {type: 'reward', button: 'Continue secretly.', description: "You choose to be significantly quieter about your work from now on.",
                 result: {type: 'multiple',
                     list: ['Science', 'stat', 'noMuster'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
@@ -118,10 +117,10 @@ export const scholar = {
             }
         },
         {type: 'choice', choiceList: ['a', 'b'], description: "Your work is sabotaged by unknown parties, leaving you with a choice.",
-            a: {button: 'Salvage what you can', description: "You decide to salvage what you can, and move on to greener pastures.",
+            a: {type: 'reward', button: 'Salvage what you can', description: "You decide to salvage what you can, and move on to greener pastures.",
                 result: {type: 'addBenefit', value: 1},
             },
-            b: {button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.",
+            b: {type: 'reward', button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.",
                 result: {type: 'multiple',
                     list: ['addBenefit', 'noMuster'],
                     addBenefit: {type: 'addBenefit', value: 'all'},

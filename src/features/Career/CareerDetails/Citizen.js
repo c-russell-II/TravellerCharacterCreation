@@ -22,19 +22,19 @@ export const citizen = {
             fail: {description: "You do not manage to measure up to your instructors' standards.", type: 'generic'}},
         7: {type: 'redirect', destionation: 'life'},
         8: {type: 'choice', description: "You learn something you shouldn't have- a corporate secret, a political scandal - which you can profit from illegally, if you choose.", choiceList: ['a', 'b'],
-            a: {description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.',  button: 'Take advantage.',
+            a: {type: 'reward', description: 'You either meet someone capable of helping you, or learn a bit about navigating this sort of backroom dealing, and make a tidy profit.',  button: 'Take advantage.',
                 results: {type: 'choice', choiceType: 'multiple', choiceList:['multipleA', 'multipleB'],
-                    multipleA: {type: 'multiple', list: ['benefit', 'choice'],
+                    multipleA: {type: 'multiple', list: ['benefit', 'choice'], button: "Benefit and Skill",
                         benefit: {type: 'benefit', value: 1}, 
                         choice: {type:'choice', choiceType: 'setSkill', choiceList:['Streetwise', 'Investigate'], specialtyList: {Streetwise: null, Investigate: null}, value: 1}
                     },
-                    multipleB: {type: 'multiple', list: ['benefit', 'contact'],
+                    multipleB: {type: 'multiple', list: ['benefit', 'contact'], button: "Benefit and Contact",
                         benefit: {type: 'benefit', value: 1},
                         contact: {type: 'contact', value: 1, description: 'Criminal who helped you illegally exploit a scandal or secret you uncovered as a Citizen.'}
                     }
                 },
             },
-            b: {description: 'You refuse to take advantage, earning little, but keeping your honor intact.', results: {type: 'none'}, button: "Stay away"},
+            b: {description: 'You refuse to take advantage, earning little, but keeping your honor intact.', type: 'generic', button: "Stay away"},
         },
         9: {type: 'reward', description: 'You are rewarded for your diligence or cunning.', results: {type: 'advancement', value: 2}},
         10: {type: 'reward', description: 'You gain experience in a technical field as a computer operator or surveyor.',
@@ -50,8 +50,8 @@ export const citizen = {
                 choice: {type: 'choice',
                     choiceType: 'multiple',
                     choiceList: ['Diplomat', 'advancement'],
-                    Diplomat: {type: 'setSkill', value: 1, skill: 'Diplomat'},
-                    advancement: {type: 'advancement', value: 4}
+                    Diplomat: {type: 'setSkill', value: 1, skill: 'Diplomat', button: "Diplomat 1"},
+                    advancement: {type: 'advancement', value: 4, button: "Advancement + 4"}
                 },
                 ally: {type: 'ally', value: 1, description: 'Superior from your time as a Citizen.'}
             },

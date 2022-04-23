@@ -55,8 +55,8 @@ export const army = {
             result:{type: 'choice',
                 choiceType: 'multiple',
                 choiceList: ['Tactics', 'advancement'],
-                Tactics: {type: 'setSkill', value: 1, specialty: 'military'},
-                advancement:{type:'advancement', value: 4}
+                Tactics: {type: 'setSkill', value: 1, specialty: 'military', button: "Tactics(military) 1"},
+                advancement:{type:'advancement', value: 4, button: "Advancement + 4"}
             }
         },
         12: {type: 'reward', description: 'You display heroism in battle.', result:{type: 'promotion'}}
@@ -69,7 +69,7 @@ export const army = {
         {type: 'reward',
             description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.',
             result: {type: 'multiple',
-                resultList: ['skill', 'enemy'],
+                list: ['skill', 'enemy'],
                 skill:{type: 'choice',
                     choiceList: ['Recon', 'Survival'],
                     choiceType: 'increaseSkill',
@@ -81,9 +81,10 @@ export const army = {
         {type: 'choice', description: 'You discover that your commanding officer is engaged in some illegal activity, such as weapon smuggling.', choiceList: ['a', 'b'],
             a: {description: 'You join their ring for a time, until the inevitable investigation gets you discharged.',
                 result: {type: 'ally', value: 1, description: 'Commanding officer you commited crimes with.'},
-                button: 'Join them'
+                button: 'Join them',
+                type: 'reward',
             },
-            b: {description: 'You choose to co-operate with the military police, ', result: {type:'addBenefit', value: 1}, button: 'Cooperate with MPs'},},
+            b: {description: 'You choose to co-operate with the military police, ', result: {type:'addBenefit', value: 1}, button: 'Cooperate with MPs', type: 'reward'},},
         {type:'reward', description: 'You are tormented by or quarrel with an officer or fellow soldier. That officer drives you out of the serivce.',
             result: {type: 'rival', value: 1, description: 'Drove you out of army career'}
         },

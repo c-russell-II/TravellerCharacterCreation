@@ -2,7 +2,7 @@ const lifeEvent = {
     2: {type: 'redirect', description: 'You are injured or become sick.', destination: 'injury'},
     3: {type: 'event', description: "Someone close to you gives birth or dies, and you are involved somehow."},
     4: {type: 'reward', description: "A romantic relationship involving you ends. Badly.", result:{type: 'rival', description: 'ex-romantic partner.', value: 1}},
-    5: {type: 'reward', description: "A rmonatic relationship involving you deepens, possibly leading to marriage or some other further commitment.", result:{type: 'ally', description: "Romantic partner that is becoming something more."}},
+    5: {type: 'reward', description: "A romantic relationship involving you deepens, possibly leading to marriage or some other further commitment.", result:{type: 'ally', description: "Romantic partner that is becoming something more."}},
     6: {type: 'reward', description: "You become involved in a new romantic relationship.", result: {type: 'ally', description: "New romantic partner.", value: 1}},
     7: {type: 'reward', description: "You make a new contact in your non-career-related life.", result: {type: 'contact', description: "Made outside of career or education!", value: 1}},
     8: {type: 'betrayal'},

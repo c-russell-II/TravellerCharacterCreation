@@ -5,6 +5,7 @@ const initialState = {
     survived: false,
     advanced: false,
     event: null,
+    deferredEvents: [],
     jobDetails: {},
     advancementBonus: 0,
     muster: false,
@@ -18,7 +19,7 @@ const options = {
             const {job, event, jobDetails} = action.payload;
             state.job = job;
             state.survived = true;
-            state.event = event;
+            state.event = {...event, resolved: false};
             state.jobDetails = jobDetails;
             return state;
         },
@@ -26,7 +27,7 @@ const options = {
             const {job, event, jobDetails} = action.payload;
             state.job = job;
             state.survived = false;
-            state.event = event;
+            state.event = {...event, resolved: false};
             state.jobDetails = jobDetails;
             return state;
         },
@@ -35,11 +36,19 @@ const options = {
             return state;
         },
         updateEvent: (state, action) => {
-            state.event = action.payload;
+            state.event = {...action.payload, resolved: false};
             return state;
         },
         resolveEvent: (state) => {
-            state.event = {resolved: true};
+            if (state.deferredEvents.length === 0) {
+                state.event = {resolved: true};
+                return state;
+            }
+            state.event = state.deferredEvents.shift();
+            return state;
+        },
+        addDeferredEvents: (state, action) => {
+            state.deferredEvents = state.deferredEvents.concat(action.payload);
             return state;
         },
         resolveTerm: (state) => {
@@ -51,5 +60,5 @@ const options = {
 
 const termSlice = createSlice(options);
 
-export const {survivedTerm, failedTerm, advancementBonus, updateEvent, resolveEvent, resolveTerm} = termSlice.actions;
+export const {survivedTerm, failedTerm, advancementBonus, updateEvent, resolveEvent, addDeferredEvents, resolveTerm} = termSlice.actions;
 export default termSlice.reducer;

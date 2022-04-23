@@ -8,11 +8,11 @@ export const noble = {
     eventList: {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You get challenged to a duel for your honour and standing.',
-            a: {button: 'Fight the Duel!', result: {type: 'check', checkType: 'skill', checkSkill: 'Melee', specialty: 'any', checkDC: 8,
+            a: {button: 'Fight the Duel!', type: 'check', checkType: 'skill', checkSkill: 'Melee', specialty: 'any', checkDC: 8,
                 pass: {type: 'reward', description: 'You fight well, and honorably, and win the honour duel.', 
                     result: {type: 'multiple', list: ['choice', 'stat'], 
-                        choice: {type: 'choice', choiceType: 'increaseSkill', 
-                            choiceList: ['Melee', 'Leadership', 'Tactics', 'Deception'], 
+                        choice: {type: 'choice', choiceType: 'increaseSkill',
+                            choiceList: ['Melee', 'Leadership', 'Tactics', 'Deception'],
                             specialtyList: {Melee: 'blade', Leadership: null, Tactics: 'any', Deception: null}
                         },
                         stat: {type: 'stat', stat: 'soc', value: 1}
@@ -28,8 +28,8 @@ export const noble = {
                         }
                     }
                 }
-            }},
-            b: {button: 'Play it safe.', description: 'You refuse, guaranteeing your safety- but, perhaps, not all your dignity.', result: {type: 'none'}}
+            },
+            b: {button: 'Play it safe.', description: 'You refuse, guaranteeing your safety- but, perhaps, not all your dignity.', type: 'generic'}
         },
         4: {type: 'reward', description: 'Your time as a ruler or player gives you a wide range of experiences.', 
             result: {type: 'choice', choiceType: 'setSkill', 
@@ -95,8 +95,8 @@ export const noble = {
                 choice: {type: 'choice',
                     choiceType: 'multiple',
                     choiceList: ['advancement', 'Leadership'],
-                    advancement: {type: 'advancement', value: 4},
-                    Leadership: {type: 'increaseSkill', skill: 'Leadership'}
+                    advancement: {type: 'advancement', value: 4, button: "Advancement + 4"},
+                    Leadership: {type: 'increaseSkill', skill: 'Leadership', button: "Increase Leadership"}
                 }
             }
         },

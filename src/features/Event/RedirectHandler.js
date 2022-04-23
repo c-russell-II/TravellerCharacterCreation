@@ -23,8 +23,7 @@ const RedirectHandler = (props) => {
     const unusualRedirect = useCallback(() => dispatch(updateEvent(unusualTable[skillCheck()])), [dispatch, unusualTable])
 
     useEffect(() => {
-        const {destination} = event;
-        switch(destination) {
+        switch(event.destination) {
             case 'injury':
                 setBody(<InjuryEntry/>)
                 return;
@@ -38,6 +37,8 @@ const RedirectHandler = (props) => {
                 unusualRedirect();
                 return;
             default:
+                alert("Unhandled Redirect Event! " + event.destination)
+                dispatch(resolveEvent())
                 return;
         }
     }, [dispatch, event, lifeRedirect, mishapRedirect, unusualRedirect])

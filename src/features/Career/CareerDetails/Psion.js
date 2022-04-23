@@ -17,10 +17,10 @@ export const psion = {
         },
         5: {type: 'choice', description: "You have a chance to use your psionic powers unethically.", choiceList: ['a', 'b'],
             a: {button: 'Do it.',type: 'check', checkType: 'stat', checkStat: 'psi', checkDC: 8,
-                pass: {type: 'reward', description: "Your attempt bears profitable fruit.", result: {type: 'choice', choiceType: 'multiple', list: ['addBenefit', 'stat'], addBenefit: {type: 'addBenefit'}, stat: {type: 'stat', stat: 'soc', value: 1}}},
+                pass: {type: 'reward', description: "Your attempt bears profitable fruit.", result: {type: 'choice', choiceType: 'multiple', list: ['addBenefit', 'stat'], addBenefit: {type: 'addBenefit', button: "Plus One Benefit"}, stat: {type: 'stat', stat: 'soc', value: 1, button: "Social Standing + 1"}}},
                 fail: {type: 'reward', description: "Your attempt backfires.", result: {type: 'stat', stat: 'soc', value: -1}}
             },
-            b: {button: "Refrain.", description: "You let your better judgement prevail.", result: {type: 'none'}}
+            b: {button: "Refrain.", description: "You let your better judgement prevail.", type: 'generic'}
         },
         6: {type: 'reward', description: 'You make an unexpected connection outside normal circles.',
             result: {type: 'contact', description: 'An unexpected connection, outside your normal circles, from your time as a Psion.', value: 1}
@@ -39,8 +39,8 @@ export const psion = {
         {type: 'reward', description: "You telepathically contact something dangerous, and are plagued by consistent, terrifying nightmares.", result: {type: 'stat', stat: 'psi', value: -1}},
         {type: 'other'},
         {type: 'choice', description: "You are asked to use your psionic powers in an unethical fashion.", choiceList: ['a', 'b'],
-            a: {button: "Agree.", description: "You do so, and it turns out to have been a test- you have been approved to continue your training.", result: {type: 'multiple', list: ['noMuster', 'enemy'], noMuster: {type: 'noMuster'}, enemy: {type: 'enemy', value: 1, description: "Someone you hurt doing something unethical during your psion career."}}},
-            b: {button: "Refuse", description: "It was a test by your superiors, and they decide you are not a good fit for continued enrollment in their organization."}
+            a: {type: 'reward', button: "Agree.", description: "You do so, and it turns out to have been a test- you have been approved to continue your training.", result: {type: 'multiple', list: ['noMuster', 'enemy'], noMuster: {type: 'noMuster'}, enemy: {type: 'enemy', value: 1, description: "Someone you hurt doing something unethical during your psion career."}}},
+            b: {type: 'generic', button: "Refuse", description: "It was a test by your superiors, and they decide you are not a good fit for continued enrollment in their organization."}
         },
         {type: 'reward', description: 'You are experimented on by a corporation, government, or other powerful organization - you escape, but cannot return to your psionic career.', result: {type: 'muster'}},
         {type: 'redirect', destination: 'injury'}

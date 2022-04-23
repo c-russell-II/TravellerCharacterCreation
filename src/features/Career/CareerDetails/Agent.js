@@ -23,7 +23,7 @@ export const agent = {
         
         4: {type: 'reward', result: {type: 'benefit', value: 1}, description: 'You complete a mission for your superiors, and are suitably rewarded.'},
         
-        5: {type: 'reward', result:{type: 'contacts', value:'roll', roll: 2}, description: 'You establish a network of contacts'},
+        5: {type: 'reward', result:{type: 'contact', value:'roll', roll: 2}, description: 'You establish a network of contacts'},
         
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: 'You are offered an opportunity for advanced, specialist training.',
             pass: {type: 'reward', description: 'Taking full advantage, your skills noticeably increase.', result: {type: 'choice', choiceType: 'increaseAny'}},
@@ -36,12 +36,16 @@ export const agent = {
                 type: 'choice',
                 choiceType: 'redirect',
                 choiceList:['rogue', 'citizen'],
+                rogue: {button: "Rogue", type: 'special'},
+                citizen: {button: "Citizen", type: 'special',},
                 resultList: ['event', 'specialist'],
             },
             fail: {description: 'You fail to deceive your targets...',
                 type: 'choice',
                 choiceType: 'redirect',
                 choiceList: ['rogue', 'citizen'],
+                rogue: {button: "Rogue", type: 'special'},
+                citizen: {button: "Citizen", type: 'special',},
                 resultList: ['mishap']
             }
         },
@@ -66,24 +70,24 @@ export const agent = {
             result:{type: 'choice',
                 choiceType: 'multiple',
                 choiceList: ['Investigate', 'advancement'],
-                Investigate: {type: 'setSkill', skill: 'Investigate', value: 1},
-                advancement: {type: 'advancement', value:4}
+                Investigate: {type: 'setSkill', skill: 'Investigate', value: 1, button:"Investigate (1)"},
+                advancement: {type: 'advancement', value:4, button:"Advancement + 4"}
             }
         },
         
         12: {type: 'reward', description: 'Your efforts uncover a massive conspiracy against your employers, you are automatically promoted.', result:{type: 'promotion'}}
     },
     mishapList: [
-        {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
+        {type: 'redirect', destination: 'injury', modifier: 'disadvantage'},
         
         {type: 'choice', 
             description: 'Someone you are investigating offers you a deal...',
             choiceList: ['a', 'b'],
             a: {description: 'You leave the career, sacrificing some honor, but losing little else...',
                 button: 'Accept the deal...',
-                result: {type: 'none'}
+                type: 'generic'
             },
-            b: {description: 'You leave the career after being injured by the one whose deal you refused...',
+            b: {type: 'reward', description: 'You leave the career after being injured by the one whose deal you refused...',
                 button: 'Decline the deal...', 
                 result: { type: 'multiple', list: ['redirect', 'enemy', 'choice'],
                     redirect: {type: 'redirect', destination: 'injury', modifier: 'disadvantage'},
@@ -96,7 +100,7 @@ export const agent = {
             pass: {type: 'generic', description: 'You manage to defend yourself well enough that you are able to leave amicably...'},
             fail: {type: 'prisoner', description: "You are unable to successfully defend yourself, landing in jail...", result: 'prisoner'}},
         
-        {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', result:{type: 'multiple', resultList:['enemy', 'skill'], skill:'Deception', }},
+        {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', result:{type: 'multiple', list:['enemy', 'skill'], skill:{type: 'setSkill', skill: 'Deception', value: 1}, enemy:{type: 'enemy', value: 1, description: "Someone you investigated as an Agent, who wants to kill you for what you uncovered."}}},
         
         {type: null, description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', result:{target: 'contact, ally, or family member', bonus:'injury'}},
         

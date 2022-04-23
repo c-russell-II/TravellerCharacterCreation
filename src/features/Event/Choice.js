@@ -8,7 +8,8 @@ export const Choice = (props) => {
     const list = event.choiceList;
 
     const handleClick = (choice) => {
-        dispatch(updateEvent({type: 'reward', description: event.description + ' ' + event[choice].description, result: event[choice].result}));
+        dispatch(updateEvent({...event[choice], description: event.description + ' ' + event[choice].description}));
+        return;
     };
     return (
         <>

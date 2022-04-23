@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { resolveEvent } from "../Term/TermSlice";
 import CheckEvent from "./CheckEvent";
+import { Choice } from "./Choice";
 import RedirectHandler from "./RedirectHandler";
 import RewardContainer from "./Rewards/RewardContainer";
 
@@ -20,14 +21,17 @@ const EventContainer = (props) => {
                 setBody(<CheckEvent/>)
                 return;
             case 'reward':
-                setBody(<RewardContainer type={event.result.type} isMultiple={false}/>)
+                setBody(<RewardContainer/>)
                 return;
             case 'choice':
+                setBody(<Choice/>)
                 return;
             case 'generic':
                 setBody(<button onClick={dispatch(resolveEvent())}>Neat!</button>)
                 return;
             default:
+                alert("Unhandled Event! " + type)
+                dispatch(resolveEvent())
                 return;
         }
     }, [dispatch, event])

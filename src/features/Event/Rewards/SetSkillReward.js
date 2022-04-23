@@ -39,7 +39,7 @@ const SetSkillReward = (props) => {
 
     const handleChange = (ev) => {
         ev.preventDefault();
-        setChoice(event.target.value);
+        setChoice(ev.target.value);
     }
 
     const handleSubmit = (ev) => {
@@ -64,7 +64,7 @@ const SetSkillReward = (props) => {
         <>
             {!needSpecialty&&
                 <form name="skills" onSubmit={handleSubmit}>
-                    {skillList.map((e, i) => <label key={i}><input type="radio" name="skills" value={e} onChange={handleChange} checked={choice === e}/>{e}</label>)}
+                    {skillList.map((e, i) => <label key={i}><input key={Math.random()} type="radio" name="skills" value={e} onChange={handleChange} checked={choice === e}/>{e}</label>)}
                     <input type="submit" value="Choose" name="skills"/>
                 </form>
             }

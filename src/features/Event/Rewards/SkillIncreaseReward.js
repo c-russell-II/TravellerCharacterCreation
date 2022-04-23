@@ -19,7 +19,8 @@ const SkillIncreaseReward = (props) => {
         } else {
             setSkillList(event.result.choiceList);
         }
-    }, [event.result.choiceList, event.result.choiceType, skills.trainedSkills])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [event.result.choiceList, event.result.choiceType])
 
     const specialtyHandler = () => {
         if (event.result.specialtyList[choice] === 'any') {
@@ -63,7 +64,7 @@ const SkillIncreaseReward = (props) => {
         <>
             {!needSpecialty &&
                 <form name="skill" onSubmit={handleSubmit}>
-                    {skillList.map((e, i) => <label key={i}><input type="radio" name="skill" value={e} checked={choice === e} onChange={handleChange}/>{e}</label>)}
+                    {skillList.map((e, i) => <label key={i}><input key={Math.random()} type="radio" name="skill" value={e} checked={choice === e} onChange={handleChange}/>{e}</label>)}
                     <input type="submit" value="Choose" name="skill"/>
                 </form>
             }

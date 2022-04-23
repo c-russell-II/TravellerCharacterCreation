@@ -51,7 +51,7 @@ export const marine = {
                     enemy: {type: 'enemy', value: 1, description: 'A commanding officer whose incompetence you outed after a disastrous mission.'}
                 }
             },
-            b:{button: 'Cover for them!', description: "You cover for them, earning a lifelong ally.",
+            b:{button: 'Cover for them!', description: "You cover for them, earning a lifelong ally.", type: 'reward',
                 result: {type: 'ally', value: 1, description: 'A commanding officer whose disastrous failure you helped cover for.'}
             }
         },
@@ -60,8 +60,8 @@ export const marine = {
             result: {type: 'choice',
                 choiceType: 'multiple',
                 choiceList: ['advancement', 'Tactics'],
-                advancement: {type: 'advancement', value: 4},
-                tactics: {type: 'setSkill', specialty: 'any', skill: 'Tactics', value: 1}
+                advancement: {type: 'advancement', value: 4, button: "Advancement + 4"},
+                tactics: {type: 'setSkill', specialty: 'any', skill: 'Tactics', value: 1, button: "Tactics(any) 1"}
             }
         },
         12: {type: 'reward', description: 'You display heroism in battle, earning an automatic promotion.', result: {type: 'promotion'}}
@@ -87,14 +87,14 @@ export const marine = {
             }
         },
         {type: 'choice', choiceList: ['a', 'b'], description: 'You are ordered to take part in a black ops mission that goes against what you think is right.', 
-            a: {button: 'Follow orders',
+            a: {button: 'Follow orders', type: 'reward', description: "You follow orders, against your own moral beliefs.",
                 result: {type: 'multiple',
                     list: ['enemy', 'noMuster'],
                     enemy: {type: 'enemy', description: 'Lone survivor of a morally dubious black ops mission you participated in.'},
                     noMuster: {type: 'noMuster'}
                 }
             },
-            b: {button: "Do what's right", result: {type: 'none'}}
+            b: {type: 'generic', description: "You refuse, and are summarily discharged.", button: "Do what's right"}
         },
         {type: 'reward', description: 'You are tormented by a superior officer or fellow marine.',
             result: {type: 'enemy', value: 1, description: 'A superior or fellow marine who drove you out of the service.'}
