@@ -1,7 +1,8 @@
 import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { parentJobs } from "../../Career/CareerDetails";
 import { useDispatch, useSelector} from "react-redux";
+import {setGraduated, setHonors} from '../EducationSlice'
 import {basicTraining} from '../../Skills/SkillsSlice';
 import { skillCheck } from "../../Career/careerHandler";
 
@@ -11,6 +12,7 @@ export const MilitaryAcademyTerm = (props) => {
     const stats = useSelector(state => state.stats)
     const [selectSkill, setSelectSkill] = useState(false);
     const [ready, setReady] = useState(false);
+    const navigate = useNavigate();
 
     const getMod = () => {
         let mod = stats.int;
@@ -29,11 +31,16 @@ export const MilitaryAcademyTerm = (props) => {
         const graduateRoll = skillCheck(getMod());
 
         if (graduateRoll >= 11) {
+            dispatch(setHonors());
+            navigate('/mil_academy/' + branch + '/graduated')
             return;
         }
         if (graduateRoll >= 8) {
+            dispatch(setGraduated())
+            navigate('/mil_academy/' + branch + '/graduated')
             return;
         }
+        navigate('/mil_academy/' + branch + '/no_graduate')
     }
     const basicTrainingArray = parentJobs[branch].skills.service;
     const handleStart = () => {
