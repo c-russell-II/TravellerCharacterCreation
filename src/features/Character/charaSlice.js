@@ -8,6 +8,11 @@ const initialChara = {
     numOfCashBenefits: 0,
     trained: false,
     drafted: false,
+    anagathics: {
+        using: false,
+        terms: 0,
+        total: 0,
+    }
 }
 
 
@@ -38,6 +43,17 @@ const options = {
         setDrafted: (state) => {
             state.drafted = true;
             return state;
+        },
+        anagathicsTerm: (state) => {
+            state.anagathics.using = true;
+            state.anagathics.terms ++;
+            state.anagathics.total ++;
+            return;
+        },
+        anagathicEnd: (state) => {
+            state.anagathics.using = false;
+            state.anagathics.terms = 0;
+            return state;
         }
     }
 }
@@ -45,5 +61,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addBenefit, setTrained, setDrafted} = charaSlice.actions;
+export const {reset, setName, addEvent, addBenefit, setTrained, setDrafted, anagathicsTerm, anagathicEnd} = charaSlice.actions;
 export default charaSlice.reducer;

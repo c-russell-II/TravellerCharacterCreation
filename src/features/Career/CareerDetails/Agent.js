@@ -104,7 +104,7 @@ export const agent = {
         
         {type: null, description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', result:{target: 'contact, ally, or family member', bonus:'injury'}},
         
-        {type: 'redirect', destination: 'injury table'}
+        {type: 'redirect', destination: 'injury'}
     ],
     skills: {
         personal: [

@@ -18,8 +18,10 @@ export const TermMidPoint = (props) => {
         const result = term.jobDetails.advancementDC <= skillCheck(stats[term.jobDetails.advancementSkill]) + term.advancementBonus;
         if (result) {
             dispatch(promotion());
-            navigate(`/term/${career}/advanced`)
+            navigate(`/term/${career}/advanced`);
+            return;
         }
+        navigate(`/term/${career}/passed`)
     }
 
     return (

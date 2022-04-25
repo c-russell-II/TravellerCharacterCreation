@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import jobObject from "../Career/CareerDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
@@ -6,21 +6,45 @@ import { skillCheck, roll } from "../Career/careerHandler";
 import { failedTerm, survivedTerm } from "./TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { basicTraining } from "../Skills/SkillsSlice";
-import { setTrained } from "../Character/charaSlice";
+import { anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
+import AgeUp from "../Character/AgeHandlers/AgeUp";
 
 const CareerTerm = (props) => {
     const {career} = useParams();
     const stats = useSelector(state => state.stats);
+    const anagathics = useSelector(state => state.chara.anagathics)
     const trained = useSelector(state=> state.skills.isTrained);
     const [skillSelect, setSkillSelect] = useState(false);
+    const [needAgeing, setNeedAgeing] = useState(false);
     const [isReady, setIsReady] = useState(false);
     const [intro, setIntro] = useState(true);
+    const [anagathicCrisis, setAnagathicCrisis] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
     const jobDetails = jobObject[career]
     const {survivalSkill, survivalDC} = jobDetails;
+
+    const ageingCleanup = () => {
+        setNeedAgeing(false);
+        if (!intro && !skillSelect && !anagathicCrisis) {
+            setIsReady(true);
+        }
+    }
+
+    const anagathicCleanup = () => {
+        setAnagathicCrisis(false);
+        if (!intro && !skillSelect && !needAgeing) {
+            setIsReady(true);
+        }
+    }
+
+    useEffect(() => {
+        if (stats.age > 34) {
+            setNeedAgeing(true);
+        }
+    }, [stats.age])
 
     const handleReady = (event) => {
         event.preventDefault();
@@ -29,15 +53,42 @@ const CareerTerm = (props) => {
             const basicTrainingArray = jobDetails.skills.service.map(e => e.skill);
             dispatch(basicTraining(basicTrainingArray))
             dispatch(setTrained());
-            setIsReady(true);
+            if (!needAgeing && !anagathicCrisis) {
+                setIsReady(true);
+            }
             return;
         }
         setSkillSelect(true);
     }
 
+    const stopAnagathics = (event) => {
+        event.preventDefault();
+
+        dispatch(anagathicEnd());
+        setAnagathicCrisis(true);
+    }
+
+    const anagathicCheck = (event) => {
+        event.preventDefault();
+
+        const rollVal = skillCheck();
+        if (rollVal === 2) {
+            // navigate to eventual "prison handler page"
+        }
+        if (rollVal + stats.soc >= 10) {
+            dispatch(anagathicsTerm());
+        }
+    }
+
     const handleClick = (event) => {
         event.preventDefault();
-        const surviveRoll = (skillCheck(stats[survivalSkill]))
+        let surviveRoll = (skillCheck(stats[survivalSkill]))
+        if (anagathics.using) {
+            const tempRoll = skillCheck(stats[survivalSkill])
+            if (tempRoll < surviveRoll) {
+                surviveRoll = tempRoll;
+            }
+        }
         const surviveCheck = surviveRoll === 2 ? false : survivalDC <= surviveRoll;
         const mishap = jobDetails.mishapList[roll()]
         const jobEvent = jobObject[career].eventList[roll() + roll() + 2];
@@ -55,7 +106,12 @@ const CareerTerm = (props) => {
             return;
         }
     }
-    const cleanup = () => {setSkillSelect(false); setIsReady(true);}
+    const cleanup = () => {
+        setSkillSelect(false);
+        if (!needAgeing && !anagathicCrisis) {
+            setIsReady(true);
+        }
+    }
 
     return (
         <>
@@ -85,6 +141,26 @@ const CareerTerm = (props) => {
                 <>
                     <p>Having gotten this term's training, it's time to see how well you stand up to the needs and demands of your chosen career.</p>
                     <button onClick={handleClick}>Let's do it!</button>
+                </>
+            }
+            {needAgeing && <AgeUp cleanup={ageingCleanup}/> }
+
+            {anagathicCrisis &&
+                <>
+                    <h3>Ending Anagathic Treatments...</h3>
+                    <p>Ending your use of anagathic treatments delivers a shock to your body, as the years catch up to you all at once.</p>
+                    <AgeUp cleanup={anagathicCleanup}/>
+                </>
+            }
+
+            {!anagathics.using ?
+                <>
+                    <p>As you get older, the effects of ageing may catch up to you. Would you like to attempt to acquire (highly illegal) anagathic treatments? It can cost anywhere from 200,000 to 1,200,000 credits each term.</p>
+                    <button onClick={anagathicCheck}>Acquire Anagathics</button>
+                </> :
+                <>
+                    <p>You are still taking anagathics each term, racking up 200,000 to 1,200,000 credits for each term you continue to take them. Would you like to stop?</p>
+                    <button onClick={stopAnagathics}>Stop Taking Anagathics</button>
                 </>
             }
         </>

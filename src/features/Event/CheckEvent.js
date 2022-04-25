@@ -48,6 +48,9 @@ const CheckEvent = (props) => {
 
         if (type === 'skill') {
             mod = getFinalMod(event.checkSkill);
+            if (mod < 0) {
+                mod += skills.JackOfAllTrades.value > 0 ? skills.JackOfAllTrades.value : 0;
+            }
         }
         const outcome = skillCheck(mod) >= event.checkDC;
         return outcome;

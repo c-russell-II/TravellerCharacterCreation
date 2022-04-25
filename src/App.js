@@ -21,6 +21,7 @@ import QualFail from './features/Organization/Qualification/QualFail';
 import CareerChoiceLayout from './features/Organization/CareerChoiceLayout';
 import DraftHandler from './features/Organization/Qualification/DraftHandler';
 import DrifterRedirect from './features/Organization/Qualification/DrifterRedirect';
+import EducationRouter from './features/education/EducationRouter';
 
 function App() {
   return (
@@ -33,9 +34,7 @@ function App() {
             <Route path="background_skills" element={<BackgroundSkillsChoice/>}/>
             <Route path="character_creation" element={<CharacterCreation/>}/>
             <Route path="classic_character_creation" element={<ClassicContainer/>}/>
-            <Route path="choose_education" element={<UniversityChoice/>}/>
-            <Route path="university_term" element={<UniversityTerm/>}/>
-            <Route path="mil_academy/:branch" element={<MilitaryAcademyTerm/>}/>
+            <Route path="education/*" element={<EducationRouter/>}/>
             <Route path="choose_career/" element={<CareerChoiceLayout />}>
               <Route index element={<CareerChooser/>}/>
               <Route path="drafted" element={<DraftHandler/>}/>

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { genericIncrease } from "../Skills/SkillsSlice";
-import { changeStat } from "../Character/StatsSlice";
+import { changeByAmount } from "../Character/StatsSlice";
 import { SelectSpecialty } from "../Skills/selectSpecialty";
 import { addQualificationBonus } from '../Character/miscBonusSlice'
 import { GraduationDialogue } from "./GraduateDialogue";
@@ -11,13 +11,12 @@ import { parentJobs } from "../Career/CareerDetails";
 export const Graduation = (props) => {
     const educationState = useSelector(state => state.education);
     const dispatch = useDispatch();
-    const { edu } = useSelector(state => state.stats);
     const skills = useSelector(state => state.skills);
     const [needSpecialty, setNeedSpecialty] = useState(false);
 
     useEffect(() => {
         if (educationState.graduated) {
-            dispatch(changeStat({ edu: edu + 2 }))
+            dispatch(changeByAmount({stat: 'edu', value: 2}))
             const qualBonusList = ['corporate', 'journalist'];
             const parentList = ['agent', 'army', 'marine', 'navy', 'scholar', 'scout'];
             parentList.forEach((e) => parentJobs[e].specialtiesList.forEach((f) => qualBonusList.push(f)))

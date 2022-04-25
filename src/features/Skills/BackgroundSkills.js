@@ -44,7 +44,7 @@ export const BackgroundSkillsChoice = (props) => {
         skills.forEach((e) => {
             dispatch(increaseToZero(e));
         })
-        navigate('/choose_education');
+        navigate('/education/');
         return;
     }
 

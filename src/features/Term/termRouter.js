@@ -6,6 +6,7 @@ import { TermMidPoint } from "./TermMidPoint";
 import { TermFailed } from "./TermFailed";
 import AdvancedTerm from "./AdvancedTerm";
 import jobObject from "../Career/CareerDetails";
+import TermNoPromotion from "./TermNoPromotion";
 
 
 export const TermRouter = (props) => {
@@ -20,6 +21,7 @@ export const TermRouter = (props) => {
                 <Route path="survived" element={<TermMidPoint/>}/>
                 <Route path="failed" element={<TermFailed/>}/>
                 <Route path="advanced" element={<AdvancedTerm/>}/>
+                <Route path="passed" element={<TermNoPromotion/>}/>
             </Route>
         </Routes>
         </div>

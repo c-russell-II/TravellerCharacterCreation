@@ -36,6 +36,7 @@ export const UniversityChoice = (props) => {
             dispatch(chooseSchool('University'))
             return;
         }
+        setChoiceButtons(false);
         setToCareers(true);
         return;
     }
@@ -96,7 +97,7 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've successfully passed the entrance exams!</h5>
-                <Link to="/university_term">Off to school!</Link>
+                <Link to="../university_term">Off to school!</Link>
             </Popup>
             <Popup
                 open={milAcademyLink}
@@ -112,7 +113,7 @@ export const UniversityChoice = (props) => {
                 modal
             >
                 <h5>You've qualified  your planetary {milAcademy.branch}'s military academy!</h5>
-                <Link to={`/mil_academy/${milAcademy.branch}`}>Hooah!</Link>
+                <Link to={`../mil_academy/${milAcademy.branch}`}>Hooah!</Link>
             </Popup>
             {toCareers &&
                 <>

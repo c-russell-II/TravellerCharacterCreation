@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
+import { ageUp } from "../Character/StatsSlice";
 import RankUpBonus from "./RankUpBonus";
 import { resolveTerm } from "./TermSlice";
 
@@ -24,10 +25,12 @@ const AdvancedTerm = (props) => {
     }, [bonus])
     const handleContinue = (event) => {
         dispatch(resolveTerm());
+        dispatch(ageUp())
         navigate(`/term/${career}/start`);
     };
     const handleNew = (event) => {
         dispatch(resolveTerm());
+        dispatch(ageUp())
         navigate(`/leave_career/${career}`)
     };
     return (
