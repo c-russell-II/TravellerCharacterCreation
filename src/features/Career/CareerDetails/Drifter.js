@@ -5,7 +5,7 @@ export const drifter = {
     qualificationStat: null,
     qualificationDC: null,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'choice', description: "A patron offers you a chance at a job.", choiceList: ['a', 'b'],
             a: {type: 'reward', description: 'You accept, but they hint that they will collect that favor one day.',
                 button: 'Accept',
@@ -30,7 +30,7 @@ export const drifter = {
             pass: {description: 'You manage to avoid injury.', type: 'generic'},
             fail: {description: 'You fail to avoid injury.', type: 'redirect', destination: 'injury'}},
         9: {type: 'choice', description: 'You are offered the chance to participate in a risky but rewarding venture.', choiceList: ['a', 'b'],
-            a:{type: 'random', description: 'You agree, and...', result: {type: 'random'}},
+            a:{type: 'special', specialType: 'drifterRandom'},
             b:{description: 'You decide to play it safe.', result: null}},
         10: {type: 'reward', description: 'Life on the edge hones your abilities.', result: {type: 'choice', choiceType: 'increaseAny'}},
         11: {type: 'career', description: 'You are forcible drafted.', career: 'draft'},
@@ -43,8 +43,8 @@ export const drifter = {
             result: {type: 'enemy', value: 1, description:'Enemy who drove you out of your drifter niche.'}
         },
         {type: 'reward', description: 'You suffer from a life threatening illness.', result: {type: 'stat', stat: 'end', value: -1}},
-        {type: null, description: 'Betrayed by a friend...'},
-        {type: 'reward', description: 'You have no idea what happened to you - there is a gap in your memory.', result: {type: 'none'}}
+        {type: 'special', specialType: 'betrayal'},
+        {description: 'You have no idea what happened to you - there is a gap in your memory.', type: 'generic'}
     ],
     skills: {
         personal: [

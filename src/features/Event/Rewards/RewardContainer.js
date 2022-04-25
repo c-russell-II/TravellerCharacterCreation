@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { skillCheck } from "../../Career/careerHandler";
+import { changeParole } from "../../Prison/prisonSlice";
 import { addDeferredEvents, resolveEvent } from "../../Term/TermSlice";
 import AddBenefit from "./AddBenefit";
 import AdvancementReward from "./AdvancementReward";
@@ -56,6 +58,15 @@ const RewardContainer = (props) => {
                 return;
             case 'enemy':
                 setBody(<Enemy />)
+                return;
+            case 'parole':
+                if (typeof event.result.value === 'string') {
+                    dispatch(changeParole(skillCheck()))
+                    dispatch(resolveEvent())
+                    return;
+                }
+                dispatch(changeParole(event.result.value));
+                dispatch(resolveEvent())
                 return;
             default:
                 alert("Unhandled Reward Event! " + event.result.type)

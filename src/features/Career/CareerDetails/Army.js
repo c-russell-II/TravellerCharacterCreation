@@ -6,7 +6,7 @@ export const army = {
     qualificationDC: 5,
     description: 'Members of the planetary armed fighting forces. Soldiers deal with planetary surface actions, battles, and campaigns. Such individuals may also be mercenaries for hire.',
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'reward', description: 'You are assigned to a planet with a hostile or wild environment.',
             result:{type: 'choice',
                 choiceList: ['VaccSuit', 'Engineer', 'Animals', 'Recon'],
@@ -64,7 +64,7 @@ export const army = {
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'reward', description: 'Your unit is slaughtered in a disastrous battle, for which you blame your commander. In retaliation, said commander has you removed from service.',
-            result: {type: 'enemy', value: 1}
+            result: {type: 'enemy', value: 1, description: "A commander who you - rightly or wrongly- blamed for a disastrous battle, who retaliated by getting you discharged from the Army."}
         },
         {type: 'reward',
             description: 'You are sent to a very unpleasant region to battle against guerilla fighters and rebels. You are discharged because of stress, injury, or because the government wishes to bury the whole thing.',
@@ -75,11 +75,11 @@ export const army = {
                     choiceType: 'increaseSkill',
                     specialtyList:{Recon: null, Survival: null}
                 },
-                enemy:{type: 'enemy', value: 1, description:'Rebels you fought against.'}
+                enemy:{type: 'enemy', value: 1, description:'Rebels you fought against while serving in the Army.'}
             }
         },
         {type: 'choice', description: 'You discover that your commanding officer is engaged in some illegal activity, such as weapon smuggling.', choiceList: ['a', 'b'],
-            a: {description: 'You join their ring for a time, until the inevitable investigation gets you discharged.',
+            a: {description: 'You join their ring for a time, until the inevitable investigation sees you discharged.',
                 result: {type: 'ally', value: 1, description: 'Commanding officer you commited crimes with.'},
                 button: 'Join them',
                 type: 'reward',

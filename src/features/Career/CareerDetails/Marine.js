@@ -6,7 +6,7 @@ export const marine = {
     qualificationStat: 'end',
     qualificationDC: 6,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'reward', description: 'Trapped behind enemy lines, you have to survive on your own.',
             result: {type: 'choice',
                 choiceType: 'setSkill',
@@ -87,11 +87,9 @@ export const marine = {
             }
         },
         {type: 'choice', choiceList: ['a', 'b'], description: 'You are ordered to take part in a black ops mission that goes against what you think is right.', 
-            a: {button: 'Follow orders', type: 'reward', description: "You follow orders, against your own moral beliefs.",
-                result: {type: 'multiple',
-                    list: ['enemy', 'noMuster'],
-                    enemy: {type: 'enemy', description: 'Lone survivor of a morally dubious black ops mission you participated in.'},
-                    noMuster: {type: 'noMuster'}
+            a: {button: 'Follow orders', type: 'reward', description: "You follow orders, against your own moral beliefs.", noMuster: true,
+                result: {type: 'enemy',
+                    description: 'Lone survivor of a morally dubious black ops mission you participated in.', value: 1
                 }
             },
             b: {type: 'generic', description: "You refuse, and are summarily discharged.", button: "Do what's right"}

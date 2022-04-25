@@ -6,7 +6,7 @@ export const agent = {
     description: 'Law enforcement agencies, corporate operatives, spies, and others who work in the shadows.',
     eventList: {
         
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         
         3: {type: 'check', checkType: 'choice', choiceList: ['Investigate', 'Streetwise'], specialtyList: {Investigate: null, Streetwise: null}, checkDC: 8, description: 'An investigation turns dangerous...',
             pass: { type: 'reward', description: 'You manage to demonstrate and noticeably improve your tradecraft.',
@@ -33,20 +33,14 @@ export const agent = {
         
         8: {type: 'check', checkType: 'skill', checkSkill: 'Deception', specialty: null, checkDC: 8, description: "You go undercover to investigate an enemy group...",
             pass:{description: "You manage to successfully infilitrate their ranks...", 
-                type: 'choice',
-                choiceType: 'redirect',
-                choiceList:['rogue', 'citizen'],
-                rogue: {button: "Rogue", type: 'special'},
-                citizen: {button: "Citizen", type: 'special',},
-                resultList: ['event', 'specialist'],
+                type: 'special',
+                specialType: 'redirectChoice',
+                pass: true
             },
             fail: {description: 'You fail to deceive your targets...',
-                type: 'choice',
-                choiceType: 'redirect',
-                choiceList: ['rogue', 'citizen'],
-                rogue: {button: "Rogue", type: 'special'},
-                citizen: {button: "Citizen", type: 'special',},
-                resultList: ['mishap']
+                type: 'special',
+                specialType: 'redirectChoice',
+                pass: false
             }
         },
 
@@ -102,7 +96,7 @@ export const agent = {
         
         {type: 'event', description: 'You learn something better left alone, and gain a new enemy, becoming just a little more familiar with deception...', result:{type: 'multiple', list:['enemy', 'skill'], skill:{type: 'setSkill', skill: 'Deception', value: 1}, enemy:{type: 'enemy', value: 1, description: "Someone you investigated as an Agent, who wants to kill you for what you uncovered."}}},
         
-        {type: null, description: 'You bring your work home with you, and someone close to you is hurt. Choose an ally, a family member, or a contact who is hurt by your work.', result:{target: 'contact, ally, or family member', bonus:'injury'}},
+        {type: 'special', specialType: 'closeHurt'},
         
         {type: 'redirect', destination: 'injury'}
     ],

@@ -6,7 +6,7 @@ export const entertainer  = {
     qualificationChoices: ['dex', 'int'],
     qualificationDC: 5,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'check', checkType: 'choice', choiceList: ['Art', 'Investigate'], specialtyList: {Art: 'any', Persuade: null}, checkDC: 8, description: 'You are invited to take part in a controversial exhibition or event.',
             pass: {type: 'reward', description: 'The event goes over remarkably well, noticeably boosting your status.', result: {type: 'stat', stat: 'soc', value: 1}},
             fail: {type: 'reward', description: 'The controversy overtakes the art, and your status in society noticeably declines.', result: {type: 'stat', stat: 'soc', value: -1}},
@@ -60,7 +60,7 @@ export const entertainer  = {
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
         {type: 'reward', description: 'You expose or are involved in a scandal of some description.', result: {type: 'none'}},
         {type: 'reward', description: 'Public opinion turns on you.', result:{type: 'stat', stat: 'soc', value: -1}},
-        {type: null, description: 'You are betrayed by a peer.'},
+        {type: 'special', specialType: 'betrayal'},
         {type: 'reward', description: 'An investigation, tour, project, or expedition goes wrong.', 
             result: {type: 'choice', choiceType: 'setSkill',
                 choiceList: ['Survival', 'Pilot', 'Persuade', 'Streetwise'],

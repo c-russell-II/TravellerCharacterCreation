@@ -5,12 +5,12 @@ export const citizen = {
     qualificationDC: 5,
     description: 'Individuals serving a corporation, bureaucracy, or industry, or who are making a new life on an untamed planet.',
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
-        3: {type: null},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
+        3: {type: 'special', specialType: 'gainRoll'},
         4: {type: 'reward', description: 'You spend time maintaining and using heavy vehicles, either as part of your job or as a hobby.',
             result: {type: 'choice',
                 choiceType: 'increaseSkill',
-                choices: ['Mechanic', 'Drive', 'Flyer', 'Engineer'],
+                choiceList: ['Mechanic', 'Drive', 'Flyer', 'Engineer'],
                 specialtyList: {Drive: 'any', Flyer: 'any', Engineer: 'any', Mechanic: null}
             }
         },

@@ -6,7 +6,7 @@ export const noble = {
     qualificationThreshold: {stat: 'soc', value: 10},
     qualificationDC: 10,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You get challenged to a duel for your honour and standing.',
             a: {button: 'Fight the Duel!', type: 'check', checkType: 'skill', checkSkill: 'Melee', specialty: 'any', checkDC: 8,
                 pass: {type: 'reward', description: 'You fight well, and honorably, and win the honour duel.', 
@@ -53,7 +53,7 @@ export const noble = {
                 result: {type: 'check', checkType: 'choice',
                     choiceList: ['Deception', 'Persuade'],
                     checkDC: 8,
-                    pass: {type: 'generic', description: 'You masterfully navigate the difficulties involved in such a conspiracy.',
+                    pass: {type: 'reward', description: 'You masterfully navigate the difficulties involved in such a conspiracy.',
                         result: {type: 'choice',
                             choiceType: 'increaseSkill',
                             choiceList: ['Deception', 'Persuade', 'Tactics', 'Carouse'],
@@ -65,7 +65,7 @@ export const noble = {
                     },
                 }
             },
-            b:{button: 'Refuse the offer.', 
+            b:{button: 'Refuse the offer.', type: 'reward',
                 description: 'You refuse the offer, in the process angering quite a few powerful nobles.', 
                 result: {type: 'enemy', value: 1, description: 'Conspiracy of nobles whose offer of membership you refused outright.'}
             }
@@ -103,7 +103,7 @@ export const noble = {
         12: {type: 'reward', description: "Your efforts do not go unnoticed by the Imperium.", result: {type: 'promotion'}}
     },
     mishapList: [
-        {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
+        {type: 'redirect', destination: 'injury', modifier: 'disadvantage'},
         {type: 'reward', description: 'A family scandal forces you out of your position.', result: {type: 'stat', stat: 'soc', value: -1}},
         {type: 'check', checkType: 'choice', choiceList: ['Stealth', 'Deception'], checkDC: 8, description: 'A disaster- natural or manmade- strikes.',
             pass: {description: "You manage to escape unhurt.", type: 'generic'},
@@ -119,7 +119,7 @@ export const noble = {
             pass: {description: 'You manage to survive the attempt with only minor wounds to show for it.', type: 'generic'},
             fail: {description: "The assassin manages to injure you.", type: 'redirect', destination: 'injury'}
         },
-        {type: 'redirect', destination: 'injury table'}
+        {type: 'redirect', destination: 'injury'}
     ],
     skills: {
         personal: [

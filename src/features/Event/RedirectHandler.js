@@ -6,27 +6,36 @@ import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
 import { addDeferredEvents, resolveEvent, updateEvent } from "../Term/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
+import { prisoner } from "../Prison/Prisoner";
 
 const RedirectHandler = (props) => {
     const event = useSelector(state=> state.term.event);
+    const job = useSelector(state => state.term.job)
     const { career } = useParams();
     const mishapTable = jobObject[career].mishapList;
     const dispatch = useDispatch();
     const [body, setBody] = useState();
     const lifeTable = genericTables.life;
     const unusualTable = genericTables.unusual;
+    const prisonEvents = genericTables.prisonEvent;
 
     const lifeRedirect = useCallback(() => dispatch(updateEvent(lifeTable[skillCheck()])), [dispatch, lifeTable]);
     const mishapRedirect = useCallback(() => {
         dispatch(updateEvent(mishapTable[roll()]))
     }, [dispatch, mishapTable]);
-    const unusualRedirect = useCallback(() => dispatch(updateEvent(unusualTable[skillCheck()])), [dispatch, unusualTable])
+    const unusualRedirect = useCallback(() => dispatch(updateEvent(unusualTable[roll()])), [dispatch, unusualTable])
+    const prisonRedirect = useCallback(() => dispatch(updateEvent(prisonEvents[roll()])), [dispatch, prisonEvents])
 
     useEffect(() => {
         switch(event.destination) {
             case 'injury':
                 setBody(<InjuryEntry/>);
-                dispatch(addDeferredEvents([{type:'medical'}]))
+                if (!prisoner.specialtiesList.includes(job)) {
+                    dispatch(addDeferredEvents([{type:'medical'}]))
+                }
+                return;
+            case 'prisonRedirect':
+                prisonRedirect();
                 return;
             case 'life':
                 lifeRedirect();
@@ -42,7 +51,7 @@ const RedirectHandler = (props) => {
                 dispatch(resolveEvent())
                 return;
         }
-    }, [dispatch, event, lifeRedirect, mishapRedirect, unusualRedirect])
+    }, [dispatch, event, lifeRedirect, mishapRedirect, unusualRedirect, prisonRedirect, job])
     return (
         <>
             {event?.description && <p>{event.description}</p>}

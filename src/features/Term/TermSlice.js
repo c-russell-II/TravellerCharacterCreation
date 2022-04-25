@@ -54,11 +54,15 @@ const options = {
         resolveTerm: (state) => {
             state = initialState;
             return state;
+        },
+        setMuster: (state, action) => {
+            state.muster = action.payload;
+            return state;
         }
     },
 }
 
 const termSlice = createSlice(options);
 
-export const {survivedTerm, failedTerm, advancementBonus, updateEvent, resolveEvent, addDeferredEvents, resolveTerm} = termSlice.actions;
+export const {survivedTerm, failedTerm, advancementBonus, updateEvent, resolveEvent, addDeferredEvents, resolveTerm, setMuster} = termSlice.actions;
 export default termSlice.reducer;

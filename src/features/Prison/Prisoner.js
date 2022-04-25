@@ -8,16 +8,16 @@ export const prisoner  = {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: "You have a chance to escape prison!",
             a: {type: 'check', checkType:'choice', choiceList: ['Stealth', 'Deception'], checkDC: 10,
-                pass: {description: "You successfully escaped!", type: 'special', result: {type: 'muster'}},
+                pass: {description: "You successfully escaped!", type: 'special', specialType: 'muster'},
                 fail: {description: "Your escape attempt failed!", type: 'reward', result: {type: 'parole', value: 2}}
             },
-            b: {type: 'reward', description: "You decide it isn't worth the risk, and go back to your cell."}
+            b: {type: 'generic', description: "You decide it isn't worth the risk, and go back to your cell."}
         },
         4: {type: 'check', checkType: 'stat', checkStat: 'end', checkDC: 8, description: "You are assigned to do backbreaking labor.",
             pass: {description: "Your body stands up to it, for now.",
                 result: {type: 'multiple',
                     list: ['parole', 'skill'],
-                    parole: {type: 'ParoleDown', value: 1},
+                    parole: {type: 'parole', value: -1},
                     skill: {type: 'choice', choiceType: 'setSkill', choiceList: ['Athletics', 'Mechanic', 'Melee'], specialtyList: {Athletics: 'any', Mechanic: null, Melee: 'unarmed'}, value: 1}
                 }
             },
@@ -27,7 +27,7 @@ export const prisoner  = {
             a: {button: "Join!",
                 result: {type: 'multiple',
                     list: ['Parole', 'Survival', 'Skill'],
-                    Parole: {type: 'ParoleUp', value: 1},
+                    Parole: {type: 'parole', value: 1},
                     Survival: {type: 'SurvivalBonus', value: 1},
                     Skill: {type: 'choice', choiceType: 'setSkill', choiceList: ['Athletics', 'Melee', 'Mechanic'], specialtyList:{Athletics: 'any', Melee: 'unarmed', Mechanic: null}, value: 1}
                 }
@@ -38,7 +38,7 @@ export const prisoner  = {
             pass: {description: "You learn.", type: 'reward', result: { type: 'choice', choiceType: 'increaseAny'}},
             fail: {description: "You didn't learn much.", type: 'generic'}
         },
-        7: {type: 'special', result:{type: "PrisonEvent"}},
+        7: {type: 'redirect', destination: 'prisonEvent'},
         8: {type: "reward", description: "Parole Hearing...", result: {type: 'parole', value: -1}},
         9: {type: 'special', result: {type: 'newLawyer'}},
         10: {type: 'reward', description: "You are given a special responsibility in the prison.",
@@ -52,14 +52,14 @@ export const prisoner  = {
         12: {type: 'choice', choiceList: ['a', 'b'], description: "You have the opportunity to attempt to save a guard or officer at risk to yourself.",
             a: {button: "Help!", description: "You step forward to help...", 
                 result: {type: 'random', roll: '2d', threshold: 8,
-                    pass:{description: "You manage to help the guard without getting hurt yourself.",
+                    pass:{description: "You manage to help the guard without getting hurt yourself.", type: 'reward',
                         result: {type: 'multiple',
                             list: ['ally', 'ParoleDown'],
                             ally: {type: 'ally', value: 1, description: 'A prison guard who you rescued from a dangerous situation.'},
-                            ParoleDown: {type: 'parole', value: 2}
+                            ParoleDown: {type: 'parole', value: -22}
                         }
                     },
-                    fail:{description: "You failed to rescue the guard, and were injured to boot.", result: {type: 'redirect', destination: 'injury'}}
+                    fail:{description: "You failed to rescue the guard, and were injured to boot.", type: 'redirect', destination: 'injury'}
                 }
             },
             b: {button: "Leave.", description: "You walk away.", type: 'generic'}
@@ -80,7 +80,7 @@ export const prisoner  = {
                         result: {type: 'multiple',
                             list: ['Enemy', 'ParoleUp'],
                             Enemy: {type: 'enemy', value: 1, description: "Gang member you met in prison, holds a grudge over you beating the heck out of him and his gang single-handedly."},
-                            ParoleUp: {type: 'ParoleUp', value: 1}
+                            ParoleUp: {type: 'parole', value: 1}
                         }
                     },
                     fail: {description: "You don't manage to win the fight, but they focus more on beating you up than stealing from you.",

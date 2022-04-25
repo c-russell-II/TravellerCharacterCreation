@@ -14,11 +14,15 @@ const options = {
             state.job = job;
             state.parole= parole;
             return state;
+        },
+        changeParole: (state, action) => {
+            state.parole += action.payload;
+            return state;
         }
     }
 }
 
 const prisonSlice = createSlice(options);
 
-export const {enterPrison} = prisonSlice.actions;
+export const {enterPrison, changeParole} = prisonSlice.actions;
 export default prisonSlice.reducer;

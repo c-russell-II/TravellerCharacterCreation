@@ -89,6 +89,11 @@ const options = {
                 edu: 0,
             }
             return state;
+        },
+        addPsi: (state, action) => {
+            state.displayValues.psi = action.payload;
+            state.psi = getModifiers(action.payload);
+            return state;
         }
     }
 }

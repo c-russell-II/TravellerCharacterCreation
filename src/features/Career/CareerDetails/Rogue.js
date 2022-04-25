@@ -5,7 +5,7 @@ export const rogue = {
     qualificationStat: 'dex',
     qualificationDC: 6,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'choice', choiceList: ['a', 'b'], description: "You are arrested and charged.",
             a:{type: 'reward', button: "Hire a Lawyer", description: "The lawyer you hired managed to successfully get the charges against you dropped.",
                 result: {type: 'multiple',
@@ -63,7 +63,7 @@ export const rogue = {
             pass: {type: 'reward', description: "You manage to come out ahead after the dust settles.", result: {type: 'addBenefit', value: 1}},
             fail: {description: "You are wounded during the fighting.", type: 'redirect', destination: 'injury'},
         },
-        10: {type: 'other'},
+        10: {type: 'special', specialType: 'gamble'},
         11: {type: 'reward',
             description: 'A crime lord considers you his protege.' ,
             result:{type: 'choice',
@@ -78,7 +78,7 @@ export const rogue = {
     mishapList: [
         {type: 'redirect', destination: 'injury table', modifier: 'disadvantage'},
         {type: 'prisoner'},
-        {type: 'betrayal'},
+        {type: 'special', specialType: 'betrayal'},
         {type: 'reward', description: "A job goes wrong, forcing you to flee off planet.",
             result:{type: 'choice',
                 choiceType: 'setSkill',

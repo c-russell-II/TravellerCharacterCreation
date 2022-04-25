@@ -5,7 +5,7 @@ export const merchant = {
     qualificationStat: 'int',
     qualificationDC: 4,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'choice', choiceList: ['a', 'b'], description: 'You are offered the opportunity to smuggle illegal goods onto a planet.',
             a: {button: 'Smuggle them', description: "You agree to smuggle the goods, and...", type: 'check',
                     checkType: 'choice', choiceList:['Deception', 'Persuade'], specialtyList: {Deception: null, Persuade: null}, checkDC: 8, 
@@ -21,7 +21,7 @@ export const merchant = {
                 result: {type: 'enemy', description: 'Someone you turned in to the authorities while working as a merchant.', value: 1}
             }
         },
-        4: {type: 'gamble'},
+        4: {type: 'special', specialType: 'gamble'},
         5: {type: 'reward', description: 'Your time amongst spacers and suppliers has taught you a few things.',
             result: {type: 'choice',
                 choiceType: 'setSkill',

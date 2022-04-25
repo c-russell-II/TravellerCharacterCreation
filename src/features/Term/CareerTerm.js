@@ -64,7 +64,6 @@ const CareerTerm = (props) => {
 
     const stopAnagathics = (event) => {
         event.preventDefault();
-
         dispatch(anagathicEnd());
         setAnagathicCrisis(true);
     }
@@ -74,7 +73,6 @@ const CareerTerm = (props) => {
 
         const rollVal = skillCheck();
         if (rollVal === 2) {
-            // navigate to eventual "prison handler page"
             alert('You were caught, and jailed, attempting to get highly illegal anagathics!')
             dispatch(ageUp());
             dispatch(resolveTerm());

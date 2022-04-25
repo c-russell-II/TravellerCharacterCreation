@@ -5,7 +5,7 @@ export const scout  = {
     qualificationStat: 'int',
     qualificationDC: 5,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'check', checkType: 'choice', choiceList: ['Pilot', 'Persuade'], specialtyList: {Pilot: 'any', Persuade: null}, description: "Your ship is ambushed by enemy vessels.", checkDC: 8,
             pass: {type: 'reward', description: "Either through parley or just cheesing it, you get away unscathed.",
                 result: {type: 'multiple',
@@ -50,7 +50,7 @@ export const scout  = {
                 }
             },
             fail: {description: "You fail to gather the information, either due to being caught or to being too cautious.",
-                result: { type: 'redirect', destination: 'mishap', result: {type: 'noMuster'}},
+                result: { type: 'redirect', destination: 'mishap', noMuster: true},
             }
         },
         9: {type: 'check', checkType: 'choice', choiceList: ['Medic', 'Engineer'], specialtyList: {Medic: null, Engineer: 'any'}, checkDC: 8,
@@ -72,10 +72,10 @@ export const scout  = {
                 result: {type: 'multiple',
                     list: ['contact', 'skill'],
                     contact: {type: 'contact', value: 1, description: "An alien you met after quite a while on the fringes of Charted Space."},
-                    skill: {type: 'increaseAny'}
+                    skill: {type: 'choice', choiceType:'increaseAny'}
                 }
             },
-            fail: {description: "You don't hold up so well to the wild space you found yourself in.", type: 'redirect', destination: 'mishap', result: {type: 'noMuster'}},
+            fail: {description: "You don't hold up so well to the wild space you found yourself in.", type: 'redirect', destination: 'mishap', noMuster: true},
         },
         11: {type: 'reward', description: "You serve as the courier for an important message from the imperium.",
             result: {type: 'choice',

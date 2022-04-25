@@ -5,7 +5,7 @@ export const psion = {
     qualificationStat: 'psi',
     qualificationDC: 6,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'contactToRival'},
         4: {type: 'reward', description: "You spend significant amounts of time mastering your mind and body, and your skills grow to reflect this.",
             result:{type: 'choice',

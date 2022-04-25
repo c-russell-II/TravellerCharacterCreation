@@ -5,13 +5,13 @@ export const scholar = {
     qualificationStat: 'int',
     qualificationDC: 6,
     eventList: {
-        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
+        2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', noMuster: true},
         3: {type: 'choice', description: "You are called upon to perform work that goes against your conscience.", choiceList: ['a', 'b'],
             a: {type: 'reward', button: "Do it anyway", description: 'You choose to ignore your conscience in the name of your science, your career, or the greater good...',
                 result: {type: 'multiple',
                     list: ['benefit', 'skill', 'enemy'],
                     benefit: {type: 'addBenefit', value: 1},
-                    skill: {type: 'increaseMultipleSpecialties', skill: 'Science'},
+                    skill: {type: 'special', specialType: 'multipleSpecs'},
                     enemy: {type: 'enemy', value: 'roll', roll: 2, description: "People who were and are morally opposed to questionable research you were involved in as a Scholar."}
                 }
             },
@@ -92,19 +92,17 @@ export const scholar = {
         },
         {type: 'choice', choiceList: ['a', 'b'], description: 'The planetary government interferes with your work for religious or political reasons.',
             a: {type: 'reward', button: 'Continue openly.', description: "You continue with your work without regard for the government, making few friends.",
-                result: {type: 'multiple',
-                    list: ['Science', 'enemy', 'noMuster'],
+                result: {type: 'multiple', noMuster: true,
+                    list: ['Science', 'enemy'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
                     enemy: {type: 'enemy', value: 1, description: "Religious or political figure whose interference in your work as a Scholar you openly flaunted."},
-                    noMuster: {type: 'noMuster'},
                 }
             },
             b: {type: 'reward', button: 'Continue secretly.', description: "You choose to be significantly quieter about your work from now on.",
-                result: {type: 'multiple',
-                    list: ['Science', 'stat', 'noMuster'],
+                result: {type: 'multiple', noMuster: true,
+                    list: ['Science', 'stat'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
                     stat: {type: 'stat', stat: 'soc', value: -2},
-                    noMuster: {type: 'noMuster'},
                 }
             }
         },
@@ -121,19 +119,11 @@ export const scholar = {
                 result: {type: 'addBenefit', value: 1},
             },
             b: {type: 'reward', button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.",
-                result: {type: 'multiple',
-                    list: ['addBenefit', 'noMuster'],
-                    addBenefit: {type: 'addBenefit', value: 'all'},
-                    noMuster: {type: 'noMuster'}
-                }
+                result: {type: 'addBenefit', value: 'all', noMuster: true}
             }
         },
         {type: 'reward', description: "A rival researcher blackens your name, or steals your research.",
-            result: {type: 'multiple',
-                list: ['rival', 'noMuster'],
-                rival: {type: 'rival', description: "Someone who stole your research or blackened your name as a Scholar.", value: 1},
-                noMuster: {type: 'noMuster'},
-            }
+            result: {type: 'rival', description: "Someone who stole your research or blackened your name as a Scholar.", value: 1, noMuster: true}
         }
     ],
     skills: {
