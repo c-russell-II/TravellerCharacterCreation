@@ -33,8 +33,14 @@ const startStats = {
         int: 0,
         edu: 0,
         soc: 0,
+    },
+    injuryHolder: {
+        str: 0,
+        dex: 0,
+        end: 0,
+        int: 0,
+        edu: 0
     }
-    
 }
 
 const options = {
@@ -59,6 +65,9 @@ const options = {
             return state;
         },
         changeByAmount: (state, action) => {
+            if (action.payload.value < 0) {
+                state.injuryHolder[action.payload.stat] -= action.payload.value;
+            }
             state.displayValues[action.payload.stat] += action.payload.value;
             state[action.payload.stat] = getModifiers(state.displayValues[action.payload.stat]);
             return state;
@@ -70,10 +79,20 @@ const options = {
         ageUp: (state) => {
             state.age += 4;
             return state;
+        },
+        clearInjuryHolder: (state) => {
+            state.injuryHolder = {
+                str: 0,
+                dex: 0,
+                end: 0,
+                int: 0,
+                edu: 0,
+            }
+            return state;
         }
     }
 }
 
 const statsSlice = createSlice(options);
-export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp, changeByAmount} = statsSlice.actions;
+export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp, changeByAmount, clearInjuryHolder} = statsSlice.actions;
 export default statsSlice.reducer;

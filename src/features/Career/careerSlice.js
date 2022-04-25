@@ -43,7 +43,8 @@ const options = {
                     rank: 0,
                     benefits: 0,
                     muster: false,
-                    details: details
+                    details: details,
+                    commissioned: false,
                 }
                 state.careerCount++;
             }
@@ -52,6 +53,15 @@ const options = {
 
         },
         promotion: (state, action) => {
+            if (state[state.currentJob].rank === 0) {
+                state[state.currentJob].benefits++;
+            }
+            if (state[state.currentJob].rank === 2) {
+                state[state.currentJob].benefits++;
+            }
+            if (state[state.currentJob].rank === 4) {
+                state[state.currentJob].benefits++;
+            }
             if (state[state.currentJob].rank < 6){
                 state[state.currentJob].rank++;
             }
@@ -65,11 +75,18 @@ const options = {
             const {job, value} = action.payload;
             state[job].benefits += value;
             return state;
+        },
+        setCommissioned: (state, action) => {
+            const job = action.payload;
+            state[job].nonComRank = state[job].rank;
+            state[job].rank = 1;
+            state[job].commissioned = true;
+            return state;
         }
     }
 }
 
 const careerSlice = createSlice(options);
-export const {saveSurvivedTerm, saveFailedTerm, selectJob, promotion, resolveBenefit, addBenefit} = careerSlice.actions;
+export const {saveSurvivedTerm, saveFailedTerm, selectJob, promotion, resolveBenefit, addBenefit, setCommissioned} = careerSlice.actions;
 export default careerSlice.reducer;
 

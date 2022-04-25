@@ -15,10 +15,11 @@ export const JobSkills = (props) => {
     const [skillChoice, setSkillChoice] = useState({active: false, details: {skill: null, list: null}})
     const dispatch = useDispatch();
     const skills = useSelector(state => state.skills);
-    const edu = useSelector(state => state.stats.edu)
+    const edu = useSelector(state => state.stats.edu);
     const {cleanup} = props;
     const {career} = useParams();
     const careerSkills = jobObject[career].skills;
+    const commission = useSelector(state => state.careers[career].commissioned);
 
     const skillNames = useMemo(() => ['personal', 'service', career], [career]);
     const finishedList = useMemo(() => [careerSkills.personal, careerSkills.service, careerSkills.specialties[career]], [career, careerSkills.personal, careerSkills.service, careerSkills.specialties]);
@@ -27,7 +28,11 @@ export const JobSkills = (props) => {
             finishedList.push(careerSkills.advanced)
             skillNames.push('advanced');
         }
-    }, [careerSkills.advanced, edu, finishedList, skillNames])
+        if (commission) {
+            finishedList.push(careerSkills.officer);
+            skillNames.push('officer');
+        }
+    }, [careerSkills.advanced, careerSkills.officer, commission, edu, finishedList, skillNames])
 
     const skillHandler = (selection) => {
         if (!skills[selection.skill].specialties) {

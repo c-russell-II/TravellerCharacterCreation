@@ -33,7 +33,7 @@ export const UniversityChoice = (props) => {
         if (result) {
             setUniPass(true);
             setChoiceButtons(false);
-            dispatch(chooseSchool('University'))
+            dispatch(chooseSchool({school: 'University', age: stats.age}))
             return;
         }
         setChoiceButtons(false);
@@ -50,7 +50,7 @@ export const UniversityChoice = (props) => {
         const result = 8 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
             setMilAcademy({pass: true, branch: 'army'});
-            dispatch(chooseSchool('Army'))
+            dispatch(chooseSchool({school: 'army', age: stats.age}))
             setMilAcademyLink(false);
             return;
         }
@@ -62,7 +62,7 @@ export const UniversityChoice = (props) => {
         const result = 9 <= skillCheck(stats.int) - getCareerModifier(true);
         if (result) {
             setMilAcademy({pass: true, branch: 'navy'});
-            dispatch(chooseSchool('Navy'))
+            dispatch(chooseSchool({school: 'navy', age: stats.age}))
             setMilAcademyLink(false);
             return;
         }
@@ -73,7 +73,7 @@ export const UniversityChoice = (props) => {
         const result = 9 <= skillCheck(stats.end) - getCareerModifier(true);
         if (result) {
             setMilAcademy({pass: true, branch: 'marine'});
-            dispatch(chooseSchool('Marine'))
+            dispatch(chooseSchool({school: 'marine', age: stats.age}))
             setMilAcademyLink(false);
             return;
         }

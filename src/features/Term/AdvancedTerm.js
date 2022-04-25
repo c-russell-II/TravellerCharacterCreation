@@ -7,19 +7,20 @@ import RankUpBonus from "./RankUpBonus";
 import { resolveTerm } from "./TermSlice";
 
 const AdvancedTerm = (props) => {
-    const term = useSelector(state => state.term);
     const {career} = useParams();
     const careerState = useSelector(state => state.careers)
     const currentRank = careerState[career].rank;
-    const bonus = jobObject[career].ranks[currentRank].bonus;
+    const rankTitle = careerState[career].commissioned ? jobObject[career].comRanks[currentRank].title : jobObject[career].ranks[currentRank].title
+    const bonus = careerState[career].commissioned ? jobObject[career].comRanks[currentRank].bonus : jobObject[career].ranks[currentRank].bonus;
     const [hasBonus, setHasBonus] = useState(false);
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
+
     useEffect(() => {
         if (bonus) {
             setHasBonus(true);
-        }else {
+        } else {
             setHasBonus(false);
         }
     }, [bonus])
@@ -36,7 +37,7 @@ const AdvancedTerm = (props) => {
     return (
         <>
             <h2>You've been promoted!</h2>
-            <p>You are now a/an {term.jobDetails.ranks[currentRank].title}, after {careerState[career].terms * 4} years at this job.</p>
+            <p>You are now a/an {rankTitle}, after {careerState[career].terms * 4} years at this job.</p>
             {hasBonus && <RankUpBonus open={hasBonus} cleanup={() => setHasBonus(false)}/>}
             <p>If you'd like to continue in this career, click this button:</p>
             <button onClick={handleContinue}>Continue</button>

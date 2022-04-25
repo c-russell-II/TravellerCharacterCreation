@@ -14,7 +14,7 @@ const MediumInjury = (props) => {
     const handleSubmit = (event) => {
         event.preventDefault();
         dispatch(changeByAmount({stat: selected, value: -2}));
-        dispatch(resolveEvent())
+        dispatch(resolveEvent());
     }
     return (
         <>

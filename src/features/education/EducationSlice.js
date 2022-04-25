@@ -1,6 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
+    ageEntered: 18,
     school: null,
     graduated: false,
     honors: false,
@@ -15,7 +16,9 @@ const options = {
     initialState: initialState,
     reducers: {
         chooseSchool: (state, action) => {
-            state.school = action.payload;
+            const {school, age} = action.payload;
+            state.school = school;
+            state.ageEntered = age;
             return state;
         },
         chooseMajor: (state, action) => {

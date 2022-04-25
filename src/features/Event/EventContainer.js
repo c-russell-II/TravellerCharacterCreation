@@ -29,6 +29,9 @@ const EventContainer = (props) => {
             case 'generic':
                 setBody(<button onClick={dispatch(resolveEvent())}>Neat!</button>)
                 return;
+            case 'medical':
+                setBody();
+                return;
             default:
                 alert("Unhandled Event! " + type)
                 dispatch(resolveEvent())

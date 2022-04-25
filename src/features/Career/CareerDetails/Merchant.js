@@ -188,7 +188,8 @@ export const freeTrader = {
         {title: 'Trade Legend', bonus: false},
     ],
     skills: merchant.skills,
-    benefits: merchant.benefits
+    benefits: merchant.benefits,
+    parent: 'merchant'
 }
 export const broker = {
     title: 'Broker',

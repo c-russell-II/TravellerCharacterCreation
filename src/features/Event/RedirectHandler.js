@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
 import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
-import { resolveEvent, updateEvent } from "../Term/TermSlice";
+import { addDeferredEvents, resolveEvent, updateEvent } from "../Term/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
 
 const RedirectHandler = (props) => {
@@ -25,7 +25,8 @@ const RedirectHandler = (props) => {
     useEffect(() => {
         switch(event.destination) {
             case 'injury':
-                setBody(<InjuryEntry/>)
+                setBody(<InjuryEntry/>);
+                dispatch(addDeferredEvents([{type:'medical'}]))
                 return;
             case 'life':
                 lifeRedirect();

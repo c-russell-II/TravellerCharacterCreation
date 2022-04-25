@@ -49,7 +49,13 @@ export const BenefitsContainer = (props) => {
                 mod++;
             }
         }
-        if (careers[career].rank > 4) {
+
+        if (careers[career].nonComRank) {
+            const realRank = careers[career].nonComRank + careers[career].rank;
+            if (realRank > 4) {
+                mod ++;
+            }
+        } else if (careers[career].rank > 4) {
             mod ++;
         }
         const getRoll = () => {

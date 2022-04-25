@@ -2,7 +2,8 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import jobObject, { parentJobs } from "../../Career/CareerDetails";
-import { selectJob } from "../../Career/careerSlice";
+import { skillCheck } from "../../Career/careerHandler";
+import { selectJob, setCommissioned } from "../../Career/careerSlice";
 import { setTrained } from "../../Character/charaSlice";
 import { increaseStat } from "../../Character/StatsSlice";
 import { genericIncrease } from "../../Skills/SkillsSlice";
@@ -11,6 +12,7 @@ const MilitaryAcademyGraduation = (props) => {
     const {branch} = useParams();
     const currentJob = useSelector(state => state.careers.currentJob)
     const honors = useSelector(state => state.education.honors)
+    const soc = useSelector(state => state.stats.soc);
     const dispatch = useDispatch();
     const navigate = useNavigate();
     const [next, setNext] = useState(false)
@@ -18,6 +20,8 @@ const MilitaryAcademyGraduation = (props) => {
     const [intro, setIntro] = useState(true);
     const [needSkills, setNeedSkills] = useState(false);
     const [skillArray, setSkillArray] = useState([])
+    const [commission, setCommission] = useState(false);
+    const [triedCommission, setTriedCommission] = useState(false);
 
     const handleChange = (event) => {
         event.preventDefault();
@@ -45,9 +49,23 @@ const MilitaryAcademyGraduation = (props) => {
         dispatch(selectJob({job: spec, details: jobObject[spec]}));
         setNeedSkills(true);
     }
+
+    const handleCommission = () => {
+        setTriedCommission(true);
+        if (honors) {
+            setCommission(true);
+        }
+        let rollVal = skillCheck(soc) + 2;
+        if (rollVal >= 8) {
+            setCommission(true);
+        }
+    }
     const handleSubmit = (event) => {
         event.preventDefault();
         skillArray.forEach((e) => dispatch(genericIncrease({skill: e})));
+        if (commission) {
+            dispatch(setCommissioned(currentJob));
+        }
         setNeedSkills(false);
         navigate(`/term/${currentJob}/start`)
     }
@@ -86,6 +104,10 @@ const MilitaryAcademyGraduation = (props) => {
             <>
                 <p>Having decided to enlist, now you need to select your specialty- the specific rating, or set of jobs, you'll be working in.</p>
                 {parentJobs[branch].specialtiesList.map((e, i) => <button key={i} onClick={handleSpecialty(e)}>{jobObject[e].title}</button>)}
+                {!triedCommission &&
+                <><p>Also, if you desire, you can enter as a commissioned officer. This offers you unique training opportunities, in addition to the obvious differences in rank.</p>
+                <button onClick={handleCommission}>Commission!</button></>
+                }
             </>
         }
         {needSkills &&

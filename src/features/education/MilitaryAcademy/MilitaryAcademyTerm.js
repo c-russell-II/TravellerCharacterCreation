@@ -5,6 +5,7 @@ import { useDispatch, useSelector} from "react-redux";
 import {setGraduated, setHonors} from '../EducationSlice'
 import {basicTraining} from '../../Skills/SkillsSlice';
 import { skillCheck } from "../../Career/careerHandler";
+import { ageUp } from "../../Character/StatsSlice";
 
 export const MilitaryAcademyTerm = (props) => {
     const dispatch = useDispatch();
@@ -28,6 +29,7 @@ export const MilitaryAcademyTerm = (props) => {
     const handleGraduate = (event) => {
         event.preventDefault();
 
+        dispatch(ageUp())
         const graduateRoll = skillCheck(getMod());
 
         if (graduateRoll >= 11) {

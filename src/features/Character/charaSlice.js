@@ -8,6 +8,7 @@ const initialChara = {
     numOfCashBenefits: 0,
     trained: false,
     drafted: false,
+    debt: 0,
     anagathics: {
         using: false,
         terms: 0,
@@ -54,6 +55,9 @@ const options = {
             state.anagathics.using = false;
             state.anagathics.terms = 0;
             return state;
+        },
+        addDebt: (state, action) => {
+            state.debt += action.payload;
         }
     }
 }
@@ -61,5 +65,5 @@ const options = {
 const charaSlice = createSlice(options);
 
 
-export const {reset, setName, addEvent, addBenefit, setTrained, setDrafted, anagathicsTerm, anagathicEnd} = charaSlice.actions;
+export const {reset, setName, addEvent, addBenefit, setTrained, setDrafted, anagathicsTerm, anagathicEnd, addDebt} = charaSlice.actions;
 export default charaSlice.reducer;

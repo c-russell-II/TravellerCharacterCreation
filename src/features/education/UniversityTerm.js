@@ -3,7 +3,7 @@ import MajorSelection from './MajorSelection';
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { increaseToZero, setValue } from "../Skills/SkillsSlice";
-import { increaseStat } from "../Character/StatsSlice";
+import { ageUp, increaseStat } from "../Character/StatsSlice";
 import { Graduation } from "./GraduationContainer";
 import { skillCheck } from "../Career/careerHandler";
 import { setGraduated, setHonors } from './EducationSlice';
@@ -32,6 +32,7 @@ export const UniversityTerm = (props) => {
         } else {
             dispatch(setValue({skill: educationState.major, value: 1}));
         }
+        dispatch(ageUp());
         dispatch(increaseToZero(educationState.minor));
         dispatch(increaseStat('edu'));
         setMinorIsActive(false);

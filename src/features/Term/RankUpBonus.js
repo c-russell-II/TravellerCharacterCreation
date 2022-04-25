@@ -9,6 +9,7 @@ import { setValue } from "../Skills/SkillsSlice";
 const RankUpBonus = (props) => {
   const term = useSelector(state => state.term);
   const currentRank = useSelector(state => state.careers[term.job].rank)
+  const commission = useSelector(state => state.careers[term.job].commissioned)
   const stats = useSelector(state => state.stats);
   const skills = useSelector(state => state.skills);
   const dispatch = useDispatch();
@@ -172,10 +173,10 @@ const RankUpBonus = (props) => {
   }, [dispatch, singleSkillHandler, skills, stats.displayValues]);
   useEffect(() => {setIsReady(false)}, [stats.age])
    useEffect(() => {
-      const bonus = term.jobDetails.ranks[currentRank].bonus
+      const bonus = commission ? term.jobDetails.comRanks[currentRank].bonus : term.jobDetails.ranks[currentRank].bonus
        setBonusBody(rankUpHandler(bonus));
        setIsReady(true);
-   }, [currentRank, rankUpHandler, term.jobDetails.ranks])
+   }, [commission, currentRank, rankUpHandler, term.jobDetails.comRanks, term.jobDetails.ranks])
     return (
         <Popup open={props.open} modal closeOnDocumentClick={false}>
             <h4>A recent promotion grants a bonus!</h4>

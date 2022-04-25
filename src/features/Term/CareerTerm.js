@@ -6,14 +6,14 @@ import { skillCheck, roll } from "../Career/careerHandler";
 import { failedTerm, survivedTerm } from "./TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { basicTraining } from "../Skills/SkillsSlice";
-import { anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";
+import { addEvent, anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
 import AgeUp from "../Character/AgeHandlers/AgeUp";
 
 const CareerTerm = (props) => {
     const {career} = useParams();
     const stats = useSelector(state => state.stats);
-    const anagathics = useSelector(state => state.chara.anagathics)
+    const anagathics = useSelector(state => state.chara.anagathics);
     const trained = useSelector(state=> state.skills.isTrained);
     const [skillSelect, setSkillSelect] = useState(false);
     const [needAgeing, setNeedAgeing] = useState(false);
@@ -96,12 +96,14 @@ const CareerTerm = (props) => {
         if (surviveCheck) {
             dispatch(survivedTerm({job: career, event: jobEvent, jobDetails: jobDetails}));
             dispatch(saveSurvivedTerm({job: career}))
+            dispatch(addEvent(jobEvent))
             navigate(`/term/${career}/survived`)
             setIntro(true);
             return;
         } else {
             dispatch(failedTerm({job: career, event: mishap, jobDetails: jobDetails}));
             navigate(`/term/${career}/failed`);
+            dispatch(addEvent(mishap));
             setIntro(true);
             return;
         }

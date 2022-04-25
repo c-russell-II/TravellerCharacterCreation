@@ -191,8 +191,17 @@ export const supportMarine = {
         {title: 'Gunnery Sergeant', bonus: {type: 'stat', stat: 'end', value: 1}},
         {title: 'Sergeant Major', bonus: false},
     ],
+    comRanks: [
+        {title: 'Lieutenant', bonus: {type: 'skill', skill: 'Leadership', value: 1}},
+        {title: 'Captain', bonus: false},
+        {title: 'Force Commander', bonus: {type: 'skill', skill: 'Tactics', specialty: 'any', value: 1}},
+        {title: 'Lieutenant Colonel', bonus: false},
+        {title: 'Colonel', bonus: {type: 'setStat', stat: 'soc', threshold: 10, value: 1}},
+        {title: 'Brigadier', bonus: false},
+    ],
     skills: marine.skills,
-    benefits: marine.benefits
+    benefits: marine.benefits,
+    parent: 'marine'
 }
 export const starMarine = {
     title: 'Star Marine',
@@ -211,6 +220,14 @@ export const starMarine = {
         {title: 'Sergeant', bonus: false},
         {title: 'Gunnery Sergeant', bonus: {type: 'stat', stat: 'end', value: 1}},
         {title: 'Sergeant Major', bonus: false},
+    ],
+    comRanks: [
+        {title: 'Lieutenant', bonus: {type: 'skill', skill: 'Leadership', value: 1}},
+        {title: 'Captain', bonus: false},
+        {title: 'Force Commander', bonus: {type: 'skill', skill: 'Tactics', specialty: 'any', value: 1}},
+        {title: 'Lieutenant Colonel', bonus: false},
+        {title: 'Colonel', bonus: {type: 'setStat', stat: 'soc', threshold: 10, value: 1}},
+        {title: 'Brigadier', bonus: false},
     ],
     skills: marine.skills,
     benefits: marine.benefits,
@@ -233,6 +250,14 @@ export const groundAssault = {
         {title: 'Sergeant', bonus: false},
         {title: 'Gunnery Sergeant', bonus: {type: 'stat', stat: 'end', value: 1}},
         {title: 'Sergeant Major', bonus: false},
+    ],
+    comRanks: [
+        {title: 'Lieutenant', bonus: {type: 'skill', skill: 'Leadership', value: 1}},
+        {title: 'Captain', bonus: false},
+        {title: 'Force Commander', bonus: {type: 'skill', skill: 'Tactics', specialty: 'any', value: 1}},
+        {title: 'Lieutenant Colonel', bonus: false},
+        {title: 'Colonel', bonus: {type: 'setStat', stat: 'soc', threshold: 10, value: 1}},
+        {title: 'Brigadier', bonus: false},
     ],
     skills: marine.skills,
     benefits: marine.benefits,
