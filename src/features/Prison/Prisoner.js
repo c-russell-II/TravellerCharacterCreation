@@ -8,8 +8,8 @@ export const prisoner  = {
         2: {type: 'redirect', destination: 'mishap', description: 'Disaster!', result: {type: 'noMuster'}},
         3: {type: 'choice', choiceList: ['a', 'b'], description: "You have a chance to escape prison!",
             a: {type: 'check', checkType:'choice', choiceList: ['Stealth', 'Deception'], checkDC: 10,
-                pass: {description: "You successfully escaped!", result: {type: 'muster'}},
-                fail: {description: "Your escape attempt failed!", result: {type: 'ParoleUp', value: 2}}
+                pass: {description: "You successfully escaped!", type: 'special', result: {type: 'muster'}},
+                fail: {description: "Your escape attempt failed!", type: 'reward', result: {type: 'parole', value: 2}}
             },
             b: {type: 'reward', description: "You decide it isn't worth the risk, and go back to your cell."}
         },
@@ -32,15 +32,15 @@ export const prisoner  = {
                     Skill: {type: 'choice', choiceType: 'setSkill', choiceList: ['Athletics', 'Melee', 'Mechanic'], specialtyList:{Athletics: 'any', Melee: 'unarmed', Mechanic: null}, value: 1}
                 }
             },
-            b: {button: "Nah, man", description: "You just want to keep your head down, but the gang doesn't take kindly to being refused.", result: {type: 'enemy', value: 1, description: "Gang member, who offered you a place in his gang- and you refused him, while in prison."}}
+            b: {button: "Nah, man", description: "You just want to keep your head down, but the gang doesn't take kindly to being refused.", type: 'reward', result: {type: 'enemy', value: 1, description: "Gang member, who offered you a place in his gang- and you refused him, while in prison."}}
         },
         6: {type: 'check', checkType: 'stat', checkStat: 'edu', checkDC: 8, description: "Vocational Training.",
-            pass: {description: "You learn.", result: {type: 'increaseAny'}},
-            fail: {description: "You didn't learn much.", result: {type: 'none'}}
+            pass: {description: "You learn.", type: 'reward', result: { type: 'choice', choiceType: 'increaseAny'}},
+            fail: {description: "You didn't learn much.", type: 'generic'}
         },
-        7: {type: "PrisonEvent"},
-        8: {type: "ParoleDown", description: "Parole Hearing...", value: 1},
-        9: {type: 'NewLawyer'},
+        7: {type: 'special', result:{type: "PrisonEvent"}},
+        8: {type: "reward", description: "Parole Hearing...", result: {type: 'parole', value: -1}},
+        9: {type: 'special', result: {type: 'newLawyer'}},
         10: {type: 'reward', description: "You are given a special responsibility in the prison.",
             result:{type: 'choice',
                 choiceType: 'increaseSkill',
@@ -48,7 +48,7 @@ export const prisoner  = {
                 specialtyList: {Admin: null, Advocate: null, Electronics: 'computers', Steward: null}
             }
         },
-        11: {type: 'ParoleDown', description: "The warden takes an interest in your case.", value: 2},
+        11: {type: 'reward', description: "The warden takes an interest in your case.", result: {type: 'parole', value: -2}},
         12: {type: 'choice', choiceList: ['a', 'b'], description: "You have the opportunity to attempt to save a guard or officer at risk to yourself.",
             a: {button: "Help!", description: "You step forward to help...", 
                 result: {type: 'random', roll: '2d', threshold: 8,
@@ -56,20 +56,20 @@ export const prisoner  = {
                         result: {type: 'multiple',
                             list: ['ally', 'ParoleDown'],
                             ally: {type: 'ally', value: 1, description: 'A prison guard who you rescued from a dangerous situation.'},
-                            ParoleDown: {type: 'ParoleDown', value: 2}
+                            ParoleDown: {type: 'parole', value: 2}
                         }
                     },
                     fail:{description: "You failed to rescue the guard, and were injured to boot.", result: {type: 'redirect', destination: 'injury'}}
                 }
             },
-            b: {button: "Leave.", description: "You walk away.", result: {type: 'none'}}
+            b: {button: "Leave.", description: "You walk away.", type: 'generic'}
         }
     },
     mishapList: [
         {type: 'redirect', destination:'injury', modifier: 'disadvantage', description: 'You are severely injured...'},
-        {type: 'ParoleUp', description: "You are accused of assaulting a prison guard.", value: 2},
+        {type: 'reward', description: "You are accused of assaulting a prison guard.", result: {type: 'parole', value: 2}},
         {type: 'choice', choiceList: ['a', 'b'], description:"A prison gang is harassing you- do you let them take few things you have, or do you fight back?",
-            a: {button: "Don't fight.", description: "Deciding it isn't worth it, you let them take what they want.", result: {type: 'addBenefit', value: 'all'}},
+            a: {button: "Don't fight.", type: 'reward', description: "Deciding it isn't worth it, you let them take what they want.", result: {type: 'addBenefit', value: 'all'}},
             b: {button: "Fight them!",
                 result: {type: 'check',
                     checkType: 'skill',
@@ -89,7 +89,12 @@ export const prisoner  = {
                 }
             }
         },
-        {type: 'ParoleUp', description: 'A guard takes a dislike to you.', value: 1, result: {type: 'enemy', value: 1, description: 'Prison guard who decided, for reasons good or bad, that he dislikes you.'}},// guard doesn't like you,
+        {type: 'reward', description: 'A guard takes a dislike to you',
+            result: {type: 'multiple', list: ['enemy', 'parole'],
+                enemy:{type: 'enemy', value: 1, description: 'Prison guard who decided, for reasons good or bad, that he dislikes you.'},
+                parole: {type: 'parole', value: 1}
+            }
+        },
         {type: 'reward', description: "You find out that word of your criminal status has reached your homeworld...", result: {type: 'stat', stat: 'soc', value: -1}},
         {type: 'redirect', destination: 'injury'}
     ],
@@ -212,3 +217,5 @@ export const fixer = {
     skills: prisoner.skills,
     benefits: prisoner.benefits
 }
+
+export const prisonSpecs = {inmate: inmate, thug: thug, fixer: fixer}

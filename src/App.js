@@ -19,6 +19,7 @@ import CareerChoiceLayout from './features/Organization/CareerChoiceLayout';
 import DraftHandler from './features/Organization/Qualification/DraftHandler';
 import DrifterRedirect from './features/Organization/Qualification/DrifterRedirect';
 import EducationRouter from './features/education/EducationRouter';
+import PrisonRouter from './features/Prison/PrisonRouter';
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             <Route path="background_skills" element={<BackgroundSkillsChoice/>}/>
             <Route path="character_creation" element={<CharacterCreation/>}/>
             <Route path="classic_character_creation" element={<ClassicContainer/>}/>
+            <Route path="prisoner/*" element={<PrisonRouter/>}/>
             <Route path="education/*" element={<EducationRouter/>}/>
             <Route path="choose_career/" element={<CareerChoiceLayout />}>
               <Route index element={<CareerChooser/>}/>

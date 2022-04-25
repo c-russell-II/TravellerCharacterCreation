@@ -3,12 +3,13 @@ import jobObject from "../Career/CareerDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { skillCheck, roll } from "../Career/careerHandler";
-import { failedTerm, survivedTerm } from "./TermSlice";
+import { failedTerm, resolveTerm, survivedTerm } from "./TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { basicTraining } from "../Skills/SkillsSlice";
 import { addEvent, anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
 import AgeUp from "../Character/AgeHandlers/AgeUp";
+import { ageUp } from "../Character/StatsSlice";
 
 const CareerTerm = (props) => {
     const {career} = useParams();
@@ -74,6 +75,10 @@ const CareerTerm = (props) => {
         const rollVal = skillCheck();
         if (rollVal === 2) {
             // navigate to eventual "prison handler page"
+            alert('You were caught, and jailed, attempting to get highly illegal anagathics!')
+            dispatch(ageUp());
+            dispatch(resolveTerm());
+            navigate('/prisoner/');
         }
         if (rollVal + stats.soc >= 10) {
             dispatch(anagathicsTerm());
