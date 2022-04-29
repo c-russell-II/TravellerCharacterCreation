@@ -17,7 +17,6 @@ const ChoiceCheck = (props) => {
         ev.preventDefault();
         const isSkill = Object.keys(skills).includes(choice);
         const newEvent = {
-            type: 'check',
             ...event
         }
         if (isSkill) {
@@ -37,8 +36,8 @@ const ChoiceCheck = (props) => {
                 specialty = specialtyList;
             }
             newEvent.specialty = specialty;
-            cleanup();
             dispatch(updateEvent(newEvent));
+            cleanup();
             return;
         }
         newEvent.checkType = 'stat';
@@ -50,6 +49,7 @@ const ChoiceCheck = (props) => {
     }
     return (
         <>
+            {event.checkType === 'choice' &&
             <form name="choice" onSubmit={handleSubmit}>
                 {event.choiceList?.map((e, i) => {
                     return (
@@ -58,6 +58,7 @@ const ChoiceCheck = (props) => {
                 })}
                 <input type="submit" name="choice" value="submit"/>
             </form>
+            }
         </>
     )
 }

@@ -91,15 +91,15 @@ export const scholar = {
             }
         },
         {type: 'choice', choiceList: ['a', 'b'], description: 'The planetary government interferes with your work for religious or political reasons.',
-            a: {type: 'reward', button: 'Continue openly.', description: "You continue with your work without regard for the government, making few friends.",
-                result: {type: 'multiple', noMuster: true,
+            a: {type: 'reward', button: 'Continue openly.', description: "You continue with your work without regard for the government, making few friends.", noMuster: true,
+                result: {type: 'multiple',
                     list: ['Science', 'enemy'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
                     enemy: {type: 'enemy', value: 1, description: "Religious or political figure whose interference in your work as a Scholar you openly flaunted."},
                 }
             },
-            b: {type: 'reward', button: 'Continue secretly.', description: "You choose to be significantly quieter about your work from now on.",
-                result: {type: 'multiple', noMuster: true,
+            b: {type: 'reward', button: 'Continue secretly.', description: "You choose to be significantly quieter about your work from now on.", noMuster: true,
+                result: {type: 'multiple',
                     list: ['Science', 'stat'],
                     Science: {type: 'increaseSkill', skill: 'Science', specialty: 'any'},
                     stat: {type: 'stat', stat: 'soc', value: -2},
@@ -118,12 +118,12 @@ export const scholar = {
             a: {type: 'reward', button: 'Salvage what you can', description: "You decide to salvage what you can, and move on to greener pastures.",
                 result: {type: 'addBenefit', value: 1},
             },
-            b: {type: 'reward', button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.",
-                result: {type: 'addBenefit', value: 'all', noMuster: true}
+            b: {type: 'reward', button: "Begin again", description: "You decide to accept the losses, and just begin again without all that.", noMuster: true,
+                result: {type: 'addBenefit', value: 'all'}
             }
         },
-        {type: 'reward', description: "A rival researcher blackens your name, or steals your research.",
-            result: {type: 'rival', description: "Someone who stole your research or blackened your name as a Scholar.", value: 1, noMuster: true}
+        {type: 'reward', description: "A rival researcher blackens your name, or steals your research.", noMuster: true,
+            result: {type: 'rival', description: "Someone who stole your research or blackened your name as a Scholar.", value: 1,}
         }
     ],
     skills: {

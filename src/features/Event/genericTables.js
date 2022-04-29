@@ -1,6 +1,6 @@
 const lifeEvent = {
     2: {type: 'redirect', description: 'You are injured or become sick.', destination: 'injury'},
-    3: {type: 'event', description: "Someone close to you gives birth or dies, and you are involved somehow."},
+    3: {type: 'generic', description: "Someone close to you gives birth or dies, and you are involved somehow."},
     4: {type: 'reward', description: "A romantic relationship involving you ends. Badly.", result:{type: 'rival', description: 'ex-romantic partner.', value: 1}},
     5: {type: 'reward', description: "A romantic relationship involving you deepens, possibly leading to marriage or some other further commitment.", result:{type: 'ally', description: "Romantic partner that is becoming something more."}},
     6: {type: 'reward', description: "You become involved in a new romantic relationship.", result: {type: 'ally', description: "New romantic partner.", value: 1}},
@@ -19,8 +19,8 @@ const unusual = [
     {type: 'special', specialType: 'psi'},
     {type: 'reward', description: 'You spend time among an alien race.', result: {type: 'multiple', list: ['skill', 'contact'], skill:{type: 'skill', skill: 'science', value: 1}, contact: {type: 'contact', value: 1, description: "Alien met from unusual life event (probably not directly connected to career!"}}},
     {type: 'reward', description: "You have a strange and unusual device from an alien culture that is not normally available to humans.", result: {type: 'misc', description: "Strange and unusual device from unknown, novel, or faraway alien culture."}},
-    {type: 'event', description: "Something happened to you. You have no idea what."},
-    {type: 'event', description: "You briefly came in contact with the highest echelons of the Imperium - perhaps an Archduke or the Emperor- or, perhaps, Imperial Intelligence."},
+    {type: 'generic', description: "Something happened to you. You have no idea what."},
+    {type: 'generic', description: "You briefly came in contact with the highest echelons of the Imperium - perhaps an Archduke or the Emperor- or, perhaps, Imperial Intelligence."},
     {type: 'reward', description: 'You possess an incredibly ancient piece of alien technology- almost certainly older than the Imperium itself.', result: {type: 'misc', description: "Incredibly ancient piece of technology, that pre-dates the Imperium."}}
 ]
 

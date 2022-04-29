@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
 import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
-import { addDeferredEvents, resolveEvent, updateEvent } from "../Term/TermSlice";
+import { addDeferredEvents, updateEvent } from "../Term/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
 import { prisoner } from "../Prison/Prisoner";
 

@@ -17,7 +17,7 @@ export const scout  = {
             fail: {type: 'reward', description: "You fail to talk or fly your way out, and your ship is destroyed.",
                 result: {type: 'multiple',
                     list: ['muster', 'enemy'],
-                    muster: {type: 'muster'},
+                    muster: {type: 'muster', muster: true},
                     enemy: {type: 'enemy', value: 1, description: "An enemy who ambushed you, and you failed to escape from, while working as a Scout."}
                 }
             }

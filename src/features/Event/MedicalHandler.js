@@ -28,7 +28,7 @@ const MedicalHandler = (props) => {
 
     const costCalculator = (percent) => {
         let numStats;
-        Object.keys(injuries).forEach((e) => numStats+= injuries[e]);
+        Object.keys(injuries).forEach((e) => numStats  += injuries[e]);
         const initialCost = numStats * 5000;
         return initialCost * (1 - percent);
     }

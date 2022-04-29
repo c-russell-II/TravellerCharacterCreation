@@ -42,7 +42,7 @@ export const psion = {
             a: {type: 'reward', button: "Agree.", description: "You do so, and it turns out to have been a test- you have been approved to continue your training.", result: {type: 'multiple', list: ['noMuster', 'enemy'], noMuster: {type: 'noMuster'}, enemy: {type: 'enemy', value: 1, description: "Someone you hurt doing something unethical during your psion career."}}},
             b: {type: 'generic', button: "Refuse", description: "It was a test by your superiors, and they decide you are not a good fit for continued enrollment in their organization."}
         },
-        {type: 'reward', description: 'You are experimented on by a corporation, government, or other powerful organization - you escape, but cannot return to your psionic career.', result: {type: 'muster'}},
+        {type: 'reward', description: 'You are experimented on by a corporation, government, or other powerful organization - you escape, but cannot return to your psionic career.'},
         {type: 'redirect', destination: 'injury'}
     ],
     skills: {
