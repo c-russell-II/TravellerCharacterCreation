@@ -171,7 +171,7 @@ export const corporate = {
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
         {title: 'Senior Field Agent', bonus: false},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', specialty: 'any', value: 1}},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', value: 1}},
         {title: 'Assistant Director', bonus: false},
         {title: 'Director', bonus: false}
     ],
@@ -217,7 +217,7 @@ export const intelligence = {
         {title: 'Agent', bonus: {type: 'skill', skill:'Deception', value: 1}},
         {title: 'Field Agent', bonus: {type: 'skill', skill:'Investigate', value: 1}},
         {title: 'Senior Field Agent', bonus: false},
-        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', specialty: 'any', value: 1}},
+        {title: 'Special Agent', bonus: {type: 'skill', skill:'GunCombat', value: 1}},
         {title: 'Assistant Director', bonus: false},
         {title: 'Director', bonus: false}
     ],

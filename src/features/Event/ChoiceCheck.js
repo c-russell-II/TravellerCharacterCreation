@@ -8,7 +8,7 @@ const ChoiceCheck = (props) => {
     const [choice, setChoice] = useState('');
     const {cleanup} = props;
     const dispatch = useDispatch();
-    
+
     const handleChange = (ev) => {
         ev.preventDefault();
         setChoice(ev.target.value);
@@ -21,8 +21,9 @@ const ChoiceCheck = (props) => {
             ...event
         }
         if (isSkill) {
-            const specialtyList = event.specialtyList[choice] === 'any' ? skills[choice].specialtyList : event.specialtyList[choice];
+            const specialtyList = event.specialtyList[choice] === 'any' ? skills[choice].specialtiesList : event.specialtyList[choice];
             newEvent.checkSkill = choice;
+            newEvent.checkType = 'skill';
             let specialty = ''
             let specialtyVal = -3;
             if (Array.isArray(specialtyList)) {
@@ -36,10 +37,8 @@ const ChoiceCheck = (props) => {
                 specialty = specialtyList;
             }
             newEvent.specialty = specialty;
-            newEvent.specialtyList = null;
-            newEvent.choiceList = null;
-            dispatch(updateEvent(newEvent));
             cleanup();
+            dispatch(updateEvent(newEvent));
             return;
         }
         newEvent.checkType = 'stat';
@@ -52,12 +51,12 @@ const ChoiceCheck = (props) => {
     return (
         <>
             <form name="choice" onSubmit={handleSubmit}>
-                {event.choiceList.map((e, i) => {
+                {event.choiceList?.map((e, i) => {
                     return (
-                        <label key={i}><input type="radio" value={e} name="choice" checked={choice===e} onChange={handleChange}/>{e}</label>
+                        <label key={i}><input type="radio" value={e} name="choice" key={Math.random()} checked={choice===e} onChange={handleChange}/>{e}</label>
                     )
                 })}
-                <input type="submit" value="submit"/>
+                <input type="submit" name="choice" value="submit"/>
             </form>
         </>
     )

@@ -74,7 +74,7 @@ const SpecialRedirectChoiceEvent = (props) => {
             {skillChoice &&
                 <>
                     <p>Select what role you are playing while undercover:</p>
-                    {parentJobs[skillChoice].specialtiesList.map((e, i) => <button key={i} onClick={handleClick(e)}>{jobObject[e].title}</button>)}
+                    {parentJobs[skillChoice].specialtiesList.map((e, i) => <button key={i} onClick={() => handleClick(parentJobs[skillChoice].skills.specialties[e])}>{jobObject[e].title}</button>)}
                 </>
             }
             {needSpecialties &&

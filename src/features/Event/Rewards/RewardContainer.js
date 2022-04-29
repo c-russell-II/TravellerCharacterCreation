@@ -26,7 +26,7 @@ const RewardContainer = (props) => {
                 setBody(<ChoiceReward/>)
                 return;
             case 'multiple':
-                dispatch(addDeferredEvents(event.result.list.map((e) => {return {type: 'reward', description: '', result: event.result[e]}})));
+                dispatch(addDeferredEvents(event.result.list.map((e) => {return {type: 'reward', description: event.description, result: event.result[e]}})));
                 dispatch(resolveEvent());
                 return;
             case 'benefit':
@@ -69,11 +69,10 @@ const RewardContainer = (props) => {
                 dispatch(resolveEvent())
                 return;
             default:
-                alert("Unhandled Reward Event! " + event.result.type)
-                dispatch(resolveEvent())
                 return;
         }
-    }, [event, dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>

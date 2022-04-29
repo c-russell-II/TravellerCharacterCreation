@@ -42,7 +42,8 @@ export const noble = {
             result:{type: 'multiple', list: ['choice', 'rival',],
                 choice: {type: 'choice',
                     choiceType: 'increaseSkill',
-                    choiceList: ['Advocate', 'Admin', 'Diplomacy', 'Persuade']
+                    choiceList: ['Advocate', 'Admin', 'Diplomacy', 'Persuade'],
+                    specialtyList: {Advocate: null, Admin: null, Diplomacy: null, Persuade: null}
                 },
                 rival: {type: 'rival', value: 1, description: 'Rival from political intruge related to your Noble career.'}
             }

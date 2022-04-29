@@ -1,6 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { ageUp } from "../Character/StatsSlice";
 import { resolveTerm } from "./TermSlice";
 
 const TermNoPromotion = (props) => {
@@ -11,9 +12,11 @@ const TermNoPromotion = (props) => {
 
     const handleContinue = (event) => {
         dispatch(resolveTerm());
+        dispatch(ageUp())
         navigate(`/term/${career}/start`);
     };
     const handleNew = (event) => {
+        dispatch(ageUp())
         dispatch(resolveTerm());
         navigate(`/leave_career/${career}`)
     };

@@ -7,7 +7,7 @@ const MultipleChoice = (props) => {
     const dispatch = useDispatch();
 
     const handleClick = (choice) => {
-        dispatch(updateEvent(event.result[choice]))
+        dispatch(updateEvent({type: 'reward', description: event.description, result: event.result[choice]}))
         return;
     }
     return (

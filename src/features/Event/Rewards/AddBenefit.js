@@ -7,7 +7,7 @@ import { resolveEvent } from "../../Term/TermSlice";
 const AddBenefit = (props) => {
     const {career} = useParams();
     const event = useSelector(state => state.term.event);
-    const benefitCount = useSelector(state => state.career[career].benefitCount)
+    const benefitCount = useSelector(state => state.careers[career].benefits)
     const dispatch = useDispatch();
 
 
@@ -16,7 +16,7 @@ const AddBenefit = (props) => {
 
     const handleClick = (ev) => {
         ev.preventDefault();
-        dispatch(addBenefit({career: career, value: value}))
+        dispatch(addBenefit({job: career, value: value}))
         dispatch(resolveEvent());
         return;
     }

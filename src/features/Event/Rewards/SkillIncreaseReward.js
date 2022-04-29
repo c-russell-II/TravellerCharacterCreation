@@ -19,16 +19,14 @@ const SkillIncreaseReward = (props) => {
         } else {
             setSkillList(event.result.choiceList);
         }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [event.result.choiceList, event.result.choiceType])
+    }, [event.result.choiceList, event.result.choiceType, skills.trainedSkills])
 
     const specialtyHandler = () => {
         if (event.result.specialtyList[choice] === 'any') {
             setNeedSpecialty(true);
-            setSpecList(skills[choice].specialtyList);
-            return;
+            setSpecList(skills[choice].specialtiesList)
         }
-        if (typeof event.result.specialtyList[choice] === 'string') {
+        if (typeof event.result.specialtyList?.[choice] === 'string') {
             dispatch(genericIncrease({skill: choice, value: event.result.value, specialty: event.result.specialtyList[choice]}));
             dispatch(resolveEvent());
             return;
@@ -45,10 +43,10 @@ const SkillIncreaseReward = (props) => {
     }
     const handleSubmit = (ev) => {
         ev.preventDefault();
-        if (skills[choice].specialty) {
+        if (skills[choice].specialties) {
             specialtyHandler();
         }
-        dispatch(genericIncrease({skill: ev.target.value, value: event.result.value}));
+        dispatch(genericIncrease({skill: choice, value: event.result.value}));
         dispatch(resolveEvent());
         return;
     }

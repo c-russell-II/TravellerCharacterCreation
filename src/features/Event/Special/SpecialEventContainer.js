@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { resolveEvent } from "../../Term/TermSlice";
 import BetrayalEvent from "./BetrayalEvent";
 import BranchSkillCheck from "./BranchSkillCheck";
 import CloseHurt from "./CloseHurt";
@@ -19,7 +18,6 @@ const SpecialEventContainer = (props) => {
     const event = useSelector(state=> state.term.event);
     const [body, setBody] = useState();
     const navigate = useNavigate();
-    const dispatch = useDispatch();
 
     useEffect(() => {
         switch (event.specialType) {
@@ -65,7 +63,8 @@ const SpecialEventContainer = (props) => {
             default:
                 return;
         }
-    }, [event.specialType, navigate])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>

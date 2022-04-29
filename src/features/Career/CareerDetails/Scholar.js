@@ -44,7 +44,7 @@ export const scholar = {
                     result: {type: 'multiple',
                         list: ['benefit', 'skill', 'enemy'],
                         benefit: {type: 'benefit', value: 2},
-                        skill: {type: 'increaseAny'},
+                        skill: {type: 'choice', choiceType: 'increaseAny'},
                         enemy: {type: 'enemy', value: 1, description: "Someone who was harmed by your choice to cheat in some form or fashion while working as a Scholar."}
                     }
                 },

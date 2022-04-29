@@ -12,15 +12,15 @@ export const JobSkills = (props) => {
     const [selectedSkill, setSelectedSkill] = useState({})
     const [skillChoice, setSkillChoice] = useState({active: false, details: {skill: null, list: null}})
     const dispatch = useDispatch();
-    const term = useSelector(state=> state.term);
     const skills = useSelector(state => state.skills);
     const edu = useSelector(state => state.stats.edu);
     const {cleanup} = props;
-    const careerSkills = term.jobDetails.skills;
-    const commission = useSelector(state => state.careers?.[term.job].commissioned);
+    const careers = useSelector(state => state.careers);
+    const commission = careers[careers.currentJob].commissioned;
+    const careerSkills = careers[careers.currentJob].details.skills;
 
-    const skillNames = useMemo(() => ['personal', 'service', term.job], [term.job]);
-    const finishedList = useMemo(() => [careerSkills.personal, careerSkills.service, careerSkills.specialties[term.job]], [careerSkills.personal, careerSkills.service, careerSkills.specialties, term.job]);
+    const skillNames = useMemo(() => ['personal', 'service', careers.currentJob], [careers.currentJob]);
+    const finishedList = useMemo(() => [careerSkills.personal, careerSkills.service, careerSkills.specialties[careers.currentJob]], [careerSkills.personal, careerSkills.service, careerSkills.specialties, careers.currentJob]);
     useEffect(() => {
         if (edu > 8) {
             finishedList.push(careerSkills.advanced)

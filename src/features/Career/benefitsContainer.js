@@ -21,14 +21,11 @@ export const BenefitsContainer = (props) => {
     const [benefitArray, setBenefitArray] = useState([]);
     const dispatch = useDispatch();
     const {career} = useParams();
-    let benefitBonuses;
-    let bonusList;
+    let benefitBonuses = {};
+    let bonusList = [];
     if (benefits[career]) {
         benefitBonuses = benefits[career]
         bonusList = Object.keys(benefitBonuses);
-    } else {
-        benefitBonuses = {}
-        bonusList = [];
     }
     useEffect(() => {
         setNumCash(chara.numOfCashBenefits);
@@ -111,12 +108,12 @@ export const BenefitsContainer = (props) => {
             <h3>{jobObject[career].title} Benefits:</h3>
             {numBenefits > 0 && <> <p>Benefits Remaining: {numBenefits}</p>
                 {numCash < 3 &&
-                <ToggleButtonGroup key={Math.random()} type="radio" name="typeSelector" value={value} onChange={handleChange}>
+                <ToggleButtonGroup type="radio" name="typeSelector" value={value} onChange={handleChange}>
                     <ToggleButton key={Math.random()} id="tbg-btn-1" value={1}>
                         Cash
                     </ToggleButton>
                     <ToggleButton key={Math.random()} id="tbg-btn-2" value={2}>
-                        Other
+                        Miscellaneous
                     </ToggleButton>
                 </ToggleButtonGroup>}
                 {bonusList.length > 0 ?
@@ -125,7 +122,7 @@ export const BenefitsContainer = (props) => {
                         <label for='none'><input type="radio" value="none" id='none' name='selectedBenefit'/> No bonus.</label>
                         <label for='submit'><input type="submit" name='selectedBenefit'/>Roll for a benefit!</label>
                     </form>
-                : <button onClick={noBonusClick}>Roll for a benefit!</button>} </> 
+                : <button onClick={noBonusClick}>Roll for a benefit!</button>} </>
             }
             {benefitArray.length > 0 &&
                 <ul>

@@ -176,7 +176,8 @@ const RankUpBonus = (props) => {
       const bonus = commission ? term.jobDetails.comRanks[currentRank].bonus : term.jobDetails.ranks[currentRank].bonus
        setBonusBody(rankUpHandler(bonus));
        setIsReady(true);
-   }, [commission, currentRank, rankUpHandler, term.jobDetails.comRanks, term.jobDetails.ranks])
+   // eslint-disable-next-line react-hooks/exhaustive-deps
+   }, [stats.age])
     return (
         <Popup open={props.open} modal closeOnDocumentClick={false}>
             <h4>A recent promotion grants a bonus!</h4>

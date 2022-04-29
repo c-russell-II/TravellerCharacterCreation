@@ -12,7 +12,7 @@ const RedirectHandler = (props) => {
     const event = useSelector(state=> state.term.event);
     const job = useSelector(state => state.term.job)
     const { career } = useParams();
-    const mishapTable = jobObject[career].mishapList;
+    const mishapTable = jobObject?.[career].mishapList;
     const dispatch = useDispatch();
     const [body, setBody] = useState();
     const lifeTable = genericTables.life;
@@ -47,11 +47,10 @@ const RedirectHandler = (props) => {
                 unusualRedirect();
                 return;
             default:
-                alert("Unhandled Redirect Event! " + event.destination)
-                dispatch(resolveEvent())
                 return;
         }
-    }, [dispatch, event, lifeRedirect, mishapRedirect, unusualRedirect, prisonRedirect, job])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
     return (
         <>
             {event?.description && <p>{event.description}</p>}

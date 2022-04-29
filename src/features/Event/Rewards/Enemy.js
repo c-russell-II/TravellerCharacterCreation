@@ -24,6 +24,8 @@ const Enemy = (props) => {
     }
     return (
         <>
+            <h4>A new enemy...</h4>
+            <p>{description}</p>
             <button onClick={handleClick}>Damn.</button>
         </>
     )

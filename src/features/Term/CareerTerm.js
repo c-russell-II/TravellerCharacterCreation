@@ -44,6 +44,8 @@ const CareerTerm = (props) => {
     useEffect(() => {
         if (stats.age > 34) {
             setNeedAgeing(true);
+        } else {
+            setNeedAgeing(false);
         }
     }, [stats.age])
 
@@ -113,6 +115,7 @@ const CareerTerm = (props) => {
     }
     const cleanup = () => {
         setSkillSelect(false);
+        setIntro(false);
         if (!needAgeing && !anagathicCrisis) {
             setIsReady(true);
         }
@@ -138,7 +141,7 @@ const CareerTerm = (props) => {
             {skillSelect &&
                 <>
                     <h3>Select a skill table:</h3><br/>
-                    <JobSkills cleanup={cleanup} />
+                    <JobSkills cleanup={cleanup} /><br/>
                 </>
 
             }

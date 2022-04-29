@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
 import { updateEvent } from "../Term/TermSlice";
@@ -15,7 +15,7 @@ const CheckEvent = (props) => {
         if (skills[skill].specialties) {
             let specialtyVal = -3;
             if (event.result.specialtyList[skill] === 'any') {
-                skills[skill].specialtyList.forEach((e) => {
+                skills[skill].specialtiesList.forEach((e) => {
                     if (skills[skill][e] > specialtyVal) {
                         specialtyVal = skills[skill][e];
                     };
@@ -28,7 +28,6 @@ const CheckEvent = (props) => {
                     if (skills[skill][e] > specialtyVal) {
                         specialtyVal = skills[skill][e];
                     }
-                    return;
                 })
                 return specialtyVal;
             }
@@ -75,11 +74,16 @@ const CheckEvent = (props) => {
         return;
     }
 
-    const handleClick = () => {
+    useEffect(() => {
         if (event.checkType === 'choice') {
             setIsChoice(true);
             return;
         }
+        setIsChoice(false);
+        return;
+    }, [event.checkType])
+
+    const handleClick = () => {
         resolveCheck(handleCheck(), event);
         return;
     }

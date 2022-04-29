@@ -25,13 +25,13 @@ const EventContainer = (props) => {
         const {type} = event;
         switch (type) {
             case 'redirect':
-                setBody(<RedirectHandler/>)
+                setBody(<RedirectHandler key={Math.random()}/>)
                 return;
             case 'check':
-                setBody(<CheckEvent/>)
+                setBody(<CheckEvent key={Math.random()}/>)
                 return;
             case 'reward':
-                setBody(<RewardContainer/>)
+                setBody(<RewardContainer key={Math.random()}/>)
                 return;
             case 'choice':
                 setBody(<Choice/>)
@@ -40,7 +40,7 @@ const EventContainer = (props) => {
                 setBody(
                 <>
                     <p>{event.description}</p>
-                    <button onClick={dispatch(resolveEvent())}>Neat!</button>
+                    <button onClick={() => dispatch(resolveEvent())}>Neat!</button>
                 </>
                 )
                 return;
@@ -48,7 +48,7 @@ const EventContainer = (props) => {
                 setBody(<MedicalHandler/>);
                 return;
             case 'special':
-                setBody(<SpecialEventContainer/>);
+                setBody(<SpecialEventContainer key={Math.random()}/>);
                 return;
             case 'random':
                 if (skillCheck() > 8) {
@@ -57,8 +57,6 @@ const EventContainer = (props) => {
                 dispatch(updateEvent(prisoner.eventList[12].fail));
                 return;
             default:
-                alert("Unhandled Event! " + type)
-                dispatch(resolveEvent())
                 return;
         }
     }, [dispatch, event])

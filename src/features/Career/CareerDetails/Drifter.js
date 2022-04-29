@@ -132,7 +132,7 @@ export const wanderer = {
     advancementSkill: 'int',
     advancementDC: 7,
     eventList: drifter.eventList,
-    mishapList: drifter.eventList,
+    mishapList: drifter.mishapList,
     ranks: [
         {title: 'Stray', bonus: false},
         {title: 'Vagrant', bonus: {type: 'skill', skill: 'Streetwise', value: 1}},

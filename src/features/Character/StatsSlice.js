@@ -99,5 +99,5 @@ const options = {
 }
 
 const statsSlice = createSlice(options);
-export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp, changeByAmount, clearInjuryHolder} = statsSlice.actions;
+export const {reset, changeStat, increaseStat, decreaseStat, setDisplayValue, ageUp, changeByAmount, clearInjuryHolder, addPsi} = statsSlice.actions;
 export default statsSlice.reducer;

@@ -25,11 +25,11 @@ const IncreaseSkillChoice = (props) => {
             return;
         }
         if (specialtyList[skill] === 'any') {
-            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
+            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtiesList});
             return;
         } 
         if (Array.isArray(specialtyList[skill])) {
-            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtyList});
+            setNeedSpecialty({active: true, skill: skill, list: skills[skill].specialtiesList});
             return;
         } 
         if (typeof specialtyList[skill] === 'string') {

@@ -14,8 +14,7 @@ const Ally = (props) => {
     const handleClick = (ev) => {
         ev.preventDefault();
         if (value === 'roll') {
-            const num = event.result.roll
-            value = roll(num);
+            value = roll(event.result.roll);
         }
         dispatch(addAlly({value: value, description: description}))
         dispatch(resolveEvent());

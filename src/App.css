@@ -1,6 +1,9 @@
 * {
     color: rgba(55,54,59,1.0);
 }
+html,body {
+    height:100%;
+}
 #root {
     background-image: url("./assets/tccbackground.jpg");
     background-origin: border-box;
@@ -76,16 +79,21 @@ input[type=text] {
     display: flex;
     width: 100vw;
     min-height: 100vh;
-    height: fit-content;
+    height: auto;
+    max-height: fit-content;
     justify-content: center;
 }
 .inner {
     background-color: rgba(160,208,242,1.0);
     box-sizing: border-box;
     max-width: 80vw;
-    padding: 1vh 2vw 8vh;
+    padding: 2vh 2vw;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
     min-width: 40vw;
     width: 100%;
+    min-height: 100%;
+    height: auto;
 }
 .background_skills_choice {
     display: flex;
@@ -107,6 +115,8 @@ input[type=text] {
     border-right: 2px groove rgba(28,40,51,0.7);
     border-bottom: 2px groove rgba(28,40,51,0.7);
     box-shadow: 10px 10px 3px black;
+    min-height: fit-content;
+    height: fit-content;
 }
 .background_skills input[type=submit] {
     display: block;
@@ -142,4 +152,14 @@ input[type=text] {
     display: flex;
     width: 100%;
     height: fit-content;
+}
+
+.btn-group {
+    margin: 2px 2px;
+    border-bottom: 1px solid black;
+    border-radius: 5%;
+}
+
+.dropdown-toggle-split {
+    border-left: 1px solid rgba(0, 0, 0, 0.18);
 }

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { resolveEvent } from '../../Term/TermSlice';
+import { addDeferredEvents, resolveEvent } from '../../Term/TermSlice';
 import SetSkillReward from './SetSkillReward';
 import SkillIncreaseReward from './SkillIncreaseReward';
 import StatChoiceReward from './StatChoiceReward';
@@ -19,6 +19,9 @@ const ChoiceReward = (props) => {
                 setBody(<SkillIncreaseReward/>);
                 return;
             case 'multiple':
+                const deferredArray = event.result.list?.map((e) => {return {type: 'reward', description: event.result.description, result: event.result[e]}})
+                dispatch(addDeferredEvents(deferredArray));
+                dispatch(resolveEvent())
                 return;
             case 'setSkill':
                 setBody(<SetSkillReward/>)
@@ -36,7 +39,8 @@ const ChoiceReward = (props) => {
                 dispatch(resolveEvent())
                 return;
         }
-    }, [event.result.choiceType, dispatch])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [])
 
     return (
         <>
