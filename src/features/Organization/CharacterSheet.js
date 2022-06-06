@@ -6,7 +6,7 @@ const CharacterSheet = React.forwardRef((props, ref) => {
     const stats = useSelector(state => state.stats);
     const statList = Object.keys(stats).slice(0, -2)
     return (
-        <div ref={ref}>
+        <div ref={ref} >
             <h3>{chara.name}</h3>
             {statList.map((e, i) => <p key={i}>{e}:{stats.displayValues[e]}</p>)}
         </div>
