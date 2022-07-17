@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
 import { skillCheck } from "../Career/careerHandler";
 import { addDebt } from "../Character/charaSlice";
-import { resolveEvent } from "../Term/TermSlice";
+import { resolveEvent } from "../Term/Utilities/TermSlice";
 
 const MedicalHandler = (props) => {
     const injuries = useSelector(state => state.stats.injuryHolder);

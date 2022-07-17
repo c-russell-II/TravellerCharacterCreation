@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import {CharacterCreation} from './features/Character/CharacterCreation';
-import {TermRouter} from './features/Term/termRouter.js';
+import {TermRouter} from './features/Term/Utilities/termRouter';
 import {LandingPage} from './features/Organization/LandingPage';
 import { CareerChooser } from './features/Organization/CareerChoice';
 import { BackgroundSkillsChoice } from './features/Skills/BackgroundSkills';

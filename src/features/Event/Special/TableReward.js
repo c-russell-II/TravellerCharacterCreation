@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { JobSkills } from "../../Skills/JobSkills";
-import { resolveEvent } from "../../Term/TermSlice";
+import { resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const TableReward = (props) => {
     const term = useSelector(state => state.term);

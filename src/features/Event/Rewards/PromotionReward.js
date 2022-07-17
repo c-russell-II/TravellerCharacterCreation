@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { promotion } from "../../Career/careerSlice";
-import { resolveEvent } from "../../Term/TermSlice";
+import { resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const PromotionReward = (props) => {
     const dispatch = useDispatch();

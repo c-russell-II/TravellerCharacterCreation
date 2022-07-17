@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { advancementBonus, resolveEvent } from "../../Term/TermSlice";
+import { advancementBonus, resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const AdvancementReward = (props) => {
     const event = useSelector(state => state.term.event);

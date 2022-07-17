@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { skillCheck } from "../../Career/careerHandler";
 import { addEnemy, removeFriend } from "../../Character/miscBonusSlice";
-import { addDeferredEvents, resolveEvent } from "../../Term/TermSlice";
+import { addDeferredEvents, resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const BetrayalEvent = (props) => {
     const misc = useSelector(state=> state.misc);

@@ -5,7 +5,7 @@ import { roll, skillCheck } from "../Career/careerHandler";
 import { saveFailedTerm, saveSurvivedTerm } from "../Career/careerSlice";
 import { addEvent } from "../Character/charaSlice";
 import { JobSkills } from "../Skills/JobSkills";
-import { failedTerm, survivedTerm } from "../Term/TermSlice";
+import { failedTerm, survivedTerm } from "../Term/Utilities/TermSlice";
 import { prisonSpecs } from "./Prisoner";
 
 const PrisonTerm = (props) => {
