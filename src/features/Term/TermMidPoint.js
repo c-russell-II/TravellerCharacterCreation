@@ -5,7 +5,7 @@ import jobObject from "../Career/CareerDetails";
 import { skillCheck } from "../Career/careerHandler";
 import { promotion } from "../Career/careerSlice";
 import EventContainer from "../Event/EventContainer";
-import CommissionHandler from "./CommissionHandler";
+import CommissionHandler from "./Utilities/CommissionHandler";
 
 export const TermMidPoint = (props) => {
     const stats = useSelector(state => state.stats);

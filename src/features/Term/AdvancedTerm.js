@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import jobObject from "../Career/CareerDetails";
 import { ageUp } from "../Character/StatsSlice";
 import RankUpBonus from "./RankUpBonus";
-import { resolveTerm } from "./TermSlice";
+import { resolveTerm } from "./Utilities/TermSlice";
 
 const AdvancedTerm = (props) => {
     const {career} = useParams();

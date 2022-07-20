@@ -3,5 +3,8 @@
     background-image: linear-gradient(#696969, #eaeaea, #696969);
     border: 3px outset #8796A6;
     border-radius: 5% 5% 5% 5%;
-    float: right
+    width: fit-content;
+    position: absolute;
+    right: 15%;
+    top: 1%;
 }

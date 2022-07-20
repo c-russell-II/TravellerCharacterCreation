@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { resolveEvent } from "../../Term/TermSlice";
+import { resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const NoInjury = (props) => {
     const dispatch = useDispatch();

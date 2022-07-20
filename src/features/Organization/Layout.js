@@ -7,7 +7,10 @@ const Layout = (props) => {
     return (
         <div className="inner">
             <SidebarController/>
-                <Outlet/>
+            <Outlet/>
+            <div className="deadspace">
+                <p style={{color: "#FFFFFF"}}>to do: put something here (maybe character/history tracker?)</p>
+            </div>
         </div>
     )
 }

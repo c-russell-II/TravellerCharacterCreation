@@ -3,7 +3,7 @@ import jobObject from "../Career/CareerDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { skillCheck, roll } from "../Career/careerHandler";
-import { failedTerm, resolveTerm, survivedTerm } from "./TermSlice";
+import { failedTerm, resolveTerm, survivedTerm } from "./Utilities/TermSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { basicTraining } from "../Skills/SkillsSlice";
 import { addEvent, anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";

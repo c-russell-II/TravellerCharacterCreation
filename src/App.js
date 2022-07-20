@@ -1,7 +1,7 @@
 import React from 'react';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom"
 import {CharacterCreation} from './features/Character/CharacterCreation';
-import {TermRouter} from './features/Term/termRouter.js';
+import {TermRouter} from './features/Term/Utilities/termRouter';
 import {LandingPage} from './features/Organization/LandingPage';
 import { CareerChooser } from './features/Organization/CareerChoice';
 import { BackgroundSkillsChoice } from './features/Skills/BackgroundSkills';
@@ -24,31 +24,31 @@ import PrisonRouter from './features/Prison/PrisonRouter';
 function App() {
   return (
     <div className="outer">
-    <div className="app" >
-      <Router>
-        <Routes>
-          <Route path="/" element={<Layout/>}>
-            <Route index element={<LandingPage/>}/>
-            <Route path="background_skills" element={<BackgroundSkillsChoice/>}/>
-            <Route path="character_creation" element={<CharacterCreation/>}/>
-            <Route path="classic_character_creation" element={<ClassicContainer/>}/>
-            <Route path="prisoner/*" element={<PrisonRouter/>}/>
-            <Route path="education/*" element={<EducationRouter/>}/>
-            <Route path="choose_career/" element={<CareerChoiceLayout />}>
-              <Route index element={<CareerChooser/>}/>
-              <Route path="drafted" element={<DraftHandler/>}/>
-              <Route path="drift" element={<DrifterRedirect/>}/>
-              <Route path="qualification/:career" element={<Qualification/>}/>
-              <Route path="qualification/:career/failed" element={<QualFail/>}/>
+      <div className="app" >
+        <Router basename="tcc">
+          <Routes>
+            <Route path="/" element={<Layout/>}>
+              <Route index element={<LandingPage/>}/>
+              <Route path="background_skills" element={<BackgroundSkillsChoice/>}/>
+              <Route path="character_creation" element={<CharacterCreation/>}/>
+              <Route path="classic_character_creation" element={<ClassicContainer/>}/>
+              <Route path="prisoner/*" element={<PrisonRouter/>}/>
+              <Route path="education/*" element={<EducationRouter/>}/>
+              <Route path="choose_career/" element={<CareerChoiceLayout />}>
+                <Route index element={<CareerChooser/>}/>
+                <Route path="drafted" element={<DraftHandler/>}/>
+                <Route path="drift" element={<DrifterRedirect/>}/>
+                <Route path="qualification/:career" element={<Qualification/>}/>
+                <Route path="qualification/:career/failed" element={<QualFail/>}/>
+              </Route>
+              <Route path="term/:career/*" element={<TermRouter/>}/>
+              <Route path="leave_career/:career" element={<BenefitsContainer/>}/>
+              <Route path="prison" element={<PrisonContainer/>}/>
+              <Route path="print" element={<PrintPage/>}/>
             </Route>
-            <Route path="term/:career/*" element={<TermRouter/>}/>
-            <Route path="leave_career/:career" element={<BenefitsContainer/>}/>
-            <Route path="prison" element={<PrisonContainer/>}/>
-            <Route path="print" element={<PrintPage/>}/>
-          </Route>
-        </Routes>
-      </Router>
-    </div>
+          </Routes>
+        </Router>
+      </div>
     </div>
       );
 }

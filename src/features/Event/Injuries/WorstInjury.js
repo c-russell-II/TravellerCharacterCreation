@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { changeByAmount } from "../../Character/StatsSlice";
-import { resolveEvent } from "../../Term/TermSlice";
+import { resolveEvent } from "../../Term/Utilities/TermSlice";
 const WorstInjury = (props) => {
     const dispatch = useDispatch();
     const [selection, setSelection] = useState('')

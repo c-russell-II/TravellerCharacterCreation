@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
 import { addBenefitBonus } from "../../Character/miscBonusSlice";
-import { resolveEvent } from "../../Term/TermSlice";
+import { resolveEvent } from "../../Term/Utilities/TermSlice";
 
 const BenefitBonusReward = (props) => {
     const event = useSelector(state => state.term.event);

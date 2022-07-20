@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { resolveEvent, setMuster, updateEvent } from "../Term/TermSlice";
+import { resolveEvent, setMuster, updateEvent } from "../Term/Utilities/TermSlice";
 import CheckEvent from "./CheckEvent";
 import { Choice } from "./Choice";
 import MedicalHandler from "./MedicalHandler";

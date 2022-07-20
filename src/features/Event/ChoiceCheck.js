@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent } from "../Term/TermSlice";
+import { updateEvent } from "../Term/Utilities/TermSlice";
 
 const ChoiceCheck = (props) => {
     const event = useSelector(state => state.term.event);

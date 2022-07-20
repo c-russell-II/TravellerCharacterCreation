@@ -4,7 +4,7 @@ import jobObject, { parentJobs } from "../../Career/CareerDetails";
 import { roll, skillCheck } from "../../Career/careerHandler";
 import { SelectSpecialty } from "../../Skills/selectSpecialty";
 import { genericIncrease } from "../../Skills/SkillsSlice";
-import { addDeferredEvents, resolveEvent, updateEvent } from "../../Term/TermSlice";
+import { addDeferredEvents, resolveEvent, updateEvent } from "../../Term/Utilities/TermSlice";
 
 const SpecialRedirectChoiceEvent = (props) => {
     const event = useSelector(state => state.term.event);
