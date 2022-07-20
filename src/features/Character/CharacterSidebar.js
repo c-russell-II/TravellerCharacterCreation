@@ -15,22 +15,21 @@ export const CharacterSidebar = (props) => {
         <div>
             <div>
                 <ul >
-                    <li>Str: {stats.displayValues.str}</li>
-                    <li>Dex: {stats.displayValues.dex}</li>
-                    <li>End: {stats.displayValues.end}</li>
-                    <li>Int: {stats.displayValues.int}</li>
-                    <li>Edu: {stats.displayValues.edu}</li>
-                    <li>Soc: {stats.displayValues.soc}</li>
+                    <li>Str: {stats.displayValues.str} ({stats.str})</li>
+                    <li>Dex: {stats.displayValues.dex} ({stats.dex})</li>
+                    <li>End: {stats.displayValues.end} ({stats.end})</li>
+                    <li>Int: {stats.displayValues.int} ({stats.int})</li>
+                    <li>Edu: {stats.displayValues.edu} ({stats.edu})</li>
+                    <li>Soc: {stats.displayValues.soc} ({stats.soc})</li>
                     <li>Age: {stats.age}</li>
                 </ul>
                 <p> Current career:</p>
-                <p>{career.currentJob}</p>
+                <p>{career[career.currentJob].details.title}</p>
             </div>
             <div onClick={() => setIsActive(!isActive)}>
             <ul><span >Skills:{isActive? '-' : '+'}</span>
             {isActive && 
             <>
-                
                     {trainedSkillsList.map((e, i) => {
                         return (
                             <>
