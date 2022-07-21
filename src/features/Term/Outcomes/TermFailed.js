@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import { saveFailedTerm } from "../Career/careerSlice";
-import { ageUp } from "../Character/StatsSlice";
-import EventContainer from "../Event/EventContainer";
+import { saveFailedTerm } from "../../Career/careerSlice";
+import { ageUp } from "../../Character/StatsSlice";
+import EventContainer from "../../Event/EventContainer";
 
 export const TermFailed = (props) => {
     const event = useSelector(state => state.term.event)

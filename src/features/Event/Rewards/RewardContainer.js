@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { skillCheck } from "../../Career/careerHandler";
-import { changeParole } from "../../Prison/prisonSlice";
+import { changeParole } from "../../Prison/Utilities/prisonSlice";
 import { addDeferredEvents, resolveEvent } from "../../Term/Utilities/TermSlice";
 import AddBenefit from "./AddBenefit";
 import AdvancementReward from "./AdvancementReward";

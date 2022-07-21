@@ -9,7 +9,6 @@ const GambleEvent = (props) => {
     const term = useSelector(state => state.term);
     const career = useSelector(state=> state.careers[term.job])
     const skills = useSelector(state => state.skills);
-    const event = term.event;
     const [selectAmount, setSelectAmount] = useState(false);
     const [amount, setAmount] = useState(0);
     const [intro, setIntro] = useState(true);

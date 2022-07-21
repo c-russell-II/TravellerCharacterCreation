@@ -3,8 +3,8 @@ import { useDispatch } from "react-redux";
 import { roll } from "../Career/careerHandler";
 import { selectJob } from "../Career/careerSlice";
 import { failedTerm } from "../Term/Utilities/TermSlice";
-import { fixer, inmate, prisonSpecs, thug } from "./Prisoner";
-import { enterPrison } from "./prisonSlice";
+import { fixer, inmate, prisonSpecs, thug } from "./Utilities/Prisoner";
+import { enterPrison } from "./Utilities/prisonSlice";
 
 const PrisonSpecialties = (props) => {
     const dispatch = useDispatch();

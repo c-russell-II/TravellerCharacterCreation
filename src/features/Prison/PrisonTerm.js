@@ -6,7 +6,7 @@ import { saveFailedTerm, saveSurvivedTerm } from "../Career/careerSlice";
 import { addEvent } from "../Character/charaSlice";
 import { JobSkills } from "../Skills/JobSkills";
 import { failedTerm, survivedTerm } from "../Term/Utilities/TermSlice";
-import { prisonSpecs } from "./Prisoner";
+import { prisonSpecs } from "./Utilities/Prisoner";
 
 const PrisonTerm = (props) => {
     const stats = useSelector(state => state.stats);

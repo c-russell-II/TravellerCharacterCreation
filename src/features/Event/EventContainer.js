@@ -8,7 +8,7 @@ import RedirectHandler from "./RedirectHandler";
 import RewardContainer from "./Rewards/RewardContainer";
 import SpecialEventContainer from './Special/SpecialEventContainer';
 import {skillCheck} from '../Career/careerHandler'
-import { prisoner } from "../Prison/Prisoner";
+import { prisoner } from "../Prison/Utilities/Prisoner";
 
 const EventContainer = (props) => {
     const event = useSelector(state=> state.term.event);

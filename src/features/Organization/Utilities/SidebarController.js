@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Offcanvas from 'react-bootstrap/Offcanvas'
 import Button from 'react-bootstrap/Button'
 import { useSelector } from "react-redux";
-import { CharacterSidebar } from "../Character/CharacterSidebar";
+import { CharacterSidebar } from "../../Character/CharacterSidebar";
 import styles from './Organization.module.css';
 
 const SidebarController = (props) => {

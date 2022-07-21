@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { ageUp } from "../Character/StatsSlice";
-import { resolveTerm } from "../Term/Utilities/TermSlice";
+import { ageUp } from "../../Character/StatsSlice";
+import { resolveTerm } from "../../Term/Utilities/TermSlice";
 
 const Freedom = (props) => {
     const dispatch = useDispatch();

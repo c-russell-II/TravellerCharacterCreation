@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from 'react-router-dom';
-import { selectJob } from '../Career/careerSlice';
+import { selectJob } from '../../Career/careerSlice';
 
 export const Specialties = (props) => {
     const [isActive, setIsActive] = useState(false);

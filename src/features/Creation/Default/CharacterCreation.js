@@ -1,15 +1,18 @@
 import React, {useState} from "react";
 import { useDispatch } from 'react-redux';
-import {changeStat} from './StatsSlice';
-import {addBenefit, setName} from './charaSlice';
-import Popup from "reactjs-popup";
+import {changeStat} from '../../Character/StatsSlice';
+import {addBenefit, setName} from '../../Character/charaSlice';
 import { useNavigate } from "react-router-dom";
+import styles from './styles.module.css';
+import FinalizePopup from "./FinalizePopup";
+import SingleStat from "./SingleStat";
 
 export const CharacterCreation = (props) => {
     const [value, setValue] = useState();
     const [points, setPoints] = useState(12);
     const [ready, setReady] = useState(false);
     const [stats, setStats] = useState({str:7, dex:7, end:7, int:7, edu:7, soc:7})
+    const statList = ['str', 'dex', 'end', 'int', 'edu', 'soc'];
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
@@ -93,59 +96,40 @@ export const CharacterCreation = (props) => {
         navigate('/background_skills');
     }
     return (
-        <div className="character_creation">
-            <h1>Select your Stats and Name</h1><hr/>
+        <div className={styles.main}>
+            <h1 className={styles.title}>Select your Stats and Name</h1><hr className={styles.line}/>
+            
             <p>Decide your natural aptitudes and abilities, that will carry you into whatever the future has in store.</p>
-            <h3>Name:</h3><form onSubmit={handleSubmit} className="name_choice"><input type="text" onChange={handleChange} placeholder="name"/><input type="submit" value="Submit"/></form>
-            <h3>Points remaining: <span>{points}</span></h3>
-            <div className="stats">
-            <div className="single_stat">
-                <button onClick={() => decrease('str')}>-</button>
-                    <span>Str: {stats.str} Mod: {getModifiers(stats.str)} </span>
-                <button onClick={() => increase('str')}>+</button>
-                Next Point: {costCalc(stats.str)}
+            
+            <h2 className={styles.subTitle}>Name:</h2>
+            
+            <form onSubmit={handleSubmit} className={styles.nameChoice}>
+
+                <input className={styles.nameInput} type="text" onChange={handleChange} placeholder="name"/>
+
+                <input  className={styles.nameSubmit} type="submit" value="Submit"/>
+
+            </form>
+            
+            <h2 className={styles.subTitle}>Points remaining: <span className={styles.remainingPoints}>{points}</span></h2>
+
+            <div className={styles.stats}>
+
+                {statList.map((e) => 
+                    <SingleStat
+                        key={e}
+                        stat={e}
+                        val={stats[e]}
+                        modVal={getModifiers(stats[e])}
+                        increase={increase}
+                        decrease={decrease}
+                        cost={costCalc(stats[e])}
+                    />
+                )}
+
+                <button onClick={handleReady} className={styles.statsButton}>Finalize stats.</button>
             </div>
-            <div className="single_stat">
-                <button onClick={() => decrease('dex')}>-</button>
-                    <span>Dex: {stats.dex} Mod: {getModifiers(stats.dex)}</span>
-                <button onClick={() => increase('dex')}>+</button>
-                Next Point: {costCalc(stats.dex)}
-            </div>
-            <div className="single_stat">
-                <button onClick={() => decrease('end')}>-</button>
-                    <span>End: {stats.end} Mod: {getModifiers(stats.end)}</span>
-                <button onClick={() => increase('end')}>+</button>
-                Next Point: {costCalc(stats.end)}
-            </div>
-            <div className="single_stat">
-                <button onClick={() => decrease('int')}>-</button>
-                    <span>Int: {stats.int} Mod: {getModifiers(stats.int)}</span>
-                <button onClick={() => increase('int')}>+</button>
-                Next Point: {costCalc(stats.int)}
-            </div>
-            <div className="single_stat">
-                <button onClick={() => decrease('edu')}>-</button>
-                    <span>Edu: {stats.edu} Mod: {getModifiers(stats.edu)}</span>
-                <button onClick={() => increase('edu')}>+</button>
-                Next Point: {costCalc(stats.edu)}
-            </div>
-            <div className="single_stat">
-                <button onClick={() => decrease('soc')}>-</button>
-                    <span>Soc: {stats.soc} Mod: {getModifiers(stats.soc)}</span>
-                <button onClick={() => increase('soc')}>+</button>
-                Next Point: {costCalc(stats.soc)}
-            </div>
-            <button onClick={handleReady}>Finalize stats.</button>
-            </div>
-            <Popup
-                open={ready}
-                modal
-                closeOnDocumentClick={false}
-            >
-                <h3>Finalize Stats?</h3>
-                <p>When you move on to careers or higher education, any unspent points will be lost, and your stats will be finalized until you create a new character.</p>
-                <button onClick={handleFinalize}>Let's continue.</button> <button onClick={() => {setReady(false)}}>Not Ready</button>
-            </Popup>
+            <FinalizePopup ready={ready} setReady={setReady} handleFinalize={handleFinalize}/>
         </div>
     )
 }

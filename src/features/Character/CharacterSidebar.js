@@ -5,7 +5,6 @@ import { useSelector } from "react-redux";
 
 export const CharacterSidebar = (props) => {
     const [isActive, setIsActive] = useState(false);
-    const [open, setOpen] = useState(true);
     const stats = useSelector(state => state.stats);
     const skills = useSelector(state=> state.skills);
     const skillsList = Object.keys(skills).slice(0, -3);

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {Specialties} from './Specialties';
-import jobObject from "../Career/CareerDetails";
+import jobObject from "../../Career/CareerDetails";
 import { Card } from "react-bootstrap";
 
 export function ParentCareers(props) {

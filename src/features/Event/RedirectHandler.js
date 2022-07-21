@@ -6,7 +6,7 @@ import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
 import { addDeferredEvents, updateEvent } from "../Term/Utilities/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
-import { prisoner } from "../Prison/Prisoner";
+import { prisoner } from "../Prison/Utilities/Prisoner";
 
 const RedirectHandler = (props) => {
     const event = useSelector(state=> state.term.event);

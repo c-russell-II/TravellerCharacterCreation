@@ -1,9 +1,9 @@
 import { ParentCareers } from './ParentCareers';
 import React from "react";
 import { useSelector } from "react-redux";
-import {parentJobs} from "../Career/CareerDetails";
+import {parentJobs} from "../../Career/CareerDetails";
 import { Card, Col, Row } from 'react-bootstrap';
-import placeholder from '../../assets/placeholder.png'
+import placeholder from '../../../assets/placeholder.png'
 
 export const CareerChooser = (props) => {
     const name = useSelector(state => state.chara.charaName);

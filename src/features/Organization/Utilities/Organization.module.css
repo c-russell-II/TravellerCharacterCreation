@@ -1,0 +1,55 @@
+.button_Lg {
+    background-color: #6f92B3;
+    background-image: linear-gradient(#696969, #eaeaea, #696969);
+    border: 3px outset #8796A6;
+    border-radius: 5% 5% 5% 5%;
+    width: fit-content;
+    align-self: flex-end;
+    position: absolute;
+}
+
+.app {
+    background-color: rgba(135,150,166,0.8);
+    border-radius:2% 2% 15% 15%;
+    display: flex;
+    flex-flow: row wrap;
+    box-sizing: content-box;
+    justify-items: center;
+    max-width: 80vw;
+    padding: 0px 3.5vw;
+    min-width: 50vw;
+    min-height: 100vh;
+    height: fit-content;
+}
+.outer {
+    display: flex;
+    width: 100vw;
+    min-height: 100vh;
+    height: auto;
+    max-height: fit-content;
+    justify-content: center;
+    background-image: url("../../../assets/tccbackground.jpg");
+    background-origin: border-box;
+    background-size: contain;
+    background-repeat:round;
+    background-attachment: fixed;
+}
+
+.inner {
+    display: flex;
+    flex-flow: column wrap;
+    background-color: hsla(205, 71%, 69%, 0.65);
+    box-sizing: border-box;
+    max-width: 80vw;
+    padding: 2vh 2vw;
+    border-bottom-left-radius: 2%;
+    border-bottom-right-radius: 2%;
+    min-width: 40vw;
+    width: 100%;
+    min-height: 100%;
+    height: auto;
+}
+.deadspace {
+    background-color: #000000;
+    flex: 1 1 1px;
+}

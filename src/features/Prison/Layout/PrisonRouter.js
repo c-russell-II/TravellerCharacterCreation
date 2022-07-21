@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
-import Freedom from "./Freedom";
-import PrisonAdvanced from "./PrisonAdvanced";
-import PrisonEntry from "./PrisonContainer";
-import PrisonLayout from "./PrisonLayout";
-import PrisonPassed from "./PrisonPassed";
-import PrisonTerm from "./PrisonTerm";
-import SurvivedPrison from "./SurvivedPrison";
+import Freedom from "../Outcomes/Freedom";
+import PrisonAdvanced from "../Outcomes/PrisonAdvanced";
+import PrisonEntry from "../Layout/PrisonContainer";
+import PrisonLayout from "../Layout/PrisonLayout";
+import PrisonPassed from "../Outcomes/PrisonPassed";
+import PrisonTerm from "../PrisonTerm";
+import SurvivedPrison from "../Outcomes/SurvivedPrison";
 const PrisonRouter = (props) => {
 
     return (

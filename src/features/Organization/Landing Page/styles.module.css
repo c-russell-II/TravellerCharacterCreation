@@ -1,0 +1,22 @@
+.homeTitle {
+    font-size: 2em;
+    font-weight: 700;
+    margin-bottom: 2%;
+}
+.linkSection {
+    display: flex;
+    flex-flow: row nowrap;
+    width: 100%;
+    justify-content: space-evenly;
+    margin: 2% 0;
+}
+
+.link {
+    color: hsl(248, 79%, 34%);
+    font-size: 1.4em;
+}
+
+.description {
+    font-size: 1.1em;
+    margin: 2%;
+}
