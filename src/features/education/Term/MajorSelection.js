@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { SelectSpecialty } from "../Skills/selectSpecialty";
-import {chooseMajor} from './EducationSlice'
+import { SelectSpecialty } from "../../Skills/selectSpecialty";
+import {chooseMajor} from '../Utilities/EducationSlice'
 
 function MajorSelection(props) {
     const [selectedMajor, setSelectedMajor] = useState('');

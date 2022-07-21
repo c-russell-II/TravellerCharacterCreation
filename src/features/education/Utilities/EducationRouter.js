@@ -1,11 +1,11 @@
 import React from "react";
 import { Route, Routes } from "react-router-dom";
 import EducationLayout from "./EducationLayout";
-import MilAcadNoGraduate from "./MilitaryAcademy/MilAcadNoGraduate";
-import MilitaryAcademyGraduation from "./MilitaryAcademy/MilitaryAcademyGraduation";
-import { MilitaryAcademyTerm } from "./MilitaryAcademy/MilitaryAcademyTerm";
-import { UniversityChoice } from "./UniversityChoice";
-import { UniversityTerm } from "./UniversityTerm";
+import MilAcadNoGraduate from "../MilitaryAcademy/MilAcadNoGraduate";
+import MilitaryAcademyGraduation from "../MilitaryAcademy/MilitaryAcademyGraduation";
+import { MilitaryAcademyTerm } from "../MilitaryAcademy/MilitaryAcademyTerm";
+import { UniversityChoice } from "../Term/UniversityChoice";
+import { UniversityTerm } from "../Term/UniversityTerm";
 
 const EducationRouter = (props) => {
 

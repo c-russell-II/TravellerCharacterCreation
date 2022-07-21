@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { parentJobs } from "../../Career/CareerDetails";
 import { useDispatch, useSelector} from "react-redux";
-import {setGraduated, setHonors} from '../EducationSlice'
+import {setGraduated, setHonors} from '../Utilities/EducationSlice'
 import {basicTraining} from '../../Skills/SkillsSlice';
 import { skillCheck } from "../../Career/careerHandler";
 import { ageUp } from "../../Character/StatsSlice";

@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { chooseMinor } from "./EducationSlice";
+import { chooseMinor } from "../Utilities/EducationSlice";
 
 function MinorSelection(props) {
     const [selectedMinor, setSelectedMinor] = useState('');

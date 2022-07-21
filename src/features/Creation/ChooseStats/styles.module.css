@@ -1,0 +1,32 @@
+.singleStat {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    margin: 1% auto;
+}
+.statsText{
+    margin: auto;
+}
+.statsButton {
+    color: black;
+    background-color: transparent;
+    background: linear-gradient(#7a7a7a, #eaeaea, #7a7a7a);
+    font-weight: 600;
+    box-sizing: border-box;
+    border: 1px hsl(0, 0%, 28%) inset;
+}
+.subTitle {
+    font-size: 1.17em;
+    font-weight: bold;
+    margin: 1.5% 0;
+}
+.remainingPoints {
+    font-weight: bolder;
+    font-size: 1.2em;
+}
+
+.stats {
+    columns: 1;
+    width: fit-content;
+    height: fit-content;
+}

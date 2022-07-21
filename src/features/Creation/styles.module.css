@@ -1,0 +1,55 @@
+.main {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: flex-start;
+    justify-items: flex-start;
+    width: 100%;
+}
+.title {
+    display: block;
+    font-size: 2em;
+    font-weight: bold;
+}
+.subTitle {
+    font-size: 1.17em;
+    font-weight: bold;
+    text-decoration: underline;
+}
+.pointTracker {
+    font-size: 1.07em;
+    font-weight:500;
+    margin: 1% 0%;
+}
+.form{
+    columns: 3;
+    justify-items:flex-start;
+    align-items:center;
+    padding: 5px 10px;
+    border-top: 1px solid rgba(28, 40, 51, 0.2);
+    border-left: 1px solid rgba(28, 40, 51, 0.2);
+    border-right: 2px groove rgba(28,40,51,0.7);
+    border-bottom: 2px groove rgba(28,40,51,0.7);
+    box-shadow: 10px 10px 3px black;
+    min-height: fit-content;
+    height: fit-content;
+}
+.confirm {
+    display: block;
+}
+.singleSkill {
+    width: 100%;
+}
+.checkBox {
+    margin: 0% 1.5%;
+}
+.selectedSkills {
+    columns: 3;
+    display: flex;
+    flex-flow: row wrap;
+    width: 95%;
+    justify-content: space-around;
+}
+.chosenSkill {
+    font-weight: 600;
+    font-size: 1.1em;
+}

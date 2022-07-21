@@ -5,7 +5,7 @@ import careerSliceReducer from '../features/Career/careerSlice';
 import charaSlice from '../features/Character/charaSlice';
 import miscSlice from '../features/Character/miscBonusSlice';
 import TermSlice from '../features/Term/Utilities/TermSlice';
-import EducationSlice from '../features/education/EducationSlice';
+import EducationSlice from '../features/education/Utilities/EducationSlice';
 
 
 export const store = configureStore({

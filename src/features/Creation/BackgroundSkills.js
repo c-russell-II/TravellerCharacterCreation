@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {increaseToZero} from '../Skills/SkillsSlice';
+import styles from './styles.module.css';
 
 export const BackgroundSkillsChoice = (props) => {
     const [skills, setSkills] = useState([]);
@@ -49,21 +50,32 @@ export const BackgroundSkillsChoice = (props) => {
     }
 
     return (
-        <div className="background_skills_choice">
-            <h3>Select Background Skills...</h3>
-            <h4>Up to {limit}</h4> <h5>Points Remaining: {limit - skills.length}</h5>
-            <form onSubmit={handleSubmit} className="background_skills">
+        <div className={styles.main}>
+            <h3 className={styles.title}>Select Background Skills...</h3>
+            <h4 className={styles.subTitle}>Up to {limit}</h4> <h5 className={styles.pointTracker}>Points Remaining: {limit - skills.length}</h5>
+            <form onSubmit={handleSubmit} className={styles.form}>
                 {options.map((e, i) => {
                     return (
-                            <label key={i}>
-                                <input type="checkbox" name="skill" value={e} checked={checked[i]} onChange={(event) => handleChange(event, e, i)} key={Math.random()}/> {e}
+                            <label key={i} className={styles.singleSkill}>
+                                <input
+                                    type="checkbox"
+                                    name="skill"
+                                    value={e}
+                                    checked={checked[i]}
+                                    onChange={(event) => handleChange(event, e, i)}
+                                    key={Math.random()}
+                                    className={styles.checkBox}
+                                /> 
+                                    {e}
                             </label>
                     )
                 })}
-                <input type="submit" value="Confirm"/>
+                <input type="submit" value="Confirm" className={styles.confirm}/>
             </form><br/>
-            <h4>Current Skills:</h4>
-            {skills?.map((e, i) => {return <span key={i}>{e}</span>})}
+            <h4 className={styles.subTitle}>Current Skills:</h4>
+            <div className={styles.selectedSkills}>
+                {skills?.map((e, i) => {return <span key={i} className={styles.chosenSkill}>{e}</span>})}
+            </div>
         </div>
     )
 }

@@ -4,35 +4,6 @@
 html,body {
     height:100%;
 }
-.background_skills_choice {
-    display: flex;
-    flex-flow: column wrap;
-    align-items: flex-start;
-    justify-items: flex-start;
-    width: 100%;
-}
-.background_skills_choice h3 {
-    display: block;
-}
-.background_skills{
-    columns: 3;
-    justify-items:flex-start;
-    align-items:center;
-    padding: 5px 10px;
-    border-top: 1px solid rgba(28, 40, 51, 0.2);
-    border-left: 1px solid rgba(28, 40, 51, 0.2);
-    border-right: 2px groove rgba(28,40,51,0.7);
-    border-bottom: 2px groove rgba(28,40,51,0.7);
-    box-shadow: 10px 10px 3px black;
-    min-height: fit-content;
-    height: fit-content;
-}
-.background_skills input[type=submit] {
-    display: block;
-}
-.background_skills label {
-    width: 100%;
-}
 
 .university_choice h2{
     border-bottom: 2px groove rgba(28, 40, 51, 0.7)

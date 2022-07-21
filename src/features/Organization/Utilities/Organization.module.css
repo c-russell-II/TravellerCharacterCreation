@@ -4,8 +4,10 @@
     border: 3px outset #8796A6;
     border-radius: 5% 5% 5% 5%;
     width: fit-content;
-    align-self: flex-end;
-    position: absolute;
+    position: fixed;
+    right: 2%;
+    top: 2%;
+    box-shadow: #000000 -3px 3px 4px;
 }
 
 .app {

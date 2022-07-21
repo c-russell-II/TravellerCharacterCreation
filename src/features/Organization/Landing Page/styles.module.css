@@ -1,7 +1,9 @@
 .homeTitle {
     font-size: 2em;
     font-weight: 700;
-    margin-bottom: 2%;
+    margin: 1% auto;
+    align-self: center;
+    border-bottom: 1px solid hsl(0, 0, 0%);
 }
 .linkSection {
     display: flex;

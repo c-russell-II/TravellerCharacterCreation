@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { genericIncrease } from "../Skills/SkillsSlice";
-import { changeByAmount } from "../Character/StatsSlice";
-import { SelectSpecialty } from "../Skills/selectSpecialty";
-import { addQualificationBonus } from '../Character/miscBonusSlice'
+import { genericIncrease } from "../../Skills/SkillsSlice";
+import { changeByAmount } from "../../Character/StatsSlice";
+import { SelectSpecialty } from "../../Skills/selectSpecialty";
+import { addQualificationBonus } from '../../Character/miscBonusSlice'
 import { GraduationDialogue } from "./GraduateDialogue";
 import Popup from "reactjs-popup";
-import { parentJobs } from "../Career/CareerDetails";
+import { parentJobs } from "../../Career/CareerDetails";
 
 export const Graduation = (props) => {
     const educationState = useSelector(state => state.education);

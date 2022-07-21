@@ -18,7 +18,7 @@ import QualFail from './features/Organization/Qualification/QualFail';
 import CareerChoiceLayout from './features/Organization/CareerChoice/CareerChoiceLayout';
 import DraftHandler from './features/Organization/Qualification/DraftHandler';
 import DrifterRedirect from './features/Organization/Qualification/DrifterRedirect';
-import EducationRouter from './features/education/EducationRouter';
+import EducationRouter from './features/education/Utilities/EducationRouter';
 import PrisonRouter from './features/Prison/Layout/PrisonRouter';
 
 function App() {

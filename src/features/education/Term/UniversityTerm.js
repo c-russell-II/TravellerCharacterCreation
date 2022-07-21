@@ -2,11 +2,11 @@ import MinorSelection from './MinorSelection';
 import MajorSelection from './MajorSelection';
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increaseToZero, setValue } from "../Skills/SkillsSlice";
-import { ageUp, increaseStat } from "../Character/StatsSlice";
-import { Graduation } from "./GraduationContainer";
-import { skillCheck } from "../Career/careerHandler";
-import { setGraduated, setHonors } from './EducationSlice';
+import { increaseToZero, setValue } from "../../Skills/SkillsSlice";
+import { ageUp, increaseStat } from "../../Character/StatsSlice";
+import { Graduation } from "../Graduation/GraduationContainer";
+import { skillCheck } from "../../Career/careerHandler";
+import { setGraduated, setHonors } from '../Utilities/EducationSlice';
 
 export const UniversityTerm = (props) => {
     const dispatch = useDispatch();

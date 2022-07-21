@@ -6,9 +6,10 @@ import styles from "./Organization.module.css"
 const Layout = (props) => {
     return (
         <div className={styles.outer}>
+            <SidebarController/>
             <div className={styles.app}>
                 <div className={styles.inner}>
-                    <SidebarController/>
+                    
                     <Outlet/>
                     <div className={styles.deadspace}>
                         <p style={{color: "#FFFFFF"}}>to do: put something here (maybe character/history tracker?)</p>

@@ -1,8 +1,8 @@
 import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { skillCheck } from "../Career/careerHandler";
-import { chooseSchool } from "./EducationSlice";
+import { skillCheck } from "../../Career/careerHandler";
+import { chooseSchool } from "../Utilities/EducationSlice";
 import Popup from "reactjs-popup";
 
 export const UniversityChoice = (props) => {
