@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { skillCheck } from "../../Career/careerHandler";
-import { changeByAmount } from "../StatsSlice";
-import MentalChoice from "./MentChoice";
-import PhysicalChoice from "./PhysChoice";
+import { skillCheck } from "../Career/careerHandler";
+import { changeByAmount } from "../Character/StatsSlice";
+import MentalChoice from "../Character/AgeHandlers/MentChoice";
+import PhysicalChoice from "../Character/AgeHandlers/PhysChoice";
 
 const AgeUp = (props) => {
     const {cleanup} = props;

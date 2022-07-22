@@ -8,7 +8,7 @@ import { JobSkills } from "../Skills/JobSkills";
 import { basicTraining } from "../Skills/SkillsSlice";
 import { addEvent, anagathicEnd, anagathicsTerm, setTrained } from "../Character/charaSlice";
 import { saveSurvivedTerm } from "../Career/careerSlice";
-import AgeUp from "../Character/AgeHandlers/AgeUp";
+import AgeUp from "../AgeUp/AgeUp";
 import { ageUp } from "../Character/StatsSlice";
 
 const CareerTerm = (props) => {
