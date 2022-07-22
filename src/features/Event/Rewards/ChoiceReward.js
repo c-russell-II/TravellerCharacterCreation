@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import {useDispatch, useSelector} from 'react-redux';
-import { addDeferredEvents, resolveEvent } from '../../Term/Utilities/TermSlice';
+import { addDeferredEvents, resolveEvent } from '../../TermSlice/TermSlice';
 import SetSkillReward from './SetSkillReward';
 import SkillIncreaseReward from './SkillIncreaseReward';
 import StatChoiceReward from './StatChoiceReward';

@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { skillCheck } from "../../Career/careerHandler";
 import { addBenefit } from "../../Career/careerSlice";
 import { setValue } from "../../Skills/SkillsSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const GambleEvent = (props) => {
     const term = useSelector(state => state.term);

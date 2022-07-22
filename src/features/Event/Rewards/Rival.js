@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { addRival } from "../../Character/miscBonusSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const Rival = (props) => {
     const event = useSelector(state => state.term.event);

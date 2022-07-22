@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { addContact } from "../../Character/miscBonusSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const Contact = (props) => {
     const event = useSelector(state => state.term.event);

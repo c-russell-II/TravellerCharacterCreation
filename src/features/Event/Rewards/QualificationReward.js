@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import jobObject from "../../Career/CareerDetails";
+import jobObject from "../../CareerDetails/CareerDetails";
 import { addQualificationBonus } from "../../Character/miscBonusSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const QualificationReward = (props) => {
     const event = useSelector(state => state.term.event);

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import jobObject, { parentJobs } from "../../Career/CareerDetails";
+import jobObject, { parentJobs } from "../../CareerDetails/CareerDetails";
 import { selectJob } from "../../Career/careerSlice";
 
 const MilAcadNoGraduate = (props) => {

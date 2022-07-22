@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { roll, skillCheck } from "../../Career/careerHandler";
 import { changeParole } from "../../Prison/Utilities/prisonSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const NewLawyerEvent = (props) => {
     const dispatch = useDispatch();

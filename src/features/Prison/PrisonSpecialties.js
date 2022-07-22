@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { roll } from "../Career/careerHandler";
 import { selectJob } from "../Career/careerSlice";
-import { failedTerm } from "../Term/Utilities/TermSlice";
+import { failedTerm } from "../TermSlice/TermSlice";
 import { fixer, inmate, prisonSpecs, thug } from "./Utilities/Prisoner";
 import { enterPrison } from "./Utilities/prisonSlice";
 

@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { addBenefit } from "../../Career/careerSlice";
-import { resolveEvent, updateEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent, updateEvent } from "../../TermSlice/TermSlice";
 
 const RiotEvent = (props) => {
     const job = useSelector(state => state.term.job)

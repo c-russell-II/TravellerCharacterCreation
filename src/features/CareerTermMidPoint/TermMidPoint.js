@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import jobObject from "../Career/CareerDetails";
+import jobObject from "../CareerDetails/CareerDetails";
 import { skillCheck } from "../Career/careerHandler";
 import { promotion } from "../Career/careerSlice";
 import EventContainer from "../Event/EventContainer";
-import CommissionHandler from "./Utilities/CommissionHandler";
+import CommissionHandler from "../ComissionHandler/CommissionHandler";
 
 export const TermMidPoint = (props) => {
     const stats = useSelector(state => state.stats);

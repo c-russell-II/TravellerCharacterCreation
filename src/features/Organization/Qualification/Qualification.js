@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useParams } from "react-router-dom";
-import jobObject, { parentJobs } from "../../Career/CareerDetails";
+import jobObject, { parentJobs } from "../../CareerDetails/CareerDetails";
 import { selectJob } from "../../Career/careerSlice";
 import EntertainerQual from "./EntertainerQual";
 import NobleQual from "./NobleQual";

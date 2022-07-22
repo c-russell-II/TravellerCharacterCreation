@@ -1,14 +1,14 @@
 import React from 'react';
 import {Routes, Route} from "react-router-dom"
 import {CharacterCreation} from './features/Creation/Default/CharacterCreation';
-import {TermRouter} from './features/Term/Utilities/termRouter';
+import {TermRouter} from './features/CareerTermRouter/termRouter';
 import {LandingPage} from './features/Organization/Landing Page/LandingPage';
 import { CareerChooser } from './features/Organization/CareerChoice/CareerChoice';
 import { BackgroundSkillsChoice } from './features/Creation/BackgroundSkills';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'reactjs-popup/dist/index.css';
 import { ClassicContainer } from './features/Creation/Classic/ClassicContainer';
-import { BenefitsContainer } from './features/Career/benefitsContainer';
+import { BenefitsContainer } from './features/Benefits/benefitsContainer';
 import PrintPage from './features/Organization/Utilities/PrintPage';
 import PrisonContainer from './features/Prison/Layout/PrisonContainer';
 import Layout from './features/Organization/Utilities/Layout';

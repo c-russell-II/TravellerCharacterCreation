@@ -1,9 +1,9 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import jobObject from "../../Career/CareerDetails";
-import { skillCheck } from "../../Career/careerHandler";
-import { setCommissioned } from "../../Career/careerSlice";
+import jobObject from "../CareerDetails/CareerDetails";
+import { skillCheck } from "../Career/careerHandler";
+import { setCommissioned } from "../Career/careerSlice";
 
 const CommissionHandler = (props) => {
     const education = useSelector(state => state.education);

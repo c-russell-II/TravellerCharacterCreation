@@ -6,7 +6,7 @@ import { SelectSpecialty } from "../../Skills/selectSpecialty";
 import { addQualificationBonus } from '../../Character/miscBonusSlice'
 import { GraduationDialogue } from "./GraduateDialogue";
 import Popup from "reactjs-popup";
-import { parentJobs } from "../../Career/CareerDetails";
+import { parentJobs } from "../../CareerDetails/CareerDetails";
 
 export const Graduation = (props) => {
     const educationState = useSelector(state => state.education);

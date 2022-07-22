@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { ageUp } from "../../Character/StatsSlice";
-import { resolveTerm } from "../../Term/Utilities/TermSlice";
+import { resolveTerm } from "../../TermSlice/TermSlice";
 
 const PrisonPassed = (props) => {
     const dispatch = useDispatch();

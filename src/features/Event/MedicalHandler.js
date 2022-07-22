@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import jobObject from "../Career/CareerDetails";
+import jobObject from "../CareerDetails/CareerDetails";
 import { skillCheck } from "../Career/careerHandler";
 import { addDebt } from "../Character/charaSlice";
-import { resolveEvent } from "../Term/Utilities/TermSlice";
+import { resolveEvent } from "../TermSlice/TermSlice";
 
 const MedicalHandler = (props) => {
     const injuries = useSelector(state => state.stats.injuryHolder);

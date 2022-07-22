@@ -1,10 +1,10 @@
 import React, {useEffect, useState} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
-import jobObject from "../../Career/CareerDetails";
-import { ageUp } from "../../Character/StatsSlice";
-import RankUpBonus from "../Utilities/RankUpBonus";
-import { resolveTerm } from "../Utilities/TermSlice";
+import jobObject from "../CareerDetails/CareerDetails";
+import { ageUp } from "../Character/StatsSlice";
+import RankUpBonus from "../RankUpBonus/RankUpBonus";
+import { resolveTerm } from "../TermSlice/TermSlice";
 
 const AdvancedTerm = (props) => {
     const {career} = useParams();

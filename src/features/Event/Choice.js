@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent } from "../Term/Utilities/TermSlice";
+import { updateEvent } from "../TermSlice/TermSlice";
 
 export const Choice = (props) => {
     const [isReady, setIsReady] = useState(false);

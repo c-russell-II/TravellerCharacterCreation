@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jobObject, { parentJobs } from "../../Career/CareerDetails";
+import jobObject, { parentJobs } from "../../CareerDetails/CareerDetails";
 
 const DrifterRedirect = (props) => {
     const [specialty, setSpecialty] = useState('');

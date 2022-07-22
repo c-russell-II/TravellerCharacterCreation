@@ -1,12 +1,12 @@
 import React from "react";
 import { Route, Routes, useParams } from "react-router-dom";
-import CareerTerm from "../CareerTerm";
-import TermContainer from "../Container/TermContainer";
-import { TermMidPoint } from "../TermMidPoint";
-import { TermFailed } from "../Outcomes/TermFailed";
-import AdvancedTerm from "../Outcomes/AdvancedTerm";
-import jobObject from "../../Career/CareerDetails";
-import TermNoPromotion from "../Outcomes/TermNoPromotion";
+import CareerTerm from "../CareerTerm/CareerTerm";
+import TermContainer from "../CareerTermContainer/TermContainer";
+import { TermMidPoint } from "../CareerTermMidPoint/TermMidPoint";
+import { TermFailed } from "../CareerTermFailed/TermFailed";
+import AdvancedTerm from "../CareerAdvancedTerm/AdvancedTerm";
+import jobObject from "../CareerDetails/CareerDetails";
+import TermNoPromotion from "../CareerNoPromoTerm/TermNoPromotion";
 
 
 export const TermRouter = (props) => {

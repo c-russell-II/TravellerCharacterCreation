@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import jobObject, { parentJobs } from "../../Career/CareerDetails";
+import jobObject, { parentJobs } from "../../CareerDetails/CareerDetails";
 import { roll, skillCheck } from "../../Career/careerHandler";
 import { SelectSpecialty } from "../../Skills/selectSpecialty";
 import { genericIncrease } from "../../Skills/SkillsSlice";
-import { addDeferredEvents, resolveEvent, updateEvent } from "../../Term/Utilities/TermSlice";
+import { addDeferredEvents, resolveEvent, updateEvent } from "../../TermSlice/TermSlice";
 
 const SpecialRedirectChoiceEvent = (props) => {
     const event = useSelector(state => state.term.event);

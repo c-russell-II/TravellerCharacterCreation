@@ -4,7 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { skillCheck } from "../../Career/careerHandler";
 import { promotion } from "../../Career/careerSlice";
 import EventContainer from "../../Event/EventContainer";
-import {resolveTerm} from '../../Term/Utilities/TermSlice'
+import {resolveTerm} from '../../TermSlice/TermSlice'
 
 const SurvivedPrison = (props) => {
     const term = useSelector(state => state.term);

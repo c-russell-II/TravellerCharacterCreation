@@ -1,10 +1,10 @@
 import React, { useCallback, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router-dom";
-import jobObject from "../Career/CareerDetails";
+import jobObject from "../CareerDetails/CareerDetails";
 import { roll, skillCheck } from "../Career/careerHandler";
 import genericTables from "./genericTables";
-import { addDeferredEvents, updateEvent } from "../Term/Utilities/TermSlice";
+import { addDeferredEvents, updateEvent } from "../TermSlice/TermSlice";
 import InjuryEntry from "./Injuries/InjuryEntry";
 import { prisoner } from "../Prison/Utilities/Prisoner";
 

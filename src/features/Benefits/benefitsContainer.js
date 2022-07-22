@@ -1,13 +1,13 @@
 import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { Link, useParams } from "react-router-dom";
-import jobObject from "./CareerDetails";
-import { roll } from "./careerHandler";
+import jobObject from "../CareerDetails/CareerDetails";
+import { roll } from "../Career/careerHandler";
 import ToggleButtonGroup from 'react-bootstrap/ToggleButtonGroup';
 import ToggleButton from 'react-bootstrap/ToggleButton';
 import { removeBenefitBonus } from "../Character/miscBonusSlice";
 import { addBenefit } from "../Character/charaSlice";
-import { resolveBenefit } from "./careerSlice";
+import { resolveBenefit } from "../Career/careerSlice";
 
 
 export const BenefitsContainer = (props) => {

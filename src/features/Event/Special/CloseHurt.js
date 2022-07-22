@@ -2,7 +2,7 @@ import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { addEvent } from "../../Character/charaSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 import genericTables from "../genericTables";
 
 const CloseHurt = (props) => {

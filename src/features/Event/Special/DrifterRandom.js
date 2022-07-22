@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { roll } from "../../Career/careerHandler";
 import { addBenefitBonus } from "../../Character/miscBonusSlice";
-import { resolveEvent, updateEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent, updateEvent } from "../../TermSlice/TermSlice";
 
 const DrifterRandom = (props) => {
     const term = useSelector(state => state.term);

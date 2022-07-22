@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import {useDispatch, useSelector} from 'react-redux';
 import { SelectSpecialty } from "../../Skills/selectSpecialty";
 import { genericIncrease } from "../../Skills/SkillsSlice";
-import { resolveEvent } from "../../Term/Utilities/TermSlice";
+import { resolveEvent } from "../../TermSlice/TermSlice";
 
 const SkillIncreaseReward = (props) => {
     const event = useSelector(state => state.term.event);

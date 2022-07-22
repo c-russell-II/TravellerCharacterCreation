@@ -1,7 +1,7 @@
 import { ParentCareers } from './ParentCareers';
 import React from "react";
 import { useSelector } from "react-redux";
-import {parentJobs} from "../../Career/CareerDetails";
+import {parentJobs} from "../../CareerDetails/CareerDetails";
 import { Card, Col, Row } from 'react-bootstrap';
 import placeholder from '../../../assets/placeholder.png'
 

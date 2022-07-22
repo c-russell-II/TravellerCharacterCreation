@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateEvent } from "../../Term/Utilities/TermSlice";
+import { updateEvent } from "../../TermSlice/TermSlice";
 
 const BranchSkillCheck = (props) => {
     const job = useSelector(state => state.term.job);

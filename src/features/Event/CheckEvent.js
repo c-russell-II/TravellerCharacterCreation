@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { skillCheck } from "../Career/careerHandler";
-import { updateEvent } from "../Term/Utilities/TermSlice";
+import { updateEvent } from "../TermSlice/TermSlice";
 import ChoiceCheck from "./ChoiceCheck";
 
 const CheckEvent = (props) => {

@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useCallback } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Popup from "reactjs-popup";
-import { changeByAmount, changeStat } from "../../Character/StatsSlice";
-import { SelectSpecialty } from "../../Skills/selectSpecialty";
-import setSkillHandler from "../../Skills/SetSkillHandler";
-import { setValue } from "../../Skills/SkillsSlice";
+import { changeByAmount, changeStat } from "../Character/StatsSlice";
+import { SelectSpecialty } from "../Skills/selectSpecialty";
+import setSkillHandler from "../Skills/SetSkillHandler";
+import { setValue } from "../Skills/SkillsSlice";
 
 const RankUpBonus = (props) => {
   const term = useSelector(state => state.term);

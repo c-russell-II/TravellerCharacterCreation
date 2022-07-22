@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setValue } from "../../Skills/SkillsSlice";
-import { updateEvent } from "../../Term/Utilities/TermSlice";
+import { updateEvent } from "../../TermSlice/TermSlice";
 
 const GainRoll = (props) => {
     const skills = useSelector(state => state.skills);
