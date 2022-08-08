@@ -24,7 +24,7 @@ import PrisonRouter from './features/Prison/Layout/PrisonRouter';
 function App() {
   return (
           <Routes>
-            <Route path="/" element={<Layout/>}>
+            <Route path="/" element={<Layout/>} basename="tcc">
               <Route index element={<LandingPage/>}/>
               <Route path="background_skills" element={<BackgroundSkillsChoice/>}/>
               <Route path="character_creation" element={<CharacterCreation/>}/>

@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch } from "react-redux";
-import { decreaseStat } from "../StatsSlice";
+import { decreaseStat } from "../../Character/StatsSlice";
 
 const MentalChoice = (props) => {
     const {cleanup} = props;

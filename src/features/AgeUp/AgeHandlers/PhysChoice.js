@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { changeByAmount } from "../StatsSlice";
+import { changeByAmount } from "../../Character/StatsSlice";
 
 const PhysicalChoice = (props) => {
     const {two, one, cleanup} = props;
