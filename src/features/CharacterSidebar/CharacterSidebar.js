@@ -1,5 +1,6 @@
 import React, {useState} from "react";
 import { useSelector } from "react-redux";
+import SpecialtySkillDisplay from "./SpecialtySkillDisplay";
 
 
 
@@ -7,8 +8,6 @@ export const CharacterSidebar = (props) => {
     const [isActive, setIsActive] = useState(false);
     const stats = useSelector(state => state.stats);
     const skills = useSelector(state=> state.skills);
-    const skillsList = Object.keys(skills).slice(0, -3);
-    const trainedSkillsList = skillsList.filter(e => skills.trainedSkills.includes(e))
     const career = useSelector(state=>state.careers);
     return (
         <div>
@@ -22,21 +21,33 @@ export const CharacterSidebar = (props) => {
                     <li>Soc: {stats.displayValues.soc} ({stats.soc})</li>
                     <li>Age: {stats.age}</li>
                 </ul>
-                <p> Current career:</p>
-                <p>{career[career.currentJob].details.title}</p>
+                { career.currentJob ?
+                    <>
+                        <p> Current career:</p>
+                        <p>{career[career.currentJob].details.title}</p>
+                    </>
+                    :
+                    <p>Not yet employed!</p>
+                }
             </div>
-            <div onClick={() => setIsActive(!isActive)}>
-            <ul><span >Skills:{isActive? '-' : '+'}</span>
+            <div>
+            <ul><span onClick={() => setIsActive(!isActive)}>Skills:{isActive? '-' : '+'}</span>
             {isActive && 
             <>
-                    {trainedSkillsList.map((e, i) => {
-                        return (
-                            <>
-                            <li key="i"><strong>{e}</strong>: {skills[e].value}</li>
-                            {skills[e].specialties && skills[e].specialtiesList?.map((f, i) => {return <div><span key={i}>-{f}: {skills[e][f]}</span></div>})}
-                            </>
-                        )
-                    })}
+                    {skills.trainedSkills.length > 0 ?
+                    skills.trainedSkills.map((e, i) => {
+                        if (!skills.specialtySkills.includes(e)) {
+                            return (
+                                <li key={`Skills-${e}`}><strong>{e}</strong>: {skills[e].value}</li>
+                            )
+                        } else if (skills.specialtySkills.includes(e)) {
+                            return <SpecialtySkillDisplay key={`Skills-${e}`} skill={e} skillObj={skills[e]}/>
+                        } else {
+                            return <p>Something went wrong!</p>
+                        }
+                    }):
+                    <p>No Skills Trained!</p>
+                    }
 
             </>}</ul>
             </div>

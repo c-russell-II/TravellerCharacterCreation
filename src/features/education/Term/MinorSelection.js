@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { chooseMinor } from "../Utilities/EducationSlice";
+import styles from './styles.module.css';
 
 function MinorSelection(props) {
     const [selectedMinor, setSelectedMinor] = useState('');
@@ -20,7 +21,7 @@ function MinorSelection(props) {
 
     return ( 
         <div>
-            <h5>Minor: --</h5>
+            <h5 className={styles.selectionTitle}>Minor: --</h5>
             <form onSubmit={cleanup} className="select_minor">
                 {allChoices.map((e, i) => {
                     if (e === educationState.major) {

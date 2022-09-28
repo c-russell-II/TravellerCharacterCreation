@@ -185,8 +185,8 @@ const options = {
     reducers: {
         reset: state => initialSkills,
         basicTraining: (state, action) => {
+          state.isTrained = true;
             action.payload.forEach((e) => {
-                state.isTrained = true;
                 state[e].trained = true;
                 if(!state.trainedSkills.includes(e)) {
                     state.trainedSkills.push(e);

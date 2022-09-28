@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { SelectSpecialty } from "../../Skills/selectSpecialty";
 import {chooseMajor} from '../Utilities/EducationSlice'
+import styles from './styles.module.css';
 
 function MajorSelection(props) {
     const [selectedMajor, setSelectedMajor] = useState('');
@@ -38,7 +39,7 @@ function MajorSelection(props) {
     }
     return (
     <div>
-        <h5>Major--</h5>
+        <h5 className={styles.selectionTitle}>Major--</h5>
         {selectedMajor !== '' ? <p>Selected Major: {selectedMajor} {educationState.majorSpecialty ? `Selected Specialty: ${educationState.majorSpecialty}` : ''}</p> : ''}
         <form onSubmit={majorSubmit} className="select_major">
             {allChoices.map((e, i) => {

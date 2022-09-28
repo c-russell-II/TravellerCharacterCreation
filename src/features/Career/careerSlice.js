@@ -53,13 +53,8 @@ const options = {
 
         },
         promotion: (state, action) => {
-            if (state[state.currentJob].rank === 0) {
-                state[state.currentJob].benefits++;
-            }
-            if (state[state.currentJob].rank === 2) {
-                state[state.currentJob].benefits++;
-            }
-            if (state[state.currentJob].rank === 4) {
+            const benefitRanks = [0, 2, 4]
+            if (benefitRanks.includes(state[state.currentJob].rank)) {
                 state[state.currentJob].benefits++;
             }
             if (state[state.currentJob].rank < 6){

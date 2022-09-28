@@ -7,6 +7,7 @@ import { ageUp, increaseStat } from "../../Character/StatsSlice";
 import { Graduation } from "../Graduation/GraduationContainer";
 import { skillCheck } from "../../Career/careerHandler";
 import { setGraduated, setHonors } from '../Utilities/EducationSlice';
+import styles from './styles.module.css'
 
 export const UniversityTerm = (props) => {
     const dispatch = useDispatch();
@@ -52,7 +53,7 @@ export const UniversityTerm = (props) => {
 
     return (
         <div className="university_term">
-            <h3>Back to School. . .</h3>
+            <h3 className={styles.termHeader}>Back to School. . .</h3>
             {!graduateDialogue && <h4>Select your major and minor for this year- the two skills you set out to focus your studies on.</h4>}
             {majorIsActive &&
                 <MajorSelection cleanup={majorCleanup} allChoices={allChoices} choiceSpecArray={choiceSpecArray} animalSpec={animalSpec}/>

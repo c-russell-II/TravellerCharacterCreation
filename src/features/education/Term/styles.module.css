@@ -32,3 +32,13 @@
     flex-flow: row wrap;
     align-items: center;
 }
+.selectionTitle {
+    font-size: 1.05em;
+    margin: 1em 0;
+    font-weight: bold;
+}
+.termHeader {
+    font-size: 1.4em;
+    font-weight: bold;
+    margin: 2% 0;
+}
