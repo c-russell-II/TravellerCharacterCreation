@@ -5,7 +5,7 @@ import styles from './styles.module.css'
 
 const NameChoice = (props) => {
     const dispatch = useDispatch();
-    const [value, setValue] = useState('');
+    const [value, setValue] = useState('John Smith');
 
     const handleSubmit = (event) => {
         event.preventDefault();

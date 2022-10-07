@@ -19,8 +19,9 @@ export const CharacterCreation = (props) => {
     const handleFinalize = () => {
         Object.keys(stats).forEach((e) => {dispatch(changeStat({stat: e, value: stats[e]}));})
         if (points > 0) {
-        dispatch(addBenefit({type: 'cash', amount:points * 2000}));}
-        navigate('/background_skills');
+			dispatch(addBenefit({ type: "cash", amount: points * 2000 }));
+		}
+		navigate("/creation/background_skills");
     }
     return (
         <div className={styles.main}>

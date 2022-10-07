@@ -23,7 +23,7 @@ const PrisonEntry = (props) => {
                 <button onClick={handleClick}>Get on with it</button>
             </>}
             {pickSpecialty && <PrisonSpecialties cleanup={cleanup}/>}
-            {ready && <button onClick={navigate('../start')}>Keep moving</button>}
+            {ready && <button onClick={navigate('./start')}>Keep moving</button>}
         </>
     )
 }

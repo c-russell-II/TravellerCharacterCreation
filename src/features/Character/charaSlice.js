@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const initialChara = {
+export const initialChara = {
     charaName: 'name',
     background: 'none',
     events: [],
