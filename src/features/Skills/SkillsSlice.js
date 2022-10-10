@@ -1,6 +1,6 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialSkills = {
+export const initialSkills = {
     Admin: { specialties: false, value: -3 },
     Advocate: { specialties: false, value: -3 },
     Animals: {

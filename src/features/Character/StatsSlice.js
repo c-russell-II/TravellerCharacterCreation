@@ -18,30 +18,30 @@ const getModifiers = (num) => {
         return 3
     }
 }
-const startStats = {
-    str: 0,
-    dex: 0,
-    end: 0,
-    int: 0,
-    edu: 0,
-    soc: 0,
-    age: 18,
-    displayValues: {
-        str: 0,
-        dex: 0,
-        end: 0,
-        int: 0,
-        edu: 0,
-        soc: 0,
-    },
-    injuryHolder: {
-        str: 0,
-        dex: 0,
-        end: 0,
-        int: 0,
-        edu: 0
-    }
-}
+export const startStats = {
+	str: 0,
+	dex: 0,
+	end: 0,
+	int: 0,
+	edu: 0,
+	soc: 0,
+	age: 18,
+	displayValues: {
+		str: 0,
+		dex: 0,
+		end: 0,
+		int: 0,
+		edu: 0,
+		soc: 0,
+	},
+	injuryHolder: {
+		str: 0,
+		dex: 0,
+		end: 0,
+		int: 0,
+		edu: 0,
+	},
+};
 
 const options = {
     name: 'stats',

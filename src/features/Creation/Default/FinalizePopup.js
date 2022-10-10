@@ -1,4 +1,6 @@
 import Popup from "reactjs-popup";
+import React from "react";
+
 
 const FinalizePopup = (props) => {
      const {ready, handleFinalize, setReady} = props;
