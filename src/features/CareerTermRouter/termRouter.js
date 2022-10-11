@@ -9,7 +9,7 @@ import jobObject from "../CareerDetails/CareerDetails";
 import TermNoPromotion from "../CareerNoPromoTerm/TermNoPromotion";
 
 
-export const TermRouter = (props) => {
+const TermRouter = (props) => {
     const {career} = useParams();
     const title = jobObject[career].title
     return (
@@ -27,3 +27,5 @@ export const TermRouter = (props) => {
         </div>
     )
 }
+
+export default TermRouter

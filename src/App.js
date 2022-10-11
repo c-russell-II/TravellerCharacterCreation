@@ -19,7 +19,7 @@ import PrisonRouter from "./features/Prison/Layout/PrisonRouter";
 import { Suspense } from "react";
 
 const CreationRouter = lazy(() => import("./features/Creation/CreationRouter"));
-const TermRouter = lazy(() => import("./features/CareerTermRouter/termRouter"));
+const TermRouter = lazy(async () => await import("./features/CareerTermRouter/termRouter"));
 
 function App() {
 	return (
