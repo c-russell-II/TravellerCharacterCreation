@@ -7,17 +7,19 @@ import styles from './styles.module.css';
 import FinalizePopup from "./FinalizePopup";
 import NameChoice from "../NameChoice/NameChoice";
 import StatChoice from "../ChooseStats/StatChoice";
-
-export const CharacterCreation = (props) => {
+const startStats: StatDisplayHolder = { str: 7, dex: 7, end: 7, int: 7, edu: 7, soc: 7, psi: 0 };
+export const CharacterCreation = () => {
     const [points, setPoints] = useState(12);
     const [ready, setReady] = useState(false);
-    const [stats, setStats] = useState({str:7, dex:7, end:7, int:7, edu:7, soc:7})
+    const [stats, setStats] = useState(startStats)
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
 
     const handleFinalize = () => {
-        Object.keys(stats).forEach((e) => {dispatch(changeStat({stat: e, value: stats[e]}));})
+        for (const e in stats) {
+            dispatch(changeStat({ stat: e as keyof StatDisplayHolder, value: stats[e as keyof StatDisplayHolder]! }));
+        }
         if (points > 0) {
 			dispatch(addBenefit({ type: "cash", amount: points * 2000 }));
 		}

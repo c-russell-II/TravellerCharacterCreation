@@ -1,6 +1,21 @@
 import { createSlice } from '@reduxjs/toolkit';
-
-export const initialChara = {
+type Anagathics = {
+    using: boolean
+    terms: number
+    total: number
+}
+interface Chara {
+    charaName: string
+    background: string
+    events: any[]
+    benefits: any[]
+    numOfCashBenefits: number
+    trained: boolean
+    drafted: boolean
+    debt: number
+    anagathics: Anagathics
+}
+export const initialChara: Chara = {
     charaName: 'name',
     background: 'none',
     events: [],
@@ -21,42 +36,42 @@ const options = {
     name: 'chara',
     initialState: initialChara,
     reducers: {
-        reset: state => initialChara,
-        setName: (state, action) => {
+        reset: (state: Chara) => initialChara,
+        setName: (state: Chara, action: {payload: string}) => {
             state.charaName = action.payload;
             return state;
         },
-        addEvent: (state, action) => {
+        addEvent: (state: Chara, action: {payload: string}) => {
             state.events.push(action.payload);
             return state;
         },
-        addBenefit: (state, action) => {
+        addBenefit: (state: Chara, action: {payload: {type: string | undefined} | any}) => {
             if (action.payload.type === 'money') {
                 state.numOfCashBenefits++;
             }
             state.benefits.push(action.payload);
             return state;
         },
-        setTrained: (state) => {
+        setTrained: (state: Chara) => {
             state.trained = true;
             return state;
         },
-        setDrafted: (state) => {
+        setDrafted: (state: Chara) => {
             state.drafted = true;
             return state;
         },
-        anagathicsTerm: (state) => {
+        anagathicsTerm: (state: Chara) => {
             state.anagathics.using = true;
             state.anagathics.terms ++;
             state.anagathics.total ++;
             return;
         },
-        anagathicEnd: (state) => {
+        anagathicEnd: (state: Chara) => {
             state.anagathics.using = false;
             state.anagathics.terms = 0;
             return state;
         },
-        addDebt: (state, action) => {
+        addDebt: (state: Chara, action: {payload: number}) => {
             state.debt += action.payload;
         }
     }

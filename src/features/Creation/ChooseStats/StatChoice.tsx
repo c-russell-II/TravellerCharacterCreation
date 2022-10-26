@@ -1,12 +1,18 @@
 import React from "react";
 import styles from "./styles.module.css";
 import SingleStat from "./SingleStat";
-
-const StatChoice = (props) => {
+interface StatChoiceProps {
+	stats: StatDisplayHolder;
+	setStats: React.Dispatch<React.SetStateAction<StatDisplayHolder>>;
+	points: number;
+	setPoints: React.Dispatch<React.SetStateAction<number>>;
+	setReady: React.Dispatch<React.SetStateAction<boolean>>;
+}
+const StatChoice = (props: StatChoiceProps) => {
 	const { stats, setStats, points, setPoints, setReady } = props;
 	const statList = Object.keys(stats);
 	// Cost for increasing stats, also used for decreasing stats, from mongoose 2e core rulebook!
-	const costCalc = (val) => {
+	const costCalc = (val: number) => {
 		if (val < 3) {
 			return 1;
 		} else if (val < 6) {
@@ -22,7 +28,7 @@ const StatChoice = (props) => {
 		}
 	};
 	// Checks the stat's current value, and passes back your increased available points and your new decreased stats;
-	const decrease = (val) => {
+	const decrease = (val: string) => {
 		const currentStat = stats[val];
 		if (stats[val] > 1) {
 			setPoints((prevPoints) => prevPoints + costCalc(currentStat - 1));
@@ -36,7 +42,7 @@ const StatChoice = (props) => {
 		}
 	};
 	// Checks the stat's current value, if you have enough points, passes increases to your current stats and your current points!
-	const increase = (val) => {
+	const increase = (val: string) => {
 		const currentStat = stats[val];
 		const pointCost = costCalc(currentStat);
 		if (currentStat < 15 && pointCost <= points) {
@@ -63,7 +69,7 @@ const StatChoice = (props) => {
 		}
 	};
 	// Thresholds for stat modifiers from Mongoose 2e Core rulebook
-	const getModifiers = (num) => {
+	const getModifiers = (num: number): number => {
 		if (num === 0) {
 			return -3;
 		} else if (num === 1 || num === 2) {
@@ -76,7 +82,7 @@ const StatChoice = (props) => {
 			return 1;
 		} else if (num > 11 && num < 15) {
 			return 2;
-		} else if (num >= 15) {
+		} else {
 			return 3;
 		}
 	};
@@ -89,17 +95,23 @@ const StatChoice = (props) => {
 			</h2>
 
 			<div className={styles.stats}>
-				{statList.map((e) => (
-					<SingleStat
-						key={e}
-						stat={e}
-						val={stats[e]}
-						modVal={getModifiers(stats[e])}
-						increase={increase}
-						decrease={decrease}
-						cost={costCalc(stats[e])}
-					/>
-				))}
+				{statList.map((e) => {
+					if (e === "psi") {
+						return <></>;
+					} else {
+						return (
+							<SingleStat
+								key={e}
+								stat={e}
+								val={stats[e]}
+								modVal={getModifiers(stats[e])}
+								increase={increase}
+								decrease={decrease}
+								cost={costCalc(stats[e])}
+							/>
+						)
+					}
+				})}
 
 				<button onClick={handleReady} className={styles.statsButton}>
 					Finalize stats.

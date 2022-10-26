@@ -82,7 +82,7 @@ const RankUpBonus = (props) => {
       case 'skill':
         if (skills[bonus.skill].specialties) {
           if (!bonus.specialty) {
-            const filteredSpecialties = skills[bonus.skill].specialtiesList.filter(e => skills[bonus.skill][e] < bonus.value);
+            const filteredSpecialties = skills[bonus.skill].specialtiesList.filter(e => skills[bonus.skill][e] <= bonus.value);
 
               if (filteredSpecialties.length === 1) {
                 dispatch(setValue({
@@ -114,7 +114,7 @@ const RankUpBonus = (props) => {
             return <p>Gained skill: {bonus.skill}({bonus.specialty}) {bonus.value}</p>
           }
 
-          const filteredSpecialties = bonus.specialty.filter(e => skills[bonus.skill][e] < bonus.value);
+          const filteredSpecialties = bonus.specialty.filter(e => skills[bonus.skill][e] <= bonus.value);
 
           if (filteredSpecialties.length > 1) {
             setSpecialtyDetails({
@@ -134,7 +134,7 @@ const RankUpBonus = (props) => {
           }
 
           return;
-        } else if (skills[bonus.skill].value < bonus.value) {
+        } else if (skills[bonus.skill].value <= bonus.value) {
           dispatch(setValue({
             skill: bonus.skill,
             value: bonus.value,

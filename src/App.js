@@ -1,6 +1,6 @@
 import React, { lazy } from "react";
 import { Routes, Route } from "react-router-dom";
-import { LandingPage } from "./features/Organization/Landing Page/LandingPage";
+import LandingPage from "./features/Organization/Landing Page/LandingPage";
 import { CareerChooser } from "./features/Organization/CareerChoice/CareerChoice";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "reactjs-popup/dist/index.css";
