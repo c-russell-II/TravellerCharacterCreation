@@ -3,7 +3,16 @@ import { skillCheck } from "../../Career/careerHandler";
 import { ClassicCharacterCreation } from "./ClassicCharacterCreation";
 import { Link } from "react-router-dom";
 
-export const ClassicContainer = (props) => {
+const classicStats: StatDisplayHolder = {
+	str: 0,
+	dex: 0,
+	end: 0,
+	int: 0,
+	edu: 0,
+	soc: 0,
+}
+
+export const ClassicContainer = () => {
 	const statRolls = Array.from({ length: 6 }, () => skillCheck());
 	const [availableStats, setAvailableStats] = useState([
 		"Strength",
@@ -14,16 +23,13 @@ export const ClassicContainer = (props) => {
 		"Social Standing",
 	]);
 	const [statArray, setStatArray] = useState(statRolls);
-	const [currentStats, setCurrentStats] = useState({
-		Strength: 0,
-		Dexterity: 0,
-		Endurance: 0,
-		Intelligence: 0,
-		Education: 0,
-		"Social Standing": 0,
-	});
+	const [currentStats, setCurrentStats] = useState(classicStats);
 
-	const handleClick = (eventKey, num) => {
+	const handleClick = (eventKey: string | null, num: number): void => {
+		if (eventKey === null) {
+			console.error("eventKey is null");
+			return;
+		}
 		setAvailableStats(availableStats.filter((e) => e !== eventKey));
 		const temp = statArray;
 		const index = statArray.indexOf(num);
@@ -35,7 +41,7 @@ export const ClassicContainer = (props) => {
 		return;
 	};
 	const currentStatArray = Object.keys(currentStats);
-	const getModifiers = (num) => {
+	const getModifiers = (num :number): number => {
 		if (num === 0) {
 			return -3;
 		} else if (num === 1 || num === 2) {
@@ -48,7 +54,7 @@ export const ClassicContainer = (props) => {
 			return 1;
 		} else if (num > 11 && num < 15) {
 			return 2;
-		} else if (num >= 15) {
+		} else {
 			return 3;
 		}
 	};
@@ -60,7 +66,7 @@ export const ClassicContainer = (props) => {
 				clickHandler={handleClick}
 				modifier={getModifiers}
 			/>
-			{currentStatArray.map((e, i) => {
+			{currentStatArray.map((e: string, i) => {
 				return (
 					<p key={i}>
 						{e}: {currentStats[e]} ({getModifiers(currentStats[e])})
