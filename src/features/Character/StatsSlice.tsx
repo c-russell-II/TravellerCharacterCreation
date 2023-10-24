@@ -1,14 +1,14 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 // Alright, goal here is to keep up with an involved list of stats that can be updated both by modifications made *now* and by future career upgrades
 const getModifiers = (num: number | undefined): number => {
-    if (num === undefined) {
-        console.error("Get Modifiers called with undefined value");
-        return 0;
-    }
-    if (num < 0) {
-        return -4;
-    }
+	if (num === undefined) {
+		console.error("Get Modifiers called with undefined value");
+		return 0;
+	}
+	if (num < 0) {
+		return -4;
+	}
 	if (num === 0) {
 		return -3;
 	} else if (num === 1 || num === 2) {
@@ -37,7 +37,7 @@ export const startStats: StatState = {
 	int: 0,
 	edu: 0,
 	soc: 0,
-    psi: 0,
+	psi: 0,
 	age: 18,
 	displayValues: {
 		str: 0,
@@ -46,7 +46,7 @@ export const startStats: StatState = {
 		int: 0,
 		edu: 0,
 		soc: 0,
-        psi: 0
+		psi: 0,
 	},
 	injuryHolder: {
 		str: 0,
@@ -56,6 +56,10 @@ export const startStats: StatState = {
 		edu: 0,
 	},
 };
+
+export type AnyStatPayload =
+	| { stat: keyof StatDisplayHolder; value: number }
+	| keyof StatDisplayHolder;
 const options = {
 	name: "stats",
 	initialState: startStats,
@@ -63,51 +67,59 @@ const options = {
 		reset: () => startStats,
 		changeStat: (
 			state: StatState,
-			action: {
-				payload: { stat: keyof StatDisplayHolder, value: number };
-			}
+			action: PayloadAction<{
+				stat: keyof StatDisplayHolder;
+				value: number;
+			}>
 		) => {
 			const { stat, value } = action.payload;
-			state.displayValues = { ...state.displayValues, [stat]: value };
+			state.displayValues[stat] = value;
 			state[stat] = getModifiers(value);
 			return state;
 		},
 		increaseStat: (
 			state: StatState,
-			action: { payload: keyof StatDisplayHolder }
+			action: PayloadAction<keyof StatDisplayHolder>
 		) => {
-            state.displayValues[action.payload]!++;
-            state[action.payload] = getModifiers(
-                state.displayValues[action.payload]!
-            );
-            return state;
+			state.displayValues[action.payload]!++;
+			state[action.payload] = getModifiers(
+				state.displayValues[action.payload]
+			);
+			return state;
 		},
 		decreaseStat: (
 			state: StatState = startStats,
-			action: { payload: keyof StatDisplayHolder }
+			action: PayloadAction<keyof StatDisplayHolder>
 		) => {
-            state.displayValues[action.payload]--;
-            state[action.payload] = getModifiers(
-                state.displayValues[action.payload]
-            );
-            return state;
+			state.displayValues[action.payload]--;
+			state[action.payload] = getModifiers(
+				state.displayValues[action.payload]
+			);
+			return state;
 		},
 		changeByAmount: (
 			state: StatState,
-			action: { payload: { stat: keyof StatDisplayHolder; value: number } }
+			action: PayloadAction<{
+				stat: keyof StatDisplayHolder;
+				value: number;
+			}>
 		) => {
-            const {stat, value} = action.payload;
+			const { stat, value } = action.payload;
 			if (value < 0 && stat !== "soc" && stat !== "psi") {
 				state.injuryHolder[stat] -= value;
 			}
 			state.displayValues[stat] += value;
-			state[stat] = getModifiers(
-                state.displayValues[stat]
-			);
+			state[stat] = getModifiers(state.displayValues[stat]);
 			return state;
 		},
-		setDisplayValue: (state: StatState, action: {payload: {stat: keyof StatDisplayHolder, value: number}}) => {
-			state.displayValues = { ...state.displayValues, ...action.payload };
+		setDisplayValue: (
+			state: StatState,
+			action: PayloadAction<{
+				stat: keyof StatDisplayHolder;
+				value: number;
+			}>
+		) => {
+			state.displayValues[action.payload.stat] = action.payload.value 
 			return state;
 		},
 		ageUp: (state: StatState) => {
@@ -124,7 +136,7 @@ const options = {
 			};
 			return state;
 		},
-		addPsi: (state: StatState, action: {payload: number}) => {
+		addPsi: (state: StatState, action: PayloadAction<number>) => {
 			state.displayValues.psi = action.payload;
 			state.psi = getModifiers(action.payload);
 			return state;

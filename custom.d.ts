@@ -3,28 +3,28 @@ declare module "*.module.css" {
 	export default classes;
 }
 declare interface Strength {
-	[str: string]: number;
+	str: number;
 }
 declare interface Dexterity {
-    [dex: string]: number
+    dex: number
 }
 declare interface Endurance {
-    [end: string]: number
+    end: number
 }
 declare interface Intellect {
-    [int: string]: number
+    int: number
 }
 declare interface Education {
-    [edu: string]: number
+    edu: number
 }
 declare interface SocialStanding {
-    [soc: string]: number
+    soc: number
 }
 declare interface Age {
-    [age: string]: number
+    age: number
 }
 declare interface Psi {
-    [psi: string]: number
+    psi?: number
 }
 declare type CharaStats = Strength & Dexterity & Endurance & Intellect & Education & SocialStanding & Age & Psi
 

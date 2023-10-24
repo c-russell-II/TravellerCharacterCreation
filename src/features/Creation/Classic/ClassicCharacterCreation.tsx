@@ -8,6 +8,7 @@ type ClassicCCProps = {
 	clickHandler: (eventKey: string | null, num: number) => void;
 	modifier: (number: number) => number;
 };
+//TODO: Add a way to do "fixed array" creation!
 export const ClassicCharacterCreation = (props: ClassicCCProps) => {
 	const { statArray, availableStats, clickHandler, modifier } = props;
 

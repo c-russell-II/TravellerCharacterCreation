@@ -1,0 +1,46 @@
+import { TermState } from "../TermSlice/TermSlice";
+import EventContainer from './EventContainer'
+
+export function renderWithTermStore(
+	ui,
+	{
+		preloadedState={},
+		store= configureStore({reducer:{ term: TermSlice }}, preloadedState),
+		...renderOptions
+	} = {}
+) {
+	function Wrapper({ children }) {
+		return <Provider store={store}>{children}</Provider>
+	}
+	return { store, ...render(ui, {wrapper: Wrapper, ...renderOptions})}
+}
+
+describe("Event Container", () => {
+    const testTerm: TermState = {
+		job: "test",
+		survived: false,
+		advanced: false,
+		event: null,
+		deferredEvents: [],
+		jobDetails: {},
+		advancementBonus: 0,
+		muster: false,
+	};
+    it("should return the correct event", () => {
+        const {getByText} = render(<EventC) 
+        const testEvent = "testingevent12345"
+        testTerm.event = testEvent
+        expect(getBy).toBe
+    });
+});
+
+const testTerm: TermState = {
+	job: "test",
+	survived: false,
+	advanced: false,
+	event: null,
+	deferredEvents: [],
+	jobDetails: {},
+	advancementBonus: 0,
+	muster: false,
+};

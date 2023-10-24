@@ -41,7 +41,11 @@ export const ClassicContainer = () => {
 		return;
 	};
 	const currentStatArray = Object.keys(currentStats);
-	const getModifiers = (num :number): number => {
+	const getModifiers = (num :number | undefined): number => {
+		if (num === undefined) {
+			console.error("Get Modifiers called with undefined value");
+			return 0;
+		}
 		if (num === 0) {
 			return -3;
 		} else if (num === 1 || num === 2) {
@@ -69,7 +73,11 @@ export const ClassicContainer = () => {
 			{currentStatArray.map((e: string, i) => {
 				return (
 					<p key={i}>
-						{e}: {currentStats[e]} ({getModifiers(currentStats[e])})
+						{e}: {currentStats[e as keyof StatDisplayHolder]} (
+						{getModifiers(
+							currentStats[e as keyof StatDisplayHolder]
+						)}
+						)
 					</p>
 				);
 			})}

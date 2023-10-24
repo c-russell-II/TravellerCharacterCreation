@@ -29,8 +29,11 @@ const StatChoice = (props: StatChoiceProps) => {
 	};
 	// Checks the stat's current value, and passes back your increased available points and your new decreased stats;
 	const decrease = (val: string) => {
-		const currentStat = stats[val];
-		if (stats[val] > 1) {
+		const currentStat = stats[val as keyof StatDisplayHolder];
+		if (typeof currentStat !== 'number') {
+			throw new Error("Invalid stat value");
+		}
+		if (currentStat > 1) {
 			setPoints((prevPoints) => prevPoints + costCalc(currentStat - 1));
 			setStats((prevStats) => {
 				return { ...prevStats, [val]: currentStat - 1 };
@@ -43,7 +46,10 @@ const StatChoice = (props: StatChoiceProps) => {
 	};
 	// Checks the stat's current value, if you have enough points, passes increases to your current stats and your current points!
 	const increase = (val: string) => {
-		const currentStat = stats[val];
+		const currentStat = stats[val as keyof StatDisplayHolder];
+		if (typeof currentStat !== 'number') {
+			throw new Error("Invalid stat value");
+		}
 		const pointCost = costCalc(currentStat);
 		if (currentStat < 15 && pointCost <= points) {
 			setPoints((prevPoints) => prevPoints - pointCost);
@@ -99,17 +105,21 @@ const StatChoice = (props: StatChoiceProps) => {
 					if (e === "psi") {
 						return <></>;
 					} else {
+						const currStat = stats[e as keyof StatDisplayHolder];
+						if (typeof currStat !== 'number') {
+							throw new Error("Invalid stat value");
+						}
 						return (
 							<SingleStat
 								key={e}
 								stat={e}
-								val={stats[e]}
-								modVal={getModifiers(stats[e])}
+								val={currStat}
+								modVal={getModifiers(currStat)}
 								increase={increase}
 								decrease={decrease}
-								cost={costCalc(stats[e])}
+								cost={costCalc(currStat)}
 							/>
-						)
+						);
 					}
 				})}
 

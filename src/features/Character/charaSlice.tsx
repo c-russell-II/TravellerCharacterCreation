@@ -45,7 +45,8 @@ const options = {
             state.events.push(action.payload);
             return state;
         },
-        addBenefit: (state: Chara, action: {payload: {type: string | undefined} | any}) => {
+        //TODO: Benefit typing in chara slice!
+        addBenefit: (state: Chara, action: {payload: any}) => {
             if (action.payload.type === 'money') {
                 state.numOfCashBenefits++;
             }

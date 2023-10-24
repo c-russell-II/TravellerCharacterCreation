@@ -1,5 +1,9 @@
 # CGR - II's Traveller Character Generator!
 
+IMPORTANT:
+
+I am midway through a conversion to typescript with this most recent, highly delayed commit. The conversion itself is largely complete, but there were a number of breaking changes introduced that will, in all likelihood, result in some temporary downtime. Sorry about that!
+
 Started out as what I thought would be a straightforward portfolio project, this has spiralled into something larger than I expected.  
 
 Built from the ground up using Mongoose Traveller 2e rules, I aimed to capture as many of the relevant mechanics to character creation as I could, short of mailing you a physical set of dice.  
