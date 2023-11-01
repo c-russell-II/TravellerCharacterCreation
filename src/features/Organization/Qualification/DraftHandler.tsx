@@ -30,7 +30,7 @@ const DraftHandler = () => {
     const fireDraft = (event: React.SyntheticEvent<HTMLButtonElement>) => {
         event.preventDefault();
         dispatch(setDrafted());
-        const index = roll();
+        const index = roll() - 1;
         setResult(careerArray[index])
     }
 

@@ -2,15 +2,16 @@ import { QualBonuses } from "../Character/miscBonusSlice";
 import { parentJobs } from "../CareerDetails/CareerDetails";
 import { ParentCareer } from "../CareerDetails/CareerTyping";
 
+//TODO: Update all implementations of roll() - I had it set up to not, actually, use the values properly in a way that excluded several random options.
 export const roll = (num = 6): number => {
     if (typeof num !== 'number') {
         throw new Error('expected a number!');
     }
-    return Math.floor(Math.random() * num);
+    return Math.floor(Math.random() * num) + 1;
 };
 
 export const skillCheck = (stat = 0, skill = 0): number => {
-    return roll() + roll() + stat + skill + 2;
+    return roll() + roll() + stat + skill
 };
 
 export const getQualBonus = (quals: QualBonuses, career: string): number => {

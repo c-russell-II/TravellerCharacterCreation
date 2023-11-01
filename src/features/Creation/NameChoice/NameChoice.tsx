@@ -3,6 +3,7 @@ import { useDispatch } from "react-redux";
 import { setName } from "../../Character/charaSlice";
 import styles from "./styles.module.css";
 
+//TODO: Handle testing NameChoice for chara creation!
 const NameChoice = () => {
 	const dispatch = useDispatch();
 	const [value, setValue] = useState("John Smith");

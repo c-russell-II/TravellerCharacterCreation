@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import jobObject, { parentJobs } from "../../CareerDetails/CareerDetails";
+import jobObject from "../../CareerDetails/CareerDetails";
 import { getParentCareer } from "../../Career/careerHandler";
 
 const DrifterRedirect = () => {

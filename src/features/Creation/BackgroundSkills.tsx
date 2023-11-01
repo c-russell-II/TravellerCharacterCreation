@@ -5,6 +5,7 @@ import { RootState } from "../../app/store";
 import {increaseToZero} from '../Skills/SkillsSlice';
 import styles from './styles.module.css';
 
+//TODO: Can probably split this up - maybe something like a "container" with just the title/text, organizational/display stuff and then a top-level container for tracking how many are selected and bottom-level components for each individual skill!
 export const BackgroundSkillsChoice = () => {
     const [skills, setSkills] = useState<string[]>([]);
     const [checked, setChecked] = useState(

@@ -1,16 +1,15 @@
 import React, { useRef } from "react";
-import ReactToPrint from "react-to-print";
+import  { useReactToPrint } from "react-to-print";
 import CharacterSheet from "./CharacterSheet";
 
-const PrintPage = (props) => {
-    const componentRef = useRef();
-
+const PrintPage = () => {
+    const componentRef = useRef<HTMLDivElement>(null);
+    const handlePrint = useReactToPrint({
+        content: () => componentRef.current
+    });
     return (
         <div>
-            <ReactToPrint
-                trigger={() => <button>Print!</button>}
-                content={() => componentRef.current}
-            />
+            <button onClick={handlePrint}>Print</button>
             <CharacterSheet ref={componentRef}/>
         </div>
     )

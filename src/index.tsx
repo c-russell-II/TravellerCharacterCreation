@@ -18,7 +18,6 @@ import { BackgroundSkillsChoice } from "./features/Creation/BackgroundSkills";
 import { ClassicContainer } from "./features/Creation/Classic/ClassicContainer";
 import { CharacterCreation } from "./features/Creation/Default/CharacterCreation";
 
-//TODO: Prisoner needs a giant ton of work, gonna defer that to the end of the conversion!
 import Freedom from "./features/Prison/Outcomes/Freedom";
 import PrisonAdvanced from "./features/Prison/Outcomes/PrisonAdvanced";
 import PrisonEntry from "./features/Prison/Layout/PrisonContainer";

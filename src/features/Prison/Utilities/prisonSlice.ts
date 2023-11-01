@@ -9,8 +9,6 @@ const initialState: PrisonState = {
 	parole: 0,
 };
 
-//TODO: Middleware must track entering and leaving prison for the toast system
-
 const options = {
 	name: "prison",
 	initialState,

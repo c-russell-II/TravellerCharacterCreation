@@ -125,13 +125,15 @@ const BenefitsContainer = () => {
 	);
 };
 
+// Extracting the number of benefits, the relevant tables, and whether or not you get a bonus based on rank!
 const extractCareerInfo = (
 	career: CareerInfo
 ): { numBenefits: number; rankBonus: boolean; benefitTables: AnyBenefit[] } => {
 	const { nonComRank, rank } = career;
-
+	//Checks if you have a seperate, pre-commission rank stored, if so, adds that value to your current rank
 	const fullRank = nonComRank ? nonComRank + rank : rank;
-	const rankBonus = fullRank > 4 ? true : false;
+	//Checks if the "total" rank is greater than four
+	const rankBonus = fullRank > 4
 
 	return {
 		numBenefits: career.benefits,

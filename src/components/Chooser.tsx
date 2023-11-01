@@ -22,7 +22,6 @@ interface SingleChooser {
 }
 
 //TODO: kinda fuzzy on if I want choosers to be consistent across the whole thing or if I want them to change with where they are
-//TODO: swap from buttons to radio for single chooser, and checkboxes for multi chooser
 export default function Chooser (props: AnyChooser) {
     const [selected, setSelected] = useState<string[]>([]);
     const {type, options, cleanup} = props;

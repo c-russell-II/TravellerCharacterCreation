@@ -15,7 +15,7 @@ export const CharacterCreation = () => {
     const dispatch = useDispatch();
     const navigate = useNavigate();
 
-
+    //TODO: Handle testing the dispatch of stat updates
     const handleFinalize = () => {
         for (const e in stats) {
             dispatch(changeStat({ stat: e as keyof StatDisplayHolder, value: stats[e as keyof StatDisplayHolder]! }));

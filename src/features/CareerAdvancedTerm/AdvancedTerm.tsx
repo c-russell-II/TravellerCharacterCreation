@@ -3,7 +3,6 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import jobObject from "../CareerDetails/CareerDetails";
 import { ageUp } from "../Character/StatsSlice";
-import RankUpBonus from "../RankUpBonus/RankUpBonus";
 import { resolveTerm } from "../TermSlice/TermSlice";
 import { RootState } from "../../app/store";
 import RankUpBonusEntry from "../../components/CareerRanks/RankUpBonus/RankUpBonusEntry";

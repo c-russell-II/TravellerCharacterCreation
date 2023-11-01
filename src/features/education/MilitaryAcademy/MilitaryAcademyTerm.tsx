@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { parentJobs } from "../../CareerDetails/CareerDetails";
 import { useDispatch, useSelector } from "react-redux";
 import { setGraduated, setHonors } from "../Utilities/EducationSlice";
 import { AllSkills, basicTraining } from "../../Skills/SkillsSlice";
