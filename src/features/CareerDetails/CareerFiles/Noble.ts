@@ -437,8 +437,8 @@ export const noble: ParentCareer = {
 		{ money: 100000, misc: "Yacht" },
 		{
 			money: 200000,
-			misc: "multiple",
-			miscList: ["soc", "Yacht"],
+			//TODO: Case handler for socYacht in noble - or just a better "multiple" reward type for misc benefits... or just a more robust benefits system in general...
+			misc: "socYacht",
 			miscValue: 1,
 		},
 	],

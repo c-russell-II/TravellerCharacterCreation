@@ -7,7 +7,6 @@ export const drifter: ParentCareer = {
 	hasCommission: false,
 	qualification: false,
 	qualificationStat: null,
-	//TODO: DRIFTER QUALIFICATION BREAKING CHANGES
 	qualificationDC: null,
 	eventList: {
 		2: {

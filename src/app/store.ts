@@ -5,8 +5,8 @@ import careerSliceReducer from '../features/Career/careerSlice';
 import charaSlice from '../features/Character/charaSlice';
 import miscSlice from '../features/Character/miscBonusSlice';
 import TermSlice from '../features/TermSlice/TermSlice';
-import EducationSlice from '../features/education/Utilities/EducationSlice';
-import prisonSlice from '../features/Prison/Utilities/prisonSlice';
+import EducationSlice from '../features/education/EducationSlice';
+import prisonSlice from '../Pages/Prison/Utilities/prisonSlice';
 // import toastWatcher from './toastWatcher';
 // import toastSlice from '../features/Tracker/ToastSlice';
 

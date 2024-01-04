@@ -4,7 +4,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import jobObject from "../CareerDetails/CareerDetails";
 import { skillCheck } from "../Career/careerHandler";
 import { promotion } from "../Career/careerSlice";
-import EventContainer from "../Event/EventContainer";
+import EventContainer from "../../components/Event/EventContainer";
 import CommissionHandler from "../ComissionHandler/CommissionHandler";
 import { RootState } from "../../app/store";
 
