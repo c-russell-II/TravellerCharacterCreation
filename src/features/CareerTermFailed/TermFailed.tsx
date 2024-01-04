@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 import { saveFailedTerm } from "../Career/careerSlice";
 import { ageUp } from "../Character/StatsSlice";
-import EventContainer from "../Event/EventContainer";
+import EventContainer from "../../components/Event/EventContainer";
 import { RootState } from "../../app/store";
 
 export const TermFailed = () => {
